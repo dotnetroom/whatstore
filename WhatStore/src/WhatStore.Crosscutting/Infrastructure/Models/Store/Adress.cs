@@ -10,17 +10,17 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Store
     {
         [Key]
         [Required]
-        public long ID { get; set; }
+        public long Id { get; set; }
         [Required]
         public int CityID { get; set; }
         [Required]
-        public String CEP { get; set; }
+        public string CEP { get; set; }
         [Required]
-        public String Number { get; set; }
+        public string Number { get; set; }
         [Required]
-        public String Street { get; set; }
+        public string Street { get; set; }
         [Required]
-        public String Complement { get; set; }
+        public string Complement { get; set; }
 
         public virtual City City { get; set; }
     }

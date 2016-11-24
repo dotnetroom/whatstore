@@ -11,11 +11,11 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Store
     {
         [Key]
         [Required]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Required]
-        public int StateID { get; set; }
+        public int StateId { get; set; }
         [Required]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         public virtual State State { get; set; }
     }

@@ -10,28 +10,28 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Store
     {
         [Key]
         [Required]
-        public long ID { get; set; }
+        public long Id { get; set; }
         [Required]
-        public long PessoaJuridicaID { get; set; }
+        public long PessoaJuridicaId { get; set; }
         [Required]
-        public long AdressID { get; set; }
+        public long AdressId { get; set; }
         [Required]
-        public int StoreTypeID { get; set; }
+        public int StoreTypeId { get; set; }
         [Required]
-        public String Name { get; set; }
+        public string Name { get; set; }
         [Required]
-        public String Description { get; set; }
-        public String Phone { get; set; }
+        public string Description { get; set; }
+        public string Phone { get; set; }
         [Required]
-        public String Email { get; set; }
+        public string Email { get; set; }
         [Required]
-        public String URL { get; set; }
+        public string URL { get; set; }
         [Required]
-        public String Logo { get; set; }
+        public string Logo { get; set; }
         [Required]
         public bool IsActive { get; set; }
         [Required]
-        public String Term { get; set; }
+        public string Term { get; set; }
 
         public virtual Adress Adress { get; set; }
         public virtual StoreType StoreType { get; set; }

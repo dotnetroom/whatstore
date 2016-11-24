@@ -10,8 +10,8 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Store
     {
         [Key]
         [Required]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Required]
-        public String Name { get; set; }
+        public string Name { get; set; }
     }
 }
