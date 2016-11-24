@@ -33,7 +33,7 @@ namespace WhatStore
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Configuration["ConnectionString:SQLServer"]));
+                    options.UseSqlServer(Configuration["ConnectionString"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole<long>>(options => {
                 options.Password.RequireDigit = false;
