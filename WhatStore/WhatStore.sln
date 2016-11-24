@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{27DD1457-3A2A-4436-BB8E-8A4BD0D3F70F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CFF7FFCC-0C4B-4D5A-9AA9-BA1D9B7371DC}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WhatStore", "src\WhatStore\WhatStore.xproj", "{6DE836C2-1D2C-46DD-806E-BBF903B0EE06}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WhatStore.Crosscutting", "src\WhatStore.Crosscutting\WhatStore.Crosscutting.xproj", "{A33EEF39-4155-41CB-A527-B328FA5F758E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DE836C2-1D2C-46DD-806E-BBF903B0EE06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE836C2-1D2C-46DD-806E-BBF903B0EE06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE836C2-1D2C-46DD-806E-BBF903B0EE06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE836C2-1D2C-46DD-806E-BBF903B0EE06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A33EEF39-4155-41CB-A527-B328FA5F758E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A33EEF39-4155-41CB-A527-B328FA5F758E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A33EEF39-4155-41CB-A527-B328FA5F758E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A33EEF39-4155-41CB-A527-B328FA5F758E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6DE836C2-1D2C-46DD-806E-BBF903B0EE06} = {27DD1457-3A2A-4436-BB8E-8A4BD0D3F70F}
+		{A33EEF39-4155-41CB-A527-B328FA5F758E} = {27DD1457-3A2A-4436-BB8E-8A4BD0D3F70F}
+	EndGlobalSection
+EndGlobal
