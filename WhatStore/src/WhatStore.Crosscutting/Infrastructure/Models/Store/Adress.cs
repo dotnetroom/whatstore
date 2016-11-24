@@ -9,7 +9,6 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Store
     public class Adress
     {
         [Key]
-        [Required]
         public long Id { get; set; }
         [Required]
         public int CityID { get; set; }

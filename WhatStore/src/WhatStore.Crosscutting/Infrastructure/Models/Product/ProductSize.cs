@@ -8,7 +8,7 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Product
 {
     public class ProductSize
     {
-        [Required]
+        [Key]
         public string ProductId { get; set; }
         [Required]
         public int SizeId { get; set; }

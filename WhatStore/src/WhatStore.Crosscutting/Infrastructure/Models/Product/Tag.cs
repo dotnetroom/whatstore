@@ -10,6 +10,7 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Product
     {
         [Key]
         public long TagId { get; set; }
+        [Required]
         public string TagName { get; set; }
     }
 }

@@ -10,7 +10,6 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Store
     public class City
     {
         [Key]
-        [Required]
         public int Id { get; set; }
         [Required]
         public int StateId { get; set; }

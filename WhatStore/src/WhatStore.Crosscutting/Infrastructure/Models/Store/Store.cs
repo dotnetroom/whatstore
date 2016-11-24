@@ -9,7 +9,6 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Store
     public class Store
     {
         [Key]
-        [Required]
         public long Id { get; set; }
         [Required]
         public long PessoaJuridicaId { get; set; }

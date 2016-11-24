@@ -9,7 +9,6 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Store
     public class State
     {
         [Key]
-        [Required]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
