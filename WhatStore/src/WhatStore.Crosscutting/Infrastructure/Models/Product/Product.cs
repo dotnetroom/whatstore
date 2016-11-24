@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,12 +14,12 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Product
         public int StoreID { get; set; }
         [Required]
         public string Name { get; set; }
-        [Requerid]
+        [Required]
         public string Description { get; set; }
         [Required]
         public double Price { get; set; }
         [Required]
-        public bool IsFreeShipping  { get; set; }
+        public bool IsFreeShipping { get; set; }
         public string Length { get; set; }
         public string Widith { get; set; }
         public string Weigth { get; set; }
