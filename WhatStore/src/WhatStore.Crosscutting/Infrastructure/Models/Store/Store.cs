@@ -21,6 +21,7 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Store
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
+
         public string Phone { get; set; }
         [Required]
         public string Email { get; set; }

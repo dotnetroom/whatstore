@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WhatStore.Models.Product
+namespace WhatStore.Crosscutting.Infrastructure.Models.Product
 {
     public class Size
     {
