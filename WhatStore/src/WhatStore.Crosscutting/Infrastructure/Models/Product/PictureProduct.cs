@@ -4,18 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WhatStore.Models.Product
+namespace WhatStore.Crosscutting.Infrastructure.Models.Product
 {
-    public class Size
+    public class PictureProduct
     {
         [Key]
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
+        public string MyProperty { get; set; }
         [Required]
-        public string Type { get; set; }
-        [Required]
-        public string Language { get; set; }
+        public string ProductId { get; set; }
 
+        public virtual Product Product { get; set; }
     }
 }
