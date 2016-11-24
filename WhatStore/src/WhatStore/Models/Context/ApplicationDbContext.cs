@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WhatStore.Crosscutting.Infrastructure.Models.Identity;
 using WhatStore.Crosscutting.Infrastructure.Models.Product;
+using WhatStore.Crosscutting.Infrastructure.Models.Store;
 
 namespace WhatStore.Models.Context
 {
@@ -21,7 +22,18 @@ namespace WhatStore.Models.Context
         }
 
         public DbSet<PictureProduct> PictureProduct { get; set; }
-        public DbSet<Product.Product> Product { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<ProductSize> ProductSize { get; set; }
+        public DbSet<Size> Size { get; set; }
+        public DbSet<Tag> Tag { get; set; }
+        public DbSet<TagProduct> TagProduct { get; set; }
+
+        public DbSet<Adress> Adress { get; set; }
+        public DbSet<City> City { get; set; }
+        public DbSet<PessoaJuridica> PessoaJuridica { get; set; }
+        public DbSet<State> State { get; set; }
+        public DbSet<Store> Store { get; set; }
+        public DbSet<StoreType> StoreType { get; set; }
 
 
     }

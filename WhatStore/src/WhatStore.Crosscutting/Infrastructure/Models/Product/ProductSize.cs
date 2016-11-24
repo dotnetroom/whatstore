@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using WhatStore.Models.Product;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WhatStore.Crosscutting.Infrastructure.Models.Product
 {
-    public class ProuctSize
+    public class ProductSize
     {
         [Required]
-        public string ProducId { get; set; }
+        public string ProductId { get; set; }
         [Required]
         public int SizeId { get; set; }
 
