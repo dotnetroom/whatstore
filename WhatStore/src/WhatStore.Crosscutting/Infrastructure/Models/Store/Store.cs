@@ -11,17 +11,16 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Store
         [Key]
         [Required]
         public long ID { get; set; }
-
         [Required]
         public long PessoaJuridicaID { get; set; }
         [Required]
         public long AdressID { get; set; }
-
+        [Required]
+        public int StoreTypeID { get; set; }
         [Required]
         public String Name { get; set; }
         [Required]
         public String Description { get; set; }
-        [Required]
         public String Phone { get; set; }
         [Required]
         public String Email { get; set; }
@@ -35,5 +34,7 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Store
         public String Term { get; set; }
 
         public virtual Adress Adress { get; set; }
+        public virtual StoreType StoreType { get; set; }
+        public virtual PessoaJuridica PessoaJuridica { get; set; }
     }
 }
