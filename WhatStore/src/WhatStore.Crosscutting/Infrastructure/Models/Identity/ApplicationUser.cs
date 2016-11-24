@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace WhatStore.Models.Identity
+namespace WhatStore.Crosscutting.Infrastructure.Models.Identity
 {
     public class ApplicationUser : IdentityUser<long>
     {
+
     }
 }

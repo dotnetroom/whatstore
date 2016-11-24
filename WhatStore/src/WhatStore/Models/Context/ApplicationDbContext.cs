@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using WhatStore.Models.Identity;
+using WhatStore.Crosscutting.Infrastructure.Models.Identity;
 
 namespace WhatStore.Models.Context
 {
