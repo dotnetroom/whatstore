@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "null";
+    Layout = null;
 }
 <html>
 <head>
@@ -9,7 +9,15 @@
 <body>
     <h1>Cadastro</h1>
     <form>
-        <label>Nome: </label><input type="text" />
+        <label>Nome: <input type="text" /></label>
+        <label>Sobrenome: <input type="text" /></label>
+        <label>RG: <input type="text" /></label>
+        <label>CPF: <input type="text" /></label>
+        <label>Data de nascimento: <input type="datetime" name="date" /></label><br />
+        <label>Genero: <input type="radio" name="genero" value="feminino" />Feminino <input type="radio" name="genero" value="masculino" />Masculino</label>
+        <label>Email: <input type="text" /> </label>
+        <label>Senha: <input type="password" /></label>
+        <button type="submit">Registrar</button>
 
     </form>
 </body>
