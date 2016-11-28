@@ -213,6 +213,7 @@
 --resource:"C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\obj\Debug\netcoreapp1.1\WhatStoredotnet-compile.deps.json",WhatStore.deps.json
 C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Program.cs
 C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Startup.cs
+C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Controllers\AccoutController.cs
 C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Controllers\HomeController.cs
 C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Migrations\20161124195904_FirtUse.cs
 C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Migrations\20161124195904_FirtUse.Designer.cs
