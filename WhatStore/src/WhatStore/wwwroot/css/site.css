@@ -4,15 +4,6 @@
     margin: 0;
 }
 
-<<<<<<< HEAD
-.body-index button {
-    color: aqua;
-    background: #ffffff;
-}
-
-.body-index a {
-    border: 5px solid #000000;
-=======
 html{
     padding-top: 0;
     padding-bottom: 0;
@@ -33,7 +24,6 @@ html{
     background: #E6E9E7;
     
     
-<<<<<<< HEAD
     
 }
 
@@ -49,17 +39,6 @@ html{
     margin-top:20px;
     margin-left:1200px;
         
-=======
->>>>>>> bdf8ca71e8eb397dcac9d8b66718bf6ef7794e80
-}
-
-.body-index {
-    top: 100px;
-    width: auto;
-    height: auto;
-    margin-left: 50px;
-    
->>>>>>> cf75d7a560f643112a015a2d744aab4e704511ca
 }
 
 /* Wrapping element */
@@ -83,20 +62,15 @@ textarea {
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
+.carousel-inner .item img[src$=".svg"]
+{
     width: 100%;
-}
-
-#formLogin {
-    width: 200px;
-    height: 200px;
-    margin: auto;
 }
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+  /* Hide captions */
+  .carousel-caption {
+    display: none
+  }
 }
