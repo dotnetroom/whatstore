@@ -1,12 +1,23 @@
-﻿@{ 
-    Layout = "null";
+﻿@{
+    Layout = null;
 }
+<html>
 
-<h1>Pagina de login:</h1>
-<form>
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-    <p>Email:</p><input type="text"/>
-    <p>Senha:</p><input type="text"/>
-    <button type="submit">Entrar</button>
+</head>
 
-</form>
+<body>
+    
+    <form id="formLogin">
+
+        <h3>Pagina de login:</h3>
+        <label>Email:</label><input type="text" />
+        <label>Senha:</label><input type="text" />
+        <button type="submit">Entrar</button>
+
+    </form>
+</body>
+
+</html>
