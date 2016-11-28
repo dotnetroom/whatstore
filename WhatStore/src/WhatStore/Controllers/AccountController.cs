@@ -8,13 +8,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WhatStore.Controllers
 {
-    public class AccoutController : Controller
+    public class AccountController : Controller
     {
         // GET: /<controller>/
+        [Route("account/login")]
         public IActionResult Login()
         {
             return View();
         }
+
+        [Route("account/register")]
         public  IActionResult Register()
         {
             return View();
