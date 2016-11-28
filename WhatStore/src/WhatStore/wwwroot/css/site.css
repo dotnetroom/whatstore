@@ -7,7 +7,9 @@
     color:aqua;
     background: #ffffff;
 }
-
+.body-index a{
+    border: 5px solid #000000;
+}
 .body-index{
     top: 100px;
     width: auto;
