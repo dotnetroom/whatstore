@@ -11,6 +11,7 @@ namespace WhatStore.Crosscutting.Infrastructure.Models.Product
     {
         [Column(Order=0),Key]
         public string ProductId { get; set; }
+
         [Column(Order = 1), Key]
         public int TagId { get; set; }
 

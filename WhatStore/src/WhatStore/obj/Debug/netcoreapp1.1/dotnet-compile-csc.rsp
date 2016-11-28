@@ -210,4 +210,7 @@
 "C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Program.cs"
 "C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Startup.cs"
 "C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Controllers\HomeController.cs"
+"C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Migrations\20161124195904_FirtUse.cs"
+"C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Migrations\20161124195904_FirtUse.Designer.cs"
+"C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Migrations\ApplicationDbContextModelSnapshot.cs"
 "C:\Users\VALID\Documents\GitHub\whatstore\WhatStore\src\WhatStore\Models\Context\ApplicationDbContext.cs"
