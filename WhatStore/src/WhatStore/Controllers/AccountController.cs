@@ -11,7 +11,7 @@ namespace WhatStore.Controllers
     public class AccoutController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return View();
         }
