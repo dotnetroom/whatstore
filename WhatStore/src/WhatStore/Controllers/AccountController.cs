@@ -11,11 +11,13 @@ namespace WhatStore.Controllers
     public class AccountController : Controller
     {
         // GET: /<controller>/
-        [Route("accout/login")]
+        [Route("account/login")]
         public IActionResult Login()
         {
             return View();
         }
+
+        [Route("account/register")]
         public  IActionResult Register()
         {
             return View();
