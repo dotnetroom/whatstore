@@ -3,6 +3,19 @@
     padding-bottom: 20px;
 }
 
+.body-index button{
+    color:aqua;
+    background: #ffffff;
+}
+
+.body-index{
+    top: 100px;
+    width: auto;
+    height:auto;
+    margin-left: 50px;
+    background: #000000;
+}
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
