@@ -1,8 +1,10 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0;
 }
 
+<<<<<<< HEAD
 .body-index button {
     color: aqua;
     background: #ffffff;
@@ -10,6 +12,19 @@
 
 .body-index a {
     border: 5px solid #000000;
+=======
+html{
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0;
+}
+
+
+.body-index a{
+    text-decoration: none;
+    border: 1px solid #808080;
+    
+>>>>>>> bdf8ca71e8eb397dcac9d8b66718bf6ef7794e80
 }
 
 .body-index {
@@ -17,7 +32,7 @@
     width: auto;
     height: auto;
     margin-left: 50px;
-    background: #000000;
+    
 }
 
 /* Wrapping element */

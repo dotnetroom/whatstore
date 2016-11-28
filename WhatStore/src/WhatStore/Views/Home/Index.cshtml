@@ -3,15 +3,16 @@
 }
 
 <html>
-<head>
-    
+<head>    
     <title>Página inicial</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 
 <body>
     <div class = "body-index"> 
-        <a href="Account/Register">Cadastrar</a>
-        <a href="Account/Login">Login</a>
+        <a asp-controller="account" asp-action="login">Login</a>
+        <a asp-controller ="account" asp-action="register">Cadastrar</a>
+        
     </div>
 </body>
 </html>
