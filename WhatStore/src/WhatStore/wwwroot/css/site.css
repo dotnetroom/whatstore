@@ -93,8 +93,9 @@ textarea {
 }
 
 #formLogin {
-    width: 200px;
-    height: 200px;
+    width: 400px;
+    min-height: 200px;
+    height: auto;
     margin: auto;
     background-color: #C1326E;
 }
