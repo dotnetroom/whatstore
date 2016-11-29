@@ -71,8 +71,10 @@ textarea {
 }
 
 #formLogin {
+
     width: 200px;
     height: 200px;
+    background-color:#CC132E;
     margin: auto;
 }
 
@@ -87,14 +89,6 @@ textarea {
     height:auto;
 
 }
-
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-<<<<<<< HEAD
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
 
 /*Margins*/
 .margin-left-10{
@@ -142,7 +136,7 @@ textarea {
 }
 
 .margin-top-10{
-    margin-top:10px;
+    margin-top: 10px !important;
 }
 .margin-top-20{
     margin-top:20px;
@@ -185,10 +179,3 @@ textarea {
     margin-bottom:100px;
 }
 /*EndMargins*/
-=======
-  /* Hide captions */
-  .carousel-caption {
-    display: none
-  }
->>>>>>> 5064a97f6a52db4fe4340cd53018f75a922a4935
-}
