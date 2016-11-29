@@ -11,9 +11,10 @@ html {
 }
 
 .navbar{
-    height: 35px;
+    height: 45px;
     background: #F8F8F8;
     padding-top: 10px;
+    padding-right:10px;
 }
 
 
@@ -44,8 +45,8 @@ html {
 }
 
 .btn-secondary {
-    border: #E6E9E7;
-    background: #E6E9E7;
+    border: #cccccc;
+    background: #cccccc;
     color: #ffffff;
 }
 
