@@ -14,20 +14,27 @@ namespace WhatStore.Controllers
         // GET: /<controller>/
 
         [Route("login")]
+<<<<<<< HEAD
+=======
 
         [Route("login")]
 
+>>>>>>> d81fda1973052028c07aa359d58c2c9509355d13
         public IActionResult Login()
         {
             return View();
         }
 
         [Route("register")]
+<<<<<<< HEAD
+        public IActionResult Register()
+=======
 
 
         [Route("register")]
 
         public  IActionResult Register()
+>>>>>>> d81fda1973052028c07aa359d58c2c9509355d13
         {
             return View();
         }

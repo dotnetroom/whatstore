@@ -63,10 +63,15 @@ textarea {
     width: 100%;
 }
 
-<<<<<<< HEAD
 #formLogin {
     width: 200px;
     height: 200px;
+    margin: auto;
+}
+
+#formRegister {
+    width: 300px;
+    height: auto;
     margin: auto;
 }
 
@@ -76,8 +81,6 @@ textarea {
 
 }
 
-=======
->>>>>>> 605e282601d796547e3840bb388a9a04664539bb
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
 <<<<<<< HEAD
