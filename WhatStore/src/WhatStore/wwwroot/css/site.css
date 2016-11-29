@@ -33,7 +33,13 @@ html {
     opacity: 0.7;
 }
 
-
+.logo-login{
+    width: 60px;
+    height: 60px;
+    background-image: url(../images/logos/logo-03.png);
+    background-size: cover;
+    cursor: pointer;
+}
 .btn{
     padding-top: 7px;
     padding-bottom: 7px;
