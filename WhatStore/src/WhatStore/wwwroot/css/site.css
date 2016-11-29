@@ -2,12 +2,14 @@
     padding-top: 0;
     padding-bottom: 0;
     margin: 0;
+    background-color: #f8f8f8;
 }
 
 html {
     padding-top: 0;
     padding-bottom: 0;
     margin: 0;
+    background-color:#f8f8f8;
 }
 
 .navbar{
@@ -98,8 +100,9 @@ textarea {
     height: auto;
     margin: auto;
     background-color: #FFFFFF;
-    border: 3px solid;
-    border-color:#c1326e;
+    border: 0.5px solid;
+    border-color:#FFFFFF;
+    box-shadow:5px 2px 3px #c1326e;
     border-radius: 5px;
 }
 
