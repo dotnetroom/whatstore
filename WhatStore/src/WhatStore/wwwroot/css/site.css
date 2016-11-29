@@ -162,6 +162,9 @@ textarea {
 
 .links{
     text-decoration: none;
+    color: #02b6e6;
+    font-family: 'Lucida Sans', serif;
+    font-size: 12px;
 }
 
 .row {
