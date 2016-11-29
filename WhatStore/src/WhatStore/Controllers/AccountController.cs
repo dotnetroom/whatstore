@@ -21,7 +21,6 @@ namespace WhatStore.Controllers
 
         [Route("register")]
         public IActionResult Register()
-
         {
             return View();
         }
