@@ -15,15 +15,10 @@ namespace WhatStore.Controllers
 
         [Route("login")]
 
-        [Route("login")]
-
         public IActionResult Login()
         {
             return View();
         }
-
-        [Route("register")]
-
 
         [Route("register")]
 
