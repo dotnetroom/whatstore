@@ -4,35 +4,41 @@
     margin: 0;
 }
 
-<<<<<<< HEAD
-.body-index button {
-    color: aqua;
-    background: #ffffff;
-}
-
-.body-index a {
-    border: 5px solid #000000;
-=======
 html{
     padding-top: 0;
     padding-bottom: 0;
     margin: 0;
 }
 
-
-.body-index a{
+.btn{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px; 
     text-decoration: none;
-    border: 1px solid #808080;
+    border: 0.5px solid;
+    border-radius:5px; 
+    font-family: 'Roboto Slab', serif;
+
+    color: #000000;
+    background: #E6E9E7;
     
->>>>>>> bdf8ca71e8eb397dcac9d8b66718bf6ef7794e80
+    
+    
 }
 
-.body-index {
-    top: 100px;
-    width: auto;
-    height: auto;
-    margin-left: 50px;
-    
+.btn-primary{
+
+}
+
+.btn-secondary{
+
+}
+
+.body-index{
+    margin-top:20px;
+    margin-left:1200px;
+        
 }
 
 /* Wrapping element */
@@ -56,18 +62,29 @@ textarea {
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
+.carousel-inner .item img[src$=".svg"]
+{
     width: 100%;
 }
 
+<<<<<<< HEAD
 #formLogin {
     width: 200px;
     height: 200px;
     margin: auto;
 }
 
+.row{
+    width: 100%;
+    height:auto;
+
+}
+
+=======
+>>>>>>> 605e282601d796547e3840bb388a9a04664539bb
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
+<<<<<<< HEAD
     /* Hide captions */
     .carousel-caption {
         display: none;
@@ -162,4 +179,10 @@ textarea {
     margin-bottom:100px;
 }
 /*EndMargins*/
+=======
+  /* Hide captions */
+  .carousel-caption {
+    display: none
+  }
+>>>>>>> 5064a97f6a52db4fe4340cd53018f75a922a4935
 }
