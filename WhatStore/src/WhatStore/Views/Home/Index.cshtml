@@ -14,8 +14,10 @@
     </div>
     <div class="navbar">
         <div class="logo-navbar float-left"></div>
-        <a asp-controller="account" asp-action="login" class="btn-primary btn float-right">Login</a>
-        <a asp-controller="account" asp-action="register" class="btn btn-secondary float-right">Cadastrar</a>
+        <div class="float-right">
+            <a asp-controller="account" asp-action="login" class="btn-primary btn float-left margin-right-10">Login</a>
+            <a asp-controller="account" asp-action="register" class="btn btn-secondary float-left">Cadastrar</a>
+        </div>
     </div>
 </body>
 </html>

@@ -15,14 +15,20 @@ html {
     background: #F8F8F8;
     padding-top: 10px;
     padding-right:10px;
+    padding-left: 10px;
 }
 
 
 .logo-navbar{
-    width: 40px;
-    height: 40px;
+    width: 114px;
+    height: 30px;
     background-image: url(../images/logos/logo-04.png);
     background-size: cover;
+    cursor: pointer;
+}
+
+.logo-navbar:hover{
+    opacity: 0.7;
 }
 
 .btn{
@@ -44,12 +50,21 @@ html {
     color: #ffffff;
 }
 
+.btn-primary:hover{
+    background: #00a3cf;
+}
+
+
 .btn-secondary {
     border: #cccccc;
     background: #cccccc;
     color: #ffffff;
 }
 
+
+.btn-secondary:hover {
+    background: #c3c3c3;
+}
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
