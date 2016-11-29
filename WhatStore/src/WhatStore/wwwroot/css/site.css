@@ -11,23 +11,22 @@ html{
 }
 
 .btn{
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px; 
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px; 
     text-decoration: none;
     border: 0.5px solid;
     border-radius:5px; 
-    font-family: 'Roboto Slab', serif;
-
+    font-family: 'Lucida Sans';
     color: #000000;
-    background: #E6E9E7;
-    
-    
-    
+    background: #E6E9E7;   
 }
 
 .btn-primary{
+    border: #02B6E6;
+    background: #02B6E6;
+    color: #ffffff;
 
 }
 
