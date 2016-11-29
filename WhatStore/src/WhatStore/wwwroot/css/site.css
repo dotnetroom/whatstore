@@ -666,3 +666,14 @@ h1, h2, h3, h4, h5, h6{
     opacity: 0.6;
     z-index: 0;
 }
+
+.arrow-up {
+    width: 400px;
+    height: 222px;
+    background: url(../images/general/arrow-up.png);
+    background-size: cover;
+    position: absolute;
+    z-index: 0;
+    right: 80px;
+    top: 30px;
+}
