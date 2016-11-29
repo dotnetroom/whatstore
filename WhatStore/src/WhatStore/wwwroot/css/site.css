@@ -319,3 +319,42 @@ textarea {
     margin-bottom: 100px;
 }
 /*EndMargins*/
+
+/* HOVERS */
+
+.hover-from-center {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow: hidden; 
+
+}
+
+.hover-from-center:before {
+  background: #ff408d !important;
+  height: 2px !important; 
+}
+
+.hover-from-center:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  background: #2098d1;
+  height: 4px;
+  transition-property: left,right;
+  transition-duration: .3s;
+  transition-timing-function: ease-out; }
+
+.hover-from-center:active:before, .hover-from-center:focus:before, .hover-from-center:hover:before {
+  left: 0;
+  right: 0; }
+
+/* END HOVERS */
