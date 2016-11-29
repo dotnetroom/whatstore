@@ -52,9 +52,9 @@ html {
 }
 
 .logo-login{
-    width: 60px;
-    height: 60px;
-    background-image: url(../images/logos/logo-03.png);
+    width: 114px;
+    height: 30px;
+    background-image: url(../images/logos/logo-04.png);
     background-size: cover;
     cursor: pointer;
 }
