@@ -460,4 +460,80 @@ label {
     font-family: 'Lucida Sans', serif;
 }
 
+.form-group {
+    margin-bottom: 15px
+}
+
+@media(min-width: 768px) {
+    .form-inline .form-group {
+        display:inline-block;
+        margin-bottom: 0;
+        vertical-align: middle
+    }
+
+    .form-inline .form-control {
+        display: inline-block
+    }
+
+    .form-inline select.form-control {
+        width: auto
+    }
+
+    .form-inline .radio,.form-inline .checkbox {
+        display: inline-block;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-left: 0
+    }
+
+    .form-inline .radio input[type="radio"],.form-inline .checkbox input[type="checkbox"] {
+        float: none;
+        margin-left: 0
+    }
+}
+
+.form-horizontal .control-label,.form-horizontal .radio,.form-horizontal .checkbox,.form-horizontal .radio-inline,.form-horizontal .checkbox-inline {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 13px
+}
+
+.form-horizontal .radio,.form-horizontal .checkbox {
+    min-height: 31px
+}
+
+.form-horizontal .form-group {
+    margin-left: -6.5px;
+    margin-right: -6.5px
+}
+
+.form-horizontal .form-group:before,.form-horizontal .form-group:after {
+    content: " ";
+    display: table
+}
+
+.form-horizontal .form-group:after {
+    clear: both
+}
+
+.form-horizontal .form-group:before,.form-horizontal .form-group:after {
+    content: " ";
+    display: table
+}
+
+.form-horizontal .form-group:after {
+    clear: both
+}
+
+.form-horizontal .form-control-static {
+    padding-top: 13px
+}
+
+@media(min-width: 768px) {
+    .form-horizontal .control-label {
+        text-align:right
+    }
+}
+
+
 /* END FORM CONTROL */
