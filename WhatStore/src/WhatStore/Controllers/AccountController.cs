@@ -14,20 +14,13 @@ namespace WhatStore.Controllers
         // GET: /<controller>/
 
         [Route("login")]
-
-        [Route("account/login")]
-
         public IActionResult Login()
         {
             return View();
         }
 
         [Route("register")]
-
-
-        [Route("account/register")]
-
-        public  IActionResult Register()
+        public IActionResult Register()
         {
             return View();
         }
