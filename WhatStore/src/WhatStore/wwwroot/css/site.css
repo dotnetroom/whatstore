@@ -31,14 +31,11 @@ html{
 }
 
 .btn-secondary{
-
+    border: #E6E9E7;
+    background: #E6E9E7;
+    color: #ffffff;
 }
 
-.body-index{
-    margin-top:20px;
-    margin-left:1200px;
-        
-}
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
