@@ -13,8 +13,9 @@ html {
 }
 
 .index-header{
-    background: url('../images/backgrounds/lojas.jpg');
+    background: url('../images/backgrounds/background-1.jpg');
     background-size:cover;
+    background-position: bottom;
     width: 100%;
     height: 500px;
     margin-top: 45px;
