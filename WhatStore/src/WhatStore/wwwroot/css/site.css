@@ -400,7 +400,9 @@ textarea {
   -moz-osx-font-smoothing: grayscale;
   position: relative;
   transition-property: color;
-  transition-duration: .3s; }
+  transition-duration: .3s; 
+  border-radius: 5px;
+}
 
 .hover-sweep-to-right:before {
   content: "";
@@ -417,14 +419,20 @@ textarea {
       transform-origin: 0 50%;
   transition-property: transform;
   transition-duration: .3s;
-  transition-timing-function: ease-out; }
+  transition-timing-function: ease-out;
+  border-radius: 5px;
+}
 
 .hover-sweep-to-right:active, .hover-sweep-to-right:focus, .hover-sweep-to-right:hover {
-  color: #fff; }
+  color: #fff;
+  border-radius: 5px;
+}
 
 .hover-sweep-to-right:active:before, .hover-sweep-to-right:focus:before, .hover-sweep-to-right:hover:before {
   -ms-transform: scaleX(1);
-      transform: scaleX(1); }
+      transform: scaleX(1);
+      border-radius: 5px;
+}
 
 .hover-sweep-to-left {
   display: inline-block;
