@@ -13,9 +13,9 @@ html {
 }
 
 .index-header{
-    background: url('../images/backgrounds/background-1.jpg');
+    background: url('../images/backgrounds/background-3.jpg');
     background-size:cover;
-    background-position: bottom;
+    background-position: center;
     width: 100%;
     height: 500px;
     margin-top: 50px;
@@ -24,7 +24,7 @@ html {
 }
 
 .index-header-content{
-    position: relative;
+    position: absolute;
 }
 
 .navbar{
