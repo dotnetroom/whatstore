@@ -15,7 +15,7 @@ namespace WhatStore.Controllers
 
         [Route("login")]
 
-        [Route("account/login")]
+        [Route("login")]
 
         public IActionResult Login()
         {
@@ -25,7 +25,7 @@ namespace WhatStore.Controllers
         [Route("register")]
 
 
-        [Route("account/register")]
+        [Route("register")]
 
         public  IActionResult Register()
         {
