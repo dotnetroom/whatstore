@@ -487,7 +487,7 @@ textarea {
 
 .form-control {
     display: block;
-    width: 100%;
+    min-width: 100%;
     height: 44px;
     padding: 12px 14px;
     font-size: 13px;
@@ -551,6 +551,7 @@ label {
     width: 100% !important;
     white-space: nowrap !important;
     font-family: 'Lucida Sans', serif;
+    color: #868585;
 }
 
 .form-group {
