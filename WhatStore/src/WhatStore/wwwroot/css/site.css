@@ -10,6 +10,13 @@ html{
     margin: 0;
 }
 
+.body-index{
+    height: 35px;
+    background: #F8F8F8;
+    padding-top: 15px;
+    padding-left: 1185px;
+}
+
 .btn{
     padding-top: 7px;
     padding-bottom: 7px;
