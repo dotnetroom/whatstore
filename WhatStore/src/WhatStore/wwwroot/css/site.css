@@ -97,7 +97,10 @@ textarea {
     min-height: 200px;
     height: auto;
     margin: auto;
-    background-color: #C1326E;
+    background-color: #FFFFFF;
+    border: 3px solid;
+    border-color:#c1326e;
+    border-radius: 5px;
 }
 
 #formRegister {
