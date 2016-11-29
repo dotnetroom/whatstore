@@ -160,6 +160,10 @@ textarea {
     font-size: 12px;
 }
 
+.links{
+    text-decoration: none;
+}
+
 .row {
     width: 100%;
     height: auto;
