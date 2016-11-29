@@ -387,6 +387,55 @@ textarea {
 
 }
 
+.hover-sweep-to-right {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  transition-property: color;
+  transition-duration: .3s; }
+
+.hover-sweep-to-right:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #02B6E6;
+  -ms-transform: scaleX(0);
+      transform: scaleX(0);
+  -ms-transform-origin: 0 50%;
+      transform-origin: 0 50%;
+  transition-property: transform;
+  transition-duration: .3s;
+  transition-timing-function: ease-out; }
+
+.hover-sweep-to-right:active, .hover-sweep-to-right:focus, .hover-sweep-to-right:hover {
+  color: #fff; }
+
+.hover-sweep-to-right:active:before, .hover-sweep-to-right:focus:before, .hover-sweep-to-right:hover:before {
+  -ms-transform: scaleX(1);
+      transform: scaleX(1); }
+
+.hover-sweep-to-left {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  transition-property: color;
+  transition-duration: .3s; 
+}
+
 /* END HOVERS */
 
 
