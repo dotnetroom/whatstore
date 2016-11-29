@@ -12,12 +12,24 @@ html {
     background-color:#f8f8f8;
 }
 
+.index-header{
+    background: url('../images/backgrounds/lojas.jpg');
+    background-size:cover;
+    width: 100%;
+    height: 500px;
+    margin-top: 45px;
+    color: #fff !important;
+}
+
 .navbar{
     height: 45px;
     background: #F8F8F8;
     padding-top: 10px;
     padding-right:10px;
     padding-left: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 
