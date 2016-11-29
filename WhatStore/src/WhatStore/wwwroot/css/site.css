@@ -102,8 +102,9 @@ textarea {
     background-color: #FFFFFF;
     border: 0.5px solid;
     border-color:#FFFFFF;
-    box-shadow:2px 2px 2px 4px #e6e9e7;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
     border-radius: 5px;
+    padding: 20px;
 }
 
 #formRegister {
