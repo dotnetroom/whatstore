@@ -160,6 +160,13 @@ textarea {
     font-size: 12px;
 }
 
+.links{
+    text-decoration: none;
+    color: #c1326e;
+    font-family: 'Lucida Sans', serif;
+    font-size: 12px;
+}
+
 .row {
     width: 100%;
     height: auto;
