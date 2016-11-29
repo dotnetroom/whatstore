@@ -36,6 +36,7 @@ html {
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 99;
 }
 
 
@@ -173,10 +174,12 @@ textarea {
 }
 
 /*Colors*/
+.color-grey{
+    color:#9c9696;
+}
 .color-blue{
     color: #02B6E6;
 }
-
 .color-pink{
     color: #C1326E;
 }
