@@ -8,27 +8,40 @@
 </head>
 
 <body>
-    <form id="formRegister" class="float-center margin-top-75">
-               
+    <div class="navbar">
+        <div class="logo-navbar float-left margin-left-30"></div>
+        <div class="float-right margin-right-20">
+            <a asp-controller="account" asp-action="login" class="btn-primary btn float-left margin-right-10">Login</a>
+            <a asp-controller="account" asp-action="register" class="btn btn-secondary float-left hover-sweep-to-right">Cadastrar</a>
+        </div>
+    </div>
+
+    <div>
+        <div class="logo-register margin-top-75 float-center"></div>
+    </div>
+
+
+    <form id="formRegister" class="float-center margin-top-50">
+
         <div class="row margin-top-10 font-size13">
             <label>Nome: </label>
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Sobrenome: </label>
-            <input type="text" class="form-control"/> 
+            <input type="text" class="form-control" />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>RG: </label>
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>CPF: </label>
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Data de nascimento: </label>
-            <input type="datetime" name="date" class="form-control"/>
+            <input type="datetime" name="date" class="form-control" />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Genero: </label>
@@ -37,14 +50,14 @@
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Email: </label>
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Senha: </label>
-            <input type="password" class="form-control"/>
+            <input type="password" class="form-control" />
         </div>
         <div class="row margin-top-10 font-size13 ">
-            <button type="submit" class="btn btn-primary hover-from-center ">Registrar</button>
+            <button type="submit" class="btn btn-primary margin-bottom-20">Registrar</button>
         </div>
     </form>
 </body>

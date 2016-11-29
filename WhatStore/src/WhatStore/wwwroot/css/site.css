@@ -58,6 +58,15 @@ html {
     background-size: cover;
     cursor: pointer;
 }
+
+.logo-register{
+    width: 114px;
+    height: 30px;
+    background-image: url(../images/logos/logo-04.png);
+    background-size: cover;
+    cursor: pointer;
+}
+
 .btn{
     padding-top: 7px;
     padding-bottom: 7px;
