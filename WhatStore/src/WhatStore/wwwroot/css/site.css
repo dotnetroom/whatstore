@@ -121,6 +121,9 @@ textarea {
 .float-left{
     float: left !important;
 }
+.float-center{
+    margin: 0 auto;
+}
 /*EndFloat*/
 
 /*Margins*/
