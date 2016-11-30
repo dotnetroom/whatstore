@@ -129,7 +129,7 @@ textarea {
     width: 100%;
 }
 
-#formLogin {
+.formLogin {
     width: 300px;
     min-height: 200px;
     height: auto;
@@ -145,20 +145,14 @@ textarea {
     font-size: 12px;
 }
 
-#formRegister {
+.formRegister {
     width: 400px;
     min-height: 550px;
-    height: auto;
-    margin:auto;
-    background-color: #FFFFFF;
-    padding: 15px;
-    border: 0.5px solid;
-    border-color:#FFFFFF;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
-    border-radius: 5px;
-    color: #868585;
-    font-family: 'Lucida Sans', serif;
-    font-size: 12px;
+}
+
+.div-management{
+    width: 400px;
+    min-height: 100px;
 }
 
 .links{
