@@ -68,6 +68,18 @@ html {
     cursor: pointer;
 }
 
+.photo-segment-content{
+    height: 100px;
+    width:100px;
+    border-radius: 100%;
+}
+
+.photo-segment{
+    height: 100%;
+    width:100%;
+    border-radius: 100%;
+}
+
 .btn{
     padding-top: 7px;
     padding-bottom: 7px;
@@ -169,7 +181,7 @@ textarea {
 
 /*Colors*/
 .color-grey{
-    color:#9c9696;
+    color:#969090;
 }
 .color-blue{
     color: #02B6E6;
@@ -681,3 +693,73 @@ h1, h2, h3, h4, h5, h6{
     right: 80px;
     top: 30px;
 }
+
+<<<<<<< HEAD
+/*Seleção de sim ou não*/
+.onoffswitch {
+    position: relative; width: 70px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 1px solid #999999; border-radius: 23px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 27px; padding: 0; line-height: 27px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "Sim";
+    padding-left: 10px;
+    background-color: #02B6E6; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "Não";
+    padding-right: 10px;
+    background-color: #E6E9E7; color: #A3A3A3;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 10px; margin: 8.5px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 39px;
+    border: 1px solid #999999; border-radius: 23px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+}
+/*END SELEÇÃO*/
+=======
+.index-content{
+    width: 1000px;
+    height: auto;
+    min-height: 100px;
+    margin: 0 auto;
+    overflow: initial;
+}
+
+.index-content label{
+    font-family: 'Lucida Sans';
+    color:#969090;    
+    margin: 0 auto;
+    font-size:17px;
+    text-align:center !important;
+    width: 100% !important;
+    margin-top: 10px;
+    float: left;
+    white-space: normal !important;
+}
+>>>>>>> 6249619c7187ac2720641100155abbcc415632b1
