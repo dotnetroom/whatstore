@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WhatStore.Controllers
 {
-    [Route("store")]
-    public class StoreController : Controller
+    [Route("admin")]
+    public class AdminController : Controller
     {
         [Route("management")]
         // GET: /<controller>/

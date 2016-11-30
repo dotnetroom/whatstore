@@ -1,14 +1,36 @@
-﻿@{
-    Layout = null;
-}
-
+﻿<!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/font-awesome.css"/>
 
 </head>
 <body>
-    <div class="navbar">
+    <div class="navbar admin-navbar">
         <div class="logo-navbar float-left margin-left-30"></div>
+    </div>
+    <div class="side-bar">
+        <ul>
+            <li>
+                <a><span class="fa fa-shopping-basket"></span> Cadastro de produtos</a>
+            </li>
+            
+            <li>
+                <a><span class="fa fa-edit"></span> Dados da loja</a>
+            </li>
+
+            <li>
+                <a><span class="fa fa-credit-card"></span> Dados financeiros</a>
+            </li>
+            <li>
+                <a><span class="fa fa-unlock"></span> Abrir loja</a>
+            </li>
+        </ul>
+    </div>
+    <div class="admin-content">
+        @RenderBody();
     </div>
 
 </body>
