@@ -8,10 +8,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WhatStore.Controllers
 {
+    [Route("store")]
     public class StoreController : Controller
     {
+        [Route("management")]
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Management()
+        {
+            return View();
+        }
+
+        [Route("product")]
+        public IActionResult Product()
         {
             return View();
         }
