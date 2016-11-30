@@ -68,6 +68,18 @@ html {
     cursor: pointer;
 }
 
+.photo-segment-content{
+    height: 100px;
+    width:100px;
+    border-radius: 100%;
+}
+
+.photo-segment{
+    height: 100%;
+    width:100%;
+    border-radius: 100%;
+}
+
 .btn{
     padding-top: 7px;
     padding-bottom: 7px;
@@ -175,7 +187,7 @@ textarea {
 
 /*Colors*/
 .color-grey{
-    color:#9c9696;
+    color:#969090;
 }
 .color-blue{
     color: #02B6E6;
@@ -686,4 +698,24 @@ h1, h2, h3, h4, h5, h6{
     z-index: 0;
     right: 80px;
     top: 30px;
+}
+
+.index-content{
+    width: 1000px;
+    height: auto;
+    min-height: 100px;
+    margin: 0 auto;
+    overflow: initial;
+}
+
+.index-content label{
+    font-family: 'Lucida Sans';
+    color:#969090;    
+    margin: 0 auto;
+    font-size:17px;
+    text-align:center !important;
+    width: 100% !important;
+    margin-top: 10px;
+    float: left;
+    white-space: normal !important;
 }
