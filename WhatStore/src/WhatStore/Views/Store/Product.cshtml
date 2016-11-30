@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <title>Cadastro de Produto - WhatStore</title>
+</head>
+<body>
+    <div class="logo-register margin-top-75 float-center"></div>
+
+
+    <form id="formRegister" class="float-center margin-top-20 margin-bottom-50">
+
+        <div class="row margin-top-10 font-size13">
+            <label>Titulo: </label>
+            <input type="text" class="form-control" />
+        </div>
+        <div class="row margin-top-10 font-size13">
+            <label>Descrição: </label>
+            <input type="text" class="form-control" />
+        </div>
+        <div class="row margin-top-10 font-size13">
+            <label>Preço: </label>
+            <input type="number" class="form-control" />
+        </div>
+        <div class="row margin-top-10 font-size13">
+            <label>Foto: </label>
+            <input type="image"  />
+        </div>
+        <div class="row margin-top-10 font-size13">
+            <div class="onoffswitch margin-right-10">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+                <label class="onoffswitch-label" for="myonoffswitch">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+            </div>
+            <label>Variação: </label>
+            <input type="checkbox" list=variacao>
+            <select id=variacao>
+                <option>Sem variação</option>
+                <option> Cor</option>
+                <option> Tamanho</option>
+            </select>
+        </div>
+        
+        <div class="row margin-top-10 font-size13 ">
+            <button type="submit" style="height: 40px;" class="btn btn-primary margin-bottom-20 row">Registrar</button>
+        </div>
+    </form>
+</body>
+</html>
