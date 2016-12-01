@@ -12,6 +12,17 @@ html {
     background-color: #f8f8f8;
 }
 
+
+/* TITLES */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Roboto",Fallback,sans-serif;
+    font-weight: 100;
+    color: #868585 !important;
+}
+
+/* END TITLES */
+
 .index-header {
     background: url('../images/backgrounds/background-3.jpg');
     background-size: cover;
@@ -23,8 +34,16 @@ html {
     position: relative;
 }
 
+    .index-header h1, index-header h2, index-header h3, index-header h4, index-header h5, index-header h6 {
+        color: #fff !important;
+    }
+
 .index-header-content {
     position: absolute;
+}
+
+.index-header-content h1, index-header-content h2, index-header-content h3, index-header-content h4, index-header-content h5, index-header-content h6{
+    color: #fff !important;
 }
 
 .navbar {
@@ -181,15 +200,15 @@ textarea {
 
 /*Colors*/
 .color-grey {
-    color: #969090;
+    color: #969090 !important;
 }
 
 .color-blue {
-    color: #02B6E6;
+    color: #02B6E6 !important;
 }
 
 .color-pink {
-    color: #C1326E;
+    color: #C1326E !important;
 }
 /*EndColors*/
 
@@ -633,9 +652,9 @@ label {
     margin-bottom: 15px;
 }
 
-.form-inline .form-control {
-    display: table-cell;
-}
+    .form-inline .form-control {
+        display: table-cell;
+    }
 
 @media(min-width: 768px) {
     .form-inline .form-group {
@@ -711,14 +730,6 @@ label {
 
 /* END FORM CONTROL */
 
-/* TITLES */
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Roboto",Fallback,sans-serif;
-    font-weight: 100;
-}
-
-/* END TITLES */
 
 .background-pattern {
     width: 100%;
@@ -843,6 +854,10 @@ h1, h2, h3, h4, h5, h6 {
         white-space: normal !important;
     }
 
+    .index-content h1, .index-content h2, .index-content h3, .index-content h4, .index-content h5, .index-content h6 {
+        color: #868585 !important;
+    }
+
 .side-bar {
     width: 20%;
     height: 100%;
@@ -898,13 +913,14 @@ h1, h2, h3, h4, h5, h6 {
     margin-left: 100px;
 }
 
-.admin-settings-content label{
-    color: #c1326e;
-}
+    .admin-settings-content label {
+        color: #c1326e !important;
+    }
 
-.admin-settings-content h1, h2, h3, h4,  h5, h6{
-    color: #15c6c6;
-}
+    .admin-settings-content h1, .admin-settings-content h2,  .admin-settings-content h3,  .admin-settings-content h4, 
+    .admin-settings-content h5, .admin-settings-content h6 {
+        color: #15c6c6 !important;
+    }
 
 
 .input-group-addon {
@@ -920,7 +936,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 4px;
 }
 
-hr{
+hr {
     border-top: 1px solid #ddd;
     height: 2px;
     width: 100%;
