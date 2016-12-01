@@ -4,44 +4,50 @@
 @{
     Layout = "_Admin";
 }
-<title>Cadastro de Produto - WhatStore</title>
+<title>Cadastro de Produtos - WhatStore</title>
 
-<form class="admin-settings-content row">
+<div class="admin-settings-content">
 
-    <div class="row margin-top-10 font-size13">
-        <label>Nome do produto: </label>
-        <input type="text" class="form-control" />
-    </div>
-    <div class="row margin-top-10 font-size13">
-        <label>Descrição: </label>
-        <textarea class="form-control" rows="5" style="resize: none"></textarea>
-    </div>
-    <div class="row margin-top-10 font-size13">
-        <label>Preço: </label>
-        <input type="text" class="form-control" value="R$" />
-    </div>
-    <div class="row margin-top-10 font-size13">
-        <label>Foto: </label>
-        <input type="image" />
-    </div>
-    <div class="row margin-top-10 font-size13">
-        <div class="onoffswitch margin-right-10">
-            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-            <label class="onoffswitch-label" for="myonoffswitch">
-                <span class="onoffswitch-inner"></span>
-                <span class="onoffswitch-switch"></span>
-            </label>
+    <h3>Cadastro de Produtos</h3>
+
+    <form class="form-group">
+
+        <div class="form-group">
+            <label>Nome do produto: </label>
+            <input type="text" class="form-control" />
         </div>
-        <label>Variação: </label>
-        <input list=variacao>
-        <select id=variacao>
-            <option> Cor</option>
-            <option> Tamanho</option>
-        </select>
-    </div>
+        <div class="form-group">
+            <label>Descrição: </label>
+            <textarea class="form-control" rows="5" style="resize: none"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Preço: </label>
+            <input type="text" class="form-control" value="R$" />
+        </div>
+        <hr />
 
-    <div class="row margin-top-10 font-size13 ">
-        <button type="submit" style="height: 40px" class="btn btn-primary margin-bottom-20 row">Registrar</button>
-    </div>
-</form>
+        <div class="form-group">
+            <label>Foto: </label>
+            <input type="image" />
+        </div>
+        <div class="form-group">
+            <div class="onoffswitch margin-right-10">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+                <label class="onoffswitch-label" for="myonoffswitch">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+            </div>
+            <label>Variação: </label>
+            <input list=variacao>
+            <select id=variacao>
+                <option> Cor</option>
+                <option> Tamanho</option>
+            </select>
+        </div>
 
+        <div class="form-group">
+            <button type="submit" style="height: 40px" class="btn btn-primary margin-bottom-20 row">Registrar</button>
+        </div>
+    </form>
+</div>
