@@ -4,50 +4,44 @@
 @{
     Layout = "_Admin";
 }
-<html>
-<head>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <title>Cadastro de Produto - WhatStore</title>
-</head>
-<body>
-   <form id="formRegister" class="float-center margin-top-20">
+<title>Cadastro de Produto - WhatStore</title>
 
-        <div class="row margin-top-10 font-size13">
-            <label>Nome do produto: </label>
-            <input type="text" class="form-control" />
-        </div>
-        <div class="row margin-top-10 font-size13">
-            <label>Descrição: </label>
-            <input type="text" class="form-control" />
-        </div>
-        <div class="row margin-top-10 font-size13">
-            <label>Preço: </label>
-            <input type="number" class="form-control" />
-        </div>
-        <div class="row margin-top-10 font-size13">
-            <label>Foto: </label>
-            <input type="image" />
-        </div>
-        <div class="row margin-top-10 font-size13">
-            <div class="onoffswitch margin-right-10">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-                <label class="onoffswitch-label" for="myonoffswitch">
-                    <span class="onoffswitch-inner"></span>
-                    <label>Variação: </label>
-                    <input list=variacao>
-                    <select id=variacao>
-                        <option> Cor</option>
-                        <option> Tamanho</option>
-                    </select>
-                    <span class="onoffswitch-switch"></span>
-                </label>
-            </div>
+<form class="float-center margin-top-20 form-group">
 
+    <div class="row margin-top-10 font-size13">
+        <label>Nome do produto: </label>
+        <input type="text" class="form-control" />
+    </div>
+    <div class="row margin-top-10 font-size13">
+        <label>Descrição: </label>
+        <textarea class="form-control" rows="5" style="resize: none"></textarea>
+    </div>
+    <div class="row margin-top-10 font-size13">
+        <label>Preço: </label>
+        <input type="text" class="form-control" value="R$" />
+    </div>
+    <div class="row margin-top-10 font-size13">
+        <label>Foto: </label>
+        <input type="image" />
+    </div>
+    <div class="row margin-top-10 font-size13">
+        <div class="onoffswitch margin-right-10">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+            <label class="onoffswitch-label" for="myonoffswitch">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
         </div>
+        <label>Variação: </label>
+        <input list=variacao>
+        <select id=variacao>
+            <option> Cor</option>
+            <option> Tamanho</option>
+        </select>
+    </div>
 
-        <div class="row margin-top-10 font-size13 ">
-            <button type="submit" style="height: 40px" class="btn btn-primary margin-bottom-20 row">Registrar</button>
-        </div>
-    </form>
-</body>
-</html>
+    <div class="row margin-top-10 font-size13 ">
+        <button type="submit" style="height: 40px" class="btn btn-primary margin-bottom-20 row">Registrar</button>
+    </div>
+</form>
+
