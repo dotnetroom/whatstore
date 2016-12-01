@@ -11,9 +11,9 @@ namespace WhatStore.Controllers
     [Route("admin")]
     public class AdminController : Controller
     {
-        [Route("management")]
+        [Route("Fiancier")]
         // GET: /<controller>/
-        public IActionResult Management()
+        public IActionResult Financier()
         {
             return View();
         }
