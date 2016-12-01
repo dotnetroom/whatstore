@@ -175,8 +175,8 @@ textarea {
 }
 
 .row {
-    width: 100%;
-    height: auto;
+    width: 100% !important;
+    height: auto !important;
 }
 
 /*Colors*/
@@ -600,6 +600,14 @@ textarea {
         background-color: #f8f8f8;
     }
 
+.form-inline .form-control, .form-group .form-control:first-child {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+
+
+
 textarea.form-control {
     height: auto;
 }
@@ -615,6 +623,16 @@ label {
 
 .form-group {
     margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.form-inline {
+    display: inline-flex !important;
+    margin-bottom: 15px;
+}
+
+.form-inline .form-control {
+    display: table-cell;
 }
 
 @media(min-width: 768px) {
@@ -829,7 +847,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #FFFFFF;
     position: fixed;
     left: 0;
-    padding-top:80px;
+    padding-top: 80px;
     -webkit-box-shadow: 3px 4px 20px -11px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 4px 20px -11px rgba(0,0,0,0.75);
     box-shadow: 3px 4px 20px -11px rgba(0,0,0,0.75);
@@ -847,33 +865,53 @@ h1, h2, h3, h4, h5, h6 {
     min-height: 300px;
     float: right;
     overflow: hidden;
-    padding: 20%;
-    margin-top:-200px;
+    margin-top: 80px;
 }
 
-.side-bar ul{
-    list-style-type:none;
+.side-bar ul {
+    list-style-type: none;
 }
 
-.side-bar ul li{
-    height:35px;
-}
+    .side-bar ul li {
+        height: 35px;
+    }
 
-.side-bar ul li a{
-    text-decoration:none;
-    color:#939393;
-    cursor:pointer;
-}
+        .side-bar ul li a {
+            text-decoration: none;
+            color: #939393;
+            cursor: pointer;
+        }
 
-.side-bar ul li a:hover{    
-    color:#c1326e;
-}
+            .side-bar ul li a:hover {
+                color: #c1326e;
+            }
 
-.admin-settings-content{
+.admin-settings-content {
     width: 600px;
     max-width: 600px;
     height: auto;
     min-height: 200px;
     overflow: hidden;
-    margin: 0 auto;
+    float: left;
+    margin-left: 100px;
+}
+
+
+.input-group-addon {
+    width: 100%;
+    padding: 15px 14px;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1;
+    color: #c9c9c9;
+    text-align: center;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+hr{
+    border-top: 1px solid #ddd;
+    height: 2px;
+    width: 100%;
 }

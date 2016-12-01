@@ -5,18 +5,39 @@
     Layout = "_Admin";
 }
 
-<div>
-    <h3 class="color-pink">Dados da Loja</h3>
-</div>
 
 <div class="admin-settings-content">
+    <h3 class="color-pink">Dados da Loja</h3>
     <form class="float-center margin-top-20">
-        <div class="font-size13">
+        <div class="form-group">
             <label>Nome da loja:</label>
             <input type="text" class="form-control" />
+        </div>
+        <div class="form-group">
             <label>Descrição da loja:</label>
             <textarea class="form-control" rows="10" style="resize: none;"></textarea>
         </div>
+        <div class="form-group">
+            <div class="float-left">
+                <label>Telefone:</label>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="float-right margin-left-100">
+                <label>Email:</label>
+                <input type="text" class="form-control" style="width:800px" />
+            </div>            
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+            <label>URL:</label>
+            <div class="form-inline">
+                <input type="text" class="form-control float-left" />
+                <span class="input-group-addon float-left">.whatstore.com.br</span>
+            </div>
+        </div>
+
 
     </form>
 </div>
