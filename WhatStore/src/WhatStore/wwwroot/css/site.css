@@ -600,20 +600,20 @@ textarea {
     }
 
     .form-control:-moz-placeholder {
-        color: #f4f4f4;
+        color: #c4c4c4;
     }
 
     .form-control::-moz-placeholder {
-        color: #f4f4f4;
+        color: #c4c4c4;
         opacity: 1;
     }
 
     .form-control:-ms-input-placeholder {
-        color: #f4f4f4;
+        color: #c4c4c4;
     }
 
     .form-control::-webkit-input-placeholder {
-        color: #f4f4f4;
+        color: #c4c4c4;
     }
 
     .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
