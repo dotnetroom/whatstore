@@ -23,5 +23,11 @@ namespace WhatStore.Controllers
         {
             return View();
         }
+
+        [Route("information")]
+        public IActionResult Information()
+        {
+            return View();
+        }
     }
 }
