@@ -32,17 +32,18 @@
         </div>
         <hr />
         <div class="form-group">
-            <h3>Variações</h3>
+            <h3>Este produto possui variações</h3>
+            <label>Ex: Diferentes cores, tamanhos, etc...</label>
             <div class="onoffswitch margin-right-10">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-                <label class="onoffswitch-label" for="myonoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="checkVariacoes">
+                <label class="onoffswitch-label" for="checkVariacoes">
                     <span class="onoffswitch-inner"></span>
                     <span class="onoffswitch-switch"></span>
                 </label>
             </div>
-            <div style="visibility:hidden">
-                <input list=variacao>
-                <select id=variacao>
+            <div id="variacoes" style="display: none;">
+                <input list=variacao class="form-control">
+                <select id=variacao class="form-control">
                     <option> Cor</option>
                     <option> Tamanho</option>
                 </select>
@@ -50,18 +51,20 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" style="height: 40px" class="btn btn-primary margin-bottom-20 row">Registrar</button>
+            <button type="submit" style="height: 40px" class="btn btn-primary margin-bottom-20 float-right">Registrar</button>
         </div>
     </form>
 </div>
-<script>
-    $("#myonoffswitch").on("change", function () {
-        if ($(this).is(":checked")) {
-            $(variacao).css("display", block);
 
+@section Scripts{
+<script type="text/javascript">
+    $("#checkVariacoes").on("change", function () {
+        if ($(this).is(":checked")) {
+            $("#variacoes").css("display", "block");
         } else {
-            $(variacao).hide();
+            $("#variacoes").css("display", "none");
 
         }
     });
 </script>
+}
