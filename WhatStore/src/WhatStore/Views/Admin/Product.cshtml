@@ -42,11 +42,11 @@
                 </label>
             </div>
             <div id="variacoes" style="display: none;">
-                <input list=variacao class="form-control">
                 <select id=variacao class="form-control">
                     <option> Cor</option>
                     <option> Tamanho</option>
                 </select>
+                <input list=variacao class="form-control">
             </div>
         </div>
         <hr />
@@ -68,7 +68,7 @@
 
         <div class="form-group">
             <h3>Tags</h3>
-            <input type="text" class="form-control" placeholder="Ex.: Presentes"/>
+            <input type="text" class="form-control" placeholder="Ex.: Presentes" />
         </div>
 
         <div class="form-group">
@@ -78,23 +78,23 @@
 </div>
 
 @section Scripts{
-<script type="text/javascript">
-    $("#checkVariacoes").on("change", function () {
-        if ($(this).is(":checked")) {
-            $("#frete").css("display", "block");
-        } else {
-            $("#variacoes").css("display", "none");
+    <script type="text/javascript">
+        $("#checkVariacoes").on("change", function () {
+            if ($(this).is(":checked")) {
+                $("#variacoes").css("display", "block");
+            } else {
+                $("#variacoes").css("display", "none");
 
-        }
-    });
+            }
+        });
 
-    $("#checkFrete").on("change", function () {
-        if ($(this).is(":checked")) {
-            $("#frete").css("display", "block");
-        } else {
-            $("#frete").css("display", "none");
+        $("#checkFrete").on("change", function () {
+            if ($(this).is(":checked")) {
+                $("#frete").css("display", "block");
+            } else {
+                $("#frete").css("display", "none");
 
-        }
-    });
-</script>
+            }
+        });
+    </script>
 }
