@@ -568,6 +568,7 @@ textarea {
     -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     -moz-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    outline: none !important;
 }
 
     .form-control:focus {
@@ -576,6 +577,7 @@ textarea {
         -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,0.6);
         -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,0.6);
         box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,0.6);
+        outline: none !important;
     }
 
     .form-control:-moz-placeholder {
@@ -894,6 +896,14 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
     float: left;
     margin-left: 100px;
+}
+
+.admin-settings-content label{
+    color: #0ba6ea;
+}
+
+.admin-settings-content h1, h2, h3, h4,  h5, h6{
+    color: #c1326e;
 }
 
 
