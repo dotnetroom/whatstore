@@ -30,7 +30,9 @@
             <label>Foto: </label>
             <input type="image" />
         </div>
+        <hr />
         <div class="form-group">
+            <h3>Variações</h3>
             <div class="onoffswitch margin-right-10">
                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
                 <label class="onoffswitch-label" for="myonoffswitch">
@@ -38,12 +40,13 @@
                     <span class="onoffswitch-switch"></span>
                 </label>
             </div>
-            <label>Variação: </label>
-            <input list=variacao>
-            <select id=variacao>
-                <option> Cor</option>
-                <option> Tamanho</option>
-            </select>
+            <div style="visibility:hidden">
+                <input list=variacao>
+                <select id=variacao>
+                    <option> Cor</option>
+                    <option> Tamanho</option>
+                </select>
+            </div>
         </div>
 
         <div class="form-group">
@@ -51,3 +54,14 @@
         </div>
     </form>
 </div>
+<script>
+    $("#myonoffswitch").on("change", function () {
+        if ($(this).is(":checked")) {
+            $(variacao).css("display", block);
+
+        } else {
+            $(variacao).hide();
+
+        }
+    });
+</script>
