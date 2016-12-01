@@ -723,7 +723,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/*Seleção de sim ou não*/
+/*Switch*/
 .onoffswitch {
     position: relative;
     width: 70px;
@@ -801,7 +801,7 @@ h1, h2, h3, h4, h5, h6 {
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px;
 }
-/*END SELEÇÃO*/
+/*END Switch*/
 
 .index-content {
     width: 1000px;
