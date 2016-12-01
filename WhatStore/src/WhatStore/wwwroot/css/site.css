@@ -847,7 +847,8 @@ h1, h2, h3, h4, h5, h6 {
     min-height: 300px;
     float: right;
     overflow: hidden;
-    padding: 5%;
+    padding: 20%;
+    margin-top:-200px;
 }
 
 .side-bar ul{
