@@ -638,7 +638,7 @@ label {
     font-weight: 500 !important;
     width: 100% !important;
     white-space: nowrap !important;
-    font-family: 'Lucida Sans', serif;
+    font-family: sans-serif;
     color: #868585;
 }
 
@@ -807,13 +807,14 @@ label {
         content: "Não";
         padding-right: 10px;
         background-color: #E6E9E7;
-        color: #A3A3A3;
+        color: #858383;
         text-align: right;
     }
 
 .onoffswitch-switch {
     display: block;
     width: 10px;
+    height: 10px;
     margin: 8.5px;
     background: #FFFFFF;
     position: absolute;
@@ -929,7 +930,7 @@ label {
     font-size: 13px;
     font-weight: normal;
     line-height: 1;
-    color: #c9c9c9;
+    color: #726f6f;
     text-align: center;
     background-color: #f8f8f8;
     border: 1px solid #ccc;
