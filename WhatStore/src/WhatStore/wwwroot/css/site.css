@@ -868,3 +868,11 @@ h1, h2, h3, h4, h5, h6 {
     color:#c1326e;
 }
 
+.admin-settings-content{
+    width: 600px;
+    max-width: 600px;
+    height: auto;
+    min-height: 200px;
+    overflow: hidden;
+    margin: 0 auto;
+}
