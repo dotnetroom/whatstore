@@ -2,7 +2,10 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "NETStandard.Library": "1.6.0"
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0-preview1-final",
+    "Microsoft.EntityFrameworkCore": "1.1.0",
+    "NETStandard.Library": "1.6.0",
+    "Dapper": "1.50.0-beta5"
   },
 
   "frameworks": {

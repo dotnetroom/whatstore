@@ -1,0 +1,133 @@
+﻿@model WhatStore.Infrastructure.ViewModels.Admin.InformationViewModel
+
+@{
+    Layout = "_Admin";
+}
+
+<title>Dados da loja - WhatStore</title>
+
+<div class="admin-settings-content">
+    <h3>Dados da Loja</h3>
+    <form class="float-center margin-top-20">
+        <div class="form-group">
+            <label>Nome da loja:</label>
+            <input type="text" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label>Descrição da loja:</label>
+            <textarea class="form-control" rows="10" style="resize: none" required></textarea>
+        </div>
+        <div class="form-group">
+            <div class="float-left" style="width:10%">
+                <label>DDD:</label>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="float-left margin-left-10">
+                <label>Telefone:</label>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="float-right margin-left-30">
+                <label>Email:</label>
+                <input type="text" class="form-control" style="width:800px" required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>URL:</label>
+            <div class="form-inline">
+                <input type="text" class="form-control float-left" required/>
+                <span class="input-group-addon float-left">.whatstore.com.br</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Escolha o logo da sua loja</label>
+            <input type="file" name="file" id="file" class="inputfile" style="display: none;" required/>
+            <label class="btn btn-secondary" style="width:30% !important" for="file">Selecione o arquivo</label>
+        </div>
+        <div class="form-group">
+            <label>Termos de uso:</label>
+            <textarea class="form-control" rows="10" style="resize: none;" required></textarea>
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+            <h3 class="float-left">Endereço físico</h3>
+            <div class="onoffswitch margin-right-10 float-right margin-top-20">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="checkEndereco">
+                <label class="onoffswitch-label" for="checkEndereco">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+            </div>
+        </div>
+
+
+
+        <div id="adress" style="display: none;">
+            <div class="form-group">
+                <div class="float-left" style="width:80%">
+                    <label>Endereço:</label>
+                    <input type="text" class="form-control" />
+                </div>
+                <div class="float-right margin-left-50" style="width:10%">
+                    <label>Número:</label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="float-left" style="width:50%">
+                    <label>Bairro:</label>
+                    <input type="text" class="form-control" />
+                </div>
+                <div class="float-right margin-left-50" style="width:40%">
+                    <label>CEP:</label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Complemento:</label>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <div class="float-right  margin-left-20" style="width:40%">
+                    <label>Cidade:</label>
+                    <select id="dropCities" type="text" class="form-control" disabled="disabled">
+                        <option value="-1">Selecione sua cidade</option>
+                    </select>
+                </div>
+                <div class="float-left" style="width:40%">
+                    <label>Estado:</label>
+                    <select id="dropStates" type="text" class="form-control">
+                        <option value="-1">Selecione um estado</option>
+                        @foreach (var state in Model.States)
+                        {
+                            <option value="@state.Id">@state.Initials</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary margin-top-10 float-right" style="height: 40px;" type="submit">Salvar</button>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $("#checkEndereco").on("change", function () {
+            console.log('changing');
+            if ($(this).is(":checked")) {
+                $("#adress").css("display", "block");
+            } else {
+                $("#adress").css("display", "none");
+            }
+        });
+
+        $(document).ready(function () {
+            $('#dropStates').states($('#dropCities'));
+        });
+    </script>
+}

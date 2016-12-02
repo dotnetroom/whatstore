@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1/",
-    "signature": "d3f71eddad64d924823152be49be47a7b406aa0d"
+    "signature": "9e3485d230b270eda53959e1f52fa5a818283747"
   },
   "compilationOptions": {
     "defines": [
@@ -34,10 +34,31 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
           "Microsoft.EntityFrameworkCore": "1.1.0",
           "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview2-final",
-          "WhatStore.Crosscutting": "1.0.0"
+          "WhatStore.Crosscutting": "1.0.0",
+          "Microsoft.DotNet.Cli.Utils": "1.0.0-preview2-003121"
         },
         "compile": {
           "WhatStore.dll": {}
+        }
+      },
+      "Dapper/1.50.0-beta5": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.3.0",
+          "System.Collections": "4.3.0",
+          "System.Collections.Concurrent": "4.3.0",
+          "System.Collections.NonGeneric": "4.3.0",
+          "System.Data.SqlClient": "4.1.0",
+          "System.Linq": "4.3.0",
+          "System.Reflection.Emit.ILGeneration": "4.3.0",
+          "System.Reflection.Emit.Lightweight": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.ThreadPool": "4.3.0"
+        },
+        "compile": {
+          "lib/dotnet5.4/Dapper.dll": {}
         }
       },
       "Libuv/1.9.1": {
@@ -2384,6 +2405,9 @@
           "System.Reflection": "4.3.0",
           "System.Reflection.Primitives": "4.3.0",
           "System.Runtime": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.0/System.Reflection.Emit.ILGeneration.dll": {}
         }
       },
       "System.Reflection.Emit.Lightweight/4.3.0": {
@@ -2392,6 +2416,9 @@
           "System.Reflection.Emit.ILGeneration": "4.3.0",
           "System.Reflection.Primitives": "4.3.0",
           "System.Runtime": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.0/System.Reflection.Emit.Lightweight.dll": {}
         }
       },
       "System.Reflection.Extensions/4.3.0": {
@@ -2982,7 +3009,10 @@
       },
       "WhatStore.Crosscutting/1.0.0": {
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0-preview1-final",
+          "Microsoft.EntityFrameworkCore": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "Dapper": "1.50.0-beta5"
         },
         "compile": {
           "WhatStore.Crosscutting.dll": {}
@@ -3010,10 +3040,31 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
           "Microsoft.EntityFrameworkCore": "1.1.0",
           "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview2-final",
-          "WhatStore.Crosscutting": "1.0.0"
+          "WhatStore.Crosscutting": "1.0.0",
+          "Microsoft.DotNet.Cli.Utils": "1.0.0-preview2-003121"
         },
         "runtime": {
           "WhatStore.dll": {}
+        }
+      },
+      "Dapper/1.50.0-beta5": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.3.0",
+          "System.Collections": "4.3.0",
+          "System.Collections.Concurrent": "4.3.0",
+          "System.Collections.NonGeneric": "4.3.0",
+          "System.Data.SqlClient": "4.1.0",
+          "System.Linq": "4.3.0",
+          "System.Reflection.Emit.ILGeneration": "4.3.0",
+          "System.Reflection.Emit.Lightweight": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.ThreadPool": "4.3.0"
+        },
+        "runtime": {
+          "lib/dotnet5.4/Dapper.dll": {}
         }
       },
       "Libuv/1.9.1": {
@@ -5868,7 +5919,10 @@
       },
       "WhatStore.Crosscutting/1.0.0": {
         "dependencies": {
-          "NETStandard.Library": "1.6.1"
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0-preview1-final",
+          "Microsoft.EntityFrameworkCore": "1.1.0",
+          "NETStandard.Library": "1.6.1",
+          "Dapper": "1.50.0-beta5"
         },
         "runtime": {
           "WhatStore.Crosscutting.dll": {}
@@ -5881,6 +5935,11 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Dapper/1.50.0-beta5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jqLsQtRDEEsOtn4bbvuaBw1VsIiNktTw2E/Ke6CESyIsLRwf26gd39tfubMkCwIevFsUJuYJL8U35+RmVe0A9A=="
     },
     "Libuv/1.9.1": {
       "type": "package",

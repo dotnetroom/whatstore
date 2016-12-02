@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+<html>
+
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @* FONTE DO GOOGLE *@
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+
+    <title>Login - WhatStore</title>
+</head>
+
+<body>
+    <div class="logo-login margin-top-75 float-center"></div>
+
+    <form class="formLogin float-center margin-top-20">
+
+        <div class="row margin-top-10">
+            <label> Digite seu email:</label>
+            <input type="text" class="form-control" required/>
+        </div>
+
+        <div class="row margin-top-10">
+            <label>Digite sua senha:</label>
+            <input type="text" class="form-control" required/>
+        </div>
+
+        <div class="row margin-top-10">
+            <button type="submit" class="btn btn-primary" style="width: 100%; height: 40px;">Entrar</button>
+        </div>
+
+        <hr />
+
+        <div>            
+            <p>Ainda não fez seu cadastro? <a class="links hover-from-center" asp-controller="account" asp-action="register">Cadastre-se.</a></p>
+        </div>
+    </form>
+</body>
+
+</html>

@@ -9,8 +9,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using WhatStore.Models.Identity;
-using WhatStore.Models.Context;
+using WhatStore.Crosscutting.Infrastructure.Models.Identity;
+using WhatStore.Crosscutting.Infrastructure.Contexts;
+using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
+using WhatStore.Crosscutting.Infrastructure.Repository;
 
 namespace WhatStore
 {
@@ -33,7 +35,7 @@ namespace WhatStore
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Configuration["ConnectionString:SQLServer"]));
+                    options.UseSqlServer(Configuration["ConnectionString"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole<long>>(options => {
                 options.Password.RequireDigit = false;
@@ -44,6 +46,21 @@ namespace WhatStore
             })
                 .AddEntityFrameworkStores<ApplicationDbContext, long>()
                 .AddDefaultTokenProviders();
+
+            // Setup options with DI
+            services.AddOptions();
+
+            // Configure MyOptions using config by installing Microsoft.Extensions.Options.ConfigurationExtensions
+            services.Configure<CustomSettings>(Configuration);
+
+            // Configure MyOptions using code
+            services.Configure<CustomSettings>(myOptions =>
+            {
+                myOptions.ConnectionString = Configuration["ConnectionString"];
+            });
+
+            // Repositories
+            services.AddTransient<ILocalizationRepository, LocalizationRepository>();
 
             // Add framework services.
             services.AddMvc();
