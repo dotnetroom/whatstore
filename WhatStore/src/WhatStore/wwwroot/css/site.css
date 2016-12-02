@@ -943,8 +943,6 @@ hr {
     width: 100%;
 }
 
-<<<<<<< HEAD
-=======
 .inputfile + label {
     font-size: 1.25em;
     font-weight: 700;
@@ -957,4 +955,4 @@ hr {
 .inputfile + label:hover {
     background-color: red;
 }
->>>>>>> 7f8fecf37b4f175c2d8fab13a4a973913a40856f
+
