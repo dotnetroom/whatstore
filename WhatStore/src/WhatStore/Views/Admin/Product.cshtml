@@ -14,15 +14,15 @@
 
         <div class="form-group">
             <label>Nome do produto: </label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" required/>
         </div>
         <div class="form-group">
             <label>Descrição: </label>
-            <textarea class="form-control" rows="5" style="resize: none"></textarea>
+            <textarea class="form-control" rows="5" style="resize: none" required></textarea>
         </div>
         <div class="form-group">
             <label>Preço: </label>
-            <input type="text" class="form-control" placeholder="Ex: 20,00" />
+            <input type="text" class="form-control" placeholder="Ex.: 20,00" required/>
         </div>
         <hr />
 
@@ -43,12 +43,15 @@
                     <span class="onoffswitch-switch"></span>
                 </label>
             </div>
-            <div id="variacoes" style="display: none;">
-                <select id=variacao class="form-control">
-                    <option> Cor</option>
-                    <option> Tamanho</option>
-                </select>
-                <input list=variacao class="form-control">
+            <div id="variacoes" class="form-group" style="display: none;">
+                <div class="form-group">
+                    <label>Cor:</label>
+                    <input list=cor class="form-control" placeholder="Ex.: azul, preto">
+                </div>
+                <div class="form-group">
+                    <label>Tamanho:</label>
+                    <input list=tamanho class="form-control" placeholder="Ex.: P, M, 10, 12">
+                </div>
             </div>
         </div>
         <hr />
@@ -64,13 +67,13 @@
             </div>
             <div id="frete" style="display: none;">
                 <div class="float-left margin-right-40">
-                    <label>Peso:</label><input type="text" class="form-control" style="width:170px" />
+                    <label>Peso:</label><input type="text" class="form-control" style="width:170px" placeholder="Ex.: 1,05kg"/>
                 </div>
                 <div class="float-left margin-right-40">
-                    <label>Altura: </label><input type="text" class="form-control" style="width:170px" />
+                    <label>Altura: </label><input type="text" class="form-control" style="width:170px" placeholder="Ex.: 10cm"/>
                 </div>
                 <div class="float-right">
-                    <label>Comprimento: </label><input type="text" class="form-control" style="width:170px" />
+                    <label>Comprimento: </label><input type="text" class="form-control" style="width:170px" placeholder="Ex.: 20cm"/>
                 </div>
             </div>
         </div>
@@ -78,7 +81,7 @@
 
         <div class="form-group">
             <h3>Tags</h3>
-            <input type="text" class="form-control" placeholder="Ex.: Presentes" />
+            <input type="text" class="form-control" placeholder="Ex.: Presentes" required/>
         </div>
 
         <div class="form-group">
