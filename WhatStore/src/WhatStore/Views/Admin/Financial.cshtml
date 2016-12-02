@@ -8,52 +8,74 @@
 
         <div class="form-group">
             <label>Sobre o responsavel: </label>
-            <textarea class="form-control"rows="10" style="resize: none;"> </textarea>
+            <textarea class="form-control" rows="10" style="resize: none;"> </textarea>
+        </div>
+        <div class="form-group">
+            <div class="float-left">
+                <label>Nome: </label>
+                <input class="form-control" style="width:300px" />
+            </div>
+
+            <div class="float-right">
+                <label> Sobrenome: </label>
+                <input class="form-control" style="width:300px" />
+            </div>
         </div>
 
         <div class="form-group">
-            <label>Nome: </label>
-            <input class="form-control" />
+            <div class="float-left">
+                <label>CPF: </label>
+                <input type="text" class="form-control" style="width:300px" />
+            </div>
+
+            <div class="float-right">
+                <label>RG: </label>
+                <input type="text" class="form-control" style="width:300px" />
+            </div>
         </div>
 
         <div class="form-group">
-            <label> Sobrenome: </label>
-            <input class="form-control" />
-        </div>
+            <div class="float-left">
+                <label>Data Nascimento: </label>
+                <input type="date" class="form-control" style="width: 160px" />
+            </div>
 
-        <div class="form-group">
-            <label>CPF: </label>
-            <input class="form-control" />
-        </div>
+            <div class="float-left margin-left-40">
+                <label>Genero: </label>
+                <select class="form-control" style="width:150px;">
+                    <option value="0">Masculino</option>
+                    <option value="1">Feminino</option>
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label>RG: </label>
-            <input class="form-control" />
-        </div>
+            <div class="float-right">
+                <div class="float-left margin-right-10">
+                    <label>DDD: </label>
+                    <input type="text" class="form-control" style="width:50px" maxlength="2" />
+                </div>
 
-        <div class="form-group">
-            <label>Data Nascimento: </label>
-            <input class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <label>Genero: </label>
-            <input class="form-control" />
-        </div>
-
-        <div class="form-group">
-            <label>Telefone: </label>
-            <input class="form-control" />
+                <div class="float-left">
+                    <label>Telefone: </label>
+                    <input type="text" class="form-control" style="width:150px" />
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
             <h4>Pessoa Juridica?</h4>
             <div class="onoffswitch margin-right-10">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-                <label class="onoffswitch-label" for="myonoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="checkPessoaJuridica">
+                <label class="onoffswitch-label" for="checkPessoaJuridica">
                     <span class="onoffswitch-inner"></span>
                     <span class="onoffswitch-switch"></span>
                 </label>
+            </div>
+        </div>
+
+        <div id="PJ" class="form-group" style="display: none;">
+            <div>
+                <label>CNPJ: </label>
+                <input class="form-control" />
             </div>
         </div>
 
@@ -99,8 +121,26 @@
         </div>
 
         <div class="form-group">
-            <button class="btn btn-primary margin-top-10" style="width: 100%; height: 40px;" type="submit">Enviar</button>
+            <button class="btn btn-primary margin-top-10 float-right" style="height: 40px;" type="submit">Enviar</button>
         </div>
 
     </form>
 </div>
+@section Scripts{
+    <script type="text/javascript">
+        $("#checkPessoaJuridica").on("change", function () {
+
+            if ($(this).is(":checked")) {
+
+                $("#PJ").css("display", "block");
+            }
+
+            else {
+                $("#PJ").css("display", "none")
+
+            }
+        });
+
+
+    </script>
+}
