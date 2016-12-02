@@ -9,5 +9,6 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository.Interfaces
     public interface ILocalizationRepository
     {
         Task<List<State>> GetStates();
+        Task<List<City>> GetCities(int stateID);
     }
 }

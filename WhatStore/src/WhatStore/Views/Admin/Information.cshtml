@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model WhatStore.Infrastructure.ViewModels.Admin.InformationViewModel
+
 @{
     Layout = "_Admin";
 }
@@ -92,11 +91,17 @@
             <div class="form-group">
                 <div class="float-left" style="width:40%">
                     <label>Cidade:</label>
-                    <select type="text" class="form-control"></select>
+                    <select id="dropCities" type="text" class="form-control"></select>
                 </div>
                 <div class="float-right margin-left-20" style="width:40%">
                     <label>Estado:</label>
-                    <select type="text" class="form-control"></select>
+                    <select id="dropStates" type="text" class="form-control">
+                        <option value="-1">Selecione um estado</option>
+                        @foreach (var state in Model.States)
+                        {
+                            <option value="@state.Id">@state.Initials</option>
+                        }
+                    </select>
                 </div>
             </div>
         </div>
@@ -113,6 +118,10 @@
             } else {
                 $("#adress").css("display", "none");
             }
+        });
+
+        $(document).ready(function () {
+            $('#dropStates').states($('#dropCities'));
         });
     </script>
 }

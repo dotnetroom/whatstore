@@ -42,5 +42,23 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository
                 return null;
             }
         }
+
+        public async Task<List<City>> GetCities(int stateID)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var result = await db.QueryAsync<City>("SELECT * FROM \"dbo\".\"City\" WHERE \"StateId\" = @STATE", new { STATE = stateID });
+
+                    return result.ToList();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

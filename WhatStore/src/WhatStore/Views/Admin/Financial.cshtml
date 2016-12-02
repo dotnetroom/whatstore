@@ -1,6 +1,9 @@
-﻿@{
+﻿@model WhatStore.Infrastructure.ViewModels.Admin.FinancialViewModel
+
+@{
     Layout = "_Admin";
 }
+
 <title>Financeiro - WhatStore</title>
 <div class="admin-settings-content">
     <h3>Dados financeiros</h3>
@@ -111,13 +114,19 @@
 
             <div class="float-left margin-left-50">
                 <label>Estado:</label>
-                <select class="form-control" style="width: 200px;"></select>
+                <select id="dropStates" class="form-control" style="width: 200px;">
+                    <option value="-1">Selecione um estado</option>
+                    @foreach(var state in Model.States)
+                    { 
+                        <option value="@state.Id">@state.Initials</option>
+                    }
+                </select>
             </div>
 
 
             <div class="float-right">
                 <label>Cidade: </label>                
-                <select class="form-control" style="width: 200px;"></select>
+                <select id="dropCities" class="form-control" style="width: 200px;" disabled="disabled"></select>
             </div>
 
         </div>
@@ -169,6 +178,9 @@
             }
         });
 
+        $(document).ready(function () {
+            $('#dropStates').states($('#dropCities'));
+        });
 
     </script>
 }
