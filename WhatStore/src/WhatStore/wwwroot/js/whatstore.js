@@ -19,7 +19,6 @@
                 },
                 error: function (x, y, message) {
                     dropCities.attr('disabled', 'disabled');
-                    alert(message);
                 }
             });
         });

@@ -128,10 +128,6 @@
                 <label>Cidade: </label>                
                 <select id="dropCities" class="form-control" style="width: 200px;" disabled="disabled">
                     <option value="-1">Selecione um estado</option>
-                    @foreach (var state in Model.States)
-                    {
-                        <option value="@state.Id">@state.Initials</option>
-                    }
                 </select>
             </div>
 
