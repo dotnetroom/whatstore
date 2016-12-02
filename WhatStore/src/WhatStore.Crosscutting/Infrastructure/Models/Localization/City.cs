@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 
-namespace WhatStore.Crosscutting.Infrastructure.Models.Store
+namespace WhatStore.Crosscutting.Infrastructure.Models.Localization
 {
     public class City
     {
