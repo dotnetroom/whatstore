@@ -8,8 +8,8 @@ using WhatStore.Models.Context;
 namespace WhatStore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20161124195904_FirtUse")]
-    partial class FirtUse
+    [Migration("20161202164051_FirstUse")]
+    partial class FirstUse
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -191,6 +191,82 @@ namespace WhatStore.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Localization.Adress", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CEP")
+                        .IsRequired();
+
+                    b.Property<int>("CityID");
+
+                    b.Property<string>("Complement")
+                        .IsRequired();
+
+                    b.Property<string>("Number")
+                        .IsRequired();
+
+                    b.Property<string>("Street")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityID");
+
+                    b.ToTable("Adress");
+                });
+
+            modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Localization.City", b =>
+                {
+                    b.Property<int>("Id");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<int>("StateId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StateId");
+
+                    b.ToTable("City");
+                });
+
+            modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Localization.Country", b =>
+                {
+                    b.Property<int>("Id");
+
+                    b.Property<string>("Initials")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Country");
+                });
+
+            modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Localization.State", b =>
+                {
+                    b.Property<int>("Id");
+
+                    b.Property<int>("CountryID");
+
+                    b.Property<string>("Initials")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryID");
+
+                    b.ToTable("State");
+                });
+
             modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Product.PictureProduct", b =>
                 {
                     b.Property<int>("Id")
@@ -308,49 +384,6 @@ namespace WhatStore.Migrations
                     b.ToTable("TagProduct");
                 });
 
-            modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Store.Adress", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CEP")
-                        .IsRequired();
-
-                    b.Property<int>("CityID");
-
-                    b.Property<string>("Complement")
-                        .IsRequired();
-
-                    b.Property<string>("Number")
-                        .IsRequired();
-
-                    b.Property<string>("Street")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityID");
-
-                    b.ToTable("Adress");
-                });
-
-            modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Store.City", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<int>("StateId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StateId");
-
-                    b.ToTable("City");
-                });
-
             modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Store.PessoaJuridica", b =>
                 {
                     b.Property<long>("Id")
@@ -371,19 +404,6 @@ namespace WhatStore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PessoaJuridica");
-                });
-
-            modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Store.State", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("State");
                 });
 
             modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Store.Store", b =>
@@ -488,6 +508,30 @@ namespace WhatStore.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Localization.Adress", b =>
+                {
+                    b.HasOne("WhatStore.Crosscutting.Infrastructure.Models.Localization.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Localization.City", b =>
+                {
+                    b.HasOne("WhatStore.Crosscutting.Infrastructure.Models.Localization.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Localization.State", b =>
+                {
+                    b.HasOne("WhatStore.Crosscutting.Infrastructure.Models.Localization.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Product.PictureProduct", b =>
                 {
                     b.HasOne("WhatStore.Crosscutting.Infrastructure.Models.Product.Product", "Product")
@@ -519,25 +563,9 @@ namespace WhatStore.Migrations
                         .HasForeignKey("TagId1");
                 });
 
-            modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Store.Adress", b =>
-                {
-                    b.HasOne("WhatStore.Crosscutting.Infrastructure.Models.Store.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Store.City", b =>
-                {
-                    b.HasOne("WhatStore.Crosscutting.Infrastructure.Models.Store.State", "State")
-                        .WithMany()
-                        .HasForeignKey("StateId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Store.Store", b =>
                 {
-                    b.HasOne("WhatStore.Crosscutting.Infrastructure.Models.Store.Adress", "Adress")
+                    b.HasOne("WhatStore.Crosscutting.Infrastructure.Models.Localization.Adress", "Adress")
                         .WithMany()
                         .HasForeignKey("AdressId")
                         .OnDelete(DeleteBehavior.Cascade);

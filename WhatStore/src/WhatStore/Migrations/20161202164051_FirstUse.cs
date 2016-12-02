@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WhatStore.Migrations
 {
-    public partial class FirtUse : Migration
+    public partial class FirstUse : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,6 +36,19 @@ namespace WhatStore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Country",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    Initials = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Country", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -102,19 +115,6 @@ namespace WhatStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "State",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_State", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "StoreType",
                 columns: table => new
                 {
@@ -144,6 +144,26 @@ namespace WhatStore.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "State",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                    CountryID = table.Column<int>(nullable: false),
+                    Initials = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_State", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_State_Country_CountryID",
+                        column: x => x.CountryID,
+                        principalTable: "Country",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -224,8 +244,7 @@ namespace WhatStore.Migrations
                 name: "City",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     StateId = table.Column<int>(nullable: false)
                 },
@@ -451,6 +470,21 @@ namespace WhatStore.Migrations
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Adress_CityID",
+                table: "Adress",
+                column: "CityID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_City_StateId",
+                table: "City",
+                column: "StateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_State_CountryID",
+                table: "State",
+                column: "CountryID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PictureProduct_ProductId",
                 table: "PictureProduct",
                 column: "ProductId");
@@ -474,16 +508,6 @@ namespace WhatStore.Migrations
                 name: "IX_TagProduct_TagId1",
                 table: "TagProduct",
                 column: "TagId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Adress_CityID",
-                table: "Adress",
-                column: "CityID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_City_StateId",
-                table: "City",
-                column: "StateId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Store_AdressId",
@@ -559,6 +583,9 @@ namespace WhatStore.Migrations
 
             migrationBuilder.DropTable(
                 name: "State");
+
+            migrationBuilder.DropTable(
+                name: "Country");
         }
     }
 }

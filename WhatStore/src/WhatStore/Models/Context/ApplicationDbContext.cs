@@ -8,6 +8,7 @@ using WhatStore.Crosscutting.Infrastructure.Models.Identity;
 using WhatStore.Crosscutting.Infrastructure.Models.Product;
 using WhatStore.Crosscutting.Infrastructure.Models.Store;
 using WhatStore.Crosscutting.Infrastructure.Models.Localization;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WhatStore.Models.Context
 {
@@ -40,7 +41,5 @@ namespace WhatStore.Models.Context
         public DbSet<State> State { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<StoreType> StoreType { get; set; }
-
-
     }
 }

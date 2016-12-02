@@ -218,8 +218,7 @@ namespace WhatStore.Migrations
 
             modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Localization.City", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id");
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -235,8 +234,7 @@ namespace WhatStore.Migrations
 
             modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Localization.Country", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id");
 
                     b.Property<string>("Initials")
                         .IsRequired();
@@ -251,10 +249,12 @@ namespace WhatStore.Migrations
 
             modelBuilder.Entity("WhatStore.Crosscutting.Infrastructure.Models.Localization.State", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id");
 
                     b.Property<int>("CountryID");
+
+                    b.Property<string>("Initials")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired();
