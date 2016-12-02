@@ -49,5 +49,11 @@ namespace WhatStore.Controllers
         {
             return View();
         }
+
+        [Route("open")]
+        public IActionResult Open()
+        {
+            return View();
+        }
     }
 }

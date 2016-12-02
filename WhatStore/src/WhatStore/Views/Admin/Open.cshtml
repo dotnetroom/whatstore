@@ -1,0 +1,30 @@
+﻿@{
+    Layout = "_Admin";
+}
+
+<div class="admin-settings-content">
+    <h3>Abrir loja</h3>
+    <div class="form-group margin-top-20">
+        <label class="margin-top-20 float-left" style="width:100px !important";>Gostaria de deixar sua loja visivel para os clientes?</label>
+        <div class="onoffswitch margin-right-10 float-right margin-top-20">
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="checkEndereco">
+            <label class="onoffswitch-label" for="checkEndereco">
+                <span class="onoffswitch-inner"></span>
+                <span class="onoffswitch-switch"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $("#checkEndereco").on("change", function () {
+            console.log('changing');
+            if ($(this).is(":checked")) {
+                $("#adress").css("display", "block");
+            } else {
+                $("#adress").css("display", "none");
+            }
+        });
+    </script>
+}
