@@ -1,22 +1,19 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using WhatStore.Crosscutting.Infrastructure.Models.Identity;
+using WhatStore.Crosscutting.Infrastructure.Models.Localization;
 using WhatStore.Crosscutting.Infrastructure.Models.Product;
 using WhatStore.Crosscutting.Infrastructure.Models.Store;
-using WhatStore.Crosscutting.Infrastructure.Models.Localization;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WhatStore.Models.Context
+namespace WhatStore.Crosscutting.Infrastructure.Contexts
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<long>, long>
     {
-        
-
-        public ApplicationDbContext(DbContextOptions options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
