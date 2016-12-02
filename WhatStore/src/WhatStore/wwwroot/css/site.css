@@ -943,7 +943,6 @@ hr {
     width: 100%;
 }
 
-<<<<<<< HEAD
 .inputfile {
 	width: 100px;
 	height: 0.1px;
@@ -954,11 +953,6 @@ hr {
 }
 
 .inputfile label {
-=======
-<<<<<<< HEAD
-=======
-.inputfile + label {
->>>>>>> c11db6564afa1f8c728d67b20121856e548159c1
     font-size: 1.25em;
     font-weight: 700;    
     
@@ -970,12 +964,6 @@ hr {
 
 
 .inputfile + label:hover {
-<<<<<<< HEAD
     background: #868585;
     color: #fff;
 }
-=======
-    background-color: red;
-}
->>>>>>> 7f8fecf37b4f175c2d8fab13a4a973913a40856f
->>>>>>> c11db6564afa1f8c728d67b20121856e548159c1
