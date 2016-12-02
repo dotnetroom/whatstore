@@ -28,7 +28,9 @@
 
         <div class="form-group">
             <label>Foto: </label>
-            <input type="file" />
+            <input type="file" id="fotoProduto" style="display: none"/>
+            <label for="fotoProduto" class="btn btn-primary" style="width:170px">Selecionar imagem</label>
+
         </div>
         <hr />
         <div class="form-group">
@@ -61,7 +63,15 @@
                 </label>
             </div>
             <div id="frete" style="display: none;">
-                <input type="text" class="form-control" />
+                <div class="float-left margin-right-40">
+                    <label>Peso:</label><input type="text" class="form-control" style="width:170px" />
+                </div>
+                <div class="float-left margin-right-40">
+                    <label>Altura: </label><input type="text" class="form-control" style="width:170px" />
+                </div>
+                <div class="float-right">
+                    <label>Comprimento: </label><input type="text" class="form-control" style="width:170px" />
+                </div>
             </div>
         </div>
         <hr />
