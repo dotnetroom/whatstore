@@ -31,9 +31,10 @@ namespace WhatStore.Infrastructure.ViewModels.Admin
         [Required(ErrorMessage = "The Name field is required.")]
         public string Terms { get; set; }
 
+        [Required]
+        public bool HasAdress { get; set; }
         public string Address { get; set; }
         public string Number { get; set; }
-        public string Neighborhood { get; set; }
         public string CEP { get; set; }
         public string Complemento { get; set; }
         public int State { get; set; }
