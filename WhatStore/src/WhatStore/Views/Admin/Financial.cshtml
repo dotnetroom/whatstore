@@ -8,45 +8,46 @@
 <div class="admin-settings-content">
     <h3>Dados financeiros</h3>
 
-    <form class="form-group margin-top-20">
+    <form class="form-group margin-top-20" asp-controller="financial" asp-action="register" method="post">
+   
 
         <div class="form-group">
             <label>Sobre o responsavel: </label>
-            <textarea class="form-control" rows="10" style="resize: none;"> </textarea>
+            <textarea class="form-control" rows="10" style="resize: none;" name="Responsable"> </textarea>
         </div>
         <div class="form-group">
             <div class="float-left">
                 <label>Nome: </label>
-                <input class="form-control" style="width:300px" required />
+                <input class="form-control" style="width:300px" required name="Name"/>
             </div>
 
             <div class="float-right">
                 <label> Sobrenome: </label>
-                <input class="form-control" style="width:300px" required />
+                <input class="form-control" style="width:300px" required  name="LastName"/>
             </div>
         </div>
 
         <div class="form-group">
             <div class="float-left">
                 <label>CPF: </label>
-                <input type="text" class="form-control" style="width:300px" required />
+                <input type="text" class="form-control" style="width:300px" required name="CPF"/>
             </div>
 
             <div class="float-right">
                 <label>RG: </label>
-                <input type="text" class="form-control" style="width:300px" required />
+                <input type="text" class="form-control" style="width:300px" required name="RG" />
             </div>
         </div>
 
         <div class="form-group">
             <div class="float-left">
                 <label>Data Nascimento: </label>
-                <input type="date" class="form-control" style="width: 160px" required />
+                <input type="date" class="form-control" style="width: 160px" required name="BirthDay"/>
             </div>
 
             <div class="float-left margin-left-40">
                 <label>Genero: </label>
-                <select class="form-control" style="width:150px;">
+                <select class="form-control" style="width:150px;" name="Gender">
                     <option value="0">Masculino</option>
                     <option value="1">Feminino</option>
                 </select>
@@ -55,12 +56,12 @@
             <div class="float-right">
                 <div class="float-left margin-right-10">
                     <label>DDD: </label>
-                    <input type="text" class="form-control" style="width:50px" maxlength="2" required />
+                    <input type="text" class="form-control" style="width:50px" maxlength="2" required name="DDD"/>
                 </div>
 
                 <div class="float-left">
                     <label>Telefone: </label>
-                    <input type="text" class="form-control" style="width:150px" required />
+                    <input type="text" class="form-control" style="width:150px" required name="Phone"/>
                 </div>
             </div>
         </div>
@@ -77,29 +78,29 @@
         </div>
 
         <div id="PJ" class="form-group" style="display: none;">
-            
+
             <div class="form-group">
                 <div class="float-left">
                     <label>CNPJ: </label>
-                    <input class="form-control" style="width:200px;" />
+                    <input class="form-control" style="width:200px;" name="CNPJ"/>
                 </div>
 
                 <div class="float-right">
                     <label>Razão social: </label>
-                    <input class="form-control" style="width:800px;"/>
+                    <input class="form-control" style="width:800px;" name="SocialName"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="float-left">
                     <label>Incrição estadual: </label>
-                    <input class="form-control" style="width: 600px;"/>
+                    <input class="form-control" style="width: 600px;" name="StateIncentive"/>
                 </div>
 
 
                 <div class="float-right">
                     <label>Inscrição municipal: </label>
-                    <input class="form-control" style="width: 600px;"/>
+                    <input class="form-control" style="width: 600px;" name="MunicipalRegistration"/>
                 </div>
             </div>
         </div>
@@ -109,15 +110,15 @@
             <h4>Endereço: </h4>
             <div class="float-left">
                 <label>CEP: </label>
-                <input class="form-control" style="width: 100px;" required />
+                <input class="form-control" style="width: 100px;" required name="CEP"/>
             </div>
 
             <div class="float-left margin-left-50">
                 <label>Estado:</label>
-                <select id="dropStates" class="form-control" style="width: 200px;">
+                <select id="dropStates" class="form-control" style="width: 200px;" name="State">
                     <option value="-1">Selecione um estado</option>
-                    @foreach(var state in Model.States)
-                    { 
+                    @foreach (var state in Model.States)
+                    {
                         <option value="@state.Id">@state.Initials</option>
                     }
                 </select>
@@ -125,8 +126,8 @@
 
 
             <div class="float-right">
-                <label>Cidade: </label>                
-                <select id="dropCities" class="form-control" style="width: 200px;" disabled="disabled">
+                <label>Cidade: </label>
+                <select id="dropCities" class="form-control" style="width: 200px;" disabled="disabled" name="City">
                     <option value="-1">Selecione um estado</option>
                 </select>
             </div>
@@ -135,28 +136,21 @@
 
         <div class="form-group">
 
-            <div class="float-left">
-                <label>Bairro: </label>
-                <input class="form-control " style="width:200px;" required />
-            </div>
-
-            <div class="float-right">
-                <div class="float-left margin-left-20">
+                <div class="float-left" style="width:400px;">
                     <label>Endereço: </label>
-                    <input class="form-control " style="width:270px;" required />
+                    <input class="form-control " required name="Address"/>
                 </div>
 
-                <div class="float-left margin-left-10">
+                <div class="float-right margin-left-10">
                     <label>Número: </label>
-                    <input class="form-control " style="width: 80px;" required />
+                    <input class="form-control " style="width: 150px;" required name="Number"/>
                 </div>
-            </div>
 
         </div>
 
         <div class="form-group">
             <label>Complemento:*</label>
-            <input class="form-control" />
+            <input class="form-control" name="Complement"/>
         </div>
 
         <div class="form-group">
@@ -165,6 +159,8 @@
 
     </form>
 </div>
+
+
 @section Scripts{
     <script type="text/javascript">
         $("#checkPessoaJuridica").on("change", function () {
