@@ -8,32 +8,29 @@
 </head>
 
 <body>
-    <div class="logo-register margin-top-75 float-center">
-        <a asp-controller="home" asp-action="index"></a>
-</div>
+    <div class="logo-register margin-top-75 float-center"></div>
 
-    
     <form class="formRegister formLogin float-center margin-top-20 margin-bottom-50">
 
         <div class="row margin-top-10 font-size13">
             <label>Nome: </label>
-            <input type="text" class="form-control" required/>
+            <input type="text" class="form-control" required />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Sobrenome: </label>
-            <input type="text" class="form-control" required/>
+            <input type="text" class="form-control" required />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>RG: </label>
-            <input type="text" class="form-control" required/>
+            <input type="text" class="form-control" required />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>CPF: </label>
-            <input type="text" class="form-control"required />
+            <input type="text" class="form-control" required />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Data de nascimento: </label>
-            <input type="date" name="date" class="form-control" required/>
+            <input type="date" name="date" class="form-control" required />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Genero: </label>
@@ -42,18 +39,18 @@
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Email: </label>
-            <input type="text" class="form-control" required/>
+            <input type="text" class="form-control" required />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Senha: </label>
-            <input type="password" class="form-control" required/>
+            <input type="password" class="form-control" required />
         </div>
         <div class="row margin-top-10 font-size13 ">
             <button type="submit" style="height: 40px !important;" class="btn btn-primary margin-bottom-20 row">Registrar</button>
         </div>
         <div class="row margin-top-10 font-size13">
             Já está cadastrado? <a asp-controller="account" asp-action="login" class="links hover-from-center">Clique aqui para entrar.</a>
-        </div> 
+        </div>
     </form>
 </body>
 </html>
