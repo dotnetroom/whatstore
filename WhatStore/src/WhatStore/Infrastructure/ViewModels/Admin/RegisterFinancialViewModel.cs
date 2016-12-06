@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WhatStore.Infrastructure
 {
-    public class RegisterFinationViewModel
+    public class RegisterFinancialViewModel
     {
         public string Responsible { get; set; }
         public string Name { get; set; }
@@ -19,7 +19,7 @@ namespace WhatStore.Infrastructure
         public string Cnpj { get; set; }
         public string SocialName { get; set; }
         public string StateIncentive { get; set; }
-        public string Municipalregistration { get; set; }
+        public string MunicipalRegistration { get; set; }
         public string Estate { get; set; }
         public string City { get; set; }
         public string Neighborhood { get; set; }
