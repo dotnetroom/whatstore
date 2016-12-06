@@ -17,9 +17,9 @@ namespace WhatStore.Infrastructure
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "The CPF field is required.")]
-        public string Cpf { get; set; }
+        public string CPF { get; set; }
 
-        public string Rg { get; set; }
+        public string RG { get; set; }
 
         [Required(ErrorMessage = "The Birth Day field is required.")]
         public DateTime BirthDay { get; set; }
@@ -27,9 +27,9 @@ namespace WhatStore.Infrastructure
         [Required(ErrorMessage = "The Gender field is required.")]
         public bool Gender { get; set; }
 
-        public string Ddd { get; set; }
+        public string DDD { get; set; }
         public string Phone { get; set; }
-        public string Cnpj { get; set; }
+        public string CNPJ { get; set; }
         public string SocialName { get; set; }
         public string StateIncentive { get; set; }
         public string MunicipalRegistration { get; set; }
@@ -49,6 +49,6 @@ namespace WhatStore.Infrastructure
         [Required(ErrorMessage = "The Adress Number field is required.")]
         public string Number { get; set; }
 
-        public string Complemento { get; set; }
+        public string Complement { get; set; }
     }
 }
