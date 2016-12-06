@@ -15,7 +15,6 @@ namespace WhatStore.Infrastructure.ViewModels.Admin
         [Required(ErrorMessage = "The Name field is required.")]
         public string StoreDescription { get; set; }
 
-        [Required(ErrorMessage = "The Name field is required.")]
         public string PhoneDDD { get; set; }
 
         public string PhoneNumber { get; set; }
