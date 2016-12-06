@@ -61,6 +61,7 @@ namespace WhatStore
 
             // Repositories
             services.AddTransient<ILocalizationRepository, LocalizationRepository>();
+            
 
             // Add framework services.
             services.AddMvc();
