@@ -47,14 +47,22 @@ namespace WhatStore.Controllers
         [Route("information")]
         public async Task<IActionResult> Information()
         {
-            var states = await _localization.GetStates();
-
-            var viewModel = new InformationViewModel()
+            try
             {
-                States = states
-            };
+                var states = await _localization.GetStates();
 
-            return View(viewModel);
+                var viewModel = new InformationViewModel()
+                {
+                    States = states
+                };
+
+                return View(viewModel);
+            }
+
+            catch(Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         [Route("open")]
