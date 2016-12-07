@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model WhatStore.Infrastructure.ViewModels.Admin.RegisterProductViewModel
 @{
     Layout = "_Admin";
 }
@@ -10,25 +8,26 @@
 
     <h3>Cadastro de Produtos</h3>
 
-    <form class="form-group">
+    <form class="form-group" asp-action="register" asp-controller="product" method="post" enctype="multipart/form-data">
 
         <div class="form-group">
             <label>Nome do produto: </label>
-            <input type="text" class="form-control" required/>
+            <input type="text" class="form-control" required asp-for="ProductName"/>
+            <span asp-validation-for="ProductName"></span>
         </div>
         <div class="form-group">
             <label>Descrição: </label>
-            <textarea class="form-control" rows="5" style="resize: none" required></textarea>
+            <textarea class="form-control" rows="5" style="resize: none" required asp-for="Description"></textarea>
         </div>
         <div class="form-group">
             <label>Preço: </label>
-            <input type="text" class="form-control" placeholder="Ex.: 20,00" required/>
+            <input type="text" class="form-control" placeholder="Ex.: 20,00" required asp-for="Price"/>
         </div>
         <hr />
 
         <div class="form-group">
             <label>Foto: </label>
-            <input class="inputfile" type="file" id="fotoProduto" style="display: none"/>
+            <input class="inputfile" type="file" id="fotoProduto" style="display: none" asp-for="Picture" multiple/>
             <label for="fotoProduto" class="btn btn-secondary" style="width:170px !important">Selecionar imagem</label>
 
         </div>
@@ -37,7 +36,7 @@
             <h3>Este produto possui variações?</h3>
             <label>Ex: Diferentes cores, tamanhos, etc...</label>
             <div class="onoffswitch margin-right-10">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="checkVariacoes">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="checkVariacoes" asp-for="HasVariety">
                 <label class="onoffswitch-label" for="checkVariacoes">
                     <span class="onoffswitch-inner"></span>
                     <span class="onoffswitch-switch"></span>
@@ -46,11 +45,11 @@
             <div id="variacoes" class="form-group" style="display: none;">
                 <div class="form-group">
                     <label>Cor:</label>
-                    <input list=cor class="form-control" placeholder="Ex.: azul, preto">
+                    <input list=cor class="form-control" placeholder="Ex.: azul, preto" asp-for="Colors">
                 </div>
                 <div class="form-group">
                     <label>Tamanho:</label>
-                    <input list=tamanho class="form-control" placeholder="Ex.: P, M, 10, 12">
+                    <input list=tamanho class="form-control" placeholder="Ex.: P, M, 10, 12" asp-for="Sizes">
                 </div>
             </div>
         </div>
@@ -59,7 +58,7 @@
         <div class="form-group">
             <h3>Este produto possui frete?</h3>
             <div class="onoffswitch margin-right-10">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="checkFrete">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="checkFrete" asp-for="IsFreeShip">
                 <label class="onoffswitch-label" for="checkFrete">
                     <span class="onoffswitch-inner"></span>
                     <span class="onoffswitch-switch"></span>
@@ -67,13 +66,13 @@
             </div>
             <div id="frete" style="display: none;">
                 <div class="float-left margin-right-40">
-                    <label>Peso:</label><input type="text" class="form-control" style="width:170px" placeholder="Ex.: 1,05kg"/>
+                    <label>Peso:</label><input type="text" value="0" class="form-control" style="width:170px" placeholder="Ex.: 1,05kg" asp-for="Weight"/>
                 </div>
                 <div class="float-left margin-right-40">
-                    <label>Altura: </label><input type="text" class="form-control" style="width:170px" placeholder="Ex.: 10cm"/>
+                    <label>Altura: </label><input type="text" value="0" class="form-control" style="width:170px" placeholder="Ex.: 10cm" asp-for="Height"/>
                 </div>
                 <div class="float-right">
-                    <label>Comprimento: </label><input type="text" class="form-control" style="width:170px" placeholder="Ex.: 20cm"/>
+                    <label>Comprimento: </label><input type="text" value="0" class="form-control" style="width:170px" placeholder="Ex.: 20cm" asp-for="Length"/>
                 </div>
             </div>
         </div>
@@ -81,7 +80,7 @@
 
         <div class="form-group">
             <h3>Tags</h3>
-            <input type="text" class="form-control" placeholder="Ex.: Presentes" required/>
+            <input type="text" class="form-control" placeholder="Ex.: Presentes" required asp-for="Tags"/>
         </div>
 
         <div class="form-group">
