@@ -39,5 +39,14 @@ namespace WhatStore.Controllers
             return Ok();
         }
 
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
     }
 }
