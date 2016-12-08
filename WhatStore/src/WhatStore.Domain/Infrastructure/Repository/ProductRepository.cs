@@ -4,14 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using WhatStore.Crosscutting.Infrastructure.Contexts;
 using WhatStore.Crosscutting.Infrastructure.Models.Product;
+using Dapper;
+using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
+using Microsoft.Extensions.Options;
 
 namespace WhatStore.Crosscutting.Infrastructure.Repository
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         private CustomSettings _settings;
+        public ProductRepository(IOptions<CustomSettings> settings)
+        {
+            _settings = settings.Value;
+        }
 
-        public async Task<bool> SetProduct()
+        public async Task<bool> SetProduct(string nomeProduct, string description, double price, bool hasVariety, string colors, string size, bool isFreeShip,
+                              double weight, double height, double lenth, string tags)
         {
             var product = new Product()
             {
