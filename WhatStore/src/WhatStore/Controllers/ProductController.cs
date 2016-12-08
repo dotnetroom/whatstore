@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WhatStore.Infrastructure.ViewModels.Admin;
+using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
 
 namespace WhatStore.Controllers
 {
@@ -17,6 +18,12 @@ namespace WhatStore.Controllers
                 return Ok();
             
 
+        }
+
+        private IProductRepository _product;
+        public ProductController (IProductRepository product)
+        {
+            _product = product;
         }
     }
 }
