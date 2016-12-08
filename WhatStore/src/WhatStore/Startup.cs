@@ -61,7 +61,7 @@ namespace WhatStore
 
             // Repositories
             services.AddTransient<ILocalizationRepository, LocalizationRepository>();
-            
+            services.AddTransient<IFinancialRepository,FinancialRopository>();
 
             // Add framework services.
             services.AddMvc();
