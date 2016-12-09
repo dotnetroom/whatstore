@@ -22,7 +22,7 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 await db.OpenAsync();
-                using (var trans = db.BeginTransaction())
+                using (var trans = db.BeginTransaction()) 
                 {
 
                     return true;

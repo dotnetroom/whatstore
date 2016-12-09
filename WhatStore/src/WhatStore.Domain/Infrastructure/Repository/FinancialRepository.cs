@@ -8,7 +8,7 @@ using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
 
 namespace WhatStore.Crosscutting.Infrastructure.Repository
 {
-    public class FinancialRepository : IFinancialRepository
+    public class FinancialRepository
     {
 
         private CustomSettings _settings;
