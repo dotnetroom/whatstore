@@ -2,9 +2,9 @@
 using System.Linq;
 using Dapper;
 using System.Threading.Tasks;
-using WhatStore.Crosscutting.Infrastructure.Contexts;
 using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
 using System.Data.SqlClient;
+using WhatStore.Domain.Infrastructure.Contexts;
 
 namespace WhatStore.Crosscutting.Infrastructure.Repository
 {
@@ -16,23 +16,14 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository
             _settings = settings;
         }
 
-        public async Task<bool> UpdateProduct(long storeId, string nomeProduct, string description, double price, bool hasVariety, string colors, string size,
+        public async Task<bool> UpdateProduct(string nomeProduct, string description, double price, bool hasVariety, string colors, string size,
                                               bool isFreeShip, double weight, double height, double lenth, string tags)
         {
-            using (var db = new SqlConnection(_settings.ConnectionString))
+             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 await db.OpenAsync();
                 using (var trans = db.BeginTransaction()) 
                 {
-                    try
-                    {
-
-                    }
-                    catch(Exception ex)
-                    {
-                        trans.Rollback();
-                        return false;
-                    }
 
                     return true;
                 }

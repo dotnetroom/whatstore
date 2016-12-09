@@ -9,7 +9,7 @@ using WhatStore.Crosscutting.Infrastructure.Models.Localization;
 using WhatStore.Crosscutting.Infrastructure.Models.Product;
 using WhatStore.Crosscutting.Infrastructure.Models.Store;
 
-namespace WhatStore.Crosscutting.Infrastructure.Contexts
+namespace WhatStore.Domain.Infrastructure.Contexts
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<long>, long>
     {

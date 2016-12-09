@@ -46,12 +46,13 @@ namespace WhatStore.Controllers
 
         [Route("open")]
         public IActionResult Open()
+
         {
             return View();
         }
 
         [Route("StoreType")]
-        public IActionResult StoreType()
+         public IActionResult StoreType()
         {
             return View();
 

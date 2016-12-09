@@ -2,20 +2,22 @@
 using System.Linq;
 using Dapper;
 using System.Threading.Tasks;
-using WhatStore.Crosscutting.Infrastructure.Contexts;
-using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
+
 using System.Data.SqlClient;
+using WhatStore.Domain.Infrastructure.Repository.Interfaces;
+using WhatStore.Domain.Infrastructure.Contexts;
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using WhatStore.Crosscutting.Infrastructure.Models.Store;
 
-namespace WhatStore.Crosscutting.Infrastructure.Repository
+namespace WhatStore.Domain.Infrastructure.Repository
 {
     public class StoreRepository : IStoreRepository
     {
         private CustomSettings _settings;
-        public StoreRepository(CustomSettings settings)
+        public StoreRepository(IOptions<CustomSettings> settings)
         {
-            _settings = settings;
+            _settings = settings.Value;
         }
 
         public async Task<bool> UpdateStoreInformation(long userID, string storeName, string storeDescription, string phoneNumber, string email, string URL,
