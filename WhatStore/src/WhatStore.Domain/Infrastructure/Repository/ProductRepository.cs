@@ -16,7 +16,7 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository
             _settings = settings;
         }
 
-        public async Task<bool> UpdateProduct(string nomeProduct, string description, double price, bool hasVariety, string colors, string size,
+        public async Task<bool> UpdateProduct(long idStore, string nomeProduct, string description, double price, bool hasVariety, string colors, string size,
                                               bool isFreeShip, double weight, double height, double lenth, string tags)
         {
              using (var db = new SqlConnection(_settings.ConnectionString))
@@ -24,6 +24,12 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository
                 await db.OpenAsync();
                 using (var trans = db.BeginTransaction()) 
                 {
+                    var result = await db.QueryAsync<long>("SELECT dbo.\"Product\".\"StoreID\" FROM dbo.\"Store\", dbo.\"Product\" WHERE" +
+                            " dbo.\"Product\".\"StoreID\" = dbo.\"Store\".\"ID\" AND dbo.\"Product\".\"ID\" = @idStore", new { idStore = idStore });
+
+                    var storeID = result.FirstOrDefault();
+
+                    if (storeID <= 0) return false;
 
                     return true;
                 }
