@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using WhatStore.Crosscutting.Infrastructure.Contexts;
+using WhatStore.Domain.Infrastructure.Contexts;
 
 namespace WhatStore.Migrations
 {
