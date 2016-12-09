@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WhatStore.Crosscutting.Infrastructure.Repository.Interfaces
+namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
 {
     public interface IStoreRepository
     {

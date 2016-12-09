@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WhatStore.Crosscutting.Infrastructure.Contexts
+namespace WhatStore.Domain.Infrastructure.Contexts
 {
     public class CustomSettings
     {

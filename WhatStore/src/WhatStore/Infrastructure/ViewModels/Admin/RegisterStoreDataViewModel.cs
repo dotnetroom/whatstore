@@ -11,7 +11,6 @@ namespace WhatStore.Infrastructure.ViewModels.Admin
     public class RegisterStoreDataViewModel
     {
         [Required(ErrorMessage = "The Name field is required.")]
-        [MaxLength(2)]
         public string StoreName { get; set; }
 
         [Required(ErrorMessage = "The Name field is required.")]
@@ -42,6 +41,9 @@ namespace WhatStore.Infrastructure.ViewModels.Admin
         public int City { get; set; }
 
         public List<State> States { get; set; }
+
+        public string ReturnMessage { get; set; }
+        
     }
 
 }

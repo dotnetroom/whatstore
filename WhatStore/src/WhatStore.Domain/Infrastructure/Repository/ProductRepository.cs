@@ -2,9 +2,9 @@
 using System.Linq;
 using Dapper;
 using System.Threading.Tasks;
-using WhatStore.Crosscutting.Infrastructure.Contexts;
 using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
 using System.Data.SqlClient;
+using WhatStore.Domain.Infrastructure.Contexts;
 
 namespace WhatStore.Crosscutting.Infrastructure.Repository
 {
