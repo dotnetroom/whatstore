@@ -30,11 +30,11 @@ namespace WhatStore.Infrastructure.ViewModels.Admin
 
         [Required]
         public string Password { get; set; }
-
-        [Required]
-        public int TypeStore { get; set; }
-
+        
         [Required]
         public string StoreName { get; set; }
+
+        [Required]
+        public List<StoreType> StoreType { get; set; }
     }
 }
