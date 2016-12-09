@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Dapper;
 using System.Threading.Tasks;
 using WhatStore.Crosscutting.Infrastructure.Contexts;
 using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
 using System.Data.SqlClient;
-using WhatStore.Crosscutting.Infrastructure.Models.Localization;
-using WhatStore.Crosscutting.Infrastructure.Models.Store;
 
 namespace WhatStore.Crosscutting.Infrastructure.Repository
 {
