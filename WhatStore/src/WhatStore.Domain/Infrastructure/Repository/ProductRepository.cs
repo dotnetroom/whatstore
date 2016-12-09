@@ -24,6 +24,7 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository
                 await db.OpenAsync();
                 using (var trans = db.BeginTransaction()) 
                 {
+                    
 
                     return true;
                 }
