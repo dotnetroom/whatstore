@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WhatStore.Crosscutting.Infrastructure.Models.Store;
 
 namespace WhatStore.Crosscutting.Infrastructure.Repository.Interfaces
 {
@@ -9,5 +10,6 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository.Interfaces
     {
         Task<bool> UpdateStoreInformation(long userID, string storeName, string storeDescription, string phoneNumber, string email, string URL,
                                           string terms, bool hasAddress, string address, string number, string CEP, string complemento, int city);
+        Task<List<StoreType>> GetStoreType();
     }
 }
