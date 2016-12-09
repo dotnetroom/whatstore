@@ -2,11 +2,13 @@
 using System.Linq;
 using Dapper;
 using System.Threading.Tasks;
-using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
+
 using System.Data.SqlClient;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using WhatStore.Domain.Infrastructure.Contexts;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
+using WhatStore.Crosscutting.Infrastructure.Models.Store;
 
 namespace WhatStore.Domain.Infrastructure.Repository
 {
@@ -102,7 +104,23 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         }
 
+        public async Task<List<StoreType>> GetStoreType()
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var result = await db.QueryAsync<StoreType>("SELECT * FROM \"db\".\"StoreType\"");
 
+                    return result.ToList();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
     }
 }
