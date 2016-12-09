@@ -25,20 +25,7 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository
                 using (var trans = db.BeginTransaction())
                 {
 
-                    var product = new Product()
-                    {
-                        NomeProduct = nomeProduct,
-                        Description = description,
-                        Price = price,
-                        HasVariety = hasVariety,
-                        Colors = colors,
-                        Size = size,
-                        IsFreeShip = isFreeShip,
-                        Weight = weight,
-                        Height = heigth,
-                        Lenth = lenth,
-                        Tags = tags
-                    };
+                    return true;
                 }
             }
         }
