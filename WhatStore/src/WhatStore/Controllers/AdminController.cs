@@ -70,5 +70,12 @@ namespace WhatStore.Controllers
         {
             return View();
         }
+
+        [Route("StoreType")]
+        public IActionResult StoreType()
+        {
+            return View();
+
+        }
     }
 }

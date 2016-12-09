@@ -22,5 +22,16 @@ namespace WhatStore.Controllers
 
             return Ok();            
         }
+
+        [HttpPost("storeType")]
+        public async Task<IActionResult> StoreType()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
     }
 }
