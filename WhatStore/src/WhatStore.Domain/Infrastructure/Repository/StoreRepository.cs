@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using WhatStore.Crosscutting.Infrastructure.Contexts;
 using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
 using System.Data.SqlClient;
+using System.Collections.Generic;
+using WhatStore.Crosscutting.Infrastructure.Models.Store;
 
 namespace WhatStore.Crosscutting.Infrastructure.Repository
 {
@@ -100,7 +102,23 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository
 
         }
 
+        public async Task<List<StoreType>> GetStoreType()
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var result = await db.QueryAsync<StoreType>("SELECT * FROM \"db\".\"StoreType\"");
 
+                    return result.ToList();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
     }
 }
