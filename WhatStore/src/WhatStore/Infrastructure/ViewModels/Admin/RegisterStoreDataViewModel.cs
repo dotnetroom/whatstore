@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WhatStore.Crosscutting.Infrastructure.Models.Localization;
 
 namespace WhatStore.Infrastructure.ViewModels.Admin
 {
@@ -39,6 +40,8 @@ namespace WhatStore.Infrastructure.ViewModels.Admin
         public string Complemento { get; set; }
         public int State { get; set; }
         public int City { get; set; }
+
+        public List<State> States { get; set; }
     }
 
 }

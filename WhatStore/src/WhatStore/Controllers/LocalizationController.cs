@@ -27,7 +27,7 @@ namespace WhatStore.Controllers
         [AllowAnonymous]
         [Route("list/cities/{state}")]
         public async Task<IActionResult> ListCities(int state)
-        {
+        { 
             try
             {
                 var cities = await _localization.GetCities(state);

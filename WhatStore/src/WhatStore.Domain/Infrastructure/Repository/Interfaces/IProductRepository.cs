@@ -8,6 +8,8 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository.Interfaces
     public interface IProductRepository
     {
         public async Task<bool> SetProduct(string nomeProduct, string description, double price, bool hasVariety, string colors, string size, bool isFreeShip,
-                              double weight, double height, double lenth, string tags){
+                              double weight, double height, double lenth, string tags)
+        {
+        }
     }
 }
