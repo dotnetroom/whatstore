@@ -13,9 +13,9 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository
 
         private CustomSettings _settings;
 
-        public FinancialRepository(IOptions<CustomSettings> settings)
+        public FinancialRepository(CustomSettings settings)
         {
-            _settings = settings.Value;
+            _settings = settings;
         }
 
 
