@@ -8,7 +8,7 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository.Interfaces
     public interface IProductRepository
     {
 
-        Task<bool> UpdateProduct(string nomeProduct, string description, double price, bool hasVariety, string colors, string size,
+        Task<bool> UpdateProduct(long storeId, string nomeProduct, string description, double price, bool hasVariety, string colors, string size,
                                  bool isFreeShip, double weight, double height, double lenth, string tags);
 
     }
