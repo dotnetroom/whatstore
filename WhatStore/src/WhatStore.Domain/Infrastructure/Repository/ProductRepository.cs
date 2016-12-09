@@ -17,12 +17,12 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository
         }
 
         public async Task<bool> UpdateProduct(long idStore, string nomeProduct, string description, double price, bool hasVariety, string colors, string size,
-                                              bool isFreeShip, double weight, double height, double lenth, string tags)
+                                              bool isFreeShip, double weight, double altura, double lenth, string tags)
         {
-             using (var db = new SqlConnection(_settings.ConnectionString))
+            using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 await db.OpenAsync();
-                using (var trans = db.BeginTransaction()) 
+                using (var trans = db.BeginTransaction())
                 {
                     var result = await db.QueryAsync<long>("SELECT dbo.\"Product\".\"StoreID\" FROM dbo.\"Store\", dbo.\"Product\" WHERE" +
                             " dbo.\"Product\".\"StoreID\" = dbo.\"Store\".\"ID\" AND dbo.\"Product\".\"ID\" = @idStore", new { idStore = idStore });
@@ -31,9 +31,45 @@ namespace WhatStore.Crosscutting.Infrastructure.Repository
 
                     if (storeID <= 0) return false;
 
-                    return true;
+                    var productInsert = "INSERT INTO dbo.\"Product\" (\"Name\", \"Description\", \"Price\""
+                                                        + "VALUES (@NAME, @DESCRIPTION, @PRICE)";
+
+                    var product = await db.ExecuteAsync(productInsert,
+                        new
+                        {
+                            NomeProduct = nomeProduct,
+                            Description = description,
+                            Price = price,
+                        });
+
+                    if (hasVariety == true)
+                    {
+                        var x = await db.ExecuteAsync(productInsert,
+                            new
+                            {
+                                HasVariety = hasVariety,
+                                Colors = colors,
+                                Size = size                                
+                            });
+                    }
+
+                    if (isFreeShip == true)
+                    {
+                        var ship = "INSERT INTO ";
+                        var y = await db.ExecuteAsync(productInsert,
+                            new
+                            {
+                                IsFreeShip = isFreeShip,
+                                Weight = weight,
+                                Height = altura,
+                                Lenth = lenth,
+                                Tags = tags
+                            });
+                    }
+
+                        return true;
+                    }
                 }
             }
         }
     }
-}
