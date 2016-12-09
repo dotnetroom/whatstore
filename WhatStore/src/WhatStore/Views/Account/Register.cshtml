@@ -40,6 +40,22 @@
             <input type="radio" name="genero" value="true" />Feminino
             <input type="radio" name="genero" value="false" />Masculino
         </div>
+
+        <div>
+            <label>Nome da Loja: </label>
+            <input />
+        </div>
+        <div class="float-left margin-left-50">
+            <label>Tipos de Loja:</label>
+            <select id="dropStore" class="form-control"  name="TipoLoja">
+                <option value="-1">Selecione um Tipo</option>
+                @foreach (var storeType in Model.StoreType)
+                {
+                    <option value="@storeType.Id">@storeType.Name</option>
+                }
+            </select>
+        </div>
+
         <div class="row margin-top-10 font-size13">
             <label>Email: </label>
             <input type="text" class="form-control" required asp-for="Email"/>
@@ -57,3 +73,13 @@
     </form>
 </body>
 </html>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#dropStore');
+        });
+
+    </script>
+}
