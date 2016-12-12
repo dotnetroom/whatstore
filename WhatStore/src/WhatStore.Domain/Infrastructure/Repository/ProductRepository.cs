@@ -2,11 +2,12 @@
 using System.Linq;
 using Dapper;
 using System.Threading.Tasks;
-using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
+
 using System.Data.SqlClient;
 using WhatStore.Domain.Infrastructure.Contexts;
+using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 
-namespace WhatStore.Crosscutting.Infrastructure.Repository
+namespace WhatStore.Domain.Infrastructure.Repository
 {
     public class ProductRepository : IProductRepository
     {

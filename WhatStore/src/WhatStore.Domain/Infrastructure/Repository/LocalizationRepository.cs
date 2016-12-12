@@ -7,10 +7,11 @@ using Dapper;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Options;
-using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
-using WhatStore.Domain.Infrastructure.Contexts;
 
-namespace WhatStore.Crosscutting.Infrastructure.Repository
+using WhatStore.Domain.Infrastructure.Contexts;
+using WhatStore.Domain.Infrastructure.Repository.Interfaces;
+
+namespace WhatStore.Domain.Infrastructure.Repository
 {
     public class LocalizationRepository : ILocalizationRepository
     {

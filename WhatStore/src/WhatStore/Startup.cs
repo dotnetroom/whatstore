@@ -10,8 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using WhatStore.Crosscutting.Infrastructure.Models.Identity;
-using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
-using WhatStore.Crosscutting.Infrastructure.Repository;
 using WhatStore.Domain.Infrastructure.Contexts;
 using WhatStore.Domain.Infrastructure.Repository;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;

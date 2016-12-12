@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WhatStore.Crosscutting.Infrastructure.Models.Localization;
 
-namespace WhatStore.Crosscutting.Infrastructure.Repository.Interfaces
+namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
 {
     public interface ILocalizationRepository
     {

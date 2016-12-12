@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WhatStore.Infrastructure.ViewModels.Admin;
-using WhatStore.Crosscutting.Infrastructure.Repository.Interfaces;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using WhatStore.Crosscutting.Infrastructure.Models.Identity;
+
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -73,16 +73,20 @@ namespace WhatStore.Controllers
         }
 
 
-        [HttpPost("storeType")]
-         public async Task<IActionResult> StoreType()
+        [Route("type")]
+        public async Task<IActionResult> RegisterType()
         {
-            if (!ModelState.IsValid)
+            try
+            {
+                return View();
+            }
+
+            catch (Exception ex)
             {
                 return BadRequest();
             }
-
-            return Ok();
         }
+
 
     }
 }
