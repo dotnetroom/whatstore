@@ -9,24 +9,39 @@
 
                 <label >Tipo de loja: </label>
                 <input class="form-control float-left" name="type" />
-                <button class="btn btn-primary margin-top-10  float-left" type="submit">Enviar</button>
+                <button class="btn btn-primary margin-top-10  float-left" type="submit" onclick="novaLinha()">Enviar</button>
             
             </div>      
     </form>
 
-    <table class="table">
+    <table class="table" id="TypeTable">
         <tr>
             <th class="tableRow">tipo de loja</th>
+            <th class="tableRow">Opções</th>
         </tr>
-       <tr>
-           <td class="tableRow">tipo1</td>
-       </tr>
-        <tr>
-            <td class="tableRow">tipo2</td>
-        </tr>
+      
     </table>
 
 </body>
 
 
 
+@section Scripts{
+    <script type="text/javascript">        
+        var i = 0;
+        function deleteRow(i) {
+            document.getElementById('TypeTable').deleteRow(i)
+        }
+        function novaLinha() {
+           i++;
+
+            var insere = "<tr><td class= 'tableRow' >Teste </td>"
+                          + "<td class= 'tableRow ' id='tabela_linha_'><input type='button' class='btn btn-primary'"
+                          +"value='remover' onClick=\"javascript:deleteRow('tabela_linha_" + i + "')\"></input></td></tr>";
+
+            document.getElementById("TypeTable").innerHTML += insere ;
+           
+
+        }
+    </script>
+}
