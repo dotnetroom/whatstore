@@ -45,17 +45,17 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                 Price = price,
                             }, trans);
 
-                        if (hasVariety == true)
-                        {
+                       // if (hasVariety == true)
+                        //{
 
-                            var x = await db.ExecuteAsync(productInsert,
-                                new
-                                {
-                                    HasVariety = hasVariety,
-                                    Colors = colors,
-                                    Size = size
-                                }, trans);
-                        }
+                          //  var x = await db.ExecuteAsync(productInsert,
+                            //    new
+                              //  {
+                                //    HasVariety = hasVariety,
+                                  //  Colors = colors,
+                                  //  Size = size
+                               // }, trans);
+                    //    }
 
                         if (isFreeShip == true)
                         {
