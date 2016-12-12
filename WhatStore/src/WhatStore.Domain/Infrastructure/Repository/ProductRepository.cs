@@ -30,15 +30,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 {
                     try
                     {
-                        var result = await db.QueryAsync<long>("SELECT dbo.\"Product\".\"StoreID\" FROM dbo.\"Store\", dbo.\"Product\" WHERE" +
-                                " dbo.\"Product\".\"StoreID\" = dbo.\"Store\".\"ID\" AND dbo.\"Product\".\"ID\" = @Store_Id", new { idStore = id });
-
-                        var storeID = result.FirstOrDefault();
-
-                        if (storeID <= 0) return false;
-
-                        var productInsert = "INSERT INTO dbo.\"Product\" (\"Name\", \"Description\", \"Price\""
-                                                            + "VALUES (@NAME, @DESCRIPTION, @PRICE)";
+                        var productInsert = "INSERT INTO dbo.\"Product\" (\"Name\", \"Description\", \"Price\") "
+                                       + "VALUES (@NAME, @DESCRIPTION, @PRICE)";
 
                         var product = await db.ExecuteAsync(productInsert,
                             new
@@ -48,21 +41,21 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                 Price = price,
                             }, trans);
 
-                       // if (hasVariety == true)
+                        // if (hasVariety == true)
                         //{
 
-                          //  var x = await db.ExecuteAsync(productInsert,
-                            //    new
-                              //  {
-                                //    HasVariety = hasVariety,
-                                  //  Colors = colors,
-                                  //  Size = size
-                               // }, trans);
-                    //    }
+                        //  var x = await db.ExecuteAsync(productInsert,
+                        //    new
+                        //  {
+                        //    HasVariety = hasVariety,
+                        //  Colors = colors,
+                        //  Size = size
+                        // }, trans);
+                        //    }
 
                         if (isFreeShip == true)
                         {
-                            var shippingInsert = "INSERT INTO dbo.\"Product\" (\"IsFreeShipping\", \"Lenth\", \"Width\" \"Weight\""
+                            var shippingInsert = "INSERT INTO dbo.\"Product\" (\"IsFreeShipping\", \"Lenth\", \"Width\" \"Weight\") "
                                                         + "VALUES (@IsFreeShipping, @Lenth, @Width, @Weight)";
 
                             var ship = await db.ExecuteAsync(shippingInsert,
@@ -70,12 +63,12 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                 {
                                     IsFreeShip = isFreeShip,
                                     Weight = weight,
-                                    Width = height,
+                                    Height = height,
                                     Lenth = length,
                                 }, trans);
                         }
 
-                        var tagsInsert = "INSERT INTO dbo.\"Tag\" (\"TagName\"" + "VALUES (@TagName)";
+                        var tagsInsert = "INSERT INTO dbo.\"Tag\" (\"TagName\") " + "VALUES (@TagName)";
 
                         var tag = await db.ExecuteAsync(tagsInsert,
                             new

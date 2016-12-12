@@ -38,12 +38,6 @@ namespace WhatStore.Controllers
             return View(viewModel);
         }
 
-        [Route("product")]
-        public IActionResult Product()
-        {
-            return View();
-        }
-
         [Route("open")]
         public IActionResult Open()
 

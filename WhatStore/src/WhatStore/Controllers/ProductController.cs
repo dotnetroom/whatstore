@@ -39,7 +39,7 @@ namespace WhatStore.Controllers
             }
         }
 
-        [HttpPost("register/information")]
+        [HttpPost("register/post")]
         public async Task<IActionResult> RegisterProduct(RegisterProductViewModel model)
         {
             if (!ModelState.IsValid)
@@ -59,7 +59,7 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return View("Information", model);
+            return View("Product", model);
         }
     }
 }
