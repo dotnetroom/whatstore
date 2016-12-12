@@ -8,7 +8,7 @@
             <div class="form-group float-left">
 
                 <label >Tipo de loja: </label>
-                <input class="form-control float-left" name="type" />
+                <input class="form-control float-left" name="type" id="Type"/>
                 <button class="btn btn-primary margin-top-10  float-left" type="submit" onclick="novaLinha()">Enviar</button>
             
             </div>      
@@ -35,7 +35,7 @@
         function novaLinha() {
            i++;
 
-            var insere = "<tr><td class= 'tableRow' >Teste </td>"
+            var insere = "<tr><td class= 'tableRow' > "+ Type +"</td>"
                           + "<td class= 'tableRow ' id='tabela_linha_'><input type='button' class='btn btn-primary'"
                           +"value='remover' onClick=\"javascript:deleteRow('tabela_linha_" + i + "')\"></input></td></tr>";
 
