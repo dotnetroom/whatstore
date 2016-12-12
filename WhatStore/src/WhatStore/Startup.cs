@@ -9,10 +9,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using WhatStore.Crosscutting.Infrastructure.Models.Identity;
 using WhatStore.Domain.Infrastructure.Contexts;
 using WhatStore.Domain.Infrastructure.Repository;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
+using WhatStore.Domain.Infrastructure.Models.Identity;
 
 namespace WhatStore
 {

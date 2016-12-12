@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WhatStore.Crosscutting.Infrastructure.Models.Identity;
 using WhatStore.Crosscutting.Infrastructure.Models.Product;
-using WhatStore.Crosscutting.Infrastructure.Models.Store;
+using WhatStore.Domain.Infrastructure.Models.Identity;
 using WhatStore.Domain.Infrastructure.Models.Localization;
+using WhatStore.Domain.Infrastructure.Models.Store;
 
 namespace WhatStore.Domain.Infrastructure.Contexts
 {

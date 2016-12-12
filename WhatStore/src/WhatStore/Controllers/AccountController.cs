@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WhatStore.Infrastructure.ViewModels.Admin;
 using Microsoft.AspNetCore.Identity;
-using WhatStore.Crosscutting.Infrastructure.Models.Identity;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 

@@ -8,7 +8,7 @@ using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using WhatStore.Domain.Infrastructure.Contexts;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
-using WhatStore.Crosscutting.Infrastructure.Models.Store;
+using WhatStore.Domain.Infrastructure.Models.Store;
 
 namespace WhatStore.Domain.Infrastructure.Repository
 {
