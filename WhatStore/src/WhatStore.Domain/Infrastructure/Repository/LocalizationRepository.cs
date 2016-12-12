@@ -37,7 +37,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 }
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -61,14 +61,6 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        Task<List<State>> ILocalizationRepository.GetStates()
-        {
-            throw new NotImplementedException();
-        }
 
-        Task<List<City>> ILocalizationRepository.GetCities(int stateID)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

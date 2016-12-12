@@ -73,7 +73,8 @@ namespace WhatStore.Controllers
         }
 
 
-        [Route("type")]
+        
+        [HttpPost("type")]
         public async Task<IActionResult> RegisterType()
         {
             try
