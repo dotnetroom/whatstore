@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using WhatStore.Domain.Infrastructure.Contexts;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
+using Microsoft.Extensions.Options;
 
 namespace WhatStore.Domain.Infrastructure.Repository
 {
     public class ProductRepository : IProductRepository
     {
         private CustomSettings _settings;
-        public ProductRepository(CustomSettings settings)
+        public ProductRepository(IOptions<CustomSettings> settings)
         {
-            _settings = settings;
+            _settings = settings.Value;
         }
 
         public async Task<bool> UpdateProduct(long idStore, string nomeProduct, string description, double price, bool hasVariety, string colors, string size,
