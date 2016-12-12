@@ -12,6 +12,10 @@ html {
     background-color: #f8f8f8;
 }
 
+table th td{
+    border: 1px solid black;
+    background-color:black;
+}
 
 /* TITLES */
 
