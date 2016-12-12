@@ -12,10 +12,6 @@ html {
     background-color: #f8f8f8;
 }
 
-table th td{
-    border: 1px solid black;
-    background-color:black;
-}
 
 /* TITLES */
 
@@ -951,4 +947,19 @@ hr {
 .inputfile + label:hover {
     background: #868585;
     color: #fff !important;
+}
+
+.table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+.tableRow {
+    border: 1px solid #dddddd;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
