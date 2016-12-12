@@ -35,7 +35,7 @@ namespace WhatStore.Infrastructure.ViewModels.Admin
         [Required]
         public string StoreName { get; set; }
 
-        [Required]
-        public List<StoreTypeVeiwModel> StoreType { get; set; }
+        //[Required]
+        //public List<StoreTypeVeiwModel> StoreType { get; set; }
     }
 }

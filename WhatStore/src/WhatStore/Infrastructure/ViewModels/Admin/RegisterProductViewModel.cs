@@ -39,5 +39,7 @@ namespace WhatStore.Infrastructure.ViewModels.Admin
 
         [Required(ErrorMessage = "The Tags field is required.")]
         public string Tags { get; set; }
+
+        public string ReturnMessage { get; set; }
     }
 }

@@ -6,6 +6,8 @@ using System.Data.SqlClient;
 using WhatStore.Domain.Infrastructure.Contexts;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 
 namespace WhatStore.Domain.Infrastructure.Repository
 {
@@ -17,8 +19,9 @@ namespace WhatStore.Domain.Infrastructure.Repository
             _settings = settings.Value;
         }
 
-        public async Task<bool> UpdateProduct(long idStore, string nomeProduct, string description, double price, bool hasVariety, string colors, string size,
-                                              bool isFreeShip, double weight, double width, double lenth, string tags)
+        public async Task<bool> UpdateProduct(long id, string productName, string description, double price, ICollection<IFormFile> picture,
+                                              bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weight,
+                                              double height, string tags)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
@@ -28,7 +31,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     try
                     {
                         var result = await db.QueryAsync<long>("SELECT dbo.\"Product\".\"StoreID\" FROM dbo.\"Store\", dbo.\"Product\" WHERE" +
-                                " dbo.\"Product\".\"StoreID\" = dbo.\"Store\".\"ID\" AND dbo.\"Product\".\"ID\" = @Store_Id", new { idStore = idStore });
+                                " dbo.\"Product\".\"StoreID\" = dbo.\"Store\".\"ID\" AND dbo.\"Product\".\"ID\" = @Store_Id", new { idStore = id });
 
                         var storeID = result.FirstOrDefault();
 
@@ -40,7 +43,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         var product = await db.ExecuteAsync(productInsert,
                             new
                             {
-                                NomeProduct = nomeProduct,
+                                NomeProduct = productName,
                                 Description = description,
                                 Price = price,
                             }, trans);
@@ -67,8 +70,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                 {
                                     IsFreeShip = isFreeShip,
                                     Weight = weight,
-                                    Width = width,
-                                    Lenth = lenth,
+                                    Width = height,
+                                    Lenth = length,
                                 }, trans);
                         }
 
