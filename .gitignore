@@ -4,3 +4,4 @@
 WhatStore/src/WhatStore.Domain/Infrastructure/Repository/Interfaces/IProductRepository.cs
 *.cs
 WhatStore/src/WhatStore.Domain/Infrastructure/Repository/StoreRepository.cs
+*.config
