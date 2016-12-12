@@ -19,8 +19,8 @@ namespace WhatStore.Controllers
             _userManager = userManager;
         }
 
-        [Route("register")]
-        public async Task<IActionResult> Register()
+        [Route("registerproduct")]
+        public async Task<IActionResult> RegisterProduct()
         {
             try
             {
