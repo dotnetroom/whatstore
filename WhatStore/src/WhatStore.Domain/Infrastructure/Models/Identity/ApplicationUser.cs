@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace WhatStore.Crosscutting.Infrastructure.Models.Identity
+namespace WhatStore.Domain.Infrastructure.Models.Identity
 {
     public class ApplicationUser : IdentityUser<long>
     {

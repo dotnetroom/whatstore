@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WhatStore.Crosscutting.Infrastructure.Models.Localization;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Options;
-
 using WhatStore.Domain.Infrastructure.Contexts;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
+using WhatStore.Domain.Infrastructure.Models.Localization;
 
 namespace WhatStore.Domain.Infrastructure.Repository
 {
@@ -60,6 +59,16 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 return null;
             }
+        }
+
+        Task<List<State>> ILocalizationRepository.GetStates()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<City>> ILocalizationRepository.GetCities(int stateID)
+        {
+            throw new NotImplementedException();
         }
     }
 }

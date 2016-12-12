@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WhatStore.Crosscutting.Infrastructure.Models.Localization
+namespace WhatStore.Domain.Infrastructure.Models.Localization
 {
     public class Adress
     {

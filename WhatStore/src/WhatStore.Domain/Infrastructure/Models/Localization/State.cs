@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WhatStore.Crosscutting.Infrastructure.Models.Localization
+namespace WhatStore.Domain.Infrastructure.Models.Localization
 {
     public class State
     {
