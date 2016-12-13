@@ -4,14 +4,14 @@
 
 <body>
     <form class="form-group margin-top-75" asp-controller="store" asp-action="type" method="post">
-        
-            <div class="form-group float-left">
 
-                <label >Tipo de loja: </label>
-                <input class="form-control float-left" name="type" id="Type"/>
-                <button class="btn btn-primary margin-top-10  float-left" type="submit" onclick="novaLinha()">Enviar</button>
-            
-            </div>      
+        <div class="form-group float-left">
+
+            <label>Tipo de loja: </label>
+            <input class="form-control float-left" name="type" id="Type" />
+            <button class="btn btn-primary margin-top-10  float-left" type="submit" onclick="novaLinha()">Enviar</button>
+
+        </div>
     </form>
 
     <table class="table" id="TypeTable">
@@ -19,7 +19,7 @@
             <th class="tableRow">tipo de loja</th>
             <th class="tableRow">Opções</th>
         </tr>
-      
+
     </table>
 
 </body>
@@ -27,21 +27,29 @@
 
 
 @section Scripts{
-    <script type="text/javascript">        
+    <script type="text/javascript">
         var i = 0;
         function deleteRow(i) {
             document.getElementById('TypeTable').deleteRow(i)
         }
+
         function novaLinha() {
-           i++;
+            i++;
+            if (!Model.StoreType.isEmpyt()) {
 
-            var insere = "<tr><td class= 'tableRow' > "+ Type +"</td>"
-                          + "<td class= 'tableRow ' id='tabela_linha_'><input type='button' class='btn btn-primary'"
-                          +"value='remover' onClick=\"javascript:deleteRow('tabela_linha_" + i + "')\"></input></td></tr>";
+                for (var types in Model.StoreType) {
 
-            document.getElementById("TypeTable").innerHTML += insere ;
-           
+                    var insere = "<tr><td class= 'tableRow' > " + types + "</td>"
+                                  + "<td class= 'tableRow ' id='tabela_linha_'><input type='button' class='btn btn-primary'"
+                                  + "value='remover' onClick=\"javascript:deleteRow('tabela_linha_" + i + "')\"></input></td></tr>";
 
+                    document.getElementById("TypeTable").innerHTML += insere;
+                }
+            }
+            else {
+                return null;
+
+            }
         }
     </script>
 }
