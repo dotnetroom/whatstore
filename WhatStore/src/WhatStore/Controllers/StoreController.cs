@@ -74,11 +74,13 @@ namespace WhatStore.Controllers
 
 
         
-        [HttpPost("type")]
+        [HttpGet("type")]
         public async Task<IActionResult> RegisterType()
         {
             try
+
             {
+               
                 return View();
             }
 

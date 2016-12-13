@@ -12,4 +12,6 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
                                           string terms, bool hasAddress, string address, string number, string CEP, string complemento, int city);
         Task<List<StoreType>> GetStoreType();
     }
+
+
 }
