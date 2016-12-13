@@ -19,7 +19,7 @@ namespace WhatStore.Controllers
             _userManager = userManager;
         }
 
-        [Route("registerproduct")]
+        [Route("register")]
         public async Task<IActionResult> RegisterProduct()
         {
             try
