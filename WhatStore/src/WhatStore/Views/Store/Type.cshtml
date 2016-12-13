@@ -1,14 +1,14 @@
-﻿@{
+﻿@model WhatStore.Infrastructure.ViewModels.Store.RegisterStoreTypeViewModel
     Layout = "_Layout";
 }
 
 <body>
-    <form class="form-group margin-top-75" asp-controller="store" asp-action="type" method="post">
+    <form class="form-group margin-top-75" asp-controller="store" asp-action="register/type" method="post">
         
             <div class="form-group float-left">
 
                 <label >Tipo de loja: </label>
-                <input class="form-control float-left" name="type" id="Type"/>
+                <input value="@Model.StoreType" class="form-control float-left" name="StoreType" id="Type"/>
                 <button class="btn btn-primary margin-top-10  float-left" type="submit" onclick="novaLinha()">Enviar</button>
             
             </div>      
@@ -35,7 +35,7 @@
         function novaLinha() {
            i++;
 
-            var insere = "<tr><td class= 'tableRow' > "+ Type +"</td>"
+            var insere = "<tr><td class= 'tableRow' > "+ Type.name0 +"</td>"
                           + "<td class= 'tableRow ' id='tabela_linha_'><input type='button' class='btn btn-primary'"
                           +"value='remover' onClick=\"javascript:deleteRow('tabela_linha_" + i + "')\"></input></td></tr>";
 

@@ -26,12 +26,12 @@ namespace WhatStore.Domain.Infrastructure.Repository
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 await db.OpenAsync();
-                using(var trans = db.BeginTransaction())
+                using (var trans = db.BeginTransaction())
                 {
                     try
                     {
                         var resultStore = await db.QueryAsync<long>("SELECT dbo.\"AspNetUsers\".\"StoreID\" FROM dbo.\"Store\", dbo.\"AspNetUsers\" WHERE" +
-                            " dbo.\"AspNetUsers\".\"StoreID\" = dbo.\"Store\".\"ID\" AND dbo.\"AspNetUsers\".\"ID\" = @userID", new {userID = userID});
+                            " dbo.\"AspNetUsers\".\"StoreID\" = dbo.\"Store\".\"ID\" AND dbo.\"AspNetUsers\".\"ID\" = @userID", new { userID = userID });
 
                         var storeID = resultStore.FirstOrDefault();
 
@@ -46,7 +46,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                             var addressID = resultAddressID.FirstOrDefault();
 
-                            if(addressID > 0)
+                            if (addressID > 0)
                             {
                                 adressUpdate = "UPDATE dbo.\"Address\" SET \"CEP\" = @CEP, \"CityID\" = @city, " +
                                            "\"Complement\" = @Complement, \"Number\" = @Number, \"Street\" = @Street " +
@@ -82,7 +82,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                "\"Name\" = @Name, \"Phone\" = @Phone, \"Term\" = @Term, \"URL\" = @URl";
 
                         var resultUpdate = await db.ExecuteAsync(queryUpdateStore,
-                                                                 new {
+                                                                 new
+                                                                 {
                                                                      Description = storeDescription,
                                                                      Email = email,
                                                                      Name = storeName,
@@ -94,7 +95,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         trans.Commit();
                         return true;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         trans.Rollback();
                         return false;
@@ -102,6 +103,33 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 }
             }
 
+        }
+
+        public async Task<bool> RegisterStoreType(string storeType)
+        {
+
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                await db.OpenAsync();
+                using (var trans = db.BeginTransaction())
+                {
+                    try
+                    {
+                        var queryInsertType = "INSERT INTO dbo.\"StoreType\" (\"Name\") "
+                                                            + "VALUES (@Name)";
+
+                        var resultInsertType = await db.ExecuteAsync(queryInsertType, new { Name = storeType }, trans);
+                        trans.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        trans.Rollback();
+                        return false;
+                    }
+                }
+
+            }
         }
 
         public async Task<List<StoreType>> GetStoreType()
@@ -121,6 +149,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 return null;
             }
         }
-
     }
 }
+
+

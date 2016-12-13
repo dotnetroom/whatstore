@@ -7,6 +7,7 @@ using WhatStore.Infrastructure.ViewModels.Admin;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using WhatStore.Domain.Infrastructure.Models.Identity;
+using WhatStore.Infrastructure.ViewModels.Store;
 
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -73,15 +74,14 @@ namespace WhatStore.Controllers
         }
 
 
-        
         [HttpGet("type")]
-        public async Task<IActionResult> RegisterType()
+        public async Task<IActionResult> Type()
         {
             try
 
             {
-               
-                return View();
+                var viewModel = new RegisterStoreTypeViewModel();
+                return View(viewModel);
             }
 
             catch (Exception ex)
@@ -89,6 +89,26 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost("register/type")]
+         public async Task<IActionResult> RegisterType (RegisterStoreTypeViewModel model)
+         {
+             if (!ModelState.IsValid)
+             {
+                 return BadRequest();
+             }
+
+             if (await _storeRepository.RegisterStoreType(model.StoreType))
+             {
+                 model.ReturnMessage = "Alterações salvas com sucesso";
+             }
+             else
+             {
+                 model.ReturnMessage = "Erro ao salvar alterações";
+             }
+
+             return View("Type", model);
+         }
 
 
     }
