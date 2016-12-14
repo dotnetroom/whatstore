@@ -46,12 +46,12 @@
         </div>
         <div class="float-left margin-left-50">
             <label>Tipos de Loja:</label>
-            <select id="dropStore" class="form-control" name="TipoLoja">
+            <select id="StoreTypeID" class="form-control" name="StoreTypeID">
                 <option value="-1">Selecione um Tipo</option>
-               @*@foreach (var storeType in Model.StoreType)
+               @foreach (var storeType in Model.StoreTypes)
                 {
-                    //<option value="@Model.StoreType">@storeType.Types</option>
-                }*@
+                    <option value="@storeType.Id">@storeType.Name</option>
+                }
             </select>
         </div>
 

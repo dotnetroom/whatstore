@@ -138,7 +138,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    var result = await db.QueryAsync<StoreType>("SELECT * FROM \"db\".\"StoreType\"");
+                    var result = await db.QueryAsync<StoreType>("SELECT * FROM \"dbo\".\"StoreType\"");
 
                     return result.ToList();
                 }
@@ -148,6 +148,45 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 return null;
             }
+        }
+
+        public async Task<long> RegisterStore(Store store)
+        {
+
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                await db.OpenAsync();
+                using (var trans = db.BeginTransaction())
+                {
+
+
+                    try
+                    {              
+                        var queryInsertStore = "INSERT INTO dbo.Store (Name, URL, IsActive, StoreTypeId) " +
+                                                "VALUES (@Name, @URL, @IsActive, @StoreTypeId); SELECT SCOPE_IDENTITY();";
+
+                        var resultInsertStore = await db.QueryAsync<long>(queryInsertStore, store, trans);
+
+                        var storeID = resultInsertStore.FirstOrDefault();
+
+                        if (storeID > 0)
+                        {
+                            trans.Commit();
+                            return storeID;
+                        }
+
+                        trans.Rollback();
+                        return -1;
+                    }
+                    catch (Exception ex)
+                    {
+                        trans.Rollback();
+                        return -1;
+                    }
+
+                }
+            }
+
         }
     }
 }

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WhatStore.Infrastructure.ViewModels.Admin;
 using Microsoft.AspNetCore.Identity;
+using WhatStore.Domain.Infrastructure.Repository.Interfaces;
+using WhatStore.Domain.Infrastructure.Models.Store;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,6 +15,13 @@ namespace WhatStore.Controllers
     [Route("account")]
     public class AccountController : Controller
     {
+
+        private IStoreRepository _storeRepository;
+        public AccountController(IStoreRepository storeRepository)
+        {
+            _storeRepository = storeRepository;
+        }
+
         // GET: /<controller>/
 
         [Route("login")]
@@ -22,9 +31,16 @@ namespace WhatStore.Controllers
         }
 
         [Route("register")]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
-            return View();
+            var storeTypes = await _storeRepository.GetStoreType();
+
+            var model = new RegisterUserViewModel()
+            {
+                StoreTypes = storeTypes
+            };
+
+            return View(model);
         }
 
         // POST: /<controller>/
@@ -38,14 +54,30 @@ namespace WhatStore.Controllers
             return Ok();
         }
 
-        /*[HttpPost("register")]
-        public async Task<IActionResult> Register(LoginViewModel model)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(RegisterUserViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            return Ok();
-        }*/
+
+            var storeID = await _storeRepository.RegisterStore(new Store() {
+                StoreTypeId = model.StoreTypeID,
+                Name = model.StoreName.Trim(),
+                URL = model.StoreName.Trim().Replace(" ", "").ToLower()
+            });
+
+            if (storeID > 0)
+             {
+                 model.ReturnMessage = "Alterações salvas com sucesso";
+             }
+             else
+             {
+                 model.ReturnMessage = "Erro ao salvar alterações";
+             }
+
+            return View("Login", model);
+        }
     }
 }
