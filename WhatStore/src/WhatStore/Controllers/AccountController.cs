@@ -78,7 +78,9 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return View("Login", model);
+            var modelLogin = new LoginViewModel();
+
+            return View("Login", modelLogin);
         }
     }
 }
