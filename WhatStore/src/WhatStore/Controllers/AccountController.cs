@@ -23,11 +23,11 @@ namespace WhatStore.Controllers
         private SignInManager<ApplicationUser> _signInManager;
         private ILogger _logger;
 
-        public AccountController(IStoreRepository storeRepository, SignInManager<ApplicationUser> signInManager, ILogger logger)
+        public AccountController(IStoreRepository storeRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
         {
             _storeRepository = storeRepository;
             _signInManager = signInManager;
-            _logger = logger;
+            _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
         // GET: /<controller>/
@@ -66,6 +66,12 @@ namespace WhatStore.Controllers
             }
 
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe ,lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
+                _logger.LogInformation(1,"Usuario logado.");
+                return RedirectToLocal(returnURL);
+            }
 
             return Ok();
         }
