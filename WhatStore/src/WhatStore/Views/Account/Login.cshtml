@@ -35,6 +35,17 @@
 
         <hr />
 
+        <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            <label asp-for="RememberMe">
+                                <input asp-for="RememberMe" />
+                                @Html.DisplayNameFor(m => m.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
         <div>            
             <p>Ainda não fez seu cadastro? <a class="links hover-from-center" asp-controller="account" asp-action="register">Cadastre-se.</a></p>
         </div>
