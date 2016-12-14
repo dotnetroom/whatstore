@@ -13,7 +13,7 @@ namespace WhatStore.Controllers
     {
         private IProductRepository _productRepository;
         private UserManager<ApplicationUser> _userManager;
-        public ProductController(IProductRepository productRepository,  UserManager<ApplicationUser> userManager)
+        public ProductController(IProductRepository productRepository, UserManager<ApplicationUser> userManager)
         {
             _productRepository = productRepository;
             _userManager = userManager;
