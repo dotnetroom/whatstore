@@ -59,6 +59,7 @@ namespace WhatStore.Controllers
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var phone = model.PhoneDDD + model.PhoneNumber;
+
             if(await _storeRepository.UpdateStoreInformation(user.Id, model.StoreName, model.StoreDescription, phone,
                                                     model.Email, model.URL, model.Terms, model.HasAdress, model.Address,
                                                     model.Number, model.CEP, model.Complemento, model.City))

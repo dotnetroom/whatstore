@@ -22,12 +22,15 @@ namespace WhatStore.Controllers
         private IStoreRepository _storeRepository;
         private SignInManager<ApplicationUser> _signInManager;
         private ILogger _logger;
+        private UserManager<ApplicationUser> _userManager;
 
-        public AccountController(IStoreRepository storeRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
+        public AccountController(UserManager<ApplicationUser> userManager, IStoreRepository storeRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
         {
             _storeRepository = storeRepository;
             _signInManager = signInManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            _userManager = userManager;
+            
         }
 
         // GET: /<controller>/
@@ -56,10 +59,8 @@ namespace WhatStore.Controllers
 
         // POST: /<controller>/
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnURL = null)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            ViewData["ReturnURL"] = returnURL;
-
             if (!ModelState.IsValid)
             {
                 return BadRequest();
@@ -69,11 +70,19 @@ namespace WhatStore.Controllers
 
             if (result.Succeeded)
             {
-                _logger.LogInformation(1,"Usuario logado.");
-                return RedirectToLocal(returnURL);
+                _logger.LogInformation(1,"Usuario logado.");                
+                
             }
 
-            return Ok();
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                
+            }
+
+            var modelAdmin = new RegisterStoreDataViewModel();
+
+            return RedirectToAction("Information", "Store", modelAdmin);
         }
 
         [HttpPost("register")]
@@ -91,8 +100,31 @@ namespace WhatStore.Controllers
                 URL = model.StoreName.Trim().Replace(" ", "").ToLower()
             });
 
+
             if (storeID > 0)
             {
+                var user = new ApplicationUser
+                {
+                    FirstName = model.Name,
+                    LastName = model.LastName,
+                    RG = model.RG,
+                    CPF = model.CPF,
+                    Birthday = model.Birthday,
+                    Genero = model.Genero,
+                    Email = model.Email,
+                    NormalizedEmail = model.Email.ToUpper(),
+                    NormalizedUserName = model.Email.ToUpper(),
+                    UserName = model.Email,
+                    StoreId = storeID
+                };
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Store");
+                }
+
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
             else
@@ -100,9 +132,28 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
+            
+                            
+
+            
+
             var modelLogin = new LoginViewModel();
 
             return View("Login", modelLogin);
         }
+
+        #region helper
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+        }
+        #endregion
     }
 }

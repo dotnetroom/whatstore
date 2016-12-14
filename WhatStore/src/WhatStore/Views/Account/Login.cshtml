@@ -2,7 +2,9 @@
 
 @{
     Layout = null;
+    ViewData["Title"] = "Log in";
 }
+
 <html>
 
 <head>
@@ -22,11 +24,13 @@
         <div class="row margin-top-10">
             <label> Digite seu email:</label>
             <input type="text" class="form-control" required name="Email"/>
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 
         <div class="row margin-top-10">
             <label>Digite sua senha:</label>
-            <input type="text" class="form-control" required name="Senha"/> 
+            <input type="password" class="form-control" required name="Password"/> 
+            <span asp-validation-for="Password" class="text-danger"></span>
         </div>
 
         <div class="row margin-top-10">

@@ -10,7 +10,11 @@
 <body>
     <div class="navbar admin-navbar">
         <a asp-controller="home" asp-action="index"><div class="logo-navbar float-left margin-left-30"></div></a>
-        
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a style="float: right">Bem-vindo @User.Identity.Name</a>
+
+        }
     </div>
     <div class="side-bar">
         <ul>
