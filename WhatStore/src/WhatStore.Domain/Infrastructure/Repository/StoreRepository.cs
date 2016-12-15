@@ -189,9 +189,21 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         }
 
-        public Task<Store> GetStore(long storeID)
+        public async Task<Store> GetStore(long storeID)
         {
-            throw new NotImplementedException();
+            using(var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {             
+                          
+                    var queryReturnData = await db.QueryAsync<Store>("SELECT * FROM dbo.Store WHERE Id = @storeId", new { storeId = storeID });
+                    var returnData = queryReturnData.FirstOrDefault();
+                    return returnData;
+                }catch(Exception ex)
+                {
+                    return null;
+                }
+            }
         }
     }
 }

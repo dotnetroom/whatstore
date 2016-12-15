@@ -36,10 +36,16 @@ namespace WhatStore.Controllers
                 
                 
                 var states = await _localizationRepository.GetStates();
+                var dataStore = await _storeRepository.GetStore(user.StoreId);
 
                 var viewModel = new RegisterStoreDataViewModel()
                 {
-                    States = states,
+                    StoreName = dataStore.Name,                 
+                    URL = dataStore.URL,
+                    Terms = dataStore.Term,
+                    States = states
+                    
+                    
                     
                 };
 
@@ -55,14 +61,16 @@ namespace WhatStore.Controllers
         [HttpPost("register/information")]
         public async Task<IActionResult> RegisterInformation (RegisterStoreDataViewModel model)
         {
+            
+
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
+         
             var phone = model.PhoneDDD + model.PhoneNumber;
-
+            
             if(await _storeRepository.UpdateStoreInformation(user.Id, model.StoreName, model.StoreDescription, phone,
                                                     model.Email, model.URL, model.Terms, model.HasAdress, model.Address,
                                                     model.Number, model.CEP, model.Complemento, model.City))
