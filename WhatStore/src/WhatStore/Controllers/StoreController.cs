@@ -32,12 +32,15 @@ namespace WhatStore.Controllers
         {
             try
             {
-
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                
+                
                 var states = await _localizationRepository.GetStates();
 
                 var viewModel = new RegisterStoreDataViewModel()
                 {
-                    States = states
+                    States = states,
+                    
                 };
 
                 return View(viewModel);

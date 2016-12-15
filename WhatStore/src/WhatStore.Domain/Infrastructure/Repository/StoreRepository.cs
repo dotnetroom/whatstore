@@ -188,6 +188,11 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
 
         }
+
+        public async Task<Store> GetStore(long storID)
+        {
+            using ()
+        }
     }
 }
 

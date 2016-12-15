@@ -13,7 +13,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<List<StoreType>> GetStoreType();
         Task<bool> RegisterStoreType(string type);
         //Task<bool> RegisterStoreType(List<StoreType> types);
-
+        Task<Store> GetStore(long storeID);
         Task<long> RegisterStore(Store store);
     }
 
