@@ -189,9 +189,9 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         }
 
-        public async Task<Store> GetStore(long storID)
+        public Task<Store> GetStore(long storeID)
         {
-            using () 
+            throw new NotImplementedException();
         }
     }
 }
