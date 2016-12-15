@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WhatStore.Crosscutting.Infrastructure.Models.Product
+namespace WhatStore.Domain.Infrastructure.Models.Product
 {
     public class Size
     {

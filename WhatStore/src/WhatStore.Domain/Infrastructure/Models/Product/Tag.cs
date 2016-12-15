@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WhatStore.Crosscutting.Infrastructure.Models.Product
+namespace WhatStore.Domain.Infrastructure.Models.Product
 {
     public class Tag
     {

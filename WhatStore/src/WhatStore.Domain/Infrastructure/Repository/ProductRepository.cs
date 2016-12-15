@@ -8,6 +8,7 @@ using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
+using WhatStore.Domain.Infrastructure.Models.Store;
 
 namespace WhatStore.Domain.Infrastructure.Repository
 {
@@ -17,6 +18,11 @@ namespace WhatStore.Domain.Infrastructure.Repository
         public ProductRepository(IOptions<CustomSettings> settings)
         {
             _settings = settings.Value;
+        }
+
+        public Task RegisterStore(Store store)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<bool> UpdateProduct(long idStore, string productName, string description, double price, ICollection<IFormFile> picture,

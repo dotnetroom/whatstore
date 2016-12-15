@@ -20,7 +20,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             _settings = settings.Value;
         }
 
-        public async Task<bool> UpdateStoreInformation(long userID, string storeName, string storeDescription, string phoneNumber, string email, string URL,
+        public async Task<bool> UpdateStoreInformation(long storeID, string storeName, string storeDescription, string phoneNumber, string email, string URL,
                                                        string terms, bool hasAddress, string address, string number, string CEP, string complemento, int city)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
@@ -30,10 +30,10 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 {
                     try
                     {
-                        var resultStore = await db.QueryAsync<long>("SELECT dbo.\"AspNetUsers\".\"StoreID\" FROM dbo.\"Store\", dbo.\"AspNetUsers\" WHERE" +
-                            " dbo.\"AspNetUsers\".\"StoreID\" = dbo.\"Store\".\"ID\" AND dbo.\"AspNetUsers\".\"ID\" = @userID", new { userID = userID });
+                        //var resultStore = await db.QueryAsync<long>("SELECT dbo.\"AspNetUsers\".\"StoreID\" FROM dbo.\"Store\", dbo.\"AspNetUsers\" WHERE" +
+                        //    " dbo.\"AspNetUsers\".\"StoreID\" = dbo.\"Store\".\"ID\" AND dbo.\"AspNetUsers\".\"ID\" = @userID", new { userID = userID });
 
-                        var storeID = resultStore.FirstOrDefault();
+                        //var storeID = resultStore.FirstOrDefault();
 
                         if (storeID <= 0) return false;
 
@@ -41,7 +41,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                         if (hasAddress)
                         {
-                            var resultAddressID = await db.QueryAsync<long>("SELECT dbo.\"Address\".\"ID\" FROM dbo.\"Address\", dbo.\"Store\" WHERE dbo.\"Store\".\"AddressID\" = dbo.\"Address\".\"ID\" AND dbo.\"Store\".\"ID\" = @STOREID",
+                            var resultAddressID = await db.QueryAsync<long>("SELECT dbo.Adress.ID FROM dbo.Address AND dbo.Store WHERE dbo.Store.AddressID = dbo.Address.ID AND dbo.Store.ID = @STOREID",
                                                                       new { STOREID = storeID });
 
                             var addressID = resultAddressID.FirstOrDefault();
@@ -74,7 +74,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         }
                         else
                         {
-                            adressUpdate = "UPDATE dbo.\"Store\" SET \"AddressID\" = NULL";
+                            adressUpdate = "UPDATE dbo.Store SET AdressId = NULL";
                             var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, trans);
                         }
 
@@ -161,7 +161,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
 
                     try
-                    {              
+                    {
                         var queryInsertStore = "INSERT INTO dbo.Store (Name, URL, IsActive, StoreTypeId) " +
                                                 "VALUES (@Name, @URL, @IsActive, @StoreTypeId); SELECT SCOPE_IDENTITY();";
 
@@ -191,15 +191,16 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         public async Task<Store> GetStore(long storeID)
         {
-            using(var db = new SqlConnection(_settings.ConnectionString))
+            using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 try
-                {             
-                          
+                {
+
                     var queryReturnData = await db.QueryAsync<Store>("SELECT * FROM dbo.Store WHERE Id = @storeId", new { storeId = storeID });
                     var returnData = queryReturnData.FirstOrDefault();
                     return returnData;
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     return null;
                 }

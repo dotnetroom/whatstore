@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using WhatStore.Crosscutting.Infrastructure.Models.Product;
+
 
 namespace WhatStore.Infrastructure.ViewModels.Admin
 {
