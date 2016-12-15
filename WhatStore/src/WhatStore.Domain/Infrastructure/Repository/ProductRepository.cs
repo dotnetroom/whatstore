@@ -36,7 +36,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         var product = await db.ExecuteAsync(productInsert,
                             new
                             {
-                                NomeProduct = productName,
+                                Name = productName,
                                 Description = description,
                                 Price = price,
                             }, trans);

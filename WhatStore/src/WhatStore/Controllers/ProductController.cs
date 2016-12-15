@@ -5,6 +5,8 @@ using WhatStore.Infrastructure.ViewModels.Admin;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using WhatStore.Domain.Infrastructure.Models.Identity;
+using WhatStore.Domain.Infrastructure.Models.Store;
+using WhatStore.Domain.Infrastructure.Models.Product;
 
 namespace WhatStore.Controllers
 {
@@ -13,10 +15,12 @@ namespace WhatStore.Controllers
     {
         private IProductRepository _productRepository;
         private UserManager<ApplicationUser> _userManager;
-        public ProductController(IProductRepository productRepository, UserManager<ApplicationUser> userManager)
+        private IStoreRepository _storeRepository;
+        public ProductController(IProductRepository productRepository, UserManager<ApplicationUser> userManager, IStoreRepository storeRepository)
         {
             _productRepository = productRepository;
             _userManager = userManager;
+            _storeRepository = storeRepository;
         }
 
         [Route("register")]
@@ -24,12 +28,12 @@ namespace WhatStore.Controllers
         {
             try
             {
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
                 var viewModel = new RegisterProductViewModel()
                 {
 
                 };
-
                 return View(viewModel);
             }
 
