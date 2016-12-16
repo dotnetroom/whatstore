@@ -36,6 +36,7 @@ namespace WhatStore.Controllers
 
 
                 var states = await _localizationRepository.GetStates();
+
                 var dataStore = await _storeRepository.GetStore(user.StoreId);
 
                 var viewModel = new RegisterStoreDataViewModel()
@@ -99,7 +100,9 @@ namespace WhatStore.Controllers
             try
 
             {
+                var storeType = await _storeRepository.GetStoreType();
                 var viewModel = new RegisterStoreTypeViewModel();
+                viewModel.StoreTypes = storeType;
                 return View(viewModel);
             }
 
@@ -117,8 +120,11 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
+            //var storeType = await _storeRepository.GetStoreType();
+
             if (await _storeRepository.RegisterStoreType(model.StoreType))
             {
+                
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
             else
