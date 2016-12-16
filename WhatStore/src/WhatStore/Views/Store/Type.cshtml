@@ -26,7 +26,8 @@
         @foreach (var type in Model.StoreTypes)
         {
             <tr>
-                <td value="@type.Id">@type.Name</td>
+                <td value="@type.Id" class="tableRow">@type.Name</td>
+                <td class="tableRow"><button type="submit" class="btn btn-primary" onclick="deleteRow()">Deletar</button></td>
             </tr>
         }
 
@@ -38,9 +39,10 @@
 
 @section Scripts{
 <script type="text/javascript">
-    var i = 0;
-    function deleteRow(i) {
-        document.getElementById('TypeTable').deleteRow(i)
+    
+    function deleteRow() {
+        document.getElementById("TypeTable").deleteRow(0);       
+
     }
 
 </script>
