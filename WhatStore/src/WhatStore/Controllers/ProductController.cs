@@ -23,7 +23,7 @@ namespace WhatStore.Controllers
             _storeRepository = storeRepository;
         }
 
-        [Route("register")]
+        [HttpGet("register")]
         public async Task<IActionResult> RegisterProduct()
         {
             try
@@ -39,7 +39,7 @@ namespace WhatStore.Controllers
             }
         }
 
-        [HttpPost("register/post")]
+        [HttpPost("register")]
         public async Task<IActionResult> RegisterProduct(RegisterProductViewModel model)
         {
             if (!ModelState.IsValid)
