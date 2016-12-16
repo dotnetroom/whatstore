@@ -33,18 +33,33 @@ namespace WhatStore.Controllers
             try
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                
-                
+
+                string subDDD = string.Empty;
+                string subPhoneNumber = string.Empty;
                 var states = await _localizationRepository.GetStates();
                 var dataStore = await _storeRepository.GetStore(user.StoreId);
-
+                if (dataStore.Phone.Length > 0)
+                {
+                    subDDD = dataStore.Phone.Substring(0, 2);
+                    subPhoneNumber = dataStore.Phone.Substring(2);
+                }
                 var viewModel = new RegisterStoreDataViewModel()
                 {
-                    StoreName = dataStore.Name,                 
+                    StoreName = dataStore.Name,    
+                    StoreDescription = dataStore.Description,
+                    PhoneDDD = subDDD,
+                    PhoneNumber = subPhoneNumber,
+                    Email = dataStore.Email,                             
                     URL = dataStore.URL,
                     Terms = dataStore.Term,
-                    States = states
+                    //Address = dataStore.Adress.Street,
+                    //Number = dataStore.Adress.Number,
+                    //CEP = dataStore.Adress.CEP,
+                    //Complemento = dataStore.Adress.Complement,
                     
+                    States = states,
+                    
+                                
                     
                     
                 };
@@ -67,6 +82,7 @@ namespace WhatStore.Controllers
             {
                 return BadRequest();
             }
+            var states = await _localizationRepository.GetStates();
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
          
             var phone = model.PhoneDDD + model.PhoneNumber;

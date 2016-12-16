@@ -36,6 +36,7 @@ namespace WhatStore.Infrastructure.ViewModels.Admin
         public string Address { get; set; }
         public string Number { get; set; }
         public string CEP { get; set; }
+
         public string Complemento { get; set; }
         public int State { get; set; }
         public int City { get; set; }

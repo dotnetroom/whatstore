@@ -26,80 +26,75 @@ namespace WhatStore.Domain.Infrastructure.Repository
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 await db.OpenAsync();
-                using (var trans = db.BeginTransaction())
+                try
                 {
-                    try
+                    //var resultStore = await db.QueryAsync<long>("SELECT dbo.\"AspNetUsers\".\"StoreID\" FROM dbo.\"Store\", dbo.\"AspNetUsers\" WHERE" +
+                    //    " dbo.\"AspNetUsers\".\"StoreID\" = dbo.\"Store\".\"ID\" AND dbo.\"AspNetUsers\".\"ID\" = @userID", new { userID = userID });
+
+                    //var storeID = resultStore.FirstOrDefault();
+
+                    if (storeID <= 0) return false;
+
+                    var adressUpdate = string.Empty;
+
+                    if (hasAddress)
                     {
-                        //var resultStore = await db.QueryAsync<long>("SELECT dbo.\"AspNetUsers\".\"StoreID\" FROM dbo.\"Store\", dbo.\"AspNetUsers\" WHERE" +
-                        //    " dbo.\"AspNetUsers\".\"StoreID\" = dbo.\"Store\".\"ID\" AND dbo.\"AspNetUsers\".\"ID\" = @userID", new { userID = userID });
+                        var resultAddressID = await db.QueryAsync<long>("SELECT dbo.Adress.Id FROM dbo.Adress, dbo.Store WHERE dbo.Store.AdressId = dbo.Adress.Id AND dbo.Store.ID = @STOREID",
+                                                                  new { STOREID = storeID });
 
-                        //var storeID = resultStore.FirstOrDefault();
+                        var addressID = resultAddressID.FirstOrDefault();
 
-                        if (storeID <= 0) return false;
-
-                        var adressUpdate = string.Empty;
-
-                        if (hasAddress)
+                        if (addressID > 0)
                         {
-                            var resultAddressID = await db.QueryAsync<long>("SELECT dbo.Adress.ID FROM dbo.Address AND dbo.Store WHERE dbo.Store.AddressID = dbo.Address.ID AND dbo.Store.ID = @STOREID",
-                                                                      new { STOREID = storeID });
+                            adressUpdate = "UPDATE dbo.\"Adress\" SET \"CEP\" = @CEP, \"CityID\" = @city, " +
+                                       "\"Complement\" = @Complement, \"Number\" = @Number, \"Street\" = @Street " +
+                                       "WHERE \"ID\" = @ID";
 
-                            var addressID = resultAddressID.FirstOrDefault();
-
-                            if (addressID > 0)
-                            {
-                                adressUpdate = "UPDATE dbo.\"Address\" SET \"CEP\" = @CEP, \"CityID\" = @city, " +
-                                           "\"Complement\" = @Complement, \"Number\" = @Number, \"Street\" = @Street " +
-                                           "WHERE \"ID\" = @ID";
-
-                                var resultUpdateAddress = await db.ExecuteAsync(adressUpdate,
-                                                                                new
-                                                                                {
-                                                                                    CEP = CEP,
-                                                                                    city = city,
-                                                                                    Complement = complemento,
-                                                                                    Number = number,
-                                                                                    Street = address,
-                                                                                    ID = addressID
-                                                                                }, trans);
-                            }
-
-                            else
-                            {
-                                var queryInsertAddress = "INSERT INTO dbo.\"Address\" (\"CEP\", \"CityID\", \"Complement\", \"Number\", \"Street\") "
-                                                        + "VALUES (@CEP, @CITY, @COMPLEMENT, @NUMBER, @STREET)";
-
-                                var resultInsertAddress = await db.ExecuteAsync(queryInsertAddress, new { CEP = CEP, CITY = city, COMPLEMENT = complemento, NUMBER = number, STREET = address }, trans);
-                            }
+                            var resultUpdateAddress = await db.ExecuteAsync(adressUpdate,
+                                                                            new
+                                                                            {
+                                                                                CEP = CEP,
+                                                                                city = city,
+                                                                                Complement = complemento,
+                                                                                Number = number,
+                                                                                Street = address,
+                                                                                ID = addressID
+                                                                            });
                         }
+
                         else
                         {
-                            adressUpdate = "UPDATE dbo.Store SET AdressId = NULL";
-                            var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, trans);
+                            var queryInsertAddress = "INSERT INTO dbo.\"Adress\" (\"CEP\", \"CityID\", \"Complement\", \"Number\", \"Street\") "
+                                                    + "VALUES (@CEP, @CITY, @COMPLEMENT, @NUMBER, @STREET)";
+
+                            var resultInsertAddress = await db.ExecuteAsync(queryInsertAddress, new { CEP = CEP, CITY = city, COMPLEMENT = complemento, NUMBER = number, STREET = address });
                         }
-
-                        var queryUpdateStore = "UPDATE dbo.\"Store\" SET \"Description\" = @Description, \"Email\" = @Email, " +
-                                               "\"Name\" = @Name, \"Phone\" = @Phone, \"Term\" = @Term, \"URL\" = @URl";
-
-                        var resultUpdate = await db.ExecuteAsync(queryUpdateStore,
-                                                                 new
-                                                                 {
-                                                                     Description = storeDescription,
-                                                                     Email = email,
-                                                                     Name = storeName,
-                                                                     Phone = phoneNumber,
-                                                                     Term = terms,
-                                                                     URL = URL,
-                                                                 }, trans);
-
-                        trans.Commit();
-                        return true;
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        trans.Rollback();
-                        return false;
+                        adressUpdate = "UPDATE dbo.Store SET AdressId = NULL";
+                        var resultUpdateAddress = await db.ExecuteAsync(adressUpdate);
                     }
+
+                    var queryUpdateStore = "UPDATE dbo.\"Store\" SET \"Description\" = @Description, \"Email\" = @Email, " +
+                                           "\"Name\" = @Name, \"Phone\" = @Phone, \"Term\" = @Term, \"URL\" = @URl";
+
+                    var resultUpdate = await db.ExecuteAsync(queryUpdateStore,
+                                                             new
+                                                             {
+                                                                 Description = storeDescription,
+                                                                 Email = email,
+                                                                 Name = storeName,
+                                                                 Phone = phoneNumber,
+                                                                 Term = terms,
+                                                                 URL = URL,
+                                                             });
+                    
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
                 }
             }
 
@@ -196,7 +191,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 try
                 {
 
-                    var queryReturnData = await db.QueryAsync<Store>("SELECT * FROM dbo.Store WHERE Id = @storeId", new { storeId = storeID });
+                    var queryReturnData = await db.QueryAsync<Store>("SELECT * FROM dbo.Store, dbo.Adress, dbo.State, dbo.City WHERE Id = @storeId AND Store.AdressId = Adress.Id AND Adress.CityID = City.Id AND City.StateId = State.Id", new { storeId = storeID });
                     var returnData = queryReturnData.FirstOrDefault();
                     return returnData;
                 }

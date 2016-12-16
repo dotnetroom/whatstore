@@ -18,7 +18,7 @@ namespace WhatStore.Domain.Infrastructure.Models.Localization
         public string Number { get; set; }
         [Required]
         public string Street { get; set; }
-        [Required]
+
         public string Complement { get; set; }
 
         public virtual City City { get; set; }
