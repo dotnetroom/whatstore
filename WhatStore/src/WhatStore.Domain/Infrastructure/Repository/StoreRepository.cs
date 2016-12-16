@@ -9,6 +9,7 @@ using WhatStore.Domain.Infrastructure.Contexts;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using WhatStore.Domain.Infrastructure.Models.Store;
+using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 
 namespace WhatStore.Domain.Infrastructure.Repository
 {
@@ -28,11 +29,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 await db.OpenAsync();
                 try
                 {
-                    //var resultStore = await db.QueryAsync<long>("SELECT dbo.\"AspNetUsers\".\"StoreID\" FROM dbo.\"Store\", dbo.\"AspNetUsers\" WHERE" +
-                    //    " dbo.\"AspNetUsers\".\"StoreID\" = dbo.\"Store\".\"ID\" AND dbo.\"AspNetUsers\".\"ID\" = @userID", new { userID = userID });
-
-                    //var storeID = resultStore.FirstOrDefault();
-
+                    
                     if (storeID <= 0) return false;
 
                     var adressUpdate = string.Empty;
@@ -184,16 +181,42 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         }
 
-        public async Task<Store> GetStore(long storeID)
+        public async Task<RegisterStoreDataViewModel> GetStore(long storeID)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 try
                 {
+                    string subDDD = string.Empty;
+                    string subPhoneNumber = string.Empty;
+                    var queryStore = "SELECT * FROM dbo.Store WHERE dbo.Store.Id = @STOREID";
+                    var queryStoreReturnData = await db.QueryAsync<Store>(queryStore, new { STOREID = storeID });
+                    var store = queryStoreReturnData.FirstOrDefault();
+                    if (store.Phone.Length > 0)
+                    {
+                        subDDD = store.Phone.Substring(0, 2);
+                        subPhoneNumber = store.Phone.Substring(2);
+                    }
+                    if (store.AdressId != null && store.AdressId > 0)
+                    {
+                        var query = "SELECT dbo.Store.Name as StoreName, dbo.Store.Description as StoreDescription, dbo.Store.Email, dbo.Store.URL, dbo.Store.Term as Terms, dbo.Store.Phone as PhoneNumber, dbo.City.Name, dbo.State.Name, dbo.Adress.Street as Address, dbo.Adress.Number, dbo.Adress.Complement as Complemento, dbo.Adress.CEP FROM dbo.Store, dbo.Adress, dbo.State, dbo.City WHERE dbo.Store.Id = @storeId AND Store.AdressId = Adress.Id AND Adress.CityID = City.Id AND City.StateId = State.Id";
+                        var queryReturnData = await db.QueryAsync<RegisterStoreDataViewModel>(query, new { storeId = storeID });
+                        var returnData = queryReturnData.FirstOrDefault();
+                        return returnData;
+                    }
 
-                    var queryReturnData = await db.QueryAsync<Store>("SELECT * FROM dbo.Store, dbo.Adress, dbo.State, dbo.City WHERE Id = @storeId AND Store.AdressId = Adress.Id AND Adress.CityID = City.Id AND City.StateId = State.Id", new { storeId = storeID });
-                    var returnData = queryReturnData.FirstOrDefault();
-                    return returnData;
+                    else return new RegisterStoreDataViewModel()
+                    {
+                        StoreName = store.Name,
+                        StoreDescription = store.Description,
+                        PhoneDDD = subDDD,
+                        PhoneNumber = subPhoneNumber,
+                        Email = store.Email,
+                        URL = store.URL,
+                        Terms = store.Term,                        
+                    };
+
+                    
                 }
                 catch (Exception ex)
                 {

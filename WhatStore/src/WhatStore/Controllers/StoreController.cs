@@ -34,34 +34,24 @@ namespace WhatStore.Controllers
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-                string subDDD = string.Empty;
-                string subPhoneNumber = string.Empty;
+
                 var states = await _localizationRepository.GetStates();
                 var dataStore = await _storeRepository.GetStore(user.StoreId);
-                if (dataStore.Phone.Length > 0)
-                {
-                    subDDD = dataStore.Phone.Substring(0, 2);
-                    subPhoneNumber = dataStore.Phone.Substring(2);
-                }
+
                 var viewModel = new RegisterStoreDataViewModel()
                 {
-                    StoreName = dataStore.Name,    
-                    StoreDescription = dataStore.Description,
-                    PhoneDDD = subDDD,
-                    PhoneNumber = subPhoneNumber,
-                    Email = dataStore.Email,                             
+                    StoreName = dataStore.StoreName,
+                    StoreDescription = dataStore.StoreDescription,
+                    PhoneDDD = dataStore.PhoneDDD,
+                    PhoneNumber = dataStore.PhoneNumber,
+                    Email = dataStore.Email,
                     URL = dataStore.URL,
-                    Terms = dataStore.Term,
-                    //Address = dataStore.Adress.Street,
-                    //Number = dataStore.Adress.Number,
-                    //CEP = dataStore.Adress.CEP,
-                    //Complemento = dataStore.Adress.Complement,
-                    
+                    Terms = dataStore.Terms,
+                    Address = dataStore.Address,
+                    Number = dataStore.Number,
+                    CEP = dataStore.CEP,
+                    Complemento = dataStore.Complemento,
                     States = states,
-                    
-                                
-                    
-                    
                 };
 
                 return View(viewModel);
@@ -74,9 +64,9 @@ namespace WhatStore.Controllers
         }
 
         [HttpPost("register/information")]
-        public async Task<IActionResult> RegisterInformation (RegisterStoreDataViewModel model)
+        public async Task<IActionResult> RegisterInformation(RegisterStoreDataViewModel model)
         {
-            
+
 
             if (!ModelState.IsValid)
             {
@@ -84,21 +74,22 @@ namespace WhatStore.Controllers
             }
             var states = await _localizationRepository.GetStates();
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-         
+
             var phone = model.PhoneDDD + model.PhoneNumber;
-            
-            if(await _storeRepository.UpdateStoreInformation(user.StoreId, model.StoreName, model.StoreDescription, phone,
+
+            if (await _storeRepository.UpdateStoreInformation(user.StoreId, model.StoreName, model.StoreDescription, phone,
                                                     model.Email, model.URL, model.Terms, model.HasAdress, model.Address,
                                                     model.Number, model.CEP, model.Complemento, model.City))
             {
-                model.ReturnMessage = "Alterações salvas com sucesso";
+                    model.States = states;
+                    model.ReturnMessage = "Alterações salvas com sucesso";
             }
             else
             {
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return View("Information",model);
+            return View("Information", model);
         }
 
 
@@ -119,24 +110,24 @@ namespace WhatStore.Controllers
         }
 
         [HttpPost("register/type")]
-         public async Task<IActionResult> RegisterType (RegisterStoreTypeViewModel model)
-         {
-             if (!ModelState.IsValid)
-             {
-                 return BadRequest();
-             }
+        public async Task<IActionResult> RegisterType(RegisterStoreTypeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
-             if (await _storeRepository.RegisterStoreType(model.StoreType))
-             {
-                 model.ReturnMessage = "Alterações salvas com sucesso";
-             }
-             else
-             {
-                 model.ReturnMessage = "Erro ao salvar alterações";
-             }
+            if (await _storeRepository.RegisterStoreType(model.StoreType))
+            {
+                model.ReturnMessage = "Alterações salvas com sucesso";
+            }
+            else
+            {
+                model.ReturnMessage = "Erro ao salvar alterações";
+            }
 
-             return View("Type", model);
-         }
+            return View("Type", model);
+        }
 
 
     }

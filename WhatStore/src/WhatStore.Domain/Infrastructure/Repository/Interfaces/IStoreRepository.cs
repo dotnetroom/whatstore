@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WhatStore.Domain.Infrastructure.Models.Store;
+using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 
 namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
 {
@@ -13,7 +14,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<List<StoreType>> GetStoreType();
         Task<bool> RegisterStoreType(string type);
         //Task<bool> RegisterStoreType(List<StoreType> types);
-        Task<Store> GetStore(long storeID);
+        Task<RegisterStoreDataViewModel> GetStore(long storeID);
         Task<long> RegisterStore(Store store);
     }
 
