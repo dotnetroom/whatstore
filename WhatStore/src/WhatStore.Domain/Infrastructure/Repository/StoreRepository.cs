@@ -192,7 +192,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     var queryStore = "SELECT * FROM dbo.Store WHERE dbo.Store.Id = @STOREID";
                     var queryStoreReturnData = await db.QueryAsync<Store>(queryStore, new { STOREID = storeID });
                     var store = queryStoreReturnData.FirstOrDefault();
-                    if (store.Phone.Length > 0)
+                    if (store.Phone != null && store.Phone.Length > 0)
                     {
                         subDDD = store.Phone.Substring(0, 2);
                         subPhoneNumber = store.Phone.Substring(2);

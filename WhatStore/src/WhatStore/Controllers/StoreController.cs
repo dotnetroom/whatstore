@@ -120,7 +120,6 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            //var storeType = await _storeRepository.GetStoreType();
 
             if (await _storeRepository.RegisterStoreType(model.StoreType))
             {
