@@ -7,5 +7,6 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Store
 {
     public class StoreTypeViewModel
     {
+        public List<StoreType> Types { get; set; }
     }
 }
