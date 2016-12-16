@@ -10,7 +10,7 @@
 
             <label>Tipo de loja: </label>
             <input value="@Model.StoreType" class="form-control float-left" name="StoreType" id="Type" />
-            <button class="btn btn-primary margin-top-10  float-left" type="submit" onclick="novaLinha()">Enviar</button>
+            <button class="btn btn-primary margin-top-10  float-left" type="submit">Enviar</button>
 
         </div>
 
@@ -36,27 +36,5 @@
             document.getElementById('TypeTable').deleteRow(i)
         }
 
-        function novaLinha() {
-            i++;
-            if (!Model.StoreType.isEmpyt()) {
-
-                for (var types in Model.StoreType) {
-
-
-                    var insere = "<tr><td class= 'tableRow' > " + types + "</td>"
-                                  + "<td class= 'tableRow ' id='tabela_linha_'><input type='button' class='btn btn-primary'"
-                                  + "value='remover' onClick=\"javascript:deleteRow('tabela_linha_" + i + "')\"></input></td></tr>";
-
-
-
-
-                    document.getElementById("TypeTable").innerHTML += insere;
-                }
-            }
-            else {
-                return null;
-
-            }
-        }
     </script>
 }

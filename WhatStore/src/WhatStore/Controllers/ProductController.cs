@@ -28,8 +28,6 @@ namespace WhatStore.Controllers
         {
             try
             {
-                var user = await _userManager.FindByNameAsync(User.Identity.Name);
-
                 var viewModel = new RegisterProductViewModel();
                  
                 return View(viewModel);
