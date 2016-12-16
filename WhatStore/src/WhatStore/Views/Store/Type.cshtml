@@ -23,6 +23,13 @@
             <th class="tableRow">Opções</th>
         </tr>
 
+        @foreach (var type in Model.StoreTypes)
+        {
+            <tr>
+                <td value="@type.Id">@type.Name</td>
+            </tr>
+        }
+
     </table>
 
 </body>
@@ -30,11 +37,11 @@
 
 
 @section Scripts{
-    <script type="text/javascript">
-        var i = 0;
-        function deleteRow(i) {
-            document.getElementById('TypeTable').deleteRow(i)
-        }
+<script type="text/javascript">
+    var i = 0;
+    function deleteRow(i) {
+        document.getElementById('TypeTable').deleteRow(i)
+    }
 
-    </script>
+</script>
 }
