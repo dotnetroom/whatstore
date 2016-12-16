@@ -30,10 +30,8 @@ namespace WhatStore.Controllers
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-                var viewModel = new RegisterProductViewModel()
-                {
-
-                };
+                var viewModel = new RegisterProductViewModel();
+                 
                 return View(viewModel);
             }
 
@@ -52,6 +50,7 @@ namespace WhatStore.Controllers
             }
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
             if (await _productRepository.UpdateProduct(user.Id, model.ProductName, model.Description, model.Price, model.Picture,
                                                        model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
                                                        model.Weight, model.Height, model.Tags))

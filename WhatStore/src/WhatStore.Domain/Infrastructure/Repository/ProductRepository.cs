@@ -36,62 +36,80 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 {
                     try
                     {
-                        var productInsert = "INSERT INTO dbo.\"Product\" (\"Name\", \"Description\", \"Price\") "
-                                       + "VALUES (@NAME, @DESCRIPTION, @PRICE)";
+                        if (idStore <= 0) return false;
 
-                        var product = await db.ExecuteAsync(productInsert,
-                            new
-                            {
-                                Name = productName,
-                                Description = description,
-                                Price = price,
-                            }, trans);
 
-                        // if (hasVariety == true)
-                        //{
+                        var resultAddressID = await db.QueryAsync<long>("SELECT dbo.Adress.ID FROM dbo.Address AND dbo.Store WHERE dbo.Store.AddressID = dbo.Address.ID AND dbo.Store.ID = @STOREID",
+                                                                  new { STOREID = idStore });
 
-                        //  var x = await db.ExecuteAsync(productInsert,
-                        //    new
-                        //  {
-                        //    HasVariety = hasVariety,
-                        //  Colors = colors,
-                        //  Size = size
-                        // }, trans);
-                        //    }
+                        var addressID = resultAddressID.FirstOrDefault();
 
-                        if (isFreeShip == true)
+                        if (addressID <= 0)
                         {
-                            var shippingInsert = "INSERT INTO dbo.\"Product\" (\"IsFreeShipping\", \"Lenth\", \"Width\" \"Weight\") "
-                                                        + "VALUES (@IsFreeShipping, @Lenth, @Width, @Weight)";
 
-                            var ship = await db.ExecuteAsync(shippingInsert,
+                            var productInsert = "INSERT INTO dbo.\"Product\" (\"Name\", \"Description\", \"Price\") "
+                                           + "VALUES (@NAME, @DESCRIPTION, @PRICE)";
+
+                            var product = await db.ExecuteAsync(productInsert,
                                 new
                                 {
-                                    IsFreeShip = isFreeShip,
-                                    Weight = weight,
-                                    Height = height,
-                                    Lenth = length,
+                                    Name = productName,
+                                    Description = description,
+                                    Price = price,
                                 }, trans);
-                        }
 
-                        var tagsInsert = "INSERT INTO dbo.\"Tag\" (\"TagName\") " + "VALUES (@TagName)";
+                            // if (hasVariety == true)
+                            //{
 
-                        var tag = await db.ExecuteAsync(tagsInsert,
-                            new
+                            //  var x = await db.ExecuteAsync(productInsert,
+                            //    new
+                            //  {
+                            //    HasVariety = hasVariety,
+                            //  Colors = colors,
+                            //  Size = size
+                            // }, trans);
+                            //    }
+
+                            if (isFreeShip == true)
                             {
-                                Tags = tags
-                            }, trans);
+                                var shippingInsert = "INSERT INTO dbo.\"Product\" (\"IsFreeShipping\", \"Lenth\", \"Width\" \"Weight\") "
+                                                            + "VALUES (@IsFreeShipping, @Lenth, @Width, @Weight)";
 
-                        trans.Commit();
-                        return true;
-                    }
-                    catch (Exception ex)
-                    {
-                        trans.Rollback();
+                                var ship = await db.ExecuteAsync(shippingInsert,
+                                    new
+                                    {
+                                        IsFreeShip = isFreeShip,
+                                        Weight = weight,
+                                        Height = height,
+                                        Lenth = length,
+                                    }, trans);
+                            }
+
+                            var tagsInsert = "INSERT INTO dbo.\"Tag\" (\"TagName\") " + "VALUES (@TagName)";
+
+                            var tag = await db.ExecuteAsync(tagsInsert,
+                                new
+                                {
+                                    Tags = tags
+                                }, trans);
+
+                            trans.Commit();
+                            return true;
+                        }
+                    
+
+                        else
+                        {
                         return false;
                     }
+                }
+                    catch (Exception ex)
+                {
+                    trans.Rollback();
+                    return false;
                 }
             }
         }
     }
+}
 }
