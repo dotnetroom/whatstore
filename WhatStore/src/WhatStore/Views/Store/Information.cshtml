@@ -1,4 +1,6 @@
-﻿@model WhatStore.Infrastructure.ViewModels.Admin.RegisterStoreDataViewModel
+﻿
+@model WhatStore.Domain.Infrastructure.ViewModels.Admin.RegisterStoreDataViewModel
+
 
 @{
     Layout = "_Admin";
@@ -54,7 +56,7 @@
         <div class="form-group">
             <h3 class="float-left">Endereço físico</h3>
             <div class="onoffswitch margin-right-10 float-right margin-top-20">
-                <input asp-for="HasAdress" type="checkbox" class="onoffswitch-checkbox" id="checkEndereco" >
+                <input asp-for="HasAdress" type="checkbox"checked="@((Model.HasAdress) ? true : false)" class="onoffswitch-checkbox" id="checkEndereco" >
                 <label class="onoffswitch-label" for="checkEndereco">
                     <span class="onoffswitch-inner"></span>
                     <span class="onoffswitch-switch"></span>
@@ -64,7 +66,7 @@
 
 
 
-        <div id="adress" style="display: none;">
+        <div id="adress" style="display: @((Model.HasAdress) ? "block" : "none");">
             <div class="form-group"><label>Endereço:</label>
                     <input name="Address" type="text" class="form-control" value="@Model.Address" />               
             </div>
@@ -89,7 +91,7 @@
                         <option value="-1">Selecione sua cidade</option>
                         @if (Model.City > 0)
                         {
-                            <option value="@Model.City">Selecione sua cidade</option>
+                            <option value="@Model.City" selected>@Model.CityName</option>
                         }
                     </select>
                 </div>
