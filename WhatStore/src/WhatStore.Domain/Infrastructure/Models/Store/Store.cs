@@ -27,6 +27,7 @@ namespace WhatStore.Domain.Infrastructure.Models.Store
 
         public string Phone { get; set; }
 
+        [EmailAddress]
         public string Email { get; set; }
 
         public string URL { get; set; }

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using WhatStore.Domain.Infrastructure.Models.Store;
 using WhatStore.Domain.Infrastructure.ViewModels.Admin;
+using WhatStore.Domain.Infrastructure.Models.Localization;
 
 namespace WhatStore.Domain.Infrastructure.Repository
 {
@@ -62,15 +63,27 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         else
                         {
                             var queryInsertAddress = "INSERT INTO dbo.\"Adress\" (\"CEP\", \"CityID\", \"Complement\", \"Number\", \"Street\") "
-                                                    + "VALUES (@CEP, @CITY, @COMPLEMENT, @NUMBER, @STREET)";
+                                                    + "VALUES (@CEP, @CITYID, @COMPLEMENT, @NUMBER, @STREET) SELECT SCOPE_IDENTITY()";
 
-                            var resultInsertAddress = await db.ExecuteAsync(queryInsertAddress, new { CEP = CEP, CITY = city, COMPLEMENT = complemento, NUMBER = number, STREET = address });
+                            var newAddress = new Adress()
+                            {
+                                CEP = CEP,
+                                CityID  = city,
+                                Complement = complemento,
+                                Number = number,
+                                Street = address
+                            };
+
+                            var addressInstertedID = await db.ExecuteScalarAsync(queryInsertAddress, newAddress);
+
+                            adressUpdate = "UPDATE dbo.Store SET AdressId = @ADDRESS WHERE Store.Id = @ID";
+                            var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID, ADDRESS = addressInstertedID });
                         }
                     }
                     else
                     {
-                        adressUpdate = "UPDATE dbo.Store SET AdressId = NULL";
-                        var resultUpdateAddress = await db.ExecuteAsync(adressUpdate);
+                        adressUpdate = "UPDATE dbo.Store SET AdressId = NULL WHERE Store.Id = @ID";
+                        var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID});
                     }
 
                     var queryUpdateStore = "UPDATE dbo.\"Store\" SET \"Description\" = @Description, \"Email\" = @Email, " +
@@ -218,7 +231,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     }
                     if (store.AdressId != null && store.AdressId > 0)
                     {
-                        var query = "SELECT dbo.Store.Name as StoreName, dbo.Store.Description as StoreDescription, dbo.Store.Email, dbo.Store.URL, dbo.Store.Term as Terms, dbo.Store.Phone as PhoneNumber, dbo.City.Name, dbo.State.Name, dbo.Adress.Street as Address, dbo.Adress.Number, dbo.Adress.Complement as Complemento, dbo.Adress.CEP FROM dbo.Store, dbo.Adress, dbo.State, dbo.City WHERE dbo.Store.Id = @storeId AND Store.AdressId = Adress.Id AND Adress.CityID = City.Id AND City.StateId = State.Id";
+                        var query = "SELECT dbo.Store.Name as StoreName, dbo.Store.Description as StoreDescription, dbo.Store.Email, dbo.Store.URL, dbo.Store.Term as Terms, dbo.Store.Phone as PhoneNumber, dbo.City.Name AS CityName, dbo.State.Id AS State, dbo.City.Id AS City dbo.State.Name, dbo.Adress.Street as Address, dbo.Adress.Number, dbo.Adress.Complement as Complemento, dbo.Adress.CEP FROM dbo.Store, dbo.Adress, dbo.State, dbo.City WHERE dbo.Store.Id = @storeId AND Store.AdressId = Adress.Id AND Adress.CityID = City.Id AND City.StateId = State.Id";
                         var queryReturnData = await db.QueryAsync<RegisterStoreDataViewModel>(query, new { storeId = storeID });
                         var returnData = queryReturnData.FirstOrDefault();
                         return returnData;

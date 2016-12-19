@@ -8,6 +8,7 @@ using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using WhatStore.Domain.Infrastructure.Models.Identity;
 using WhatStore.Infrastructure.ViewModels.Store;
+using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -53,6 +54,9 @@ namespace WhatStore.Controllers
                     CEP = dataStore.CEP,
                     Complemento = dataStore.Complemento,
                     States = states,
+                    State = dataStore.State,
+                    City = dataStore.City,
+                    CityName = dataStore.CityName
                 };
 
                 return View(viewModel);
@@ -82,13 +86,14 @@ namespace WhatStore.Controllers
                                                     model.Email, model.URL, model.Terms, model.HasAdress, model.Address,
                                                     model.Number, model.CEP, model.Complemento, model.City))
             {
-                    model.States = states;
                     model.ReturnMessage = "Alterações salvas com sucesso";
             }
             else
             {
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
+
+            model.States = states;
 
             return View("Information", model);
         }

@@ -8,7 +8,7 @@
 
 <div class="admin-settings-content">
     <h3>Dados da Loja</h3>
-    <form asp-controller="Store" asp-action="register/information" method="post" enctype="multipart/form-data" class="float-center margin-top-20">
+    <form asp-controller="Store" asp-action="RegisterInformation" method="post" enctype="multipart/form-data" class="float-center margin-top-20">
         <div class="form-group">
             <label>Nome da loja:</label>
             <input type="text" class="form-control" name="StoreName" value="@Model.StoreName" required/>
@@ -20,15 +20,16 @@
         <div class="form-group">
             <div class="float-left" style="width:10%">
                 <label>DDD:</label>
-                <input name="PhoneDDD" type="text" class="form-control" value="@Model.PhoneDDD"/>
+                <input maxlength="2" name="PhoneDDD" type="text" class="form-control" value="@Model.PhoneDDD"/>
             </div>
             <div class="float-left margin-left-10">
                 <label>Telefone:</label>
                 <input name="PhoneNumber" type="text" class="form-control" value="@Model.PhoneNumber"/>
             </div>
             <div class="float-right margin-left-30">
-                <label>Email:</label>
+                <label>Email: </label>                
                 <input name="Email" type="text" class="form-control" style="width:800px" value="@Model.Email" required/>
+                <span asp-validation-for="Email"></span>
             </div>
         </div>
         <div class="form-group">
@@ -86,6 +87,10 @@
                     <label>Cidade:</label>
                     <select name="City" id="dropCities" type="text" class="form-control" disabled="disabled" value="@Model.City">
                         <option value="-1">Selecione sua cidade</option>
+                        @if (Model.City > 0)
+                        {
+                            <option value="@Model.City">Selecione sua cidade</option>
+                        }
                     </select>
                 </div>
                 <div class="float-left" style="width:40%">
@@ -94,7 +99,15 @@
                         <option value="-1">Selecione um estado</option>
                         @foreach (var state in Model.States)
                         {
-                            <option value="@state.Id">@state.Initials</option>
+                            if (state.Id == Model.State)
+                            {
+                                <option value="@state.Id" selected>@state.Initials</option>
+                            }
+                            else
+                            {
+                                <option value="@state.Id">@state.Initials</option>
+
+                            }
                         }
                     </select>
                 </div>

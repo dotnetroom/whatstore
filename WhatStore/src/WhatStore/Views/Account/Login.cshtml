@@ -1,4 +1,5 @@
 ﻿@model WhatStore.Infrastructure.ViewModels.Admin.LoginViewModel
+@using Microsoft.AspNetCore.Http.Authentication
 
 @{
     Layout = null;
@@ -23,7 +24,7 @@
 
         <div class="row margin-top-10">
             <label> Digite seu email:</label>
-            <input type="text" class="form-control" required name="Email"/>
+            <input type="text" class="form-control" asp-for="Email" required />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 

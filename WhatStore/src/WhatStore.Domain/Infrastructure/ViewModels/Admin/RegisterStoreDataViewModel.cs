@@ -40,6 +40,7 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
         public string Complemento { get; set; }
         public int State { get; set; }
         public int City { get; set; }
+        public string CityName { get; set; }
 
         public List<State> States { get; set; }
 
