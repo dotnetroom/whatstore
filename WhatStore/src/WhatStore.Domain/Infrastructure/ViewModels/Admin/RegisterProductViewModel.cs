@@ -13,6 +13,9 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
         [Required]
         public long StoreId { get; set; }
 
+        [Required]
+        public long Id { get; set; }
+
         [Required(ErrorMessage = "The Product Name field is required.")]
         public string ProductName { get; set; }
 
