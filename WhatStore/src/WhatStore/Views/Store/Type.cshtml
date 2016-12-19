@@ -16,34 +16,26 @@
 
     </form>
 
+    <form class="form-group" asp-controller="store">
 
-    <table class="table" id="TypeTable">
-        <tr>
-            <th class="tableRow">tipo de loja</th>
-            <th class="tableRow">Opções</th>
-        </tr>
-
-        @foreach (var type in Model.StoreTypes)
-        {
+        <table class="table" id="TypeTable">
             <tr>
-                <td value="@type.Id" class="tableRow">@type.Name</td>
-                <td class="tableRow"><button type="submit" class="btn btn-primary" onclick="deleteRow()">Deletar</button></td>
+                <th class="tableRow">tipo de loja</th>
+                <th class="tableRow">Opções</th>
             </tr>
-        }
 
-    </table>
+            @foreach (var type in Model.StoreTypes)
+            {
+
+                <tr>
+                    <td value="@type.Id" class="tableRow">@type.Name</td>
+                    <td class="tableRow"><button type="submit" class="btn btn-primary">Deletar</button></td>
+                </tr>
+
+            }
+
+        </table>
+
+    </form>
 
 </body>
-
-
-
-@section Scripts{
-<script type="text/javascript">
-    
-    function deleteRow() {
-        document.getElementById("TypeTable").deleteRow(0);       
-
-    }
-
-</script>
-}

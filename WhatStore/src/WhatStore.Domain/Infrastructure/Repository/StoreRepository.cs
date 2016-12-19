@@ -141,6 +141,25 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 return null;
             }
         }
+        public async Task<bool> DeleteStoreType(long storeId)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var result = await db.QueryAsync("DELETE FROM dbo.StoreType WHERE storeId = @storeId");
+
+                        return true;
+                }
+                
+            }
+
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
 
         public async Task<long> RegisterStore(Store store)
         {
@@ -223,7 +242,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     return null;
                 }
             }
-        }
+        }       
     }
 }
 
