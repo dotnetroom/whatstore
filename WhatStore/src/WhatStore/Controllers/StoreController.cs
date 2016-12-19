@@ -142,6 +142,25 @@ namespace WhatStore.Controllers
             return View("Type", model);
         }
 
+        [HttpDelete("(delete/type)")]
+        public async Task<IActionResult> DeleteType(RegisterStoreTypeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if(await _storeRepository.DeleteStoreType(model.StoreType))
+            {
+                model.ReturnMessage = "Alterações salvas com sucesso";
+            }
+            else
+            {
+                model.ReturnMessage = "Erro ao salvar alterações";
+            }
+
+            return View("Type", model);
+        }
 
     }
 }

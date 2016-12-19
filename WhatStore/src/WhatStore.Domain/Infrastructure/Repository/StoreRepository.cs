@@ -154,13 +154,14 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 return null;
             }
         }
-        public async Task<bool> DeleteStoreType(long storeId)
+        public async Task<bool> DeleteStoreType(string storeType)
         {
             try
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    var result = await db.QueryAsync("DELETE FROM dbo.StoreType WHERE storeId = @storeId");
+
+                    var result = await db.QueryAsync("DELETE FROM dbo.StoreType WHERE storeType = @storeType");
 
                         return true;
                 }
