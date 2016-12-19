@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WhatStore.Infrastructure.ViewModels.Admin;
+using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using WhatStore.Domain.Infrastructure.Models.Identity;
-using WhatStore.Infrastructure.ViewModels.Store;
-using WhatStore.Domain.Infrastructure.ViewModels.Admin;
+using WhatStore.Domain.Infrastructure.ViewModels.Store;
+
 
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -56,7 +56,9 @@ namespace WhatStore.Controllers
                     States = states,
                     State = dataStore.State,
                     City = dataStore.City,
-                    CityName = dataStore.CityName
+                    CityName = dataStore.CityName,
+                    HasAdress = (dataStore.State > 0) ? true : false 
+                    
                 };
 
                 return View(viewModel);
