@@ -36,9 +36,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 {
                     try
                     {
-                        var idStore = await db.QueryAsync<long>("SELECT dbo.Store.ID FROM dbo.AspNetUser WHERE dbo.Store.Id = @STOREID", new {
-                            STOREID = storeId
-                        });
+                        var idStore = await db.QueryAsync<long>("SELECT dbo.Store.ID FROM dbo.AspNetUser");
 
                         if (idStore == null) return false;
 

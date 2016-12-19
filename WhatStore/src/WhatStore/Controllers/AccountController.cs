@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WhatStore.Infrastructure.ViewModels.Admin;
+using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 using Microsoft.AspNetCore.Identity;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using WhatStore.Domain.Infrastructure.Models.Store;
 using Microsoft.AspNetCore.Authorization;
 using WhatStore.Domain.Infrastructure.Models.Identity;
 using Microsoft.Extensions.Logging;
+using WhatStore.Domain.Infrastructure.ViewModels.Account;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
