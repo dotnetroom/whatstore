@@ -56,7 +56,9 @@ namespace WhatStore.Controllers
                     States = states,
                     State = dataStore.State,
                     City = dataStore.City,
-                    CityName = dataStore.CityName
+                    CityName = dataStore.CityName,
+                    HasAdress = (dataStore.State > 0) ? true : false 
+                    
                 };
 
                 return View(viewModel);
