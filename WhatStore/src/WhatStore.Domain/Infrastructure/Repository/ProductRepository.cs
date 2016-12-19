@@ -25,7 +25,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<bool> UpdateProduct(long idStore, string productName, string description, double price, ICollection<IFormFile> picture,
+        public async Task<bool> UpdateProduct(long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
                                               bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weight,
                                               double height, string tags)
         {
@@ -36,10 +36,14 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 {
                     try
                     {
-                        if (idStore <= 0) return false;
+                        var idStore = await db.QueryAsync<long>("SELECT dbo.Store.ID FROM dbo.AspNetUser WHERE dbo.Store.Id = @STOREID", new {
+                            STOREID = storeId
+                        });
 
-                        var productInsert = "INSERT INTO dbo.\"Product\" (\"Name\", \"Description\", \"Price\") "
-                                       + "VALUES (@NAME, @DESCRIPTION, @PRICE)";
+                        if (idStore == null) return false;
+
+                        var productInsert = "INSERT INTO dbo.\"Product\" (\"Name\", \"Description\", \"Price\", \"Store_Id\") "
+                                       + "VALUES (@NAME, @DESCRIPTION, @PRICE, @STORE_ID)";
 
                         var product = await db.ExecuteAsync(productInsert,
                             new
@@ -47,6 +51,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                 Name = productName,
                                 Description = description,
                                 Price = price,
+                                StoreId = storeId
                             }, trans);
 
                         // if (hasVariety == true)

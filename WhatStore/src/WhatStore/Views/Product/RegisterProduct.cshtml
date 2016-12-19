@@ -86,6 +86,8 @@
             <input type="text" class="form-control" placeholder="Ex.: Presentes" required asp-for="Tags" value="@Model.Tags"/>
         </div>
 
+        <input type="text" name="storeId" asp-for="StoreId" value="@Model.StoreId" hidden/>
+
         <div class="form-group">
             <button type="submit" style="height: 40px" class="btn btn-primary margin-bottom-20 float-right">Cadastrar</button>
         </div>
