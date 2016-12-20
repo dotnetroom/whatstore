@@ -142,7 +142,7 @@ namespace WhatStore.Controllers
             return View("Type", model);
         }
 
-        [HttpDelete("(delete/type)")]
+        [HttpPost("delete/type")]
         public async Task<IActionResult> DeleteType(RegisterStoreTypeViewModel model)
         {
             if (!ModelState.IsValid)
@@ -150,7 +150,7 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            if(await _storeRepository.DeleteStoreType(model.StoreType))
+            if(await _storeRepository.DeleteStoreType(model.Id))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }

@@ -161,7 +161,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
 
-                    var result = await db.QueryAsync("DELETE FROM dbo.StoreType WHERE storeType = @storeType");
+                    var result = await db.QueryAsync("DELETE FROM dbo.StoreType WHERE dbo.StoreType.Id = @storeType", storeType);
 
                         return true;
                 }

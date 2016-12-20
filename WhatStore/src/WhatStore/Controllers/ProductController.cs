@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WhatStore.Infrastructure.ViewModels.Admin;
+using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using WhatStore.Domain.Infrastructure.Models.Identity;
@@ -49,7 +49,7 @@ namespace WhatStore.Controllers
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            if (await _productRepository.UpdateProduct(model.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
+            if (await _productRepository.UpdateProduct(user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
                                                        model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
                                                        model.Weight, model.Height, model.Tags))
             {
