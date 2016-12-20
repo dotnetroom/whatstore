@@ -5,8 +5,6 @@ using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using WhatStore.Domain.Infrastructure.Models.Identity;
-using WhatStore.Domain.Infrastructure.Models.Store;
-using WhatStore.Domain.Infrastructure.Models.Product;
 
 namespace WhatStore.Controllers
 {
@@ -51,7 +49,7 @@ namespace WhatStore.Controllers
 
             if (await _productRepository.UpdateProduct(user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
                                                        model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
-                                                       model.Weight, model.Height, model.Tags))
+                                                       model.Weight, model.Height, model.Tags, model.Id))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
