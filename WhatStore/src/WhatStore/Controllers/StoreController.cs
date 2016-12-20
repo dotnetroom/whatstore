@@ -8,6 +8,7 @@ using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using WhatStore.Domain.Infrastructure.Models.Identity;
 using WhatStore.Domain.Infrastructure.ViewModels.Store;
+using WhatStore.Domain.Infrastructure.Models.Store;
 
 
 
@@ -103,6 +104,7 @@ namespace WhatStore.Controllers
 
         [HttpGet("type")]
         public async Task<IActionResult> Type()
+
         {
             try
 
@@ -139,27 +141,27 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return View("Type", model);
+            return RedirectToAction("Type");
         }
 
         [HttpPost("delete/type")]
-        public async Task<IActionResult> DeleteType(RegisterStoreTypeViewModel model)
+        public async Task<IActionResult> DeleteType(int typeID)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            if(await _storeRepository.DeleteStoreType(model.Id))
+            if(await _storeRepository.DeleteStoreType(typeID))
             {
-                model.ReturnMessage = "Alterações salvas com sucesso";
+                
             }
             else
             {
-                model.ReturnMessage = "Erro ao salvar alterações";
+                
             }
 
-            return View("Type", model);
+            return RedirectToAction("Type");
         }
 
     }

@@ -12,5 +12,6 @@ namespace WhatStore.Domain.Infrastructure.Models.Store
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
+
     }
 }
