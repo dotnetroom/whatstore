@@ -142,6 +142,13 @@ namespace WhatStore.Controllers
             return View("Login", modelLogin);
         }
 
+        [HttpPost("Logoff")]
+        public async Task<IActionResult> Logoff()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
+
+        }
         #region helper
         private IActionResult RedirectToLocal(string returnUrl)
         {
