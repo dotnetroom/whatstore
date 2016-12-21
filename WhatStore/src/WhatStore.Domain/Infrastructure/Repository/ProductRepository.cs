@@ -27,77 +27,71 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         public async Task<bool> UpdateProduct(long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
                                               bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weight,
-                                              double height, string tags)
+                                              double height, string tags, string id)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 await db.OpenAsync();
-                using (var trans = db.BeginTransaction())
+                try
                 {
-                    try
-                    {
-                        var idStore = await db.QueryAsync<long>("SELECT dbo.Store.ID FROM dbo.AspNetUser WHERE dbo.Store.Id = @STOREID", new {
-                            STOREID = storeId
+                    var idStore = await db.QueryAsync<long>("SELECT StoreID FROM dbo.AspNetUsers");
+
+                    if (idStore == null) return false;
+
+                    var productInsert = "INSERT INTO dbo.\"Product\" (\"Id\",\"Name\", \"Description\", \"Price\", \"StoreId\", \"IsFreeShipping\") "
+                                   + "VALUES (@ID, @NAME, @DESCRIPTION, @PRICE, @STOREID, @ISFREESHIPPING)";
+
+                    var product = await db.ExecuteAsync(productInsert,
+                        new
+                        {
+                            Id = id,
+                            Name = productName,
+                            Description = description,
+                            Price = price,
+                            StoreId = idStore,
+                            IsFreeShipping = isFreeShip
                         });
 
-                        if (idStore == null) return false;
+                    // if (hasVariety == true)
+                    //{
 
-                        var productInsert = "INSERT INTO dbo.\"Product\" (\"Name\", \"Description\", \"Price\", \"Store_Id\") "
-                                       + "VALUES (@NAME, @DESCRIPTION, @PRICE, @STORE_ID)";
+                    //  var x = await db.ExecuteAsync(productInsert,
+                    //    new
+                    //  {
+                    //    HasVariety = hasVariety,
+                    //  Colors = colors,
+                    //  Size = size
+                    // }, trans);
+                    //    }
 
-                        var product = await db.ExecuteAsync(productInsert,
-                            new
-                            {
-                                Name = productName,
-                                Description = description,
-                                Price = price,
-                                StoreId = storeId
-                            }, trans);
-
-                        // if (hasVariety == true)
-                        //{
-
-                        //  var x = await db.ExecuteAsync(productInsert,
-                        //    new
-                        //  {
-                        //    HasVariety = hasVariety,
-                        //  Colors = colors,
-                        //  Size = size
-                        // }, trans);
-                        //    }
-
-                        if (isFreeShip == true)
-                        {
-                            var shippingInsert = "INSERT INTO dbo.\"Product\" (\"IsFreeShipping\", \"Lenth\", \"Width\" \"Weight\") "
-                                                        + "VALUES (@IsFreeShipping, @Lenth, @Width, @Weight)";
-
-                            var ship = await db.ExecuteAsync(shippingInsert,
-                                new
-                                {
-                                    IsFreeShip = isFreeShip,
-                                    Weight = weight,
-                                    Height = height,
-                                    Lenth = length,
-                                }, trans);
-                        }
-
-                        var tagsInsert = "INSERT INTO dbo.\"Tag\" (\"TagName\") " + "VALUES (@TagName)";
-
-                        var tag = await db.ExecuteAsync(tagsInsert,
-                            new
-                            {
-                                Tags = tags
-                            }, trans);
-
-                        trans.Commit();
-                        return true;
-
-                    }
-                    catch (Exception ex)
+                    if (isFreeShip == true)
                     {
-                        trans.Rollback();
-                        return false;
+                        var shippingInsert = "INSERT INTO dbo.\"Product\" (\"Lenth\", \"Width\" \"Weight\") "
+                                                    + "VALUES (@Lenth, @Width, @Weight)";
+
+                        var ship = await db.ExecuteAsync(shippingInsert,
+                            new
+                            {
+                                Weight = weight,
+                                Height = height,
+                                Lenth = length,
+                            });
                     }
+
+                    var tagsInsert = "INSERT INTO dbo.\"Tag\" (\"TagName\") VALUES (@TagName)";
+
+                    var tag = await db.ExecuteAsync(tagsInsert,
+                        new
+                        {
+                            TagName = tags
+                        });
+
+                    return true;
+
+                }
+                catch (Exception ex)
+                {
+                    return false;
                 }
             }
         }

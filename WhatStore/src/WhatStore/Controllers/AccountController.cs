@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WhatStore.Infrastructure.ViewModels.Admin;
+using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 using Microsoft.AspNetCore.Identity;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using WhatStore.Domain.Infrastructure.Models.Store;
 using Microsoft.AspNetCore.Authorization;
 using WhatStore.Domain.Infrastructure.Models.Identity;
 using Microsoft.Extensions.Logging;
+using WhatStore.Domain.Infrastructure.ViewModels.Account;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -63,7 +64,7 @@ namespace WhatStore.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return View(model);
             }
 
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe ,lockoutOnFailure: false);
@@ -73,11 +74,11 @@ namespace WhatStore.Controllers
                 _logger.LogInformation(1,"Usuario logado.");                
                 
             }
-
+                        
             else
-            {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                
+            {               
+                ModelState.AddModelError("Email", "Usuário ou senha incorreta");
+                return View(model);
             }
 
             var modelAdmin = new RegisterStoreDataViewModel();
@@ -141,6 +142,13 @@ namespace WhatStore.Controllers
             return View("Login", modelLogin);
         }
 
+        [HttpPost("Logoff")]
+        public async Task<IActionResult> Logoff()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
+
+        }
         #region helper
         private IActionResult RedirectToLocal(string returnUrl)
         {

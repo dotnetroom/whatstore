@@ -10,6 +10,12 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 {
     public class RegisterProductViewModel
     {
+        [Required]
+        public long StoreId { get; set; }
+
+        [Required]
+        public string Id { get; set; }
+
         [Required(ErrorMessage = "The Product Name field is required.")]
         public string ProductName { get; set; }
 

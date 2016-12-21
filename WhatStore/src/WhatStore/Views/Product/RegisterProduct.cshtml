@@ -11,6 +11,11 @@
     <form class="form-group" asp-action="register" asp-controller="product" method="post" enctype="multipart/form-data">
         
         <div class="form-group">
+            <label>Código do produto</label>
+            <input type="text" name="id" class="form-control" asp-for="Id" value="@Model.Id" required/>
+        </div>
+
+        <div class="form-group">
             <label>Nome do produto: </label>
             <input type="text" class="form-control" required asp-for="ProductName" value="@Model.ProductName"/>
             <span asp-validation-for="ProductName"></span>
@@ -85,8 +90,6 @@
             <h3>Tags</h3>
             <input type="text" class="form-control" placeholder="Ex.: Presentes" required asp-for="Tags" value="@Model.Tags"/>
         </div>
-
-        <input type="text" name="storeId" asp-for="StoreId" value="@Model.StoreId" hidden/>
 
         <div class="form-group">
             <button type="submit" style="height: 40px" class="btn btn-primary margin-bottom-20 float-right">Cadastrar</button>

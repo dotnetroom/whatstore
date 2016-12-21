@@ -17,6 +17,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
     public class StoreRepository : IStoreRepository
     {
         private CustomSettings _settings;
+
         public StoreRepository(IOptions<CustomSettings> settings)
         {
             _settings = settings.Value;
@@ -154,14 +155,14 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 return null;
             }
         }
-        public async Task<bool> DeleteStoreType(string storeType)
+        public async Task<bool> DeleteStoreType(int storeType)
         {
             try
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
 
-                    var result = await db.QueryAsync("DELETE FROM dbo.StoreType WHERE storeType = @storeType");
+                    var result = await db.ExecuteAsync("DELETE FROM dbo.StoreType WHERE dbo.StoreType.Id = @storeType", new { storeType = storeType });
 
                         return true;
                 }

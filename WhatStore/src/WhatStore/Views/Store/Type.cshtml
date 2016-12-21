@@ -16,26 +16,27 @@
 
     </form>
 
-    <form class="form-group" asp-controller="store" asp-action ="delte/type" method="delete">
+    <table class="table" id="TypeTable">
+        <tr>
+            <th class="tableRow">tipo de loja</th>
+            <th class="tableRow">Opções</th>
+        </tr>
 
-        <table class="table" id="TypeTable">
-            <tr>
-                <th class="tableRow">tipo de loja</th>
-                <th class="tableRow">Opções</th>
-            </tr>
-
-            @foreach (var type in Model.StoreTypes)
+        @foreach (var type in Model.StoreTypes)
             {
 
-                <tr>
-                    <td value="@type.Id" class="tableRow">@type.Name</td>
-                    <td class="tableRow"><button type="submit" class="btn btn-primary">Deletar</button></td>
-                </tr>
+            <tr>
+                <td class="tableRow">@type.Name</td>
+                <td class="tableRow">
+                    <form class="form-group" asp-controller="store" asp-action="delete/type" method="post">
+                        <input name="typeID" hidden value="@type.Id" />
+                        <button type="submit" class="btn btn-primary">Deletar</button>
+                    </form>
+                </td>
+            </tr>
 
-            }
+        }
 
-        </table>
-
-    </form>
+    </table>
 
 </body>
