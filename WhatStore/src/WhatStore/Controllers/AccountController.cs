@@ -64,7 +64,7 @@ namespace WhatStore.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return View(model);
             }
 
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe ,lockoutOnFailure: false);
@@ -74,11 +74,11 @@ namespace WhatStore.Controllers
                 _logger.LogInformation(1,"Usuario logado.");                
                 
             }
-
+                        
             else
-            {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                
+            {               
+                ModelState.AddModelError("Email", "Usuário ou senha incorreta");
+                return View(model);
             }
 
             var modelAdmin = new RegisterStoreDataViewModel();
