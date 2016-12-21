@@ -48,7 +48,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             Name = productName,
                             Description = description,
                             Price = price,
-                            StoreId = storeId,
+                            StoreId = idStore,
                             IsFreeShipping = isFreeShip
                         });
 
