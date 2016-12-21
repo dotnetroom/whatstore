@@ -38,13 +38,15 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     if (idStore == null) return false;
 
+                    var codigo = id.Replace(" ", "");
+
                     var productInsert = "INSERT INTO dbo.\"Product\" (\"Id\",\"Name\", \"Description\", \"Price\", \"StoreId\", \"IsFreeShipping\") "
                                    + "VALUES (@ID, @NAME, @DESCRIPTION, @PRICE, @STOREID, @ISFREESHIPPING)";
 
                     var product = await db.ExecuteAsync(productInsert,
                         new
                         {
-                            Id = id,
+                            Id = codigo,
                             Name = productName,
                             Description = description,
                             Price = price,
