@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WhatStore.Domain.Infrastructure.ViewModels.Admin;
@@ -58,7 +56,7 @@ namespace WhatStore.Controllers
                     State = dataStore.State,
                     City = dataStore.City,
                     CityName = dataStore.CityName,
-                    HasAdress = (dataStore.State > 0) ? true : false 
+                    HasAdress = (dataStore.State > 0) ? true : false  
                     
                 };
 
