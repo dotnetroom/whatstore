@@ -74,7 +74,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         var ship = await db.ExecuteAsync(shippingInsert,
                             new
                             {
-                                Weight = weight,
+                                Weight = weight, 
                                 Height = height,
                                 Lenth = length,
                             });

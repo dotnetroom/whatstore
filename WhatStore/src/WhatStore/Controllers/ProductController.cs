@@ -42,7 +42,7 @@ namespace WhatStore.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(); 
             }
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
