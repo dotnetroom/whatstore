@@ -20,11 +20,6 @@ namespace WhatStore.Domain.Infrastructure.Repository
             _settings = settings.Value;
         }
 
-        public Task RegisterStore(Store store)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<bool> UpdateProduct(long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
                                               bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weight,
                                               double height, string tags, string id)
@@ -38,19 +33,18 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     if (idStore == null) return false;
 
-                    var codigo = id.Replace(" ", "");
+                    var code = id.Replace(" ", "");
 
-                    var productInsert = "INSERT INTO dbo.\"Product\" (\"Id\",\"Name\", \"Description\", \"Price\", \"StoreId\", \"IsFreeShipping\") "
-                                   + "VALUES (@ID, @NAME, @DESCRIPTION, @PRICE, @STOREID, @ISFREESHIPPING)";
+                    var productInsert = "INSERT INTO dbo.\"Product\" (\"Id\", \"Name\", \"Description\", \"Price\", \"StoreID\", \"IsFreeShipping\") VALUES (@ID, @NAME, @DESCRIPTION, @PRICE, @STOREID, @ISFREESHIPPING)";
 
                     var product = await db.ExecuteAsync(productInsert,
                         new
                         {
-                            Id = codigo,
+                            Id = code,
                             Name = productName,
                             Description = description,
                             Price = price,
-                            StoreId = idStore,
+                            storeId = idStore,
                             IsFreeShipping = isFreeShip
                         });
 
@@ -68,7 +62,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     if (isFreeShip == true)
                     {
-                        var shippingInsert = "INSERT INTO dbo.\"Product\" (\"Lenth\", \"Width\" \"Weight\") "
+                        var shippingInsert = "INSERT INTO dbo.\"Product\" (\"Lenth\", \"Width\", \"Weight\") "
                                                     + "VALUES (@Lenth, @Width, @Weight)";
 
                         var ship = await db.ExecuteAsync(shippingInsert,
@@ -76,7 +70,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             {
                                 Weight = weight, 
                                 Height = height,
-                                Lenth = length,
+                                Lenth = length
                             });
                     }
 

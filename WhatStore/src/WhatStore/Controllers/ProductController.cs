@@ -55,6 +55,7 @@ namespace WhatStore.Controllers
             }
             else
             {
+                ModelState.AddModelError("Id", "Código já existente");
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
