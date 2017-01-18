@@ -64,7 +64,7 @@
         <div class="form-group">
             <h3>Este produto possui frete?</h3>
             <div class="onoffswitch margin-right-10">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="checkFrete" asp-for="IsFreeShip" value="@Model.IsFreeShip">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="checkFrete" asp-for="IsFreeShip" checked="@((Model.IsFreeShip) ? true : false)">
                 <label class="onoffswitch-label" for="checkFrete">
                     <span class="onoffswitch-inner"></span>
                     <span class="onoffswitch-switch"></span>
@@ -73,11 +73,11 @@
             <div id="frete" style="display: none;">
                 <div class="float-left margin-right-40">
                     <label>Peso:</label>
-                    <input type="text" value="0" class="form-control" style="width:170px" placeholder="Ex.: 1,05kg" asp-for="Weight"/>
+                    <input type="text" value="0" class="form-control" style="width:170px" placeholder="Ex.: 1,05kg" asp-for="Weigth"/>
                 </div>
                 <div class="float-left margin-right-40">
                     <label>Altura: </label>
-                    <input type="text" value="0" class="form-control" style="width:170px" placeholder="Ex.: 10cm" asp-for="Height"/>
+                    <input type="text" value="0" class="form-control" style="width:170px" placeholder="Ex.: 10cm" asp-for="Widith"/>
                 </div>
                 <div class="float-right">
                     <label>Comprimento: </label>

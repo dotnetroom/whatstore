@@ -49,7 +49,7 @@ namespace WhatStore.Controllers
 
             if (await _productRepository.UpdateProduct(user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
                                                        model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
-                                                       model.Weight, model.Height, model.Tags, model.Id))
+                                                       model.Weigth, model.Widith, model.Tags, model.Id))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
