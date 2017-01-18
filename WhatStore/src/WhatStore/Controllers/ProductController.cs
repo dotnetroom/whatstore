@@ -49,13 +49,12 @@ namespace WhatStore.Controllers
 
             if (await _productRepository.UpdateProduct(user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
                                                        model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
-                                                       model.Weigth, model.Widith, model.Tags, model.Id))
+                                                       model.Weigth, model.Widith, model.Tags, model.Id))  
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
             else
             {
-                ModelState.AddModelError("Id", "Código já existente");
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 

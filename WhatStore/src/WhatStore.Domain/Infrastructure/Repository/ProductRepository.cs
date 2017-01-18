@@ -20,6 +20,11 @@ namespace WhatStore.Domain.Infrastructure.Repository
             _settings = settings.Value;
         }
 
+        public Task RegisterStore(Store store)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> UpdateProduct(long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
                                               bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weigth,
                                               double widtih, string tags, string id)
@@ -33,18 +38,19 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     if (idStore == null) return false;
 
-                    var code = id.Replace(" ", "");
+                    var codigo = id.Replace(" ", "");
 
-                    var productInsert = "INSERT INTO dbo.\"Product\" (\"Id\", \"Name\", \"Description\", \"Price\", \"StoreID\", \"IsFreeShipping\") VALUES (@ID, @NAME, @DESCRIPTION, @PRICE, @STOREID, @ISFREESHIPPING)";
+                    var productInsert = "INSERT INTO dbo.\"Product\" (\"Id\",\"Name\", \"Description\", \"Price\", \"StoreId\", \"IsFreeShipping\") "
+                                   + "VALUES (@ID, @NAME, @DESCRIPTION, @PRICE, @STOREID, @ISFREESHIPPING)";
 
                     var product = await db.ExecuteAsync(productInsert,
                         new
                         {
-                            Id = code,
+                            Id = codigo,
                             Name = productName,
                             Description = description,
                             Price = price,
-                            storeId = idStore,
+                            StoreId = idStore,
                             IsFreeShipping = isFreeShip
                         });
 
@@ -62,16 +68,26 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     if (isFreeShip == true)
                     {
+<<<<<<< HEAD
 
                         var shippingInsert = "UPDATE dbo.\"Product\" SET \"Length\" = @Length, \"Widith\" = @Widith, \"Weigth\" = @Weigth";
 
+=======
+                        var shippingInsert = "UPDATE dbo.\"Product\" SET \"Length\" = @Length, \"Widith\" = @Widith, \"Weigth\" = @Weigth";
+>>>>>>> 700a70786f334d9180d6caf7f4fc11098fd53402
 
                         var ship = await db.ExecuteAsync(shippingInsert,
                             new
                             {
+<<<<<<< HEAD
                                 Weigth = weigth, 
                                 Widith = widtih,
                                 Length = length
+=======
+                                Weigth = weigth,   
+                                Widith = widtih,
+                                Length = length,
+>>>>>>> 700a70786f334d9180d6caf7f4fc11098fd53402
                             });
                     }
 
