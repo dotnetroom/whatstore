@@ -68,26 +68,16 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     if (isFreeShip == true)
                     {
-<<<<<<< HEAD
-
                         var shippingInsert = "UPDATE dbo.\"Product\" SET \"Length\" = @Length, \"Widith\" = @Widith, \"Weigth\" = @Weigth";
 
-=======
-                        var shippingInsert = "UPDATE dbo.\"Product\" SET \"Length\" = @Length, \"Widith\" = @Widith, \"Weigth\" = @Weigth";
->>>>>>> 700a70786f334d9180d6caf7f4fc11098fd53402
 
                         var ship = await db.ExecuteAsync(shippingInsert,
                             new
                             {
-<<<<<<< HEAD
+
                                 Weigth = weigth, 
                                 Widith = widtih,
                                 Length = length
-=======
-                                Weigth = weigth,   
-                                Widith = widtih,
-                                Length = length,
->>>>>>> 700a70786f334d9180d6caf7f4fc11098fd53402
                             });
                     }
 
