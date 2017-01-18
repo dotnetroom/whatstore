@@ -73,7 +73,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         var ship = await db.ExecuteAsync(shippingInsert,
                             new
                             {
-                                Weigth = weigth, 
+                                Weigth = weigth,  
                                 Widith = widtih,
                                 Length = length,
                             });
