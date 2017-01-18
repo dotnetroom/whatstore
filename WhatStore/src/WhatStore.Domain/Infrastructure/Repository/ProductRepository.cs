@@ -68,15 +68,34 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     if (isFreeShip == true)
                     {
+<<<<<<< HEAD
                         var shippingUpdate = "UPDATE dbo.Product SET Length = @Length, Widith = @Widith, Weigth = @Weigth WHERE Id =@ID";
+=======
+<<<<<<< HEAD
+
+                        var shippingInsert = "UPDATE dbo.\"Product\" SET \"Length\" = @Length, \"Widith\" = @Widith, \"Weigth\" = @Weigth";
+
+=======
+                        var shippingInsert = "UPDATE dbo.\"Product\" SET \"Length\" = @Length, \"Widith\" = @Widith, \"Weigth\" = @Weigth";
+>>>>>>> 700a70786f334d9180d6caf7f4fc11098fd53402
+>>>>>>> 98fca9a2b960ffda7dec6666ea860c1616e5b124
 
                         var ship = await db.ExecuteAsync(shippingUpdate,
                             new
                             {
+<<<<<<< HEAD
                                 Id = codigo,
+=======
+<<<<<<< HEAD
+                                Weigth = weigth, 
+                                Widith = widtih,
+                                Length = length
+=======
+>>>>>>> 98fca9a2b960ffda7dec6666ea860c1616e5b124
                                 Weigth = weigth,   
                                 Widith = widtih,
                                 Length = length,
+>>>>>>> 700a70786f334d9180d6caf7f4fc11098fd53402
                             });
                     }
 
