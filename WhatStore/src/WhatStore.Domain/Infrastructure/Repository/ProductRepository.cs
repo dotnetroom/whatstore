@@ -68,19 +68,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     if (isFreeShip == true)
                     {
-<<<<<<< HEAD
-                        var shippingInsert = "UPDATE dbo.\"Product\" SET \"Length\" = @Length, \"Widith\" = @Widith, \"Weigth\" = @Weigth";
+                       
 
-
-                        var ship = await db.ExecuteAsync(shippingInsert,
-                            new
-                            {
-
-                                Weigth = weigth, 
-                                Widith = widtih,
-                                Length = length
-                            });
-=======
                         var shippingUpdate = "UPDATE dbo.Product SET Length = @Length, Widith = @Widith, Weigth = @Weigth WHERE Id =@ID";
 
                         var ship = await db.ExecuteAsync(shippingUpdate,
@@ -92,7 +81,6 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                 Widith = widtih,
                                 Length = length
 });
->>>>>>> 36f873d5261bab8bfe01691e59215246d7a45ee1
                     }
 
                     var tagsInsert = "INSERT INTO dbo.\"Tag\" (\"TagName\") VALUES (@TagName)";

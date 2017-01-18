@@ -59,7 +59,7 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return View("RegisterProduct", model);
+            return RedirectToAction("RegisterProduct", model);
         }
     }
 }
