@@ -35,9 +35,9 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
         [Required(ErrorMessage = "The Ship field is required.")]
         public bool IsFreeShip { get; set; }
 
-        public double Weight { get; set; } = 0;
+        public double Weigth { get; set; } = 0;
 
-        public double Height { get; set; } = 0;
+        public double Widith { get; set; } = 0;
 
         public double Length { get; set; } = 0;
 
