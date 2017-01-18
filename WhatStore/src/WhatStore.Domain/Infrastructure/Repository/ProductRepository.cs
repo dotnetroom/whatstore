@@ -68,11 +68,12 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     if (isFreeShip == true)
                     {
-                        var shippingInsert = "UPDATE dbo.\"Product\" SET \"Length\" = @Length, \"Widith\" = @Widith, \"Weigth\" = @Weigth";
+                        var shippingUpdate = "UPDATE dbo.Product SET Length = @Length, Widith = @Widith, Weigth = @Weigth WHERE Id =@ID";
 
-                        var ship = await db.ExecuteAsync(shippingInsert,
+                        var ship = await db.ExecuteAsync(shippingUpdate,
                             new
                             {
+                                Id = codigo,
                                 Weigth = weigth,   
                                 Widith = widtih,
                                 Length = length,
