@@ -63,8 +63,9 @@ namespace WhatStore.Controllers
         }
 
         [HttpGet("edit")]
-        public async Task<IActionResult> EditProduct()
+        public async Task<IActionResult> EditProduct(EditProductViewModel model)
         {
+
             try
             {
                 var viewModel = new RegisterProductViewModel();

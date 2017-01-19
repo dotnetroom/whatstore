@@ -1,11 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model WhatStore.Domain.Infrastructure.ViewModels.Admin.EditProductViewModel
+
 @{
     Layout = "_Admin";
 }
 <title>Produtos - WhatStore</title>
 
 <div class="admin-settings-content">
-
+    <form class="form-group margin-top-20" asp-controller=" " asp-action=" " method="post">
+        @foreach (var product in Model.Products)
+        {
+            <div value="@product.Id">@product.Name</div>
+        }
+    </form>
 </div>
