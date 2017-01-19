@@ -67,7 +67,7 @@ namespace WhatStore.Controllers
         {
             try
             {
-                var viewModel = new EditProductViewModel();
+                var viewModel = new RegisterProductViewModel();
 
                 return View(viewModel);
             }
