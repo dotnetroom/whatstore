@@ -28,8 +28,9 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
                     var result = await db.QueryAsync<Product>("SELECT * FROM \"dbo\".\"Product\" WHERE dbo.Product.StoreID = @STOREID",
-                        new { STOREID = storeID }
-                        );
+                        new {
+                            STOREID = storeID
+                        });
 
                     return result.ToList();
                 }
