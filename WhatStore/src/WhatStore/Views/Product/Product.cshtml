@@ -1,0 +1,20 @@
+﻿@model WhatStore.Domain.Infrastructure.ViewModels.Admin.ProductViewModel
+
+@{
+    Layout = "_Admin";
+}
+<title>Produtos - WhatStore</title>
+
+<div class="admin-settings-content-large">
+    <form asp-controller="product" asp-action="information" method="post">
+        @foreach (var product in Model.Products)
+        {
+            <div class="product-display-content">
+                <div class="product-display-image">
+
+                </div>
+                <label>@product.Name</label>
+            </div>
+        }
+    </form>
+</div>

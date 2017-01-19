@@ -34,7 +34,6 @@ namespace WhatStore.Controllers
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-
                 var states = await _localizationRepository.GetStates();
 
                 var dataStore = await _storeRepository.GetStore(user.StoreId);

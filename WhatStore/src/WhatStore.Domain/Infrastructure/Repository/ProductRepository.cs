@@ -31,8 +31,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         new {
                             STOREID = storeID
                         });
-
-                    return result.ToList();
+                    var product = result.ToList();
+                    return product;
                 }
             }
 

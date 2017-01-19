@@ -21,6 +21,7 @@ namespace WhatStore.Controllers
             _storeRepository = storeRepository;
         }
 
+
         [HttpGet("register")]
         public async Task<IActionResult> RegisterProduct()
         {
@@ -62,21 +63,28 @@ namespace WhatStore.Controllers
             return RedirectToAction("RegisterProduct", model);
         }
 
-        [HttpGet("edit")]
-        public async Task<IActionResult> EditProduct(EditProductViewModel model)
+        
+        [HttpGet("information")]
+        public async Task<IActionResult> Product(RegisterProductViewModel model)
         {
-
             try
             {
-                var viewModel = new RegisterProductViewModel();
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+                var products = _productRepository.GetProducts(user.StoreId);
+
+                var viewModel = new ProductViewModel();
+                viewModel.Products = await products;
 
                 return View(viewModel);
+
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return BadRequest();
-            }
 
+            }
         }
+
     }
 }

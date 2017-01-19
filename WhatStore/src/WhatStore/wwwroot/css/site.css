@@ -964,3 +964,44 @@ hr {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+.product-display-content{
+    width: 250px;
+    height: auto;
+    min-height: 190px;
+    float: left;
+    background: #fff;
+    border-radius: 3px;
+    margin-right: 10px;
+    border: 1px solid #E6E9E7;
+    margin-bottom: 20px;
+    position: relative;
+    padding: 10px;
+}
+
+.product-display-image{
+    width: 100%;
+    height: 150px;
+    background: #ddd;
+}
+
+.product-display-content label{
+    color: #868585 !important;
+    font-weight: 500 !important;
+    font-size: 15px;
+    text-align: left;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+
+
+.admin-settings-content-large {
+    width: 800px;
+    max-width: 800px;
+    height: auto;
+    min-height: 200px;
+    overflow: hidden;
+    float: left;
+    margin-left: 100px;
+}
