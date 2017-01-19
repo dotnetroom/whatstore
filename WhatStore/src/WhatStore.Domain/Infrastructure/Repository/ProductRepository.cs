@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using WhatStore.Domain.Infrastructure.Models.Store;
+using WhatStore.Domain.Infrastructure.Models.Product;
 
 namespace WhatStore.Domain.Infrastructure.Repository
 {
@@ -20,9 +21,24 @@ namespace WhatStore.Domain.Infrastructure.Repository
             _settings = settings.Value;
         }
 
-        public Task RegisterStore(Store store)
+        public async Task<List<Product>> GetProducts(long storeID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var result = await db.QueryAsync<Product>("SELECT * FROM \"dbo\".\"Product\" WHERE dbo.Product.StoreID = @STOREID",
+                        new { STOREID = storeID }
+                        );
+
+                    return result.ToList();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<bool> UpdateProduct(long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
