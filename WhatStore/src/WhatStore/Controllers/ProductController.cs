@@ -95,6 +95,7 @@ namespace WhatStore.Controllers
 
                 var viewModel = new RegisterProductViewModel()
                 {
+                    Id = dataProduct.Id,
                     Description = dataProduct.Description,
                     IsFreeShip = dataProduct.IsFreeShipping,
                     Length = Double.Parse(dataProduct.Length),
