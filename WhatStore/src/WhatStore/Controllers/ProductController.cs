@@ -101,9 +101,14 @@ namespace WhatStore.Controllers
                     ProductName = dataProduct.Name,
                     Price = dataProduct.Price,
                     Weigth = Double.Parse(dataProduct.Weigth),
-                    Widith = Double.Parse(dataProduct.Widith)                  
-                }
-                return view(viewModel);
+                    Widith = Double.Parse(dataProduct.Widith)
+                };
+                return View(viewModel);
+            }
+
+            catch(Exception ex)
+            {
+                return BadRequest();
             }
         }
 
