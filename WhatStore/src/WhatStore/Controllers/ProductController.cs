@@ -86,7 +86,7 @@ namespace WhatStore.Controllers
             }
         }
 
-        [Route("Edit")]
+        [HttpGet("edit")]
         public async Task<IActionResult> EditProduct(RegisterProductViewModel model)
         {
             try
