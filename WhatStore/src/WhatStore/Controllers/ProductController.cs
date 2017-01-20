@@ -63,7 +63,7 @@ namespace WhatStore.Controllers
             return RedirectToAction("RegisterProduct", model);
         }
 
-        
+
         [HttpGet("information")]
         public async Task<IActionResult> Product(RegisterProductViewModel model)
         {
@@ -79,10 +79,31 @@ namespace WhatStore.Controllers
                 return View(viewModel);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest();
 
+            }
+        }
+
+        [Route("Edit")]
+        public async Task<IActionResult> EditProduct(RegisterProductViewModel model)
+        {
+            try
+            {
+                var dataProduct = await _productRepository.GetProduct(model.Id);
+
+                var viewModel = new RegisterProductViewModel()
+                {
+                    Description = dataProduct.Description,
+                    IsFreeShip = dataProduct.IsFreeShipping,
+                    Length = Double.Parse(dataProduct.Length),
+                    ProductName = dataProduct.Name,
+                    Price = dataProduct.Price,
+                    Weigth = Double.Parse(dataProduct.Weigth),
+                    Widith = Double.Parse(dataProduct.Widith)                  
+                }
+                return view(viewModel);
             }
         }
 
