@@ -86,15 +86,15 @@ namespace WhatStore.Controllers
             }
         }
 
-        [HttpGet("edit")]
-        public async Task<IActionResult> EditProduct(RegisterProductViewModel model)
+        [HttpGet("edit/{id}")]
+        public async Task<IActionResult> EditProduct(string id)
         {
             try
             {
-                //var dataProduct = await _productRepository.GetProduct(model.Id);
+                var dataProduct = await _productRepository.GetProduct(id);
 
-                var viewModel = new RegisterProductViewModel();
-                /*{
+                var viewModel = new RegisterProductViewModel()
+                {
                     Description = dataProduct.Description,
                     IsFreeShip = dataProduct.IsFreeShipping,
                     Length = Double.Parse(dataProduct.Length),
@@ -102,7 +102,7 @@ namespace WhatStore.Controllers
                     Price = dataProduct.Price,
                     Weigth = Double.Parse(dataProduct.Weigth),
                     Widith = Double.Parse(dataProduct.Widith)
-                };*/
+                };
                 return View(viewModel);
             }
 

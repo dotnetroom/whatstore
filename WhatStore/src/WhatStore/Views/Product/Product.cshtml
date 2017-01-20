@@ -9,7 +9,7 @@
     <form asp-controller="product" asp-action="information" method="post">
         @foreach (var product in Model.Products)
         {
-            <a asp-controller="product" asp-action="edit">
+            <a href="@Url.Action($"edit", "product", new { id = product.Id})">
 
                 <div class="product-display-content">
 
@@ -17,7 +17,7 @@
 
                     </div>
 
-                    <label value="@product.Id">@product.Name</label>
+                    <label >@product.Name</label>
                 </div>
             </a>
         }
