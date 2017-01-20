@@ -91,10 +91,10 @@ namespace WhatStore.Controllers
         {
             try
             {
-                var dataProduct = await _productRepository.GetProduct(model.Id);
+                //var dataProduct = await _productRepository.GetProduct(model.Id);
 
-                var viewModel = new RegisterProductViewModel()
-                {
+                var viewModel = new RegisterProductViewModel();
+                /*{
                     Description = dataProduct.Description,
                     IsFreeShip = dataProduct.IsFreeShipping,
                     Length = Double.Parse(dataProduct.Length),
@@ -102,7 +102,7 @@ namespace WhatStore.Controllers
                     Price = dataProduct.Price,
                     Weigth = Double.Parse(dataProduct.Weigth),
                     Widith = Double.Parse(dataProduct.Widith)
-                };
+                };*/
                 return View(viewModel);
             }
 
