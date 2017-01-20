@@ -28,7 +28,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
                     var result = await db.QueryAsync<Product>("SELECT * FROM dbo.Product WHERE dbo.Product.StoreID = @STOREID",
-                        new {
+                        new
+                        {
                             STOREID = storeID
                         });
                     var product = result.ToList();
@@ -39,6 +40,19 @@ namespace WhatStore.Domain.Infrastructure.Repository
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+
+        public async Task<Product> GetProduct(string productID)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                var result = await db.QueryAsync<Product>("SELECT * FROM dbo.Product WHERE dbo.Product.Id = @ProductID",
+                    new
+                    {
+                    ProductID= productID
+                    });
+                return result.FirstOrDefault();
             }
         }
 
@@ -85,7 +99,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     if (isFreeShip == true)
                     {
-                       
+
 
                         var shippingUpdate = "UPDATE dbo.Product SET Length = @Length, Widith = @Widith, Weigth = @Weigth WHERE Id =@ID";
 
@@ -94,10 +108,10 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             {
 
                                 Id = codigo,
-                                Weigth = weigth, 
+                                Weigth = weigth,
                                 Widith = widtih,
                                 Length = length
-});
+                            });
                     }
 
                     var tagsInsert = "INSERT INTO dbo.\"Tag\" (\"TagName\") VALUES (@TagName)";

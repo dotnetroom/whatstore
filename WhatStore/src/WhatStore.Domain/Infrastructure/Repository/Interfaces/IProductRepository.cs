@@ -15,5 +15,6 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
                                  bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weigth, 
                                  double widith, string tags, string id);
         Task<List<Product>> GetProducts(long storeID);
+        Task<Product> GetProduct(string productId);
     }
 }
