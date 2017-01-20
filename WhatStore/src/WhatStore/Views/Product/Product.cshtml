@@ -9,12 +9,17 @@
     <form asp-controller="product" asp-action="information" method="post">
         @foreach (var product in Model.Products)
         {
-            <div class="product-display-content">
-                <div class="product-display-image">
+            <a asp-controller="product" asp-action="register">
 
+                <div class="product-display-content">
+                    <div class="product-display-image">
+
+                    </div>
+
+                    <label>@product.Name</label>
                 </div>
-                <label>@product.Name</label>
-            </div>
+            </a>
+
         }
     </form>
 </div>
