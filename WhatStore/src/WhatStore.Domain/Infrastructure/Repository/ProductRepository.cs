@@ -50,7 +50,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 var result = await db.QueryAsync<Product>("SELECT * FROM dbo.Product WHERE dbo.Product.Id= @ProductID ",
                     new
                     {
-                    ProductID= productID,
+                        ProductID = productID,
                     });
                 return result.FirstOrDefault();
             }
@@ -147,11 +147,21 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             });
                     }
 
-                    var tagsInsert = "INSERT INTO dbo.\"Tag\" (\"TagName\") VALUES (@TagName)";
+                    var tagProductInsert = "INSERT INTO dbo.TagProduct (ProductId) VALUES (@ProductId)";
+                    var tagProduct = await db.ExecuteAsync(tagProductInsert,
+                        new
+                        {
+                            ProductId = id
+                        });
+
+                    var tagIdSelect = "SELECT TagId FROM TagProduct";
+
+                    var tagsInsert = "INSERT INTO dbo.\"Tag\" (\"TagId\", \"TagName\") VALUES (@tagIdSelect, @TagName)";
 
                     var tag = await db.ExecuteAsync(tagsInsert,
                         new
                         {
+                            TagId = tagIdSelect,
                             TagName = tags
                         });
 
