@@ -56,9 +56,9 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<bool> UpdateProduct(string productName, string description, 
-                                              double price, bool hasVariety,                                             string colors, string sizes, bool isFreeShip, double length, double weigth, 
-                                              double widith, string tags, string id)
+        public async Task<bool> UpdateProduct(string productName, string description, double price, bool hasVariety, string colors,
+                                              string sizes, bool isFreeShip, double length, double weigth, double widith,
+                                              string tags, string id)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
