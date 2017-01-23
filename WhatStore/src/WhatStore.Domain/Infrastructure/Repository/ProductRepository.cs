@@ -56,7 +56,39 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<bool> UpdateProduct(long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
+        public async Task<bool> UpdateProduct(string productName, string description, 
+                                              double price, bool hasVariety,                                             string colors, string sizes, bool isFreeShip, double length, double weigth, 
+                                              double widith, string tags, string id)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                await db.OpenAsync();
+                try
+                {
+                    var productUpdateQuery = "UPDATE dbo.Product SET Description = @Description, Name = @Name, Price = @Price" +
+                        " IsFreeShipping = @IsFreeShipping, Length = @Length, Weigth = @Weigth, Widith = @Widith WHERE Id = @Id";
+
+                    var resultProductUpdate = await db.ExecuteAsync(productUpdateQuery,
+                                                                    new
+                                                                    {
+                                                                        Description = description,
+                                                                        IsFreeShipping = isFreeShip,
+                                                                        Length = length,
+                                                                        Name = productName,
+                                                                        Price = price,
+                                                                        Weigth = weigth,
+                                                                        Widith = widith
+                                                                    });
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public async Task<bool> InsertProduct(long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
                                               bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weigth,
                                               double widtih, string tags, string id)
         {
