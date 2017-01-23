@@ -48,7 +48,7 @@ namespace WhatStore.Controllers
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            if (await _productRepository.UpdateProduct(user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
+            if (await _productRepository.InsertProduct(user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
                                                        model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
                                                        model.Weigth, model.Widith, model.Tags, model.Id))
             {
@@ -112,6 +112,24 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost("edit")]
+        public async Task<IActionResult>EditProductSave(RegisterProductViewModel model)
+        {
+            if (await _productRepository.UpdateProduct(model.ProductName, model.Description,
+                model.Price, model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
+                model.Weigth, model.Widith, model.Tags, model.Id))
+            {
+                model.ReturnMessage = "Alterações salvas com sucesso";
+            }
+            else
+            {
+                model.ReturnMessage = "Erro ao salvar alterações";
+            }
+
+            return View();
+        }
+
 
     }
 }
