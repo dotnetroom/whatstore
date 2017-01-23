@@ -9,7 +9,7 @@
     <form asp-controller="product" asp-action="information" method="post">
         @foreach (var product in Model.Products)
         {
-            <a href="@Url.Action($"edit", "product", new { id = product.Id})">
+            <a href="@Url.Action($"edit/", "product", new { id = product.Id})">
 
                 <div class="product-display-content">
 

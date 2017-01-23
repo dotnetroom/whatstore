@@ -8,7 +8,7 @@
 
     <h3>Cadastro de Produtos</h3>
 
-    <form asp-action="edit" asp-controller="product" method="post" enctype="multipart/form-data">
+    <form  asp-controller="product" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label>Código do produto</label>
             <input type="text" name="id" class="form-control" asp-for="Id" value="@Model.Id" required readonly="readonly" />
@@ -98,14 +98,9 @@
 
 
 
-<button type="submit" style="height: 40px" class="btn btn-primary margin-bottom-20 float-right">Salvar</button>
-
+<button asp-action="edit" type="submit" name="salvar" style="height: 40px" class="btn btn-primary margin-bottom-20 float-right">Salvar</button>
+<button type="submit" name="excluir" style="height: 40px" class="btn btn-primary margin-right-20 float-right">Excluir</button>
 <hr />
-
-
-
-
-
     </form>
 </div>
 

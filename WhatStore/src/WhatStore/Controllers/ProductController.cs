@@ -97,8 +97,7 @@ namespace WhatStore.Controllers
                 {
                     Id = dataProduct.Id,
                     Description = dataProduct.Description,
-                    IsFreeShip = dataProduct.IsFreeShipping,
-                    Tags = dataProduct.,
+                    IsFreeShip = dataProduct.IsFreeShipping,                    
                     Length = (dataProduct.Length != null) ? Double.Parse(dataProduct.Length) : 0,
                     ProductName = dataProduct.Name,
                     Price = dataProduct.Price,
@@ -128,7 +127,7 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return View();
+            return RedirectToAction("EditProductSave");
         }
 
 
