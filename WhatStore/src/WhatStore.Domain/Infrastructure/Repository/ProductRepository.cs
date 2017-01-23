@@ -47,10 +47,10 @@ namespace WhatStore.Domain.Infrastructure.Repository
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
-                var result = await db.QueryAsync<Product>("SELECT * FROM dbo.Product WHERE dbo.Product.Id = @ProductID",
+                var result = await db.QueryAsync<Product>("SELECT * FROM dbo.Product, dbo.TagProduct, dbo.Tag WHERE dbo.Product.Id = dbo.TagProduct.ProductId AND dbo.TagProduct.TagId = dbo.Tag.TagId AND dbo.Product.Id= @ProductID ",
                     new
                     {
-                    ProductID= productID
+                    ProductID= productID,
                     });
                 return result.FirstOrDefault();
             }

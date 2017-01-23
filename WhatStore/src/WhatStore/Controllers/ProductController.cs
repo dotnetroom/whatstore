@@ -98,6 +98,7 @@ namespace WhatStore.Controllers
                     Id = dataProduct.Id,
                     Description = dataProduct.Description,
                     IsFreeShip = dataProduct.IsFreeShipping,
+                    Tags = dataProduct.,
                     Length = (dataProduct.Length != null) ? Double.Parse(dataProduct.Length) : 0,
                     ProductName = dataProduct.Name,
                     Price = dataProduct.Price,
