@@ -65,19 +65,13 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 await db.OpenAsync();
                 try
                 {
-                    var productUpdateQuery = "UPDATE dbo.Product SET Description = @Description, Name = @Name, Price = @Price" +
-                        " IsFreeShipping = @IsFreeShipping, Length = @Length, Weigth = @Weigth, Widith = @Widith WHERE Id = @Id";
+                    var productUpdateQuery = "UPDATE dbo.Product SET Description = @Description";
 
                     var resultProductUpdate = await db.ExecuteAsync(productUpdateQuery,
                                                                     new
                                                                     {
-                                                                        Description = description,
-                                                                        IsFreeShipping = isFreeShip,
-                                                                        Length = length,
-                                                                        Name = productName,
-                                                                        Price = price,
-                                                                        Weigth = weigth,
-                                                                        Widith = widith
+                                                                        Description = description
+                                                                        
                                                                     });
                     return true;
                 }
