@@ -35,9 +35,12 @@ namespace WhatStore
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Configuration["ConnectionString"]));
+            {
+                options.UseSqlServer(Configuration["ConnectionString"], option => option.MigrationsAssembly("WhatStore"));
+            });
 
-            services.AddIdentity<ApplicationUser, IdentityRole<long>>(options => {
+            services.AddIdentity<ApplicationUser, IdentityRole<long>>(options =>
+            {
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 3;
                 options.Password.RequireLowercase = false;

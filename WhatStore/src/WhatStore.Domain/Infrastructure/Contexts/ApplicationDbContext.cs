@@ -17,7 +17,7 @@ namespace WhatStore.Domain.Infrastructure.Contexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<TagProduct>(x =>
+            builder.Entity<TagProducts>(x =>
             {
                 x.HasKey(y => new { y.ProductId, y.TagId });
             });
@@ -30,7 +30,7 @@ namespace WhatStore.Domain.Infrastructure.Contexts
         public DbSet<ProductSize> ProductSize { get; set; }
         public DbSet<Size> Size { get; set; }
         public DbSet<Tag> Tag { get; set; }
-        public DbSet<TagProduct> TagProduct { get; set; }
+        public DbSet<TagProducts> TagProduct { get; set; }
         public DbSet<Adress> Adress { get; set; }
         public DbSet<City> City { get; set; }
         public DbSet<Country> Country { get; set; }

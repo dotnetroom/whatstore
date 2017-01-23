@@ -98,14 +98,14 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 await db.OpenAsync();
                 try
                 {
-                    var idStore = await db.QueryAsync<long>("SELECT StoreID FROM dbo.AspNetUsers");
+                    if (storeId == 0) return false;
 
-                    if (idStore == null) return false;
+                    string[] arrayTag = tags.Split(',');
 
                     var codigo = id.Replace(" ", "");
 
-                    var productInsert = "INSERT INTO dbo.\"Product\" (\"Id\",\"Name\", \"Description\", \"Price\", \"StoreId\", \"IsFreeShipping\") "
-                                   + "VALUES (@ID, @NAME, @DESCRIPTION, @PRICE, @STOREID, @ISFREESHIPPING)";
+                    var productInsert = "INSERT INTO dbo.Product (Id, Name, Description, Price, StoreId, IsFreeShipping, Length, Weigth, Widith) "
+                                   + "VALUES (@ID, @NAME, @DESCRIPTION, @PRICE, @STOREID, @ISFREESHIPPING, @Length, @Weigth, @Widith)";
 
                     var product = await db.ExecuteAsync(productInsert,
                         new
@@ -114,60 +114,55 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             Name = productName,
                             Description = description,
                             Price = price,
-                            StoreId = idStore,
-                            IsFreeShipping = isFreeShip
+                            StoreId = storeId,
+                            IsFreeShipping = isFreeShip,
+                            Length = (isFreeShip != false) ? length : 0,
+                            Weigth = (isFreeShip != false) ? weigth : 0,
+                            Widith = (isFreeShip != false) ? widtih : 0
                         });
 
-                    // if (hasVariety == true)
-                    //{
 
-                    //  var x = await db.ExecuteAsync(productInsert,
-                    //    new
-                    //  {
-                    //    HasVariety = hasVariety,
-                    //  Colors = colors,
-                    //  Size = size
-                    // }, trans);
-                    //    }
-
-                    if (isFreeShip == true)
+                    for (int i = 0; i < arrayTag.Length; i++)
                     {
-
-
-                        var shippingUpdate = "UPDATE dbo.Product SET Length = @Length, Widith = @Widith, Weigth = @Weigth WHERE Id =@ID";
-
-                        var ship = await db.ExecuteAsync(shippingUpdate,
+                        var tagSelect = await db.QueryAsync<long>("SELECT dbo.Tag.TagId FROM dbo.Tag WHERE dbo.Tag.TagName = @TagName",
                             new
                             {
-
-                                Id = codigo,
-                                Weigth = weigth,
-                                Widith = widtih,
-                                Length = length
+                                TagName = arrayTag[i]
                             });
+                        var resultTagSelect = tagSelect.FirstOrDefault();
+
+                        if (resultTagSelect < 1)
+                        {
+                            var tagInsertQuery = "INSERT INTO dbo.Tag (TagName) VALUES (@TagName); SELECT SCOPE_IDENTITY();";
+                            var tagInsert = await db.QueryAsync<long>(tagInsertQuery,
+                                                                    new
+                                                                    {
+                                                                        TagName = arrayTag[i]
+                                                                    });
+                            resultTagSelect = tagInsert.FirstOrDefault();
+
+
+                        }
+
+                        var tagProductInsert = "INSERT INTO dbo.TagProduct (ProductId, TagId) VALUES (@ProductId, @TagId)";
+                        var tagProduct = await db.ExecuteAsync(tagProductInsert,
+                            new
+                            {
+                                ProductId = id,
+                                TagId = resultTagSelect
+                            });
+
+
+
                     }
 
-                    var tagProductInsert = "INSERT INTO dbo.TagProduct (ProductId) VALUES (@ProductId)";
-                    var tagProduct = await db.ExecuteAsync(tagProductInsert,
-                        new
-                        {
-                            ProductId = id
-                        });
 
-                    var tagIdSelect = "SELECT TagId FROM TagProduct";
+                            
 
-                    var tagsInsert = "INSERT INTO dbo.\"Tag\" (\"TagId\", \"TagName\") VALUES (@tagIdSelect, @TagName)";
 
-                    var tag = await db.ExecuteAsync(tagsInsert,
-                        new
-                        {
-                            TagId = tagIdSelect,
-                            TagName = tags
-                        });
+                            return true;
 
-                    return true;
-
-                }
+                        }
                 catch (Exception ex)
                 {
                     return false;
