@@ -64,7 +64,10 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 await db.OpenAsync();
                 try
-                {
+                {                    
+
+                    string[] arrayTag = tags.Split(',');
+
                     var productUpdateQuery = "UPDATE dbo.Product SET Description = @Description, IsFreeShipping = @IsFreeShipping, " +
                         "Length = @Length, Name = @Name, Price = @Price, Weigth = @Weigth, Widith = @Widith WHERE id = @Id";
 
@@ -80,6 +83,38 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                         Weigth = (isFreeShip != false) ? weigth : 0,
                                                                         Widith = (isFreeShip != false) ? widith : 0,
                                                                     });
+
+                    for (int i = 0; i < arrayTag.Length; i++)
+                    {
+                        var tagSelect = await db.QueryAsync<long>("SELECT dbo.Tag.TagId FROM dbo.Tag WHERE dbo.Tag.TagName = @TagName",
+                            new
+                            {
+                                TagName = arrayTag[i]
+                            });
+                        var resultTagSelect = tagSelect.FirstOrDefault();
+
+                        if (resultTagSelect < 1)
+                        {
+                            var tagInsertQuery = "INSERT INTO dbo.Tag (TagName) VALUES (@TagName); SELECT SCOPE_IDENTITY();";
+                            var tagInsert = await db.QueryAsync<long>(tagInsertQuery,
+                                                                    new
+                                                                    {
+                                                                        TagName = arrayTag[i]
+                                                                    });
+                            resultTagSelect = tagInsert.FirstOrDefault();
+
+
+                        }
+
+                        var tagProductInsert = "INSERT INTO dbo.TagProduct (ProductId, TagId) VALUES (@ProductId, @TagId)";
+                        var tagProduct = await db.ExecuteAsync(tagProductInsert,
+                            new
+                            {
+                                ProductId = id,
+                                TagId = resultTagSelect
+                            });
+                    }
+
                     return true;
                 }
                 catch (Exception ex)
@@ -88,6 +123,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 }
             }
         }
+
 
         public async Task<List<string>> GetTag(string productId)
         {

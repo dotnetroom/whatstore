@@ -133,7 +133,7 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return RedirectToAction("EditProductSave");
+            return RedirectToAction("Product",model);
         }
 
 
