@@ -136,6 +136,22 @@ namespace WhatStore.Controllers
             return RedirectToAction("Product",model);
         }
 
+        [HttpPost("delete")]
+        public async Task<IActionResult>DeleteProduct(long ID)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if(await _productRepository.DeleteProduct(ID))
+            {
+
+            }
+
+            return RedirectToAction("Product");
+        }
+
 
     }
 }

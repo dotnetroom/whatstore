@@ -84,7 +84,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                         Widith = (isFreeShip != false) ? widith : 0,
                                                                     });
 
-                    for (int i = 0; i < arrayTag.Length; i++)
+                    for (int i = 0; i <= arrayTag.Length; i++)
                     {
                         var tagSelect = await db.QueryAsync<long>("SELECT dbo.Tag.TagId FROM dbo.Tag WHERE dbo.Tag.TagName = @TagName",
                             new
@@ -141,7 +141,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                               });
                     var resultTagIdSelect = tagIdSelect.ToList();
 
-                    for (int i = 0; i < resultTagIdSelect.Count; i++)
+                    for (int i = 0; i <= resultTagIdSelect.Count; i++)
                     {
                         var tagNameSelect = await db.QueryAsync<string>("SELECT dbo.Tag.TagName FROM dbo.Tag WHERE dbo.Tag.TagId = @TagId",
                                                                         new
@@ -233,6 +233,27 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 {
                     return false;
                 }
+            }
+        }
+
+        public async Task<bool> DeleteProduct(long ID)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var result = await db.ExecuteAsync("DELETE FROM dbo.Product WHERE dbo.Product.Id = @ID",
+                        new
+                        {
+                            ID = ID
+                        });
+                    return true;
+
+                }
+            }
+            catch(Exception ex)
+            {
+                return false;
             }
         }
     }
