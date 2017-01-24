@@ -91,13 +91,13 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         public async Task<List<string>> GetTag(string productId)
         {
-            List<string> tagName = new List<string>();
+            List<string> tagName = new List<string>(); ;
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 await db.OpenAsync();
                 try
                 {
-                    
+                  
                     var tagIdSelect = await db.QueryAsync<long>("SELECT dbo.TagProduct.TagId FROM dbo.TagProduct WHERE dbo.TagProduct.ProductId = @ProductId",
                                                               new
                                                               {
@@ -113,7 +113,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                             TagId = resultTagIdSelect[i]
                                                                         });
                         var resultTagNameSelect = tagNameSelect.FirstOrDefault();
-                        tagName[i] = resultTagNameSelect;
+                        tagName.Add(resultTagNameSelect);
                     }
                 }
                 catch(Exception ex)
