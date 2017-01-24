@@ -106,7 +106,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                         }
 
-                        var tagProductInsert = "INSERT INTO dbo.TagProduct (ProductId, TagId) VALUES (@ProductId, @TagId)";
+                        var tagProductInsert = "UPDATE dbo.TagProduct SET ProductId = @ProductId, TagId = @TagId WHERE ProductId = @id";
                         var tagProduct = await db.ExecuteAsync(tagProductInsert,
                             new
                             {
