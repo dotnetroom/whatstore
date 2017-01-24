@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -93,6 +94,10 @@ namespace WhatStore.Controllers
             {
                 var dataProduct = await _productRepository.GetProduct(id);
 
+                var dataTag = await _productRepository.GetTag(dataProduct.Id);
+
+                string resultDataTag = string.Join(",", dataTag);
+
                 var viewModel = new RegisterProductViewModel()
                 {
                     Id = dataProduct.Id,
@@ -102,7 +107,8 @@ namespace WhatStore.Controllers
                     ProductName = dataProduct.Name,
                     Price = dataProduct.Price,
                     Weigth = (dataProduct.Weigth != null) ? Double.Parse(dataProduct.Weigth) : 0,
-                    Widith = (dataProduct.Widith != null) ? Double.Parse(dataProduct.Widith) : 0
+                    Widith = (dataProduct.Widith != null) ? Double.Parse(dataProduct.Widith) : 0,
+                    Tags = resultDataTag
                 };
                 return View(viewModel);
             }

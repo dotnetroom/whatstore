@@ -89,6 +89,42 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
+        public async Task<List<string>> GetTag(string productId)
+        {
+            List<string> tagName = new List<string>();
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                await db.OpenAsync();
+                try
+                {
+                    
+                    var tagIdSelect = await db.QueryAsync<long>("SELECT dbo.TagProduct.TagId FROM dbo.TagProduct WHERE dbo.TagProduct.ProductId = @ProductId",
+                                                              new
+                                                              {
+                                                                  ProductId = productId
+                                                              });
+                    var resultTagIdSelect = tagIdSelect.ToList();
+
+                    for (int i = 0; i < resultTagIdSelect.Count; i++)
+                    {
+                        var tagNameSelect = await db.QueryAsync<string>("SELECT dbo.Tag.TagName FROM dbo.Tag WHERE dbo.Tag.TagId = @TagId",
+                                                                        new
+                                                                        {
+                                                                            TagId = resultTagIdSelect[i]
+                                                                        });
+                        var resultTagNameSelect = tagNameSelect.FirstOrDefault();
+                        tagName[i] = resultTagNameSelect;
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+            }
+            return tagName;
+        }
+
+
         public async Task<bool> InsertProduct(long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
                                               bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weigth,
                                               double widtih, string tags, string id)
@@ -151,18 +187,12 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                 ProductId = id,
                                 TagId = resultTagSelect
                             });
-
-
-
                     }
 
 
-                            
+                    return true;
 
-
-                            return true;
-
-                        }
+                }
                 catch (Exception ex)
                 {
                     return false;

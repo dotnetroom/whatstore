@@ -19,6 +19,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
                                  string tags, string id);
         Task<List<Product>> GetProducts(long storeID);
         Task<Product> GetProduct(string productId);
+        Task<List<string>> GetTag(string productId);
 
     }
 }
