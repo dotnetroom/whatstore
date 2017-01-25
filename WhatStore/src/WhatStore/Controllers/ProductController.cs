@@ -104,11 +104,11 @@ namespace WhatStore.Controllers
                     Id = dataProduct.Id,
                     Description = dataProduct.Description,
                     IsFreeShip = dataProduct.IsFreeShipping,                    
-                    Length = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Length) : 10,
+                    Length = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Length) : 0,
                     ProductName = dataProduct.Name,
                     Price = dataProduct.Price,
-                    Weigth = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Weigth) : 10,
-                    Widith = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Widith) : 10,
+                    Weigth = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Weigth) : 0,
+                    Widith = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Widith) : 0,
                     Tags = resultDataTag
                 };
                 return View(viewModel);
