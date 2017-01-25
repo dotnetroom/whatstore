@@ -83,7 +83,10 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                         Weigth = (isFreeShip != false) ? weigth : 0,
                                                                         Widith = (isFreeShip != false) ? widith : 0,
                                                                     });
-
+                    for (int i = 0; i < arrayTag.Length; i++)
+                    { 
+                        var deleteTag = await db.ExecuteAsync("DELETE FROM dbo.TagProduct WHERE dbo.TagProduct.ProductId = @id");
+                    }
                     for (int i = 0; i < arrayTag.Length; i++)
                     {
                         var tagSelect = await db.QueryAsync<long>("SELECT dbo.Tag.TagId FROM dbo.Tag WHERE dbo.Tag.TagName = @TagName",
