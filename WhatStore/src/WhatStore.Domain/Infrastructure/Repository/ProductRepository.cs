@@ -84,7 +84,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                         Widith = (isFreeShip != false) ? widith : 0,
                                                                     });
 
-                    for (int i = 0; i <= arrayTag.Length; i++)
+                    for (int i = 0; i < arrayTag.Length; i++)
                     {
                         var tagSelect = await db.QueryAsync<long>("SELECT dbo.Tag.TagId FROM dbo.Tag WHERE dbo.Tag.TagName = @TagName",
                             new
@@ -106,7 +106,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                         }
 
-                        var tagProductInsert = "UPDATE dbo.TagProduct SET ProductId = @ProductId, TagId = @TagId WHERE ProductId = @id";
+                        var tagProductInsert = "INSERT INTO dbo.TagProduct (ProductId, TagId) VALUES (@ProductId, @TagId)";
                         var tagProduct = await db.ExecuteAsync(tagProductInsert,
                             new
                             {
@@ -141,7 +141,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                               });
                     var resultTagIdSelect = tagIdSelect.ToList();
 
-                    for (int i = 0; i <= resultTagIdSelect.Count; i++)
+                    for (int i = 0; i < resultTagIdSelect.Count; i++)
                     {
                         var tagNameSelect = await db.QueryAsync<string>("SELECT dbo.Tag.TagName FROM dbo.Tag WHERE dbo.Tag.TagId = @TagId",
                                                                         new
