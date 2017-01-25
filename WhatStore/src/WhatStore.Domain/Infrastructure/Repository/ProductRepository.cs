@@ -85,7 +85,11 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                     });
                     for (int i = 0; i < arrayTag.Length; i++)
                     { 
-                        var deleteTag = await db.ExecuteAsync("DELETE FROM dbo.TagProduct WHERE dbo.TagProduct.ProductId = @id");
+                        var deleteTag = await db.ExecuteAsync("DELETE FROM dbo.TagProduct WHERE dbo.TagProduct.ProductId = @id", 
+                            new
+                            {
+                                id = id
+                            });
                     }
                     for (int i = 0; i < arrayTag.Length; i++)
                     {
@@ -239,7 +243,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<bool> DeleteProduct(long ID)
+        public async Task<bool> DeleteProduct(string id)
         {
             try
             {
@@ -248,7 +252,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     var result = await db.ExecuteAsync("DELETE FROM dbo.Product WHERE dbo.Product.Id = @ID",
                         new
                         {
-                            ID = ID
+                            ID = id
                         });
                     return true;
 

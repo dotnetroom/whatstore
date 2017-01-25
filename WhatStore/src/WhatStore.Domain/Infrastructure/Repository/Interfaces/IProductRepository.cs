@@ -20,7 +20,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<List<Product>> GetProducts(long storeID);
         Task<Product> GetProduct(string productId);
         Task<List<string>> GetTag(string productId);
-        Task<bool> DeleteProduct(long ID);
+        Task<bool> DeleteProduct(string id);
 
     }
 }

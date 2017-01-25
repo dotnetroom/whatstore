@@ -137,14 +137,14 @@ namespace WhatStore.Controllers
         }
 
         [HttpPost("delete")]
-        public async Task<IActionResult>DeleteProduct(long ID)
+        public async Task<IActionResult>DeleteProduct(string id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            if(await _productRepository.DeleteProduct(ID))
+            if(await _productRepository.DeleteProduct(id))
             {
 
             }
