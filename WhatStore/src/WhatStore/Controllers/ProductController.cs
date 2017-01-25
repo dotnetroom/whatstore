@@ -6,6 +6,7 @@ using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using WhatStore.Domain.Infrastructure.Models.Identity;
+using System.Globalization;
 
 namespace WhatStore.Controllers
 {
@@ -103,11 +104,11 @@ namespace WhatStore.Controllers
                     Id = dataProduct.Id,
                     Description = dataProduct.Description,
                     IsFreeShip = dataProduct.IsFreeShipping,                    
-                    Length = (dataProduct.Length != null) ? Double.Parse(dataProduct.Length) : 0,
+                    Length = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Length) : 10,
                     ProductName = dataProduct.Name,
                     Price = dataProduct.Price,
-                    Weigth = (dataProduct.Weigth != null) ? Double.Parse(dataProduct.Weigth) : 0,
-                    Widith = (dataProduct.Widith != null) ? Double.Parse(dataProduct.Widith) : 0,
+                    Weigth = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Weigth) : 10,
+                    Widith = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Widith) : 10,
                     Tags = resultDataTag
                 };
                 return View(viewModel);
