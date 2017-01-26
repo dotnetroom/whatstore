@@ -8,6 +8,8 @@ using WhatStore.Domain.Infrastructure.Models.Identity;
 using WhatStore.Domain.Infrastructure.Models.Localization;
 using WhatStore.Domain.Infrastructure.Models.Product;
 using WhatStore.Domain.Infrastructure.Models.Store;
+using WhatStore.Domain.Infrastructure.Models.Financial;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WhatStore.Domain.Infrastructure.Contexts
 {
@@ -20,6 +22,10 @@ namespace WhatStore.Domain.Infrastructure.Contexts
             builder.Entity<TagProducts>(x =>
             {
                 x.HasKey(y => new { y.ProductId, y.TagId });
+            });
+            builder.Entity<StoreFinancial>(x =>
+            {
+                x.HasOne(y => y.Store).WithMany().HasForeignKey("StoreId").OnDelete(DeleteBehavior.Restrict);
             });
 
             base.OnModelCreating(builder);
@@ -38,5 +44,6 @@ namespace WhatStore.Domain.Infrastructure.Contexts
         public DbSet<State> State { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<StoreType> StoreType { get; set; }
+        public DbSet<StoreFinancial> StoreFinancial { get; set; }
     }
 }

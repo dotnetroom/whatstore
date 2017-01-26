@@ -120,6 +120,48 @@ namespace WhatStore.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("WhatStore.Domain.Infrastructure.Models.Financial.StoreFinancial", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("About");
+
+                    b.Property<long>("AdressId");
+
+                    b.Property<DateTime>("Birthday");
+
+                    b.Property<string>("CPF")
+                        .IsRequired();
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<bool>("Gender");
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<long>("PessoaJuridicaId");
+
+                    b.Property<string>("Phone")
+                        .IsRequired();
+
+                    b.Property<string>("Rg");
+
+                    b.Property<long>("StoreId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdressId");
+
+                    b.HasIndex("PessoaJuridicaId");
+
+                    b.HasIndex("StoreId");
+
+                    b.ToTable("StoreFinancial");
+                });
+
             modelBuilder.Entity("WhatStore.Domain.Infrastructure.Models.Identity.ApplicationUser", b =>
                 {
                     b.Property<long>("Id")
@@ -483,6 +525,23 @@ namespace WhatStore.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WhatStore.Domain.Infrastructure.Models.Financial.StoreFinancial", b =>
+                {
+                    b.HasOne("WhatStore.Domain.Infrastructure.Models.Localization.Adress", "Adress")
+                        .WithMany()
+                        .HasForeignKey("AdressId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("WhatStore.Domain.Infrastructure.Models.Store.PessoaJuridica", "PessoaJuridica")
+                        .WithMany()
+                        .HasForeignKey("PessoaJuridicaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("WhatStore.Domain.Infrastructure.Models.Store.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("StoreId");
                 });
 
             modelBuilder.Entity("WhatStore.Domain.Infrastructure.Models.Identity.ApplicationUser", b =>

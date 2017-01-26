@@ -31,15 +31,15 @@ namespace WhatStore.Domain.Infrastructure.Models.Financial
         public bool Gender { get; set; }
 
         [Required]
-        public string Phone { get; set; }
-
-        public long PessoaJuridicaId { get; set; }
+        public string Phone { get; set; }        
 
         [Required]
         public long AdressId { get; set; }
 
         [Required]
         public long StoreId { get; set; }
+
+        public long PessoaJuridicaId { get; set; }
 
         public virtual Adress Adress { get; set; }
         public virtual Store.Store Store { get; set; }
