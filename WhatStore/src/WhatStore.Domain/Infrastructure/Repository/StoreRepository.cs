@@ -31,7 +31,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 await db.OpenAsync();
                 try
                 {
-                    
+
                     if (storeID <= 0) return false;
 
                     var adressUpdate = string.Empty;
@@ -69,7 +69,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             var newAddress = new Adress()
                             {
                                 CEP = CEP,
-                                CityID  = city,
+                                CityID = city,
                                 Complement = complemento,
                                 Number = number,
                                 Street = address
@@ -84,7 +84,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     else
                     {
                         adressUpdate = "UPDATE dbo.Store SET AdressId = NULL WHERE Store.Id = @ID";
-                        var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID});
+                        var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID });
                     }
 
                     var queryUpdateStore = "UPDATE dbo.\"Store\" SET \"Description\" = @Description, \"Email\" = @Email, " +
@@ -100,7 +100,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                  Term = terms,
                                                                  URL = URL,
                                                              });
-                    
+
                     return true;
                 }
                 catch (Exception ex)
@@ -164,9 +164,9 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     var result = await db.ExecuteAsync("DELETE FROM dbo.StoreType WHERE dbo.StoreType.Id = @storeType", new { storeType = storeType });
 
-                        return true;
+                    return true;
                 }
-                
+
             }
 
             catch (Exception ex)
@@ -247,18 +247,95 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         PhoneNumber = subPhoneNumber,
                         Email = store.Email,
                         URL = store.URL,
-                        Terms = store.Term,                        
+                        Terms = store.Term,
                     };
 
-                    
+
                 }
                 catch (Exception ex)
                 {
                     return null;
                 }
             }
-        }       
+        }
+
+        public async Task<bool> InsertFinancial(string CEP, int cityId, string complement, string number, string street, long storeId, string about, 
+                                                DateTime birthday, string CPF, string firstName,string lastName, bool isPessoaJuridica, string phone, 
+                                                string Rg, bool gender, string CNPJ, string socialName, string stateIncentive, string municipalRegistration)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                await db.OpenAsync();
+
+                try
+                {
+                    long selectPessoaJuridicaId = 0;
+
+                    if (isPessoaJuridica)
+                    {
+                        var queryInsertPessoaJuridica = "INSERT INTO dbo.PessoaJuridica (CNPJ, InscricaoEstadual, InscricaoMunicipal, RazaoSocial) "
+                                                        + "VALUES (@CNPJ, @InscricaoEstadual, @InscricaoMunicipal, @RazaoSocial) SELECT SCOPE_IDENTITY()";
+
+                        var resultInsertPessoaJuridica = await db.QueryAsync<long>(queryInsertPessoaJuridica,
+                                                        new
+                                                        {
+                                                            CNPJ = CNPJ,
+                                                            IncricaoEstadual = stateIncentive,
+                                                            InscricaoMunicipal = municipalRegistration,
+                                                            RazaoSocial = socialName
+                                                        });
+
+                        selectPessoaJuridicaId = resultInsertPessoaJuridica.FirstOrDefault();
+              
+                    }
+
+                    var queryInsertAddress = "INSERT INTO dbo.Adress (CEP, CityID, Complement, Number, Street) "
+                                                   + "VALUES (@CEP, @CITYID, @COMPLEMENT, @NUMBER, @STREET) SELECT SCOPE_IDENTITY()";
+
+                    var newAddress = new Adress()
+                    {
+                        CEP = CEP,
+                        CityID = cityId,
+                        Complement = complement,
+                        Number = number,
+                        Street = street
+                    };
+
+                    var adressInstertedID = await db.QueryAsync<long>(queryInsertAddress, newAddress);
+
+                    var selectAdressId = adressInstertedID.FirstOrDefault();
+
+                    var queryInsertStoreFinancial = "INSERT INTO dbo.StoreFinancial(About, AdressId, Birthday, CPF, FirstName, Gender, LastName, PessoaJuridicaId, Phone, Rg, StoreId) " +
+                                                  "VALUES (@About, @AdressId, @Birthday, @CPF, @FirstName, @Gender, @LastName, @PessoaJuridicaId, @Phone, @Rg, @StoreId); SELECT SCOPE_IDENTITY();";
+
+                    var resultInsertStore = await db.ExecuteAsync(queryInsertStoreFinancial, new
+                    {
+                        About = about,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        CPF = CPF,
+                        Rg = Rg,
+                        Birthday = birthday,
+                        Gender = gender,
+                        PessoaJuridicaId = (isPessoaJuridica != false) ? selectPessoaJuridicaId : 0,
+                        AdressId = selectAdressId,
+                        Phone = phone,
+                        StoreId = storeId,
+                    });                                   
+
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+
+                    return false;
+                }
+            }
+        }
+
     }
 }
+
 
 

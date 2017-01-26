@@ -8,7 +8,7 @@ namespace WhatStore.Domain.Infrastructure
 {
     public class RegisterFinancialViewModel
     {
-        public string Responsible { get; set; }
+        public string AboutResponsible { get; set; }
 
         [Required(ErrorMessage = "The Name field is required.")]
         public string Name { get; set; }
@@ -29,6 +29,10 @@ namespace WhatStore.Domain.Infrastructure
 
         public string DDD { get; set; }
         public string Phone { get; set; }
+
+        [Required]
+        public bool IsPessoaJuridica { get; set; }
+
         public string CNPJ { get; set; }
         public string SocialName { get; set; }
         public string StateIncentive { get; set; }
@@ -50,5 +54,7 @@ namespace WhatStore.Domain.Infrastructure
         public string Number { get; set; }
 
         public string Complement { get; set; }
+
+        public string ReturnMessage { get; set; }
     }
 }
