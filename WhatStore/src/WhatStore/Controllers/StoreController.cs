@@ -161,5 +161,45 @@ namespace WhatStore.Controllers
             return RedirectToAction("Type");
         }
 
+        [HttpGet("financial")]
+        public async Task<IActionResult> Financial()
+        {
+            var states = await _localizationRepository.GetStates();
+
+            var model = new RegisterFinancialViewModel()
+            {
+                States = states
+            };
+
+            return View(model);
+        }
+
+        [HttpPost("financial/register")]
+        public async Task<IActionResult> RegisterFinancial(RegisterFinancialViewModel model)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var phone = model.DDD + model.Phone;
+
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            if (await _storeRepository.InsertFinancial(model.CEP, model.CityID, model.Complement, model.Number, model.Street, user.StoreId,
+                                             model.About, model.BirthDay, model.CPF, model.FirstName, model.LastName, model.IsPessoaJuridica,
+                                             phone, model.Rg, model.Gender, model.CNPJ, model.RazaoSocial, model.InscricaoEstadual, model.InscricaoMunicipal))
+            {
+                model.ReturnMessage = "Alterações salvas com sucesso";
+            }
+            else
+            {
+                model.ReturnMessage = "Erro ao salvar alterações";
+            }
+
+            return RedirectToAction("FinancialViewModel", model);
+        }
+
     }
 }
