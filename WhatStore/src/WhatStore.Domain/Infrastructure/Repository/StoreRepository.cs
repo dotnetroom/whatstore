@@ -259,8 +259,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<bool> InsertFinancial(string CEP, int cityId, string complement, string number, string street, long storeId, string about,
-                                                DateTime birthday, string CPF, string firstName, string lastName, bool isPessoaJuridica, string phone,
+        public async Task<bool> InsertFinancial(string CEP, int cityId, string complement, string number, string street, long storeId, string about, 
+                                                DateTime birthday, string CPF, string firstName,string lastName, bool isPessoaJuridica, string phone, 
                                                 string Rg, bool gender, string CNPJ, string razaoSocial, string inscricaoEstadual, string inscricaoMunicipal)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
@@ -286,7 +286,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                         });
 
                         selectPessoaJuridicaId = resultInsertPessoaJuridica.FirstOrDefault();
-
+              
                     }
 
                     var queryInsertAddress = "INSERT INTO dbo.Adress (CEP, CityID, Complement, Number, Street) "
@@ -321,7 +321,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         AdressId = selectAdressId,
                         Phone = phone,
                         StoreId = storeId,
-                    });
+                    });                                   
 
 
                     return true;
@@ -334,6 +334,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
+<<<<<<< HEAD
 
         //public async Task<RegisterFinancialViewModel> GetStoreFinancial(long storeID)
         //{
@@ -350,8 +351,10 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         }
 
+=======
+>>>>>>> parent of 3c31abc... Merge branch '1.0' of https://github.com/dotnetroom/whatstore into 1.0
     }
-
+}
 
 
 

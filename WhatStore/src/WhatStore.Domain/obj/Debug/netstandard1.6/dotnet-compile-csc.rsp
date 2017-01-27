@@ -114,6 +114,7 @@
 -r:"C:\Users\VALID04\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll"
 "C:\Users\VALID04\Documents\GitHub\whatstore\WhatStore\src\WhatStore.Domain\Infrastructure\Contexts\ApplicationDbContext.cs"
 "C:\Users\VALID04\Documents\GitHub\whatstore\WhatStore\src\WhatStore.Domain\Infrastructure\Contexts\CustomSettings.cs"
+"C:\Users\VALID04\Documents\GitHub\whatstore\WhatStore\src\WhatStore.Domain\Infrastructure\Models\Financial\StoreFinancial.cs"
 "C:\Users\VALID04\Documents\GitHub\whatstore\WhatStore\src\WhatStore.Domain\Infrastructure\Models\Identity\ApplicationUser.cs"
 "C:\Users\VALID04\Documents\GitHub\whatstore\WhatStore\src\WhatStore.Domain\Infrastructure\Models\Localization\Adress.cs"
 "C:\Users\VALID04\Documents\GitHub\whatstore\WhatStore\src\WhatStore.Domain\Infrastructure\Models\Localization\City.cs"
