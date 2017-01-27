@@ -14,12 +14,12 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<List<StoreType>> GetStoreType();
         Task<bool> DeleteStoreType(int storeType);
         Task<bool> RegisterStoreType(string type);
-        //Task<bool> RegisterStoreType(List<StoreType> types);
         Task<RegisterStoreDataViewModel> GetStore(long storeID);
         Task<long> RegisterStore(Store store);
         Task<bool> InsertFinancial(string CEP, int cityId, string complement, string number, string street, long storeId, string about, 
                                     DateTime birthday, string CPF, string firstName, string lastName, bool isPessoaJuridica, string phone, 
                                     string Rg, bool gender, string CNPJ, string socialName, string stateIncentive, string municipalRegistration);
+        //Task<RegisterFinancialViewModel> GetFinancial(long storeID);
     }
 
 }

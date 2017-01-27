@@ -335,17 +335,17 @@ namespace WhatStore.Domain.Infrastructure.Repository
         }
 
 
-        public async Task<RegisterFinancialViewModel> GetStoreFinancial(long storeID)
-        {
-            using (var db = new SqlConnection(_settings.ConnectionString))
-            {
-                try
-                {
+        //public async Task<RegisterFinancialViewModel> GetStoreFinancial(long storeID)
+        //{
+        //    using (var db = new SqlConnection(_settings.ConnectionString))
+        //    {
+        //        try
+        //        {
 
-                    var query
-                }
+        //            var query
+        //        }
             
-                }
+        //        }
         
 
         }
