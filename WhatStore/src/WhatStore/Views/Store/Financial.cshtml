@@ -1,5 +1,7 @@
 ﻿@model WhatStore.Domain.Infrastructure.ViewModels.Admin.RegisterFinancialViewModel
 
+
+
 @{
     Layout = "_Admin";
 }
@@ -8,7 +10,7 @@
 <div class="admin-settings-content">
     <h3>Dados financeiros</h3>
 
-    <form class="form-group margin-top-20" asp-controller="store" asp-action="financial/register" method="post">
+    <form class="form-group margin-top-20" asp-controller="admin" asp-action="financial" method="post">
    
 
         <div class="form-group">
@@ -18,7 +20,7 @@
         <div class="form-group">
             <div class="float-left">
                 <label>Nome: </label>
-                <input class="form-control" style="width:300px" required name="FirstName" value="@Model.FirstName"/>
+                <input class="form-control" style="width:300px" required name="Name" value="@Model.FirstName"/>
             </div>
 
             <div class="float-right">
@@ -88,20 +90,20 @@
 
                 <div class="float-right">
                     <label>Razão social: </label>
-                    <input class="form-control" style="width:800px;" name="RazaoSocial" value="@Model.RazaoSocial"/>
+                    <input class="form-control" style="width:800px;" name="SocialName" value="@Model.RazaoSocial]"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="float-left">
                     <label>Incrição estadual: </label>
-                    <input class="form-control" style="width: 600px;" name="InscricaoEstadual" value="@Model.InscricaoEstadual"/>
+                    <input class="form-control" style="width: 600px;" name="StateIncentive" value="@Model.InscricaoEstadual"/>
                 </div>
 
 
                 <div class="float-right">
                     <label>Inscrição municipal: </label>
-                    <input class="form-control" style="width: 600px;" name="InscricaoMunicipal" value="@Model.InscricaoMunicipal"/>
+                    <input class="form-control" style="width: 600px;" name="MunicipalRegistration" value="@Model.InscricaoMunicipal"/>
                 </div>
             </div>
         </div>
@@ -128,7 +130,7 @@
 
             <div class="float-right">
                 <label>Cidade: </label>
-                <select id="dropCities" class="form-control" style="width: 200px;" disabled="disabled" name="CityID" value="@Model.CityID">
+                <select id="dropCities" class="form-control" style="width: 200px;" disabled="disabled" name="City" value="@Model.CityID">
                     <option value="-1">Selecione uma cidade</option>
                 </select>
             </div>
@@ -139,7 +141,7 @@
 
                 <div class="float-left" style="width:400px;">
                     <label>Endereço: </label>
-                    <input class="form-control " required name="Street" value="@Model.Street"/>
+                    <input class="form-control " required name="Address" value="@Model.Street"/>
                 </div>
 
                 <div class="float-right margin-left-10">
