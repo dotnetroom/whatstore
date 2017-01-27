@@ -58,9 +58,9 @@ namespace WhatStore.Controllers
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            if (await _store.InsertFinancial(model.CEP, model.City, model.Complement, model.Number, model.Address, user.StoreId,
-                                             model.AboutResponsible, model.BirthDay, model.CPF, model.Name, model.LastName, model.IsPessoaJuridica,
-                                             phone, model.RG, model.Gender, model.CNPJ, model.SocialName, model.StateIncentive, model.MunicipalRegistration))
+            if (await _store.InsertFinancial(model.CEP, model.CityID, model.Complement, model.Number, model.Street, user.StoreId,
+                                             model.About, model.BirthDay, model.CPF, model.FirstName, model.LastName, model.IsPessoaJuridica,
+                                             phone, model.Rg, model.Gender, model.CNPJ, model.RazaoSocial, model.InscricaoEstadual, model.InscricaoMunicipal))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             } 
