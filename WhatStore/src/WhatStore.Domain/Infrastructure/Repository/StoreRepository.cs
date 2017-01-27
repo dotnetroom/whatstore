@@ -334,7 +334,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-<<<<<<< HEAD
+
 
         //public async Task<RegisterFinancialViewModel> GetStoreFinancial(long storeID)
         //{
@@ -351,10 +351,6 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         }
 
-=======
->>>>>>> parent of 3c31abc... Merge branch '1.0' of https://github.com/dotnetroom/whatstore into 1.0
-    }
-}
 
 
 
