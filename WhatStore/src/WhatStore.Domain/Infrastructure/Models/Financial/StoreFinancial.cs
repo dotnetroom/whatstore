@@ -14,6 +14,7 @@ namespace WhatStore.Domain.Infrastructure.Models.Financial
         public long Id { get; set; }
 
         public string About { get; set; }
+
         [Required]
         public string FirstName { get; set; }
 
@@ -23,8 +24,10 @@ namespace WhatStore.Domain.Infrastructure.Models.Financial
         [Required]
         public string CPF { get; set; }
 
+        [Required]
         public string Rg { get; set; }
 
+        [Required]
         public DateTime Birthday { get; set; }
 
         [Required]

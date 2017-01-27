@@ -15,7 +15,7 @@
 
         <div class="form-group">
             <label>Sobre o responsavel: </label>
-            <textarea class="form-control" rows="10" style="resize: none;" name="Responsable" value="@Model.AboutResponsible"> </textarea>
+            <textarea class="form-control" rows="10" style="resize: none;" name="About" value="@Model.AboutResponsible"> </textarea>
         </div>
         <div class="form-group">
             <div class="float-left">
@@ -167,13 +167,9 @@
 @section Scripts{
     <script type="text/javascript">
         $("#checkPessoaJuridica").on("change", function () {
-
             if ($(this).is(":checked")) {
-
                 $("#PJ").css("display", "block");
-            }
-
-            else {
+            }else {
                 $("#PJ").css("display", "none")
 
             }

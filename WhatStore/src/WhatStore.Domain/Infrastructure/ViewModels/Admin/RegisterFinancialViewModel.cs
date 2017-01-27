@@ -9,10 +9,10 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 {
     public class RegisterFinancialViewModel
     {
-        public string AboutResponsible { get; set; }
+        public string About { get; set; }
 
         [Required(ErrorMessage = "The Name field is required.")]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
         [Required(ErrorMessage = "The Last Name field is required.")]
         public string LastName { get; set; }
@@ -20,7 +20,7 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
         [Required(ErrorMessage = "The CPF field is required.")]
         public string CPF { get; set; }
 
-        public string RG { get; set; }
+        public string Rg { get; set; }
 
         [Required(ErrorMessage = "The Birth Day field is required.")]
         public DateTime BirthDay { get; set; }
@@ -35,9 +35,9 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
         public bool IsPessoaJuridica { get; set; }
 
         public string CNPJ { get; set; }
-        public string SocialName { get; set; }
-        public string StateIncentive { get; set; }
-        public string MunicipalRegistration { get; set; }
+        public string RazaoSocial { get; set; }
+        public string InscricaoEstadual { get; set; }
+        public string InscricaoMunicipal { get; set; }
 
         [Required(ErrorMessage = "The CEP field is required.")]
         public string CEP { get; set; }
@@ -46,10 +46,10 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
         public int State { get; set; }
 
         [Required(ErrorMessage = "The City field is required.")]
-        public int City { get; set; }
+        public int CityID { get; set; }
 
         [Required(ErrorMessage = "The Adress field is required.")]
-        public string Address { get; set; }
+        public string Street { get; set; }
 
         [Required(ErrorMessage = "The Adress Number field is required.")]
         public string Number { get; set; }
