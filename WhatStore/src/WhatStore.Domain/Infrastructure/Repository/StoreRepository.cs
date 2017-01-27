@@ -261,7 +261,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         public async Task<bool> InsertFinancial(string CEP, int cityId, string complement, string number, string street, long storeId, string about, 
                                                 DateTime birthday, string CPF, string firstName,string lastName, bool isPessoaJuridica, string phone, 
-                                                string Rg, bool gender, string CNPJ, string socialName, string stateIncentive, string municipalRegistration)
+                                                string Rg, bool gender, string CNPJ, string razaoSocial, string inscricaoEstadual, string inscricaoMunicipal)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
@@ -280,9 +280,9 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                         new
                                                         {
                                                             CNPJ = CNPJ,
-                                                            IncricaoEstadual = stateIncentive,
-                                                            InscricaoMunicipal = municipalRegistration,
-                                                            RazaoSocial = socialName
+                                                            InscricaoEstadual = inscricaoEstadual,
+                                                            InscricaoMunicipal = inscricaoMunicipal,
+                                                            RazaoSocial = razaoSocial
                                                         });
 
                         selectPessoaJuridicaId = resultInsertPessoaJuridica.FirstOrDefault();
