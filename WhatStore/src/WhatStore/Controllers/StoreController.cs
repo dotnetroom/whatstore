@@ -198,7 +198,7 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return RedirectToAction("FinancialViewModel", model);
+            return RedirectToAction("RegisterFinancialViewModel", model);
         }
 
     }
