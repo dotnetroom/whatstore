@@ -37,7 +37,7 @@ namespace WhatStore.Controllers
         {
             var states = await _localization.GetStates();
 
-            var viewModel = new FinancialViewModel()
+            var viewModel = new RegisterFinancialViewModel()
             {
                 States = states
             };
@@ -54,19 +54,22 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
+            var phone = model.DDD + model.Phone;
+
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            if (await _store.InsertFinancial(model.CEP, model.City, model.Complement, model.Number, model.  )
+            if (await _store.InsertFinancial(model.CEP, model.City, model.Complement, model.Number, model.Address, user.StoreId,
+                                             model.AboutResponsible, model.BirthDay, model.CPF, model.Name, model.LastName, model.IsPessoaJuridica,
+                                             phone, model.RG, model.Gender, model.CNPJ, model.SocialName, model.StateIncentive, model.MunicipalRegistration))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
-            }
+            } 
             else
-            {
-                ModelState.AddModelError("Id", "Código já existente");
+            {  
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return RedirectToAction("RegisterProduct", model);
+            return RedirectToAction("FinancialViewModel", model);
         }
         
             

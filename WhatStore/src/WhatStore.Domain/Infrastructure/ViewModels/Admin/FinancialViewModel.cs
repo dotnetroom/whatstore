@@ -8,6 +8,6 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 {
     public class FinancialViewModel
     {
-        public List<State> States { get; set; }
+        
     }
 }

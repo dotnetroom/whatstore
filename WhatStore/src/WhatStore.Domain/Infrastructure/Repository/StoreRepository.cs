@@ -271,10 +271,10 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 {
                     long selectPessoaJuridicaId = 0;
 
-                    if (isPessoaJuridica)
+                    if (isPessoaJuridica == true)
                     {
                         var queryInsertPessoaJuridica = "INSERT INTO dbo.PessoaJuridica (CNPJ, InscricaoEstadual, InscricaoMunicipal, RazaoSocial) "
-                                                        + "VALUES (@CNPJ, @InscricaoEstadual, @InscricaoMunicipal, @RazaoSocial) SELECT SCOPE_IDENTITY()";
+                                                        + "VALUES (@CNPJ, @InscricaoEstadual, @InscricaoMunicipal, @RazaoSocial); SELECT SCOPE_IDENTITY()";
 
                         var resultInsertPessoaJuridica = await db.QueryAsync<long>(queryInsertPessoaJuridica,
                                                         new
@@ -290,7 +290,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     }
 
                     var queryInsertAddress = "INSERT INTO dbo.Adress (CEP, CityID, Complement, Number, Street) "
-                                                   + "VALUES (@CEP, @CITYID, @COMPLEMENT, @NUMBER, @STREET) SELECT SCOPE_IDENTITY()";
+                                                   + "VALUES (@CEP, @CITYID, @COMPLEMENT, @NUMBER, @STREET); SELECT SCOPE_IDENTITY()";
 
                     var newAddress = new Adress()
                     {
@@ -317,7 +317,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         Rg = Rg,
                         Birthday = birthday,
                         Gender = gender,
-                        PessoaJuridicaId = (isPessoaJuridica != false) ? selectPessoaJuridicaId : 0,
+                        PessoaJuridicaId = selectPessoaJuridicaId,
                         AdressId = selectAdressId,
                         Phone = phone,
                         StoreId = storeId,

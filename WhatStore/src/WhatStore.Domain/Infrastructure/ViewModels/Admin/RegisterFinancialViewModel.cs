@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WhatStore.Domain.Infrastructure.Models.Localization;
 
-namespace WhatStore.Domain.Infrastructure
+namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 {
     public class RegisterFinancialViewModel
     {
@@ -56,5 +57,7 @@ namespace WhatStore.Domain.Infrastructure
         public string Complement { get; set; }
 
         public string ReturnMessage { get; set; }
+
+        public List<State> States { get; set; }
     }
 }

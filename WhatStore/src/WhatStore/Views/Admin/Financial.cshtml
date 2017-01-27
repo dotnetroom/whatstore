@@ -1,4 +1,6 @@
-﻿@model WhatStore.Domain.Infrastructure.ViewModels.Admin.FinancialViewModel
+﻿@model WhatStore.Domain.Infrastructure.ViewModels.Admin.RegisterFinancialViewModel
+
+
 
 @{
     Layout = "_Admin";
@@ -8,46 +10,46 @@
 <div class="admin-settings-content">
     <h3>Dados financeiros</h3>
 
-    <form class="form-group margin-top-20" asp-controller="financial" asp-action="register" method="post">
+    <form class="form-group margin-top-20" asp-controller="admin" asp-action="financial" method="post">
    
 
         <div class="form-group">
             <label>Sobre o responsavel: </label>
-            <textarea class="form-control" rows="10" style="resize: none;" name="Responsable"> </textarea>
+            <textarea class="form-control" rows="10" style="resize: none;" name="Responsable" value="@Model.AboutResponsible"> </textarea>
         </div>
         <div class="form-group">
             <div class="float-left">
                 <label>Nome: </label>
-                <input class="form-control" style="width:300px" required name="Name"/>
+                <input class="form-control" style="width:300px" required name="Name" value="@Model.Name"/>
             </div>
 
             <div class="float-right">
                 <label> Sobrenome: </label>
-                <input class="form-control" style="width:300px" required  name="LastName"/>
+                <input class="form-control" style="width:300px" required  name="LastName" value="@Model.LastName"/>
             </div>
         </div>
 
         <div class="form-group">
             <div class="float-left">
                 <label>CPF: </label>
-                <input type="text" class="form-control" style="width:300px" required name="CPF"/>
+                <input type="text" class="form-control" style="width:300px" required name="CPF" value="@Model.CPF"/>
             </div>
 
             <div class="float-right">
                 <label>RG: </label>
-                <input type="text" class="form-control" style="width:300px" name="RG" />
+                <input type="text" class="form-control" style="width:300px" name="RG" value="@Model.RG"/>
             </div>
         </div>
 
         <div class="form-group">
             <div class="float-left">
                 <label>Data Nascimento: </label>
-                <input type="date" class="form-control" style="width: 160px" required name="BirthDay"/>
+                <input type="date" class="form-control" style="width: 160px" required name="BirthDay" value="@Model.BirthDay"/>
             </div>
 
             <div class="float-left margin-left-40">
                 <label>Genero: </label>
-                <select class="form-control" style="width:150px;" name="Gender">
+                <select class="form-control" style="width:150px;" name="Gender" value="@Model.Gender">
                     <option value="-1">Selecione</option>
                     <option value="false">Masculino</option>
                     <option value="true">Feminino</option>
@@ -57,12 +59,12 @@
             <div class="float-right">
                 <div class="float-left margin-right-10">
                     <label>DDD: </label>
-                    <input type="text" class="form-control" style="width:50px" maxlength="2" required name="DDD"/>
+                    <input type="text" class="form-control" style="width:50px" maxlength="2" required name="DDD" value="@Model.DDD"/>
                 </div>
 
                 <div class="float-left">
                     <label>Telefone: </label>
-                    <input type="text" class="form-control" style="width:150px" required name="Phone"/>
+                    <input type="text" class="form-control" style="width:150px" required name="Phone" value="@Model.Phone"/>
                 </div>
             </div>
         </div>
@@ -70,7 +72,7 @@
         <div class="form-group">
             <h4>Pessoa Juridica?</h4>
             <div class="onoffswitch margin-right-10">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="checkPessoaJuridica">
+                <input type="checkbox" checked="@((Model.IsPessoaJuridica) ? true : false)" name="onoffswitch" class="onoffswitch-checkbox" id="checkPessoaJuridica" asp-for="IsPessoaJuridica" >
                 <label class="onoffswitch-label" for="checkPessoaJuridica">
                     <span class="onoffswitch-inner"></span>
                     <span class="onoffswitch-switch"></span>
@@ -78,30 +80,30 @@
             </div>
         </div>
 
-        <div id="PJ" class="form-group" style="display: none;">
+        <div id="PJ" class="form-group" style="display: @((Model.IsPessoaJuridica) ? "block" : "none");">
 
             <div class="form-group">
                 <div class="float-left">
                     <label>CNPJ: </label>
-                    <input class="form-control" style="width:200px;" name="CNPJ"/>
+                    <input class="form-control" style="width:200px;" name="CNPJ" value="@Model.CNPJ"/>
                 </div>
 
                 <div class="float-right">
                     <label>Razão social: </label>
-                    <input class="form-control" style="width:800px;" name="SocialName"/>
+                    <input class="form-control" style="width:800px;" name="SocialName" value="@Model.SocialName"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="float-left">
                     <label>Incrição estadual: </label>
-                    <input class="form-control" style="width: 600px;" name="StateIncentive"/>
+                    <input class="form-control" style="width: 600px;" name="StateIncentive" value="@Model.StateIncentive"/>
                 </div>
 
 
                 <div class="float-right">
                     <label>Inscrição municipal: </label>
-                    <input class="form-control" style="width: 600px;" name="MunicipalRegistration"/>
+                    <input class="form-control" style="width: 600px;" name="MunicipalRegistration" value="@Model.MunicipalRegistration"/>
                 </div>
             </div>
         </div>
@@ -111,7 +113,7 @@
             <h4>Endereço: </h4>
             <div class="float-left">
                 <label>CEP: </label>
-                <input class="form-control" style="width: 100px;" required name="CEP"/>
+                <input class="form-control" style="width: 100px;" required name="CEP" value="@Model.CEP"/>
             </div>
 
             <div class="float-left margin-left-50">
@@ -128,8 +130,8 @@
 
             <div class="float-right">
                 <label>Cidade: </label>
-                <select id="dropCities" class="form-control" style="width: 200px;" disabled="disabled" name="City">
-                    <option value="-1">Selecione um estado</option>
+                <select id="dropCities" class="form-control" style="width: 200px;" disabled="disabled" name="City" value="@Model.City">
+                    <option value="-1">Selecione uma cidade</option>
                 </select>
             </div>
 
@@ -139,19 +141,19 @@
 
                 <div class="float-left" style="width:400px;">
                     <label>Endereço: </label>
-                    <input class="form-control " required name="Address"/>
+                    <input class="form-control " required name="Address" value="@Model.Address"/>
                 </div>
 
                 <div class="float-right margin-left-10">
                     <label>Número: </label>
-                    <input class="form-control " style="width: 150px;" required name="Number"/>
+                    <input class="form-control " style="width: 150px;" required name="Number" value="@Model.Number"/>
                 </div>
 
         </div>
 
         <div class="form-group">
             <label>Complemento:*</label>
-            <input class="form-control" name="Complement"/>
+            <input class="form-control" name="Complement" value="@Model.Complement"/>
         </div>
 
         <div class="form-group">
