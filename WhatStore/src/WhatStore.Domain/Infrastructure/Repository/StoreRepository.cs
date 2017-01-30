@@ -272,7 +272,45 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                 try
                 {
-                                        
+
+                    var queryVerificacao = await db.QueryAsync<long>("SELECT dbo.StoreFinancial.StoreId FROM dbo.StoreFinancial WHERE StoreId = @StoreId",
+                        new
+                        {
+                            StoreId = storeId
+                        });
+
+                    var verificacao = queryVerificacao.FirstOrDefault();
+
+                    if (verificacao == storeId)
+                    {
+
+
+                        var selectAdress = await db.QueryAsync<long>("SELECT dbo.StoreFinancial.AdressId FROM dbo.StoreFinancial WHERE StoreId = @StoreId",
+                             new
+                             {
+                                 StoreId = storeId
+                             });
+                        var adress = selectAdress.FirstOrDefault();
+
+                        var deleteAdress = await db.ExecuteAsync("DELETE FROM dbo.Adress WHERE dbo.Adress.Id = @AdressId",
+                            new
+                            {
+                                AdressId = adress
+                            });
+
+                        var deleteFinancial = await db.ExecuteAsync("DELETE FROM dbo.StoreFinancial WHERE dbo.StoreFinancial.StoreId = @storeId",
+                            new
+                            {
+                                storeId = storeId
+                            });
+
+
+
+                    }
+
+
+
+
                     var queryInsertAddress = "INSERT INTO dbo.Adress (CEP, CityID, Complement, Number, Street) "
                                                    + "VALUES (@CEP, @CITYID, @COMPLEMENT, @NUMBER, @STREET); SELECT SCOPE_IDENTITY()";
 
@@ -303,7 +341,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         Gender = gender,
                         AdressId = selectAdressId,
                         Phone = phone,
-                        StoreId = storeId                        
+                        StoreId = storeId
                     });
 
 
@@ -331,7 +369,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             StoreId = storeId
                         });
 
-                       
+
 
 
                     }
