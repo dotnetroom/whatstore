@@ -22,14 +22,14 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 
         public string Rg { get; set; }
 
-        [Required(ErrorMessage = "The Birth Day field is required.")]
+        [Required(ErrorMessage = "The BirthDay field is required.")]
         public DateTime BirthDay { get; set; }
 
         [Required(ErrorMessage = "The Gender field is required.")]
         public bool Gender { get; set; }
 
-        public string DDD { get; set; }
-        public string Phone { get; set; }
+        public string PhoneDDD { get; set; }
+        public string PhoneNumber { get; set; }
 
         [Required]
         public bool IsPessoaJuridica { get; set; }
@@ -47,6 +47,8 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 
         [Required(ErrorMessage = "The City field is required.")]
         public int CityID { get; set; }
+        
+        public string CityName { get; set; }
 
         [Required(ErrorMessage = "The Adress field is required.")]
         public string Street { get; set; }
@@ -59,5 +61,13 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
         public string ReturnMessage { get; set; }
 
         public List<State> States { get; set; }
+
+        public long AdressId { get; set; }
+
+        public long StoreId { get; set; }
+
+        public long PessoaJuridicaId { get; set; }
+
+        public int StateID { get; set; }
     }
 }

@@ -164,10 +164,38 @@ namespace WhatStore.Controllers
         [HttpGet("financial")]
         public async Task<IActionResult> Financial()
         {
+            
             var states = await _localizationRepository.GetStates();
+
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            var dataFinancial = await _storeRepository.GetFinancial(user.StoreId);
+
+
 
             var model = new RegisterFinancialViewModel()
             {
+                About = dataFinancial.About,
+                BirthDay = dataFinancial.BirthDay,
+                CEP = dataFinancial.CEP,
+                Complement = dataFinancial.Complement,
+                FirstName = dataFinancial.FirstName,
+                Street = dataFinancial.Street,
+                Gender = dataFinancial.Gender,
+                CPF = dataFinancial.CPF,
+                PhoneDDD = dataFinancial.PhoneDDD,
+                PhoneNumber = dataFinancial.PhoneNumber,
+                Number = dataFinancial.Number,
+                LastName = dataFinancial.LastName,
+                IsPessoaJuridica = (dataFinancial.PessoaJuridicaId > 0) ? true : false,
+                CityID = dataFinancial.CityID,
+                CityName = dataFinancial.CityName,
+                State = dataFinancial.StateID,
+                CNPJ = dataFinancial.CNPJ,
+                InscricaoEstadual = dataFinancial.InscricaoEstadual,
+                InscricaoMunicipal = dataFinancial.InscricaoMunicipal,
+                RazaoSocial = dataFinancial.RazaoSocial,               
+                Rg = dataFinancial.Rg,
                 States = states
             };
 
@@ -183,7 +211,7 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            var phone = model.DDD + model.Phone;
+            var phone = model.PhoneDDD + model.PhoneNumber;
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
