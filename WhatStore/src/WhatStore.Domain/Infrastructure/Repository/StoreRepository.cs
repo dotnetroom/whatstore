@@ -444,65 +444,6 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 }
             }
         }
-
-                   
-
-
-
-
-
-
-
-
-        //            var queryFinancialStore = "SELECT dbo.StoreFinancial.Phone, dbo.StoreFinancial.PessoaJuridicaId FROM dbo.StoreFinancial WHERE dbo.StoreFinancial.StoreId = @STOREID";
-        //            var financialStorePhone = await db.QueryAsync<StoreFinancial>(queryFinancialStore, new { STOREID = storeID });
-        //            var resultFinancialStorePhone = financialStorePhone.FirstOrDefault();
-
-
-
-        //            if (resultFinancialStorePhone.Phone != null && resultFinancialStorePhone.Phone.Length > 0)
-        //            {
-        //                subDDD = resultFinancialStorePhone.Phone.Substring(0, 2);
-        //                subPhone = resultFinancialStorePhone.Phone.Substring(2);
-        //            }
-
-        //            var querySelectFinancial = "SELECT * FROM dbo.StoreFinancial, dbo.Adress, dbo.City, dbo.State WHERE dbo.StoreFinancial.StoreId = @STOREID AND dbo.Adress.Id = dbo.StoreFinancial.AdressId AND dbo.City.Id = dbo.Adress.CityID AND dbo.State.Id = dbo.City.StateId";
-
-        //            var StoreFinancialReturnData = await db.QueryAsync<RegisterFinancialViewModel>(querySelectFinancial, new { STOREID = storeID });
-        //            var resultSelectStoreFinancial = StoreFinancialReturnData.FirstOrDefault();
-
-        //            resultSelectStoreFinancial.PhoneDDD = subDDD;
-        //            resultSelectStoreFinancial.PhoneNumber = subPhone;
-
-        //            if (resultFinancialStorePhone.PessoaJuridicaId > 0 && resultFinancialStorePhone.PessoaJuridicaId != null)
-        //            {
-        //                var queryPJ = "SELECT * FROM dbo.PessoaJuridica WHERE dbo.PessoaJuridica.Id = @ID";
-        //                var pessoaJuridica = await db.QueryAsync<PessoaJuridica>(queryPJ, new { ID = resultFinancialStorePhone.PessoaJuridicaId });
-        //                var resultPessoaJuridica = pessoaJuridica.FirstOrDefault();
-        //                resultSelectStoreFinancial.CNPJ = resultPessoaJuridica.CNPJ;
-        //                resultSelectStoreFinancial.InscricaoEstadual = resultPessoaJuridica.InscricaoEstadual;
-        //                resultSelectStoreFinancial.InscricaoMunicipal = resultPessoaJuridica.InscricaoMunicipal;
-        //                resultSelectStoreFinancial.RazaoSocial = resultPessoaJuridica.RazaoSocial;
-
-        //            }
-
-
-        //            return resultSelectStoreFinancial;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            return new RegisterFinancialViewModel();
-
-        //        }
-
-
-        //    }
-
-
-
-        //}
-
-
     }
 }
 
