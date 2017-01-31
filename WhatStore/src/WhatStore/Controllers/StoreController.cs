@@ -55,8 +55,8 @@ namespace WhatStore.Controllers
                     State = dataStore.State,
                     City = dataStore.City,
                     CityName = dataStore.CityName,
-                    HasAdress = (dataStore.State > 0) ? true : false  
-                    
+                    HasAdress = (dataStore.State > 0) ? true : false
+
                 };
 
                 return View(viewModel);
@@ -86,7 +86,7 @@ namespace WhatStore.Controllers
                                                     model.Email, model.URL, model.Terms, model.HasAdress, model.Address,
                                                     model.Number, model.CEP, model.Complemento, model.City))
             {
-                    model.ReturnMessage = "Alterações salvas com sucesso";
+                model.ReturnMessage = "Alterações salvas com sucesso";
             }
             else
             {
@@ -149,13 +149,13 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            if(await _storeRepository.DeleteStoreType(typeID))
+            if (await _storeRepository.DeleteStoreType(typeID))
             {
-                
+
             }
             else
             {
-                
+
             }
 
             return RedirectToAction("Type");
@@ -173,47 +173,58 @@ namespace WhatStore.Controllers
             var subDDD = string.Empty;
             var subPhoneNumber = string.Empty;
 
+
+
             var states = await _localizationRepository.GetStates();
+
+            var model = new RegisterFinancialViewModel()
+            {
+                States = states
+            };
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             var dataFinancial = await _storeRepository.GetFinancial(user.StoreId);
 
-            if(dataFinancial.Phone != null)
+            if (dataFinancial != null && dataFinancial.Phone != null)
             {
                 subDDD = dataFinancial.Phone.Substring(0, 2);
                 subPhoneNumber = dataFinancial.Phone.Substring(2);
+
+                var dataAdress = await _storeRepository.GetAdress(dataFinancial.AdressId);
+
+                var dataPessoaJuridica = await _storeRepository.GetPessoaJuridica(dataFinancial.PessoaJuridicaId);
+
+                model = new RegisterFinancialViewModel()
+                {
+                    About = dataFinancial.About,
+                    BirthDay = dataFinancial.Birthday,
+                    FirstName = dataFinancial.FirstName,
+                    Gender = dataFinancial.Gender,
+                    LastName = dataFinancial.LastName,
+                    IsPessoaJuridica = (dataFinancial.PessoaJuridicaId > 0) ? true : false,
+                    PhoneDDD = subDDD,
+                    PhoneNumber = subPhoneNumber,
+                    Rg = dataFinancial.Rg,
+                    CEP = dataAdress.CEP,
+                    Complement = dataAdress.Complemento,
+                    Number = dataAdress.Number,
+                    Street = dataAdress.Address,
+                    CityID = dataAdress.City,
+                    CityName = dataAdress.CityName,
+                    State = dataAdress.State,
+                    CPF = dataFinancial.CPF,
+                    CNPJ = (dataFinancial.PessoaJuridicaId > 0) ? dataPessoaJuridica.CNPJ : null,
+                    InscricaoEstadual = (dataFinancial.PessoaJuridicaId > 0) ? dataPessoaJuridica.InscricaoEstadual : null,
+                    InscricaoMunicipal = (dataFinancial.PessoaJuridicaId > 0) ? dataPessoaJuridica.InscricaoMunicipal : null,
+                    RazaoSocial = (dataFinancial.PessoaJuridicaId > 0) ? dataPessoaJuridica.RazaoSocial : null,
+                };
             }
 
-            var dataAdress = await _storeRepository.GetAdress(dataFinancial.AdressId);
 
-            var dataPessoaJuridica = await _storeRepository.GetPessoaJuridica(dataFinancial.PessoaJuridicaId);
 
-            var model = new RegisterFinancialViewModel()
-            {
-                About = dataFinancial.About,
-                BirthDay = dataFinancial.Birthday,                
-                FirstName = dataFinancial.FirstName,
-                Gender = dataFinancial.Gender,
-                LastName = dataFinancial.LastName,
-                IsPessoaJuridica = (dataFinancial.PessoaJuridicaId > 0) ? true : false,
-                PhoneDDD = subDDD,
-                PhoneNumber = subPhoneNumber,
-                Rg = dataFinancial.Rg,
-                CEP = dataAdress.CEP,
-                Complement = dataAdress.Complemento,
-                Number = dataAdress.Number,
-                Street = dataAdress.Address,
-                CityID = dataAdress.City,
-                CityName = dataAdress.CityName,
-                State = dataAdress.State,
-                CPF = dataFinancial.CPF,
-                CNPJ = (dataFinancial.PessoaJuridicaId > 0) ? dataPessoaJuridica.CNPJ : null,
-                InscricaoEstadual = (dataFinancial.PessoaJuridicaId > 0) ? dataPessoaJuridica.InscricaoEstadual : null,
-                InscricaoMunicipal = (dataFinancial.PessoaJuridicaId > 0) ? dataPessoaJuridica.InscricaoMunicipal : null,
-                RazaoSocial = (dataFinancial.PessoaJuridicaId > 0) ? dataPessoaJuridica.RazaoSocial : null,
-                States = states
-            };
+
+
 
             return View(model);
         }
@@ -242,7 +253,7 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return RedirectToAction("Information");
-        }      
+            return RedirectToAction("Financial");
+        }
     }
 }
