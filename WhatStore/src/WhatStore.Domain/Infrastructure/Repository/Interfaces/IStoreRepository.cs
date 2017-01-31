@@ -17,12 +17,18 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<bool> RegisterStoreType(string type);
         Task<RegisterStoreDataViewModel> GetStore(long storeID);
         Task<long> RegisterStore(Store store);
-        Task<bool> InsertFinancial(string CEP, int cityId, string complement, string number, string street, long storeId, string about, 
-                                    DateTime birthday, string CPF, string firstName, string lastName, bool isPessoaJuridica, string phone, 
+        Task<bool> InsertFinancial(string CEP, int cityId, string complement, string number, string street, long storeId, string about,
+                                    DateTime birthday, string CPF, string firstName, string lastName, bool isPessoaJuridica, string phone,
                                     string Rg, bool gender, string CNPJ, string socialName, string stateIncentive, string municipalRegistration);
         Task<StoreFinancial> GetFinancial(long storeID);
         Task<RegisterStoreDataViewModel> GetAdress(long adressId);
         Task<PessoaJuridica> GetPessoaJuridica(long pessoaJuridicaId);
+        Task<bool> InsertStoreFinancial(long storeId, long adressId, string about, DateTime birthday, string cpf, string firstName, string lastName, bool gender, string phone, string rg);
+        Task<long> InsertPessoaJuridica(string CNPJ, string inscricaoEstadual, string inscricaoMunicipal, string razaoSocial);
+        Task<bool> UpdateStoreFinancial(long storeFinancialId, string about, DateTime birthday, string cpf, string firstName, string lastName, bool gender, string phone, string rg);
+        Task<bool> InsertPessoaJuridica(string CNPJ, string inscricaoEstadual, string inscricaoMunicipal, string razaoSocial, long storeFinancialId);
+        Task<bool> UpdatePessoaJuridica(long pessoaJuridicaId, string CNPJ, string inscricaoEstadual, string inscricaoMunicipal, string razaoSocial);
+        Task<long> InsertAdress(string CEP, int cityId, string complement, string number, string street);
+        Task<bool> UpdateAdress(long adressId, string CEP, int cityId, string complement, string number, string street);
     }
-
 }

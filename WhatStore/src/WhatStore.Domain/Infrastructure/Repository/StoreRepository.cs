@@ -275,107 +275,38 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 try
                 {
 
-                    var queryVerificacao = await db.QueryAsync<long>("SELECT dbo.StoreFinancial.StoreId FROM dbo.StoreFinancial WHERE StoreId = @StoreId",
-                        new
-                        {
-                            StoreId = storeId
-                        });
+                    var getFinancial = await GetFinancial(storeId);
 
-                    var verificacao = queryVerificacao.FirstOrDefault();
-
-                    if (verificacao == storeId)
+                    if (getFinancial != null)
                     {
+                        var updateAdress = await UpdateAdress(getFinancial.AdressId, CEP, cityId, complement, number, street);
 
+                        if (getFinancial.PessoaJuridicaId > 0)
+                        {
 
-                        var selectAdress = await db.QueryAsync<long>("SELECT dbo.StoreFinancial.AdressId FROM dbo.StoreFinancial WHERE StoreId = @StoreId",
-                             new
-                             {
-                                 StoreId = storeId
-                             });
-                        var adress = selectAdress.FirstOrDefault();
+                            var updatePesoaJuridica = await UpdatePessoaJuridica(getFinancial.PessoaJuridicaId, CNPJ, inscricaoEstadual, inscricaoMunicipal, razaoSocial);
 
-                        var deleteAdress = await db.ExecuteAsync("DELETE FROM dbo.Adress WHERE dbo.Adress.Id = @AdressId",
-                            new
-                            {
-                                AdressId = adress
-                            });
+                        }
+                        else
+                        {
+                            var insertPessoaJuridica = await InsertPessoaJuridica(CNPJ, inscricaoEstadual, inscricaoMunicipal, razaoSocial, getFinancial.Id);
+                        }
 
-                        var deleteFinancial = await db.ExecuteAsync("DELETE FROM dbo.StoreFinancial WHERE dbo.StoreFinancial.StoreId = @storeId",
-                            new
-                            {
-                                storeId = storeId
-                            });
-
-
+                        var updateStoreFinancial = await UpdateStoreFinancial(getFinancial.Id, about, birthday, CPF, firstName, lastName, gender, phone, Rg);
 
                     }
-
-
-
-
-                    var queryInsertAddress = "INSERT INTO dbo.Adress (CEP, CityID, Complement, Number, Street) "
-                                                   + "VALUES (@CEP, @CITYID, @COMPLEMENT, @NUMBER, @STREET); SELECT SCOPE_IDENTITY()";
-
-                    var newAddress = new Adress()
+                    else
                     {
-                        CEP = CEP,
-                        CityID = cityId,
-                        Complement = complement,
-                        Number = number,
-                        Street = street
-                    };
+                        var insertAdress = await InsertAdress(CEP, cityId, complement, number, street);
 
-                    var adressInstertedID = await db.QueryAsync<long>(queryInsertAddress, newAddress);
-
-                    var selectAdressId = adressInstertedID.FirstOrDefault();
-
-                    var queryInsertStoreFinancial = "INSERT INTO dbo.StoreFinancial(About, AdressId, Birthday, CPF, FirstName, Gender, LastName, Phone, Rg, StoreId) " +
-                                                  "VALUES (@About, @AdressId, @Birthday, @CPF, @FirstName, @Gender, @LastName, @Phone, @Rg, @StoreId); SELECT SCOPE_IDENTITY();";
-
-                    var resultInsertStore = await db.ExecuteAsync(queryInsertStoreFinancial, new
-                    {
-                        About = about,
-                        FirstName = firstName,
-                        LastName = lastName,
-                        CPF = CPF,
-                        Rg = Rg,
-                        Birthday = birthday,
-                        Gender = gender,
-                        AdressId = selectAdressId,
-                        Phone = phone,
-                        StoreId = storeId
-                    });
-
-
-                    if (isPessoaJuridica == true)
-                    {
-                        var queryInsertPessoaJuridica = "INSERT INTO dbo.PessoaJuridica (CNPJ, InscricaoEstadual, InscricaoMunicipal, RazaoSocial) "
-                                                        + "VALUES (@CNPJ, @InscricaoEstadual, @InscricaoMunicipal, @RazaoSocial); SELECT SCOPE_IDENTITY()";
-
-                        var resultInsertPessoaJuridica = await db.QueryAsync<long>(queryInsertPessoaJuridica,
-                                                        new
-                                                        {
-                                                            CNPJ = CNPJ,
-                                                            InscricaoEstadual = inscricaoEstadual,
-                                                            InscricaoMunicipal = inscricaoMunicipal,
-                                                            RazaoSocial = razaoSocial
-                                                        });
-
-                        var selectPessoaJuridicaId = resultInsertPessoaJuridica.FirstOrDefault();
-
-                        var queryUpdateStoreFinancial = "UPDATE dbo.StoreFinancial SET  dbo.StoreFinancial.PessoaJuridicaId = @PessoaJuridicaId WHERE dbo.StoreFinancial.StoreId = @StoreId";
-
-                        var result = await db.ExecuteAsync(queryUpdateStoreFinancial, new
+                        if (isPessoaJuridica == true)
                         {
-                            PessoaJuridicaId = selectPessoaJuridicaId,
-                            StoreId = storeId
-                        });
+                            var insertPessoaJuridica = await InsertPessoaJuridica(CNPJ, inscricaoEstadual, inscricaoMunicipal, razaoSocial);
+                        }
 
-
-
+                        var insertStoreFinancial = await InsertStoreFinancial(storeId, insertAdress, about, birthday, CPF, firstName, lastName, gender, phone, Rg);
 
                     }
-
 
                     return true;
                 }
@@ -388,17 +319,17 @@ namespace WhatStore.Domain.Infrastructure.Repository
         }
 
 
-
         public async Task<RegisterStoreDataViewModel> GetAdress(long adressId)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 try
-                { 
+                {
                     var query = "SELECT dbo.City.Name AS CityName, dbo.State.Id AS State, dbo.City.Id AS City, dbo.State.Name, dbo.Adress.Street as Address, dbo.Adress.Number, dbo.Adress.Complement as Complemento, dbo.Adress.CEP FROM dbo.Adress, dbo.State, dbo.City WHERE dbo.Adress.Id = @adressId AND Adress.CityID = City.Id AND City.StateId = State.Id";
                     var queryReturnData = await db.QueryAsync<RegisterStoreDataViewModel>(query, new { adressId = adressId });
                     return queryReturnData.FirstOrDefault();
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     return new RegisterStoreDataViewModel();
                 }
@@ -416,12 +347,12 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     string subDDD = string.Empty;
                     string subPhone = string.Empty;
 
-                    var queryStoreFinancial = "SELECT * FROM dbo.StoreFinancial WHERE dbo.StoreFinancial.StoreId = @ID";
-                    var resultStoreFinancial = await db.QueryAsync<StoreFinancial>(queryStoreFinancial, new { ID = storeID });
+                    var resultStoreFinancial = await db.QueryAsync<StoreFinancial>("SELECT * FROM dbo.StoreFinancial WHERE dbo.StoreFinancial.StoreId = @ID", new { ID = storeID });
                     return resultStoreFinancial.FirstOrDefault();
-                    
-                    
-                } catch (Exception ex)
+
+
+                }
+                catch (Exception ex)
                 {
                     return new StoreFinancial();
 
@@ -438,11 +369,218 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     var queryPJ = "SELECT * FROM dbo.PessoaJuridica WHERE dbo.PessoaJuridica.Id = @ID";
                     var resultPJ = await db.QueryAsync<PessoaJuridica>(queryPJ, new { ID = pessoaJuridicaId });
                     return resultPJ.FirstOrDefault();
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     return new PessoaJuridica();
                 }
             }
+        }
+
+        public async Task<bool> UpdateAdress(long adressId, string CEP, int cityId, string complement, string number, string street)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var updateAdress = await db.ExecuteAsync("UPDATE dbo.Adress SET CEP = @Cep, CityID = @CityID, Complement = @Complement, Number = @ Number, Street = @Street WHERE dbo.Adress.Id = @AdressId",
+                           new
+                           {
+                               AdressId = adressId,
+                               CEP = CEP,
+                               CityID = cityId,
+                               Complemento = complement,
+                               Number = number,
+                               Street = street
+                           });
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public async Task<long> InsertAdress(string CEP, int cityId, string complement, string number, string street)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var insertAdress = await db.QueryAsync<long>("INSERT INTO dbo.Adress (CEP, CityID, Complement, Number, Street) SET CEP = @Cep, CityID = @CityID, Complement = @Complement, Number = @ Number, Street = @Street; SELECT SCOPE_IDENTITY();",
+                                                                new
+                                                                {
+                                                                    Cep = CEP,
+                                                                    CityID = cityId,
+                                                                    Complement = complement,
+                                                                    Number = number,
+                                                                    Street = street
+                                                                });
+
+                    return insertAdress.FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    return 0;
+                }
+            }
+        }
+
+
+        public async Task<bool> UpdatePessoaJuridica(long pessoaJuridicaId, string CNPJ, string inscricaoEstadual, string inscricaoMunicipal, string razaoSocial)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var updatePessoaJuridica = await db.ExecuteAsync("UPDATE dbo.PessoaJuridica SET CNPJ = @CNPJ, InscricaoEstadual = @InscricaoEstadual, InscricaoMunicipal = @InscricaoMunicipal, RazaoSocial = @RazaoSocial  WHERE dbo.PessoaJuridica.Id = @PessoaJuridicaId",
+                                                                     new
+                                                                     {
+                                                                         PessoaJuridicaId = pessoaJuridicaId,
+                                                                         CNPJ = CNPJ,
+                                                                         InscricaoEstadual = inscricaoEstadual,
+                                                                         InscricaoMunicipal = inscricaoMunicipal,
+                                                                         RazaoSocial = razaoSocial
+                                                                     });
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public async Task<bool> InsertPessoaJuridica(string CNPJ, string inscricaoEstadual, string inscricaoMunicipal, string razaoSocial, long storeFinancialId)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var queryInsertPessoaJuridica = "INSERT INTO dbo.PessoaJuridica (CNPJ, InscricaoEstadual, InscricaoMunicipal, RazaoSocial) "
+                                                            + "VALUES (@CNPJ, @InscricaoEstadual, @InscricaoMunicipal, @RazaoSocial); SELECT SCOPE_IDENTITY()";
+
+                    var resultInsertPessoaJuridica = await db.QueryAsync<long>(queryInsertPessoaJuridica,
+                                                    new
+                                                    {
+                                                        CNPJ = CNPJ,
+                                                        InscricaoEstadual = inscricaoEstadual,
+                                                        InscricaoMunicipal = inscricaoMunicipal,
+                                                        RazaoSocial = razaoSocial
+                                                    });
+
+                    var selectPessoaJuridicaId = resultInsertPessoaJuridica.FirstOrDefault();
+
+                    var queryUpdateStoreFinancial = "UPDATE dbo.StoreFinancial SET dbo.StoreFinancial.PessoaJuridicaId = @PessoaJuridicaId WHERE dbo.StoreFinancial.Id = @ID";
+
+                    var result = await db.ExecuteAsync(queryUpdateStoreFinancial, new
+                    {
+                        PessoaJuridicaId = selectPessoaJuridicaId,
+                        StoreId = storeFinancialId
+                    });
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public async Task<bool> UpdateStoreFinancial(long storeFinancialId, string about, DateTime birthday, string cpf, string firstName, string lastName, bool gender, string phone, string rg)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var updatePessoaJuridica = await db.ExecuteAsync("UPDATE dbo.StoreFinancial SET About = @About, Birthday = @Birthday, CPF = @CPF, FirstName = @FirstName, Gender = @Gender, LastName = @LastName, Phone = @Phone, Rg = Rg WHERE dbo.StoreFinancial.Id = @ID",
+                                                                    new
+                                                                    {
+                                                                        ID = storeFinancialId,
+                                                                        About = about,
+                                                                        Birthday = birthday,
+                                                                        CPF = cpf,
+                                                                        FirstName = firstName,
+                                                                        Gender = gender,
+                                                                        LastName = lastName,
+                                                                        Phone = phone,
+                                                                        Rg = rg
+                                                                    });
+                    return true;
+
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public async Task<long> InsertPessoaJuridica(string CNPJ, string inscricaoEstadual, string inscricaoMunicipal, string razaoSocial)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var queryInsertPessoaJuridica = "INSERT INTO dbo.PessoaJuridica (CNPJ, InscricaoEstadual, InscricaoMunicipal, RazaoSocial) "
+                                                             + "VALUES (@CNPJ, @InscricaoEstadual, @InscricaoMunicipal, @RazaoSocial); SELECT SCOPE_IDENTITY()";
+
+                    var resultInsertPessoaJuridica = await db.QueryAsync<long>(queryInsertPessoaJuridica,
+                                                    new
+                                                    {
+                                                        CNPJ = CNPJ,
+                                                        InscricaoEstadual = inscricaoEstadual,
+                                                        InscricaoMunicipal = inscricaoMunicipal,
+                                                        RazaoSocial = razaoSocial
+                                                    });
+
+                    return resultInsertPessoaJuridica.FirstOrDefault();
+
+                }
+                catch (Exception ex)
+                {
+                    return 0;
+                }
+            }
+
+        }
+
+        public async Task<bool> InsertStoreFinancial(long storeId, long adressId, string about, DateTime birthday, string cpf, string firstName, string lastName, bool gender, string phone, string rg)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var queryInsertStoreFinancial = "INSERT INTO dbo.StoreFinancial(About, AdressId, Birthday, CPF, FirstName, Gender, LastName, Phone, Rg, StoreId) " +
+                                                     "VALUES (@About, @AdressId, @Birthday, @CPF, @FirstName, @Gender, @LastName, @Phone, @Rg, @StoreId); SELECT SCOPE_IDENTITY();";
+
+                    var resultInsertStore = await db.ExecuteAsync(queryInsertStoreFinancial, new
+                    {
+                        About = about,
+                        FirstName = firstName,
+                        LastName = lastName,
+                        CPF = cpf,
+                        Rg = rg,
+                        Birthday = birthday,
+                        Gender = gender,
+                        AdressId = adressId,
+                        Phone = phone,
+                        StoreId = storeId
+                    });
+
+
+                    return true;
+
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+
         }
     }
 }
