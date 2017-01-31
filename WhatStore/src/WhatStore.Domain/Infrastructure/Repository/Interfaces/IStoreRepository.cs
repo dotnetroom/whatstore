@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WhatStore.Domain.Infrastructure.Models.Financial;
 using WhatStore.Domain.Infrastructure.Models.Store;
 using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 
@@ -19,7 +20,9 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<bool> InsertFinancial(string CEP, int cityId, string complement, string number, string street, long storeId, string about, 
                                     DateTime birthday, string CPF, string firstName, string lastName, bool isPessoaJuridica, string phone, 
                                     string Rg, bool gender, string CNPJ, string socialName, string stateIncentive, string municipalRegistration);
-        Task<RegisterFinancialViewModel> GetFinancial(long storeID);
+        Task<StoreFinancial> GetFinancial(long storeID);
+        Task<RegisterStoreDataViewModel> GetAdress(long adressId);
+        Task<PessoaJuridica> GetPessoaJuridica(long pessoaJuridicaId);
     }
 
 }

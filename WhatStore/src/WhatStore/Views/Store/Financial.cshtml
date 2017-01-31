@@ -42,7 +42,7 @@
         <div class="form-group">
             <div class="float-left">
                 <label>Data Nascimento: </label>
-                <input type="date" class="form-control" style="width: 160px" required asp-for="BirthDay" value="@Model.BirthDay"/>
+                <input type="date" class="form-control" style="width: 160px" required asp-for="BirthDay" value="@Model.BirthDay.ToString("yyyy-MM-dd")"/>
             </div>
 
             <div class="float-left margin-left-40">

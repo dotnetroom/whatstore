@@ -156,6 +156,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 return null;
             }
         }
+
+
         public async Task<bool> DeleteStoreType(int storeType)
         {
             try
@@ -386,7 +388,26 @@ namespace WhatStore.Domain.Infrastructure.Repository
         }
 
 
-        public async Task<RegisterFinancialViewModel> GetFinancial(long storeID)
+
+        public async Task<RegisterStoreDataViewModel> GetAdress(long adressId)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                { 
+                    var query = "SELECT dbo.City.Name AS CityName, dbo.State.Id AS State, dbo.City.Id AS City, dbo.State.Name, dbo.Adress.Street as Address, dbo.Adress.Number, dbo.Adress.Complement as Complemento, dbo.Adress.CEP FROM dbo.Adress, dbo.State, dbo.City WHERE dbo.Adress.Id = @adressId AND Adress.CityID = City.Id AND City.StateId = State.Id";
+                    var queryReturnData = await db.QueryAsync<RegisterStoreDataViewModel>(query, new { adressId = adressId });
+                    return queryReturnData.FirstOrDefault();
+                }catch(Exception ex)
+                {
+                    return new RegisterStoreDataViewModel();
+                }
+            }
+
+        }
+
+
+        public async Task<StoreFinancial> GetFinancial(long storeID)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
@@ -395,72 +416,96 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     string subDDD = string.Empty;
                     string subPhone = string.Empty;
 
-                    var queryFinancialStore = "SELECT dbo.StoreFinancial.Phone, dbo.StoreFinancial.PessoaJuridicaId FROM dbo.StoreFinancial WHERE dbo.StoreFinancial.StoreId = @STOREID";
-                    var financialStorePhone = await db.QueryAsync<StoreFinancial>(queryFinancialStore, new { STOREID = storeID });
-                    var resultFinancialStorePhone = financialStorePhone.FirstOrDefault();
-
+                    var queryStoreFinancial = "SELECT * FROM dbo.StoreFinancial WHERE dbo.StoreFinancial.StoreId = @ID";
+                    var resultStoreFinancial = await db.QueryAsync<StoreFinancial>(queryStoreFinancial, new { ID = storeID });
+                    return resultStoreFinancial.FirstOrDefault();
                     
-
-                    if (resultFinancialStorePhone.Phone != null && resultFinancialStorePhone.Phone.Length > 0)
-                    {
-                        subDDD = resultFinancialStorePhone.Phone.Substring(0, 2);
-                        subPhone = resultFinancialStorePhone.Phone.Substring(2);
-                    }
-
-                    var querySelectFinancial = "SELECT * FROM dbo.StoreFinancial, dbo.Adress, dbo.City, dbo.State WHERE dbo.StoreFinancial.StoreId = @STOREID AND dbo.Adress.Id = dbo.StoreFinancial.AdressId AND dbo.City.Id = dbo.Adress.CityID AND dbo.State.Id = dbo.City.StateId"; 
-
-                    var StoreFinancialReturnData = await db.QueryAsync<RegisterFinancialViewModel>(querySelectFinancial, new { STOREID = storeID });
-                    var resultSelectStoreFinancial = StoreFinancialReturnData.FirstOrDefault();                    
-
-                    resultSelectStoreFinancial.PhoneDDD = subDDD;
-                    resultSelectStoreFinancial.PhoneNumber = subPhone;
-
-                    if (resultFinancialStorePhone.PessoaJuridicaId > 0 && resultFinancialStorePhone.PessoaJuridicaId != null)
-                    {
-                        var queryPJ = "SELECT * FROM dbo.PessoaJuridica WHERE dbo.PessoaJuridica.Id = @ID";
-                        var pessoaJuridica = await db.QueryAsync<PessoaJuridica>(queryPJ, new { ID = resultFinancialStorePhone.PessoaJuridicaId });
-                        var resultPessoaJuridica = pessoaJuridica.FirstOrDefault();
-                        resultSelectStoreFinancial.CNPJ = resultPessoaJuridica.CNPJ;
-                        resultSelectStoreFinancial.InscricaoEstadual = resultPessoaJuridica.InscricaoEstadual;
-                        resultSelectStoreFinancial.InscricaoMunicipal = resultPessoaJuridica.InscricaoMunicipal;
-                        resultSelectStoreFinancial.RazaoSocial = resultPessoaJuridica.RazaoSocial;
-                    }
                     
-
-                    return resultSelectStoreFinancial;
-                }
-                catch (Exception ex)
+                } catch (Exception ex)
                 {
-                    return new RegisterFinancialViewModel();
+                    return new StoreFinancial();
 
                 }
-
-
             }
-
-
-
         }
+
+        public async Task<PessoaJuridica> GetPessoaJuridica(long pessoaJuridicaId)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var queryPJ = "SELECT * FROM dbo.PessoaJuridica WHERE dbo.PessoaJuridica.Id = @ID";
+                    var resultPJ = await db.QueryAsync<PessoaJuridica>(queryPJ, new { ID = pessoaJuridicaId });
+                    return resultPJ.FirstOrDefault();
+                }catch(Exception ex)
+                {
+                    return new PessoaJuridica();
+                }
+            }
+        }
+
+                   
+
+
+
+
+
+
+
+
+        //            var queryFinancialStore = "SELECT dbo.StoreFinancial.Phone, dbo.StoreFinancial.PessoaJuridicaId FROM dbo.StoreFinancial WHERE dbo.StoreFinancial.StoreId = @STOREID";
+        //            var financialStorePhone = await db.QueryAsync<StoreFinancial>(queryFinancialStore, new { STOREID = storeID });
+        //            var resultFinancialStorePhone = financialStorePhone.FirstOrDefault();
+
+
+
+        //            if (resultFinancialStorePhone.Phone != null && resultFinancialStorePhone.Phone.Length > 0)
+        //            {
+        //                subDDD = resultFinancialStorePhone.Phone.Substring(0, 2);
+        //                subPhone = resultFinancialStorePhone.Phone.Substring(2);
+        //            }
+
+        //            var querySelectFinancial = "SELECT * FROM dbo.StoreFinancial, dbo.Adress, dbo.City, dbo.State WHERE dbo.StoreFinancial.StoreId = @STOREID AND dbo.Adress.Id = dbo.StoreFinancial.AdressId AND dbo.City.Id = dbo.Adress.CityID AND dbo.State.Id = dbo.City.StateId";
+
+        //            var StoreFinancialReturnData = await db.QueryAsync<RegisterFinancialViewModel>(querySelectFinancial, new { STOREID = storeID });
+        //            var resultSelectStoreFinancial = StoreFinancialReturnData.FirstOrDefault();
+
+        //            resultSelectStoreFinancial.PhoneDDD = subDDD;
+        //            resultSelectStoreFinancial.PhoneNumber = subPhone;
+
+        //            if (resultFinancialStorePhone.PessoaJuridicaId > 0 && resultFinancialStorePhone.PessoaJuridicaId != null)
+        //            {
+        //                var queryPJ = "SELECT * FROM dbo.PessoaJuridica WHERE dbo.PessoaJuridica.Id = @ID";
+        //                var pessoaJuridica = await db.QueryAsync<PessoaJuridica>(queryPJ, new { ID = resultFinancialStorePhone.PessoaJuridicaId });
+        //                var resultPessoaJuridica = pessoaJuridica.FirstOrDefault();
+        //                resultSelectStoreFinancial.CNPJ = resultPessoaJuridica.CNPJ;
+        //                resultSelectStoreFinancial.InscricaoEstadual = resultPessoaJuridica.InscricaoEstadual;
+        //                resultSelectStoreFinancial.InscricaoMunicipal = resultPessoaJuridica.InscricaoMunicipal;
+        //                resultSelectStoreFinancial.RazaoSocial = resultPessoaJuridica.RazaoSocial;
+
+        //            }
+
+
+        //            return resultSelectStoreFinancial;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return new RegisterFinancialViewModel();
+
+        //        }
+
+
+        //    }
+
+
+
+        //}
 
 
     }
 }
 
-
-        //public async Task<RegisterFinancialViewModel> GetStoreFinancial(long storeID)
-        //{
-        //    using (var db = new SqlConnection(_settings.ConnectionString))
-        //    {
-        //        try
-        //        {
-
-        //            var query
-        //        }
-            
-        //        }
-        
-
-        
 
 
 

@@ -164,38 +164,54 @@ namespace WhatStore.Controllers
         [HttpGet("financial")]
         public async Task<IActionResult> Financial()
         {
-            
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var subDDD = string.Empty;
+            var subPhoneNumber = string.Empty;
+
             var states = await _localizationRepository.GetStates();
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             var dataFinancial = await _storeRepository.GetFinancial(user.StoreId);
 
+            if(dataFinancial.Phone != null)
+            {
+                subDDD = dataFinancial.Phone.Substring(0, 2);
+                subPhoneNumber = dataFinancial.Phone.Substring(2);
+            }
 
+            var dataAdress = await _storeRepository.GetAdress(dataFinancial.AdressId);
+
+            var dataPessoaJuridica = await _storeRepository.GetPessoaJuridica(dataFinancial.PessoaJuridicaId);
 
             var model = new RegisterFinancialViewModel()
             {
                 About = dataFinancial.About,
-                BirthDay = dataFinancial.BirthDay,
-                CEP = dataFinancial.CEP,
-                Complement = dataFinancial.Complement,
+                BirthDay = dataFinancial.Birthday,                
                 FirstName = dataFinancial.FirstName,
-                Street = dataFinancial.Street,
                 Gender = dataFinancial.Gender,
-                CPF = dataFinancial.CPF,
-                PhoneDDD = dataFinancial.PhoneDDD,
-                PhoneNumber = dataFinancial.PhoneNumber,
-                Number = dataFinancial.Number,
                 LastName = dataFinancial.LastName,
                 IsPessoaJuridica = (dataFinancial.PessoaJuridicaId > 0) ? true : false,
-                CityID = dataFinancial.CityID,
-                CityName = dataFinancial.CityName,
-                State = dataFinancial.StateID,
-                CNPJ = dataFinancial.CNPJ,
-                InscricaoEstadual = dataFinancial.InscricaoEstadual,
-                InscricaoMunicipal = dataFinancial.InscricaoMunicipal,
-                RazaoSocial = dataFinancial.RazaoSocial,               
+                PhoneDDD = subDDD,
+                PhoneNumber = subPhoneNumber,
                 Rg = dataFinancial.Rg,
+                CEP = dataAdress.CEP,
+                Complement = dataAdress.Complemento,
+                Number = dataAdress.Number,
+                Street = dataAdress.Address,
+                CityID = dataAdress.City,
+                CityName = dataAdress.CityName,
+                State = dataAdress.State,
+                CPF = dataFinancial.CPF,
+                CNPJ = (dataFinancial.PessoaJuridicaId > 0) ? dataPessoaJuridica.CNPJ : null,
+                InscricaoEstadual = (dataFinancial.PessoaJuridicaId > 0) ? dataPessoaJuridica.InscricaoEstadual : null,
+                InscricaoMunicipal = (dataFinancial.PessoaJuridicaId > 0) ? dataPessoaJuridica.InscricaoMunicipal : null,
+                RazaoSocial = (dataFinancial.PessoaJuridicaId > 0) ? dataPessoaJuridica.RazaoSocial : null,
                 States = states
             };
 
