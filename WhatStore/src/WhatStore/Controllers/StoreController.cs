@@ -197,6 +197,7 @@ namespace WhatStore.Controllers
 
                 model = new RegisterFinancialViewModel()
                 {
+                    States = states,
                     About = dataFinancial.About,
                     BirthDay = dataFinancial.Birthday,
                     FirstName = dataFinancial.FirstName,

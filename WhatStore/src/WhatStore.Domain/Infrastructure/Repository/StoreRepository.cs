@@ -383,15 +383,17 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 try
                 {
-                    var updateAdress = await db.ExecuteAsync("UPDATE dbo.Adress SET CEP = @Cep, CityID = @CityID, Complement = @Complement, Number = @ Number, Street = @Street WHERE dbo.Adress.Id = @AdressId",
+
+                   
+                    var updateAdress = await db.ExecuteAsync("UPDATE dbo.Adress SET CEP = @CEP, CityID = @CityID, Complement = @Complement, Number = @Number, Street = @Street WHERE Id = @AdressId",
                            new
-                           {
-                               AdressId = adressId,
+                           {                               
                                CEP = CEP,
                                CityID = cityId,
-                               Complemento = complement,
+                               Complement = complement,
                                Number = number,
-                               Street = street
+                               Street = street,
+                               AdressId = adressId,
                            });
 
                     return true;
@@ -478,7 +480,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     var result = await db.ExecuteAsync(queryUpdateStoreFinancial, new
                     {
                         PessoaJuridicaId = selectPessoaJuridicaId,
-                        StoreId = storeFinancialId
+                        ID = storeFinancialId
                     });
 
                     return true;
