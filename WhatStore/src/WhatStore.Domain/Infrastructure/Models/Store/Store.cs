@@ -33,7 +33,7 @@ namespace WhatStore.Domain.Infrastructure.Models.Store
 
         public string URL { get; set; }
 
-        ICollection<IFormFile> Logo { get; set; }
+        public string Logo { get; set; }
 
         [Required]
         public bool IsActive { get; set; }
