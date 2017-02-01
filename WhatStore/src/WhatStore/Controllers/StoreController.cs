@@ -78,16 +78,19 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            foreach(var file in model.Pictures)
+            string fileName = null;
+
+            foreach (var file in model.Pictures)
             {
                 using (var ms = file.OpenReadStream())
                 {
                     byte[] pictureBytes = new byte[ms.Length];
                     ms.Read(pictureBytes, 0, (int)ms.Length);
                     
+
                     if(pictureBytes != null && pictureBytes.Length > 10)
                     {
-                        var fileName = $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg";
+                        fileName = $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg";
                         System.IO.File.WriteAllBytes($"C:\\whatstore\\{fileName}", pictureBytes);
                     }
                 }
@@ -98,7 +101,7 @@ namespace WhatStore.Controllers
 
             var phone = model.PhoneDDD + model.PhoneNumber;
 
-            if (await _storeRepository.UpdateStoreInformation(user.StoreId, model.StoreName, model.StoreDescription, phone,
+            if (await _storeRepository.UpdateStoreInformation(fileName, user.StoreId, model.StoreName, model.StoreDescription, phone,
                                                     model.Email, model.URL, model.Terms, model.HasAdress, model.Address,
                                                     model.Number, model.CEP, model.Complemento, model.City))
             {
