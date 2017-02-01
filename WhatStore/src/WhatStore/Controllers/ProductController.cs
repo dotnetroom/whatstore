@@ -48,7 +48,28 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-           
+            List<string> fileNames;
+            string fileName = null;
+
+            foreach (var file in model.Picture)
+            {
+                using (var ms = file.OpenReadStream())
+                {
+                    byte[] pictureBytes = new byte[ms.Length];
+                    ms.Read(pictureBytes, 0, (int)ms.Length);
+
+
+                    if (pictureBytes != null && pictureBytes.Length > 10)
+                    {
+                        fileNames = new List<string>
+                        {
+                            $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg"
+                        };
+                        System.IO.File.WriteAllBytes($"C:\\whatstore\\{fileName}", pictureBytes);
+                    }
+                }
+            }
+
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
@@ -105,7 +126,7 @@ namespace WhatStore.Controllers
                 {
                     Id = dataProduct.Id,
                     Description = dataProduct.Description,
-                    IsFreeShip = dataProduct.IsFreeShipping,                    
+                    IsFreeShip = dataProduct.IsFreeShipping,
                     Length = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Length) : 0,
                     ProductName = dataProduct.Name,
                     Price = dataProduct.Price,
@@ -116,14 +137,14 @@ namespace WhatStore.Controllers
                 return View(viewModel);
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest();
             }
         }
 
         [HttpPost("edit")]
-        public async Task<IActionResult>EditProductSave(RegisterProductViewModel model)
+        public async Task<IActionResult> EditProductSave(RegisterProductViewModel model)
         {
             if (await _productRepository.UpdateProduct(model.ProductName, model.Description,
                 model.Price, model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
@@ -136,18 +157,18 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return RedirectToAction("Product",model);
+            return RedirectToAction("Product", model);
         }
 
         [HttpPost("delete")]
-        public async Task<IActionResult>DeleteProduct(string id)
+        public async Task<IActionResult> DeleteProduct(string id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            if(await _productRepository.DeleteProduct(id))
+            if (await _productRepository.DeleteProduct(id))
             {
 
             }
