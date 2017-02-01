@@ -11,7 +11,7 @@ namespace WhatStore.Domain.Infrastructure.Models.Product
         [Key]
         public int Id { get; set; }
         [Required]
-        public string MyProperty { get; set; }
+        public string Name { get; set; }
         [Required]
         public string ProductId { get; set; }
 
