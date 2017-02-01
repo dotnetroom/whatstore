@@ -38,6 +38,11 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     var adressUpdate = string.Empty;
 
+                    if(fileName != null)
+                    {
+
+                    }
+
                     if (hasAddress)
                     {
                         var resultAddressID = await db.QueryAsync<long>("SELECT dbo.Adress.Id FROM dbo.Adress, dbo.Store WHERE dbo.Store.AdressId = dbo.Adress.Id AND dbo.Store.ID = @STOREID",
@@ -89,7 +94,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID });
                     }
 
-                    var queryUpdateStore = "UPDATE dbo.\"Store\" SET \"Description\" = @Description, \"Email\" = @Email, " +
+                    var queryUpdateStore = "UPDATE dbo.\"Store\" SET Logo = @Logo, \"Description\" = @Description, \"Email\" = @Email, " +
                                            "\"Name\" = @Name, \"Phone\" = @Phone, \"Term\" = @Term, \"URL\" = @URl";
 
                     var resultUpdate = await db.ExecuteAsync(queryUpdateStore,
@@ -101,6 +106,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                  Phone = phoneNumber,
                                                                  Term = terms,
                                                                  URL = URL,
+                                                                 Logo = fileName,
                                                              });
 
                     return true;

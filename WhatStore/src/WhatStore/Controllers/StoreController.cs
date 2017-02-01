@@ -9,6 +9,7 @@ using WhatStore.Domain.Infrastructure.ViewModels.Store;
 using WhatStore.Domain.Infrastructure.Models.Store;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 
 
 
