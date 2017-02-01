@@ -12,6 +12,7 @@ using WhatStore.Domain.Infrastructure.Models.Store;
 using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 using WhatStore.Domain.Infrastructure.Models.Localization;
 using WhatStore.Domain.Infrastructure.Models.Financial;
+using Microsoft.AspNetCore.Http;
 
 namespace WhatStore.Domain.Infrastructure.Repository
 {
@@ -24,7 +25,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             _settings = settings.Value;
         }
 
-        public async Task<bool> UpdateStoreInformation(long storeID, string storeName, string storeDescription, string phoneNumber, string email, string URL,
+        public async Task<bool> UpdateStoreInformation(ICollection<IFormFile> Pictures, long storeID, string storeName, string storeDescription, string phoneNumber, string email, string URL,
                                                        string terms, bool hasAddress, string address, string number, string CEP, string complemento, int city)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))

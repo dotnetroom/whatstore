@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace WhatStore.Domain.Infrastructure.Models.Store
 
         public string URL { get; set; }
 
-        public string Logo { get; set; }
+        ICollection<IFormFile> Logo { get; set; }
 
         [Required]
         public bool IsActive { get; set; }

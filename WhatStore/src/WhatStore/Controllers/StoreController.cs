@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using WhatStore.Domain.Infrastructure.Models.Identity;
 using WhatStore.Domain.Infrastructure.ViewModels.Store;
 using WhatStore.Domain.Infrastructure.Models.Store;
+using System.IO;
+using System.Text;
 
 
 
@@ -71,18 +73,32 @@ namespace WhatStore.Controllers
         [HttpPost("register/information")]
         public async Task<IActionResult> RegisterInformation(RegisterStoreDataViewModel model)
         {
-
-
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            var states = await _localizationRepository.GetStates();
+
+            foreach(var file in model.Pictures)
+            {
+                using (var ms = file.OpenReadStream())
+                {
+                    byte[] pictureBytes = new byte[ms.Length];
+                    ms.Read(pictureBytes, 0, (int)ms.Length);
+                    
+                    if(pictureBytes != null && pictureBytes.Length > 10)
+                    {
+                        var fileName = $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg";
+                        System.IO.File.WriteAllBytes($"C:\\whatstore\\{fileName}", pictureBytes);
+                    }
+                }
+            }
+
+                var states = await _localizationRepository.GetStates();
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             var phone = model.PhoneDDD + model.PhoneNumber;
 
-            if (await _storeRepository.UpdateStoreInformation(user.StoreId, model.StoreName, model.StoreDescription, phone,
+            if (await _storeRepository.UpdateStoreInformation(model.Pictures, user.StoreId, model.StoreName, model.StoreDescription, phone,
                                                     model.Email, model.URL, model.Terms, model.HasAdress, model.Address,
                                                     model.Number, model.CEP, model.Complemento, model.City))
             {
