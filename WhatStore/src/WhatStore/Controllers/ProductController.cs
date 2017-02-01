@@ -48,6 +48,8 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
+           
+
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             if (await _productRepository.InsertProduct(user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,

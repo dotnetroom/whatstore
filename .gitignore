@@ -5,3 +5,4 @@ WhatStore/src/WhatStore.Domain/Infrastructure/Repository/Interfaces/IProductRepo
 *.cs
 WhatStore/src/WhatStore.Domain/Infrastructure/Repository/StoreRepository.cs
 *.config
+WhatStore/src/WhatStore.Domain/Infrastructure/Models/Store/Store.cs

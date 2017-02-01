@@ -98,7 +98,7 @@ namespace WhatStore.Controllers
 
             var phone = model.PhoneDDD + model.PhoneNumber;
 
-            if (await _storeRepository.UpdateStoreInformation(model.Pictures, user.StoreId, model.StoreName, model.StoreDescription, phone,
+            if (await _storeRepository.UpdateStoreInformation(user.StoreId, model.StoreName, model.StoreDescription, phone,
                                                     model.Email, model.URL, model.Terms, model.HasAdress, model.Address,
                                                     model.Number, model.CEP, model.Complemento, model.City))
             {
