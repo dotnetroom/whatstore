@@ -312,7 +312,7 @@ namespace WhatStore.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name")
+                    b.Property<string>("MyProperty")
                         .IsRequired();
 
                     b.Property<string>("ProductId")
