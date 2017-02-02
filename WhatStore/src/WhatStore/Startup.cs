@@ -60,6 +60,7 @@ namespace WhatStore
             services.Configure<CustomSettings>(myOptions =>
             {
                 myOptions.ConnectionString = Configuration["ConnectionString"];
+                myOptions.ImagePath = Configuration["ImagePath"];
             });
 
             // Repositories

@@ -8,5 +8,6 @@ namespace WhatStore.Domain.Infrastructure.Contexts
     public class CustomSettings
     {
         public string ConnectionString { get; set; }
+        public string ImagePath { get; set; }
     }
 }

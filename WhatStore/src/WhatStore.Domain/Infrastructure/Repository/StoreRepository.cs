@@ -243,6 +243,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         var returnData = queryReturnData.FirstOrDefault();
                         returnData.PhoneDDD = subDDD;
                         returnData.PhoneNumber = subPhoneNumber;
+                        returnData.Logo = store.Logo;
                         //returnData.Pictures = store.Logo;
                         return returnData;
                     }
@@ -256,6 +257,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         Email = store.Email,
                         URL = store.URL,
                         Terms = store.Term,
+                        Logo = store.Logo
                     };
 
 
@@ -387,10 +389,10 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 try
                 {
 
-                   
+
                     var updateAdress = await db.ExecuteAsync("UPDATE dbo.Adress SET CEP = @CEP, CityID = @CityID, Complement = @Complement, Number = @Number, Street = @Street WHERE Id = @AdressId",
                            new
-                           {                               
+                           {
                                CEP = CEP,
                                CityID = cityId,
                                Complement = complement,

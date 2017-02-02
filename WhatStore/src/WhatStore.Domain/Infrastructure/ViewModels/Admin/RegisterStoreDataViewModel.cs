@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using WhatStore.Domain.Infrastructure.Models.Localization;
+using WhatStore.Domain.Infrastructure.Models.Pictures;
 
 namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 {
@@ -28,8 +29,6 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 
         public ICollection<IFormFile> Pictures { get; set; }
 
-        public string LogoName { get; set; }
-
         [Required(ErrorMessage = "The Name field is required.")]
         public string Terms { get; set; }
 
@@ -45,6 +44,8 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
         public string CityName { get; set; }
 
         public List<State> States { get; set; }
+
+        public string Logo { get; set; }
 
         public string ReturnMessage { get; set; }
 

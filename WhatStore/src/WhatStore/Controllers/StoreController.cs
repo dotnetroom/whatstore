@@ -41,17 +41,10 @@ namespace WhatStore.Controllers
 
                 var dataStore = await _storeRepository.GetStore(user.StoreId);
 
-
-           
-                var path = $"C:\\whatstore\\{dataStore.LogoName}.jpeg";
-                //byte[] bytes = System.IO.File.ReadAllBytes(path);                
-                //var image = File(bytes, "image/jpeg");
-
-
+                dataStore.Logo = Url.Action(dataStore.Logo , "image");
+                
                 var viewModel = new RegisterStoreDataViewModel()
                 {
-                    //LogoName = dataStore.LogoName,
-                    //Pictures = image,
                     StoreName = dataStore.StoreName,
                     StoreDescription = dataStore.StoreDescription,
                     PhoneDDD = dataStore.PhoneDDD,
@@ -67,7 +60,8 @@ namespace WhatStore.Controllers
                     State = dataStore.State,
                     City = dataStore.City,
                     CityName = dataStore.CityName,
-                    HasAdress = (dataStore.State > 0) ? true : false
+                    HasAdress = (dataStore.State > 0) ? true : false,
+                    Logo = dataStore.Logo
 
                 };
 

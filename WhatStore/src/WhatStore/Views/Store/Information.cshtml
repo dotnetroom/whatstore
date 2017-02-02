@@ -13,7 +13,7 @@
     <form asp-controller="Store" asp-action="RegisterInformation" method="post" enctype="multipart/form-data" class="float-center margin-top-20">
         <div class="form-group">
             <label>Nome da loja:</label>
-            <input type="text" class="form-control" name="StoreName" value="@Model.StoreName" required/>
+            <input type="text" class="form-control" name="StoreName" value="@Model.StoreName" required />
         </div>
         <div class="form-group">
             <label>Descrição da loja:</label>
@@ -22,28 +22,36 @@
         <div class="form-group">
             <div class="float-left" style="width:10%">
                 <label>DDD:</label>
-                <input maxlength="2" name="PhoneDDD" type="text" class="form-control" value="@Model.PhoneDDD"/>
+                <input maxlength="2" name="PhoneDDD" type="text" class="form-control" value="@Model.PhoneDDD" />
             </div>
             <div class="float-left margin-left-10">
                 <label>Telefone:</label>
-                <input name="PhoneNumber" type="text" class="form-control" value="@Model.PhoneNumber"/>
+                <input name="PhoneNumber" type="text" class="form-control" value="@Model.PhoneNumber" />
             </div>
             <div class="float-right margin-left-30">
-                <label>Email: </label>                
-                <input name="Email" type="text" class="form-control" style="width:800px" value="@Model.Email" required/>
+                <label>Email: </label>
+                <input name="Email" type="text" class="form-control" style="width:800px" value="@Model.Email" required />
                 <span asp-validation-for="Email"></span>
             </div>
         </div>
         <div class="form-group">
             <label>URL:</label>
             <div class="form-inline">
-                <input name="URL" type="text" class="form-control float-left" value="@Model.URL" required/>
+                <input name="URL" type="text" class="form-control float-left" value="@Model.URL" required />
                 <span class="input-group-addon float-left">.whatstore.com.br</span>
             </div>
         </div>
         <div class="form-group">
             <label>Escolha o logo da sua loja</label>
-            <input type="file" name="Pictures" id="Pictures" class="custom-file-input" none;" multiple/>
+            @if (!string.IsNullOrEmpty(Model.Logo))
+            {
+                <div class="logo-display-content">
+                    <img src="@Model.Logo" class="logo-display-image" />                   
+                       </div>
+            }
+        </div>
+            <div>
+            <input type="file" name="Pictures" id="Pictures" class="custom-file-input" none;" multiple />
         </div>
         <div class="form-group">
             <label>Termos de uso:</label>
@@ -55,7 +63,7 @@
         <div class="form-group">
             <h3 class="float-left">Endereço físico</h3>
             <div class="onoffswitch margin-right-10 float-right margin-top-20">
-                <input asp-for="HasAdress" type="checkbox"checked="@((Model.HasAdress) ? true : false)" class="onoffswitch-checkbox" id="checkEndereco" >
+                <input asp-for="HasAdress" type="checkbox" checked="@((Model.HasAdress) ? true : false)" class="onoffswitch-checkbox" id="checkEndereco">
                 <label class="onoffswitch-label" for="checkEndereco">
                     <span class="onoffswitch-inner"></span>
                     <span class="onoffswitch-switch"></span>
@@ -66,23 +74,24 @@
 
 
         <div id="adress" style="display: @((Model.HasAdress) ? "block" : "none");">
-            <div class="form-group"><label>Endereço:</label>
-                    <input name="Address" type="text" class="form-control" value="@Model.Address" />               
+            <div class="form-group">
+                <label>Endereço:</label>
+                <input name="Address" type="text" class="form-control" value="@Model.Address" />
             </div>
             <div class="form-group">
                 <div class="float-left" style="width:20%">
                     <label>Número:</label>
                     <input name="Number" type="text" class="form-control" value="@Model.Number" />
-                </div> 
+                </div>
                 <div class="float-right margin-left-50" style="width:40%">
                     <label>CEP:</label>
-                    <input name="CEP" type="text" class="form-control" value="@Model.CEP"/>
+                    <input name="CEP" type="text" class="form-control" value="@Model.CEP" />
                 </div>
             </div>
             <div class="form-group">
                 <label>Complemento:</label>
-                <input name="Complemento" type="text" class="form-control" value="@Model.Complemento"/>
-            </div> 
+                <input name="Complemento" type="text" class="form-control" value="@Model.Complemento" />
+            </div>
             <div class="form-group">
                 <div class="float-right  margin-left-20" style="width:40%">
                     <label>Cidade:</label>
@@ -90,7 +99,9 @@
                         <option value="-1">Selecione sua cidade</option>
                         @if (Model.City > 0)
                         {
+
                             <option value="@Model.City" selected>@Model.CityName</option>
+
                         }
                     </select>
                 </div>
