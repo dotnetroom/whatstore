@@ -33,7 +33,16 @@
 
         <div class="form-group">
             <label>Foto: </label>
-            <input class="inputfile" type="file" id="fotoProduto" style="display: none" name="Picture" multiple" />
+
+            <div class="fileUpload">
+                <span class="custom-span">+</span>
+                <p class="custom-para">Add Images</p>
+                <input id="uploadBtn" type="file" class="upload" />
+            </div>
+            <input id="uploadFile" placeholder="0 files selected" disabled="disabled" />
+
+
+            <input class="fileUpload" type="file" id="fotoProduto" name="Picture" multiple />
             <label for="fotoProduto" class="btn btn-secondary" style="width:170px !important">Selecionar imagem</label>
         </div>
 

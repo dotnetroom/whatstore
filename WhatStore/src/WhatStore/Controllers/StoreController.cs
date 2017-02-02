@@ -81,18 +81,21 @@ namespace WhatStore.Controllers
 
             string fileName = null;
 
-            foreach (var file in model.Pictures)
+            if (model.Pictures != null)
             {
-                using (var ms = file.OpenReadStream())
+                foreach (var file in model.Pictures)
                 {
-                    byte[] pictureBytes = new byte[ms.Length];
-                    ms.Read(pictureBytes, 0, (int)ms.Length);
-                    
-
-                    if(pictureBytes != null && pictureBytes.Length > 10)
+                    using (var ms = file.OpenReadStream())
                     {
-                        fileName = $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg";
-                        System.IO.File.WriteAllBytes($"C:\\whatstore\\{fileName}", pictureBytes);
+                        byte[] pictureBytes = new byte[ms.Length];
+                        ms.Read(pictureBytes, 0, (int)ms.Length);
+
+
+                        if (pictureBytes != null && pictureBytes.Length > 10)
+                        {
+                            fileName = $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg";
+                            System.IO.File.WriteAllBytes($"C:\\whatstore\\{fileName}", pictureBytes);
+                        }
                     }
                 }
             }
