@@ -63,13 +63,25 @@ namespace WhatStore.Controllers
 
                         if (pictureBytes != null && pictureBytes.Length > 10)
                         {
+                            fileName = $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg";
+                            System.IO.File.WriteAllBytes($"C:\\whatstore\\{fileName}", pictureBytes);
+
                             fileNames = new List<string>
-                         {
-                            $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg"
+                            {
+                                $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg"
 
                         };
-                            System.IO.File.WriteAllBytes($"C:\\whatstore\\{fileNames}", pictureBytes);
+
                         }
+                    }
+
+                    if(await _productRepository.InsertImagem(model.Id, fileName))
+                    {
+                        model.ReturnMessage = "Imagem salva com sucesso";
+                    }
+                    else
+                    {
+                        model.ReturnMessage = "Erro ao salvar alterações";
                     }
                 }
             }
@@ -90,6 +102,7 @@ namespace WhatStore.Controllers
             }
 
             return RedirectToAction("RegisterProduct", model);
+
         }
 
 

@@ -64,7 +64,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 await db.OpenAsync();
                 try
-                {                    
+                {
 
                     string[] arrayTag = tags.Split(',');
 
@@ -84,8 +84,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                         Widith = (isFreeShip != false) ? widith : 0,
                                                                     });
                     for (int i = 0; i < arrayTag.Length; i++)
-                    { 
-                        var deleteTag = await db.ExecuteAsync("DELETE FROM dbo.TagProduct WHERE dbo.TagProduct.ProductId = @id", 
+                    {
+                        var deleteTag = await db.ExecuteAsync("DELETE FROM dbo.TagProduct WHERE dbo.TagProduct.ProductId = @id",
                             new
                             {
                                 id = id
@@ -140,7 +140,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 await db.OpenAsync();
                 try
                 {
-                  
+
                     var tagIdSelect = await db.QueryAsync<long>("SELECT dbo.TagProduct.TagId FROM dbo.TagProduct WHERE dbo.TagProduct.ProductId = @ProductId",
                                                               new
                                                               {
@@ -159,7 +159,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         tagName.Add(resultTagNameSelect);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
 
                 }
@@ -258,10 +258,33 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
+        }
+
+
+        public async Task<bool> InsertImagem(string productId, string fileName)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var insertPicture ="INSERT INTO dbo.PictureProduct (ImagemName, ProductId) VALUES (@FileName, @ProductId)";
+                     var picture = await db.ExecuteAsync(insertPicture, new
+                      {
+                         FileName = fileName,
+                         ProductId = productId
+                     });
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
     }
 }

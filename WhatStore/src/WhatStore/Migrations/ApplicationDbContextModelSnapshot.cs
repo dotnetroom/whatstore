@@ -147,7 +147,8 @@ namespace WhatStore.Migrations
                     b.Property<string>("Phone")
                         .IsRequired();
 
-                    b.Property<string>("Rg");
+                    b.Property<string>("Rg")
+                        .IsRequired();
 
                     b.Property<long>("StoreId");
 
@@ -312,7 +313,7 @@ namespace WhatStore.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("MyProperty")
+                    b.Property<string>("ImagemName")
                         .IsRequired();
 
                     b.Property<string>("ProductId")
