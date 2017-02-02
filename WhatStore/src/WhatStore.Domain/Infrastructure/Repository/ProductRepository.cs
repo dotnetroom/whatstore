@@ -168,7 +168,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
         }
 
 
-        public async Task<bool> InsertProduct(long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
+        public async Task<bool> InsertProduct(List<string>fileNames, long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
                                               bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weigth,
                                               double widtih, string tags, string id)
         {
@@ -232,6 +232,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             });
                     }
 
+                    var insertPicture = insertPictures(codigo, fileNames);
+
 
                     return true;
 
@@ -265,18 +267,20 @@ namespace WhatStore.Domain.Infrastructure.Repository
         }
 
 
-        public async Task<bool> InsertImagem(string productId, string fileName)
+        public async Task<bool> insertPictures(string productId, List<string> fileNames)
         {
             try
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    var insertPicture ="INSERT INTO dbo.PictureProduct (ImagemName, ProductId) VALUES (@FileName, @ProductId)";
-                     var picture = await db.ExecuteAsync(insertPicture, new
-                      {
-                         FileName = fileName,
-                         ProductId = productId
-                     });
+                    foreach (var fileName in fileNames){
+                        var insertPicture = "INSERT INTO dbo.PictureProduct (ImagemName, ProductId) VALUES (@FileName, @ProductId)";
+                        var picture = await db.ExecuteAsync(insertPicture, new
+                        {
+                            FileName = fileName,
+                            ProductId = productId
+                        });
+                    }
                 }
                 return true;
             }

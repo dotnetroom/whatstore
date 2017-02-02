@@ -48,8 +48,8 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            List<string> fileNames;
-            string fileName = null;
+            List<string> fileNames = new List<string> { null };
+            string fileName;
 
             if (model.Picture != null)
             {
@@ -66,30 +66,21 @@ namespace WhatStore.Controllers
                             fileName = $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg";
                             System.IO.File.WriteAllBytes($"C:\\whatstore\\{fileName}", pictureBytes);
 
-                            fileNames = new List<string>
-                            {
-                                $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg"
-
-                        };
+                            fileNames.Add( 
+                                fileName
+                            );
+                            
 
                         }
                     }
-
-                    if(await _productRepository.InsertImagem(model.Id, fileName))
-                    {
-                        model.ReturnMessage = "Imagem salva com sucesso";
-                    }
-                    else
-                    {
-                        model.ReturnMessage = "Erro ao salvar alterações";
-                    }
-                }
+                    
+                }                
             }
 
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            if (await _productRepository.InsertProduct(user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
+            if (await _productRepository.InsertProduct(fileNames,user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
                                                        model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
                                                        model.Weigth, model.Widith, model.Tags, model.Id))
             {
