@@ -41,7 +41,10 @@ namespace WhatStore.Controllers
 
                 var dataStore = await _storeRepository.GetStore(user.StoreId);
 
-                dataStore.Logo = Url.Action(dataStore.Logo , "image");
+                if (dataStore.Logo != null)
+                {
+                    dataStore.Logo = Url.Action(dataStore.Logo, "image");
+                }
                 
                 var viewModel = new RegisterStoreDataViewModel()
                 {
