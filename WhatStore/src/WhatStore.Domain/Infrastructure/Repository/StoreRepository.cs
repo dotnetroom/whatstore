@@ -38,11 +38,6 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     var adressUpdate = string.Empty;
 
-                    if(fileName != null)
-                    {
-
-                    }
-
                     if (hasAddress)
                     {
                         var resultAddressID = await db.QueryAsync<long>("SELECT dbo.Adress.Id FROM dbo.Adress, dbo.Store WHERE dbo.Store.AdressId = dbo.Adress.Id AND dbo.Store.ID = @STOREID",
@@ -243,11 +238,12 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     }
                     if (store.AdressId != null && store.AdressId > 0)
                     {
-                        var query = "SELECT dbo.Store.Name as StoreName, dbo.Store.Description as StoreDescription, dbo.Store.Email, dbo.Store.URL, dbo.Store.Term as Terms, dbo.Store.Phone as PhoneNumber, dbo.City.Name AS CityName, dbo.State.Id AS State, dbo.City.Id AS City, dbo.State.Name, dbo.Adress.Street as Address, dbo.Adress.Number, dbo.Adress.Complement as Complemento, dbo.Adress.CEP FROM dbo.Store, dbo.Adress, dbo.State, dbo.City WHERE dbo.Store.Id = @storeId AND Store.AdressId = Adress.Id AND Adress.CityID = City.Id AND City.StateId = State.Id";
+                        var query = "SELECT dbo.Store.Name as StoreName, dbo.Store.Description as StoreDescription, dbo.Store.Email, dbo.Store.URL, dbo.Store.Logo as LogoName, dbo.Store.Term as Terms, dbo.Store.Phone as PhoneNumber, dbo.City.Name AS CityName, dbo.State.Id AS State, dbo.City.Id AS City, dbo.State.Name, dbo.Adress.Street as Address, dbo.Adress.Number, dbo.Adress.Complement as Complemento, dbo.Adress.CEP FROM dbo.Store, dbo.Adress, dbo.State, dbo.City WHERE dbo.Store.Id = @storeId AND Store.AdressId = Adress.Id AND Adress.CityID = City.Id AND City.StateId = State.Id";
                         var queryReturnData = await db.QueryAsync<RegisterStoreDataViewModel>(query, new { storeId = storeID });
                         var returnData = queryReturnData.FirstOrDefault();
                         returnData.PhoneDDD = subDDD;
                         returnData.PhoneNumber = subPhoneNumber;
+                        //returnData.Pictures = store.Logo;
                         return returnData;
                     }
 

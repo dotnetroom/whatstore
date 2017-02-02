@@ -28,6 +28,8 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 
         public ICollection<IFormFile> Pictures { get; set; }
 
+        public string LogoName { get; set; }
+
         [Required(ErrorMessage = "The Name field is required.")]
         public string Terms { get; set; }
 

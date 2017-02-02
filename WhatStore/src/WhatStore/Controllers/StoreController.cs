@@ -41,8 +41,17 @@ namespace WhatStore.Controllers
 
                 var dataStore = await _storeRepository.GetStore(user.StoreId);
 
+
+           
+                var path = $"C:\\whatstore\\{dataStore.LogoName}.jpeg";
+                //byte[] bytes = System.IO.File.ReadAllBytes(path);                
+                //var image = File(bytes, "image/jpeg");
+
+
                 var viewModel = new RegisterStoreDataViewModel()
                 {
+                    //LogoName = dataStore.LogoName,
+                    //Pictures = image,
                     StoreName = dataStore.StoreName,
                     StoreDescription = dataStore.StoreDescription,
                     PhoneDDD = dataStore.PhoneDDD,
@@ -100,7 +109,7 @@ namespace WhatStore.Controllers
                 }
             }
 
-                var states = await _localizationRepository.GetStates();
+            var states = await _localizationRepository.GetStates();
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             var phone = model.PhoneDDD + model.PhoneNumber;
