@@ -48,7 +48,7 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            List<string> fileNames = new List<string> { null };
+            List<string> fileNames = new List<string> { };
             string fileName;
 
             if (model.Picture != null)
@@ -61,7 +61,7 @@ namespace WhatStore.Controllers
                         ms.Read(pictureBytes, 0, (int)ms.Length);
 
 
-                        if (pictureBytes != null && pictureBytes.Length > 10)
+                        if (pictureBytes != null && pictureBytes.Length > 0)
                         {
                             fileName = $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg";
                             System.IO.File.WriteAllBytes($"C:\\whatstore\\{fileName}", pictureBytes);
