@@ -1057,3 +1057,27 @@ tr:nth-child(even) {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
   color:#c1326e;
 }
+
+.custom-bottom-delete{
+    padding-left:0;
+    padding-bottom:0;
+    padding-right:0;
+    padding-top:0;
+    border-radius: 100px;
+    width: 20px;
+    height:20px;
+    font-size:12px;
+    line-height:15px;
+    text-align:center;
+    vertical-align:middle;
+    background: #02B6E6;
+    color:white;
+    margin-top: -20px;
+    margin-right: -20px;
+}
+
+.custom-bottom-delete:hover{
+    background: #fff;
+    color:#02b6e6;
+}
+

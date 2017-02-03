@@ -46,8 +46,11 @@
             @if (!string.IsNullOrEmpty(Model.Logo))
             {
                 <div class="logo-display-content">
+                    <button class="btn custom-bottom-delete float-right" style="padding-top:-5px">x</button>
                     <img src="@Model.Logo" class="logo-display-image" />
+                    
                 </div>
+                
             }
         </div>
         <div>
