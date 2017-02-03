@@ -168,7 +168,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
         }
 
 
-        public async Task<bool> InsertProduct(List<string>fileNames, long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
+        public async Task<bool> InsertProduct(List<string> fileNames, long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
                                               bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weigth,
                                               double widtih, string tags, string id)
         {
@@ -266,14 +266,19 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-
         public async Task<bool> insertPictures(string productId, List<string> fileNames)
         {
             try
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    foreach (var fileName in fileNames){
+                    var selectPictures = db.QueryAsync<string>("SELECT ImagemName FROM dbo.PictureProduct WHERE ProductId = @ProductId", new
+                    {
+                        ProductId = productId
+                    });
+                    var pictures = selectPictures.ToString();
+                    foreach (var fileName in fileNames)
+                    {
                         var insertPicture = "INSERT INTO dbo.PictureProduct (ImagemName, ProductId) VALUES (@FileName, @ProductId)";
                         var picture = await db.ExecuteAsync(insertPicture, new
                         {

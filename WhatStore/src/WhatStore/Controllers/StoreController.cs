@@ -124,7 +124,7 @@ namespace WhatStore.Controllers
 
             model.States = states;
 
-            return View("Information", model);
+            return RedirectToAction("Information", model);
         }
 
 
