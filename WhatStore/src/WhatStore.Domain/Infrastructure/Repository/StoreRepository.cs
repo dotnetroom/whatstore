@@ -88,26 +88,10 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         adressUpdate = "UPDATE dbo.Store SET AdressId = NULL WHERE Store.Id = @ID";
                         var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID });
                     }
-                    if(fileName != null) { 
-                    var queryUpdateStore = "UPDATE dbo.\"Store\" SET Logo = @Logo, \"Description\" = @Description, \"Email\" = @Email, " +
-                                           "\"Name\" = @Name, \"Phone\" = @Phone, \"Term\" = @Term, \"URL\" = @URl";
-
-                    var resultUpdate = await db.ExecuteAsync(queryUpdateStore,
-                                                             new
-                                                             {
-                                                                 Description = storeDescription,
-                                                                 Email = email,
-                                                                 Name = storeName,
-                                                                 Phone = phoneNumber,
-                                                                 Term = terms,
-                                                                 URL = URL,
-                                                                 Logo = fileName,
-                                                             });
-                    }
-                    else
+                    if (fileName != null)
                     {
-                        var queryUpdateStore = "UPDATE dbo.\"Store\" SET \"Description\" = @Description, \"Email\" = @Email, " +
-                                          "\"Name\" = @Name, \"Phone\" = @Phone, \"Term\" = @Term, \"URL\" = @URl";
+                        var queryUpdateStore = "UPDATE dbo.\"Store\" SET Logo = @Logo, \"Description\" = @Description, \"Email\" = @Email, " +
+                                               "\"Name\" = @Name, \"Phone\" = @Phone, \"Term\" = @Term, \"URL\" = @URl";
 
                         var resultUpdate = await db.ExecuteAsync(queryUpdateStore,
                                                                  new
@@ -117,7 +101,25 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                      Name = storeName,
                                                                      Phone = phoneNumber,
                                                                      Term = terms,
-                                                                     URL = URL,                                                                     
+                                                                     URL = URL,
+                                                                     Logo = fileName,
+                                                                 });
+                    }
+                    else
+                    {
+                        var queryUpdateStore = "UPDATE dbo.\"Store\" SET \"Description\" = @Description, \"Email\" = @Email, " +
+                                          "\"Name\" = @Name, \"Phone\" = @Phone, \"Term\" = @Term, \"URL\" = @URl WHERE Id = @StoreId";
+
+                        var resultUpdate = await db.ExecuteAsync(queryUpdateStore,
+                                                                 new
+                                                                 {
+                                                                     Description = storeDescription,
+                                                                     Email = email,
+                                                                     Name = storeName,
+                                                                     Phone = phoneNumber,
+                                                                     Term = terms,
+                                                                     URL = URL,
+                                                                     StoreId = storeID
                                                                  });
 
                     }
@@ -605,6 +607,23 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 }
             }
 
+        }
+
+        public async Task<bool> DeleteLogo(long storeId)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var query = "UPDATE dbo.Store SET Logo = NULL WHERE dbo.Store.Id = @ID";
+                    var updateLogo = await db.ExecuteAsync(query, new { ID = storeId });
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
         }
     }
 }

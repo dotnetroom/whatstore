@@ -45,7 +45,7 @@ namespace WhatStore.Controllers
                 {
                     dataStore.Logo = Url.Action(dataStore.Logo, "image");
                 }
-                
+
                 var viewModel = new RegisterStoreDataViewModel()
                 {
                     StoreName = dataStore.StoreName,
@@ -284,6 +284,28 @@ namespace WhatStore.Controllers
             }
 
             return RedirectToAction("Financial");
+        }
+
+
+        [HttpPost("delete/logo")]
+        public async Task<IActionResult> DeleteLogo(RegisterStoreDataViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (await _storeRepository.DeleteLogo(user.StoreId))
+            {
+                model.ReturnMessage = "Alterações salvas com sucesso";
+            }
+            else
+            {
+                model.ReturnMessage = "Erro ao salvar alterações";
+            }
+
+            return RedirectToAction("Information", model);
         }
     }
 }
