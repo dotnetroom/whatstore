@@ -44,8 +44,7 @@
 
             }
 
-            <input class="inputfile" type="file" id="fotoProduto" style="display: none" asp-for="Picture" multiple value="@Model.Picture" />
-            <label for="fotoProduto" class="btn btn-secondary" style="width:170px !important">Selecionar imagem</label>
+            <input class="custom-file-input" type="file" id="fotoProduto" asp-for="Picture" multiple value="@Model.Picture" />
 
         </div>
         <hr />
