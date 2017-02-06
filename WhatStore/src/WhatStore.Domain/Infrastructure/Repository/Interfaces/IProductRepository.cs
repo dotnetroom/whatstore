@@ -22,5 +22,6 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<List<string>> GetTag(string productId);
         Task<bool> DeleteProduct(string id);
         Task<bool> insertPictures(string productId, List<string> fileNames);
+        Task<string> GetImage(long productId);
     }
 }

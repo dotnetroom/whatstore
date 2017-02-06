@@ -298,5 +298,26 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
 
         }
+
+        public async Task<List<string>> GetImage(long productId)
+        {
+            try
+            {
+                using( var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var imageSelect = await db.QueryAsync<string>("SELECT dbo.PictureProduct.ImageName FROM dbo.PictureProduct WHERE dbo.PictureProduct.ProductId = @ID",
+                            new
+                            {
+                                ID = productId
+                            });
+                    var resultImageSelect = imageSelect.ToList();
+                    return resultImageSelect;
+                }
+            }catch(Exception ex)
+            {
+                return null;
+            }
+            
+        }
     }
 }

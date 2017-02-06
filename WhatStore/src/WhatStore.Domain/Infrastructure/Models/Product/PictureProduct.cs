@@ -9,7 +9,7 @@ namespace WhatStore.Domain.Infrastructure.Models.Product
     public class PictureProduct
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
         [Required]
         public string ImageName { get; set; }
         [Required]
