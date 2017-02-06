@@ -16,7 +16,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
                                  double widith, string tags, string id);
         Task<bool> UpdateProduct(string productName, string description, double price, bool hasVariety, string colors, 
                                  string sizes, bool isFreeShip, double length, double weigth, double widith, 
-                                 string tags, string id);
+                                 string tags, string id, List<string> fileName);
         Task<List<Product>> GetProducts(long storeID);
         Task<Product> GetProduct(string productId);
         Task<List<string>> GetTag(string productId);

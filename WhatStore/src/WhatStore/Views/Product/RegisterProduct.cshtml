@@ -33,15 +33,8 @@
 
         <div class="form-group">
             <label>Foto: </label>
-
-            @if (!string.IsNullOrEmpty(Model.ProductImagem))
-            {
-                <div class="logo-display-content">
-                    <img src="@Model.ProductImagem" class="logo-display-image" />
-                </div>
-            }
-            <input class="custom-file-input" type="file" id="fotoProduto" name="Picture" multiple />            
-        </div>     
+            <input class="custom-file-input" type="file" id="fotoProduto" name="Picture" multiple />
+        </div>
 
         <hr />
         <div class="form-group">

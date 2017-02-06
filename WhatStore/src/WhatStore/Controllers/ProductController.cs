@@ -154,9 +154,42 @@ namespace WhatStore.Controllers
         [HttpPost("edit")]
         public async Task<IActionResult> EditProductSave(RegisterProductViewModel model)
         {
+            List<string> fileNames = new List<string> { };
+            string fileName;
+
+            if (model.Picture != null)
+            {
+                foreach (var file in model.Picture)
+                {
+                    using (var ms = file.OpenReadStream())
+                    {
+                        byte[] pictureBytes = new byte[ms.Length];
+                        ms.Read(pictureBytes, 0, (int)ms.Length);
+
+
+                        if (pictureBytes != null && pictureBytes.Length > 0)
+                        {
+                            fileName = $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg";
+                            System.IO.File.WriteAllBytes($"C:\\whatstore\\{fileName}", pictureBytes);
+
+                            fileNames.Add(
+                                fileName
+                            );
+
+
+                        }
+                    }
+
+                }
+            }
+
+
+
+
+
             if (await _productRepository.UpdateProduct(model.ProductName, model.Description,
                 model.Price, model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
-                model.Weigth, model.Widith, model.Tags, model.Id))
+                model.Weigth, model.Widith, model.Tags, model.Id, fileNames))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
