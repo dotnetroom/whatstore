@@ -232,6 +232,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             });
                     }
 
+
                     var insertPicture = insertPictures(codigo, fileNames);
 
 
