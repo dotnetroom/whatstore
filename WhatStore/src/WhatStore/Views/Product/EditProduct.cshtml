@@ -34,11 +34,11 @@
 
         <div class="form-group">
             <label>Foto: </label>
-            @if (!string.IsNullOrEmpty(Model.ProductImagem))
+            @if (!string.IsNullOrEmpty(Model.ImageName))
             {
             <div class="logo-display-content">
                 <button asp-action="delete/logo" class="btn custom-bottom-delete float-right">x</button>
-                <img src="@Model.ProductImagem" class="logo-display-image" />
+                <img src="@Model.ImageName" class="logo-display-image" />
             </div>
             }
 
