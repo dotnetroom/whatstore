@@ -10,7 +10,7 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
     {
         public List<Product> Products { get; set; }
 
-        public string Logo { get; set; }
+        public List<string> Pictures { get; set; }
 
     } 
 }

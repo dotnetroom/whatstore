@@ -306,8 +306,12 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             {
                                 ID = productId
                             });
-                    var resultImageSelect = imageSelect.ToList();
-                    return resultImageSelect;
+
+                   
+                        var resultImageSelect = imageSelect.ToList();
+                        return resultImageSelect;
+                    
+                    
                 }
             }
             catch (Exception ex)
