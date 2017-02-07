@@ -122,7 +122,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             });
                     }
 
-                    var insertPicture = insertPictures(id, fileNames);
+                    var insertPicture = InsertPictures(id, fileNames);
 
                     return true;
                 }
@@ -235,7 +235,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     }
 
 
-                    var insertPicture = insertPictures(codigo, fileNames);
+                    var insertPicture = InsertPictures(codigo, fileNames);
 
 
                     return true;
