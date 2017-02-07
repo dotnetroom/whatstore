@@ -269,12 +269,17 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<bool> InsertPictures(string productId, List<string> fileNames)
+        public async Task<bool> insertPictures(string productId, List<string> fileNames)
         {
             try
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
+                    var selectPictures = db.QueryAsync<string>("SELECT ImagemName FROM dbo.PictureProduct WHERE ProductId = @ProductId", new
+                    {
+                        ProductId = productId
+                    });
+                    var pictures = selectPictures.ToString();
                     foreach (var fileName in fileNames)
                     {
                         var insertPicture = "INSERT INTO dbo.PictureProduct (ImageName, ProductId) VALUES (@FileName, @ProductId)";
