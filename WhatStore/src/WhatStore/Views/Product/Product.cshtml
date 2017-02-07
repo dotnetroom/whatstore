@@ -1,4 +1,4 @@
-﻿@model WhatStore.Domain.Infrastructure.ViewModels.Admin.ProductViewModel
+﻿@model List<WhatStore.Domain.Infrastructure.ViewModels.Admin.ProductViewModel>
 
 @{
     Layout = "_Admin";
@@ -7,17 +7,14 @@
 
 <div class="admin-settings-content-large">
     <form asp-controller="product" asp-action="information" method="post">
-        @foreach (var product in Model.Products)
+        @foreach (var product in Model) 
         {
             <a href="@Url.Action($"edit/", "product", new { id = product.Id})">
 
                 <div class="product-display-content">
 
-
-
-                        <img src="@Model.Pictures.FirstOrDefault()" class="product-display-image" />
-
-
+                        <img src="@product.Pictures" class="product-display-image" />
+                    
                     <label >@product.Name</label>
                 </div>
             </a>

@@ -103,9 +103,9 @@ namespace WhatStore.Controllers
         {
             try
             {
-                List<string> pictures = new List<string> { };
+                List<ProductViewModel> productsList = new List<ProductViewModel>() { };
+                
 
-                List<string> resultPictures = new List<string> { };
 
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
@@ -113,21 +113,20 @@ namespace WhatStore.Controllers
 
                 foreach (var product in products)
                 {
-                    pictures = await _productRepository.GetImage(product.Id);
-
-                    foreach (var picture in pictures)
+                    var image = await _productRepository.GetImage(product.Id);
+                    image = Url.Action(image, "image");
+                    var viewModel = new ProductViewModel()
                     {
-                        resultPictures.Add(Url.Action(picture, "image"));
-                    }
+                        Id = product.Id,
+                        Name = product.Name,
+                        Pictures = image
+                    };
 
-                }            
+                    productsList.Add(viewModel);
 
+                }
 
-                var viewModel = new ProductViewModel();
-                viewModel.Products = products;
-                viewModel.Pictures = resultPictures;
-
-                return View(viewModel);
+                return View(productsList);
 
             }
             catch (Exception ex)
@@ -148,7 +147,7 @@ namespace WhatStore.Controllers
 
                 var dataTag = await _productRepository.GetTag(dataProduct.Id);
 
-                var dataImage = await _productRepository.GetImage(dataProduct.Id);
+                var dataImage = await _productRepository.GetImages(dataProduct.Id);
 
                 if (dataImage != null && dataImage.Count > 0)
                 {

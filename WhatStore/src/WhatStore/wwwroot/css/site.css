@@ -968,7 +968,7 @@ tr:nth-child(even) {
 
 .product-display-content {
     width: 250px;
-    height: auto;
+    height: 250px;
     min-height: 190px;
     float: left;
     background: #fff;

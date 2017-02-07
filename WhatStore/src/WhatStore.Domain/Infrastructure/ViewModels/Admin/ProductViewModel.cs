@@ -8,9 +8,12 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 {
     public class ProductViewModel
     {
-        public List<Product> Products { get; set; }
 
-        public List<string> Pictures { get; set; }
+        public string Id { get; set; }
+       
+        public string Name { get; set; }
+
+        public string Pictures { get; set; }
 
     } 
 }
