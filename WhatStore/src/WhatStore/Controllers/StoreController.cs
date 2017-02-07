@@ -122,9 +122,7 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            model.States = states;
-
-            return RedirectToAction("Information", model);
+            return RedirectToAction("Information");
         }
 
 
