@@ -107,6 +107,8 @@ namespace WhatStore.Controllers
 
                 var products = _productRepository.GetProducts(user.StoreId);
 
+                
+
                 var viewModel = new ProductViewModel();
                 viewModel.Products = await products;
 

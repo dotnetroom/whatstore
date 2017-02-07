@@ -33,6 +33,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             STOREID = storeID
                         });
                     var product = result.ToList();
+                    
                     return product;
                 }
             }

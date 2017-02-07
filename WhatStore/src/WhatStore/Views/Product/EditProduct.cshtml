@@ -8,7 +8,7 @@
 
     <h3>Editar Produtos</h3>
 
-    <form  asp-controller="product" method="post" enctype="multipart/form-data">
+    <form asp-controller="product" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label>Código do produto</label>
             <input type="text" name="id" class="form-control" asp-for="Id" value="@Model.Id" required readonly="readonly" />
@@ -33,14 +33,22 @@
         </div>
 
         <div class="form-group">
+
             <label>Foto: </label>
             @if (Model.ImageName != null && Model.ImageName.Count > 0)
             {
-            <div class="logo-display-content">
-                <button asp-action="delete/logo" class="btn custom-bottom-delete float-right">x</button>
-                <img src="@Model.ImageName" class="logo-display-image" />
-            </div>
+                foreach (var image in Model.ImageName)
+                {
+                    <div class="logo-display-content">
+                        <button asp-action="delete/logo" class="btn custom-bottom-delete float-right">x</button>
+                        <img src="@image" class="logo-display-image" />
+                    </div>
+
+                }
+
             }
+        </div>
+        <div class="form-group">
 
             <input class="custom-file-input" type="file" id="fotoProduto" asp-for="Picture" multiple value="@Model.Picture" />
 
@@ -105,10 +113,10 @@
 
 
 
-<button asp-action="edit" type="submit" name="salvar" style="height: 40px" class="btn btn-primary margin-bottom-20 float-right">Salvar</button>
+        <button asp-action="edit" type="submit" name="salvar" style="height: 40px" class="btn btn-primary margin-bottom-20 float-right">Salvar</button>
 
-<button asp-action="delete" type="submit" name="excluir" style="height: 40px" class="btn btn-primary margin-right-20 float-right">Excluir</button>
-<hr />
+        <button asp-action="delete" type="submit" name="excluir" style="height: 40px" class="btn btn-primary margin-right-20 float-right">Excluir</button>
+        <hr />
     </form>
 </div>
 
