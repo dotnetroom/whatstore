@@ -282,7 +282,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     var pictures = selectPictures.ToString();
                     foreach (var fileName in fileNames)
                     {
-                        var insertPicture = "INSERT INTO dbo.PictureProduct (ImagemName, ProductId) VALUES (@FileName, @ProductId)";
+                        var insertPicture = "INSERT INTO dbo.PictureProduct (ImageName, ProductId) VALUES (@FileName, @ProductId)";
                         var picture = await db.ExecuteAsync(insertPicture, new
                         {
                             FileName = fileName,
@@ -299,11 +299,11 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         }
 
-        public async Task<List<string>> GetImage(long productId)
+        public async Task<List<string>> GetImage(string productId)
         {
             try
             {
-                using( var db = new SqlConnection(_settings.ConnectionString))
+                using (var db = new SqlConnection(_settings.ConnectionString))
                 {
                     var imageSelect = await db.QueryAsync<string>("SELECT dbo.PictureProduct.ImageName FROM dbo.PictureProduct WHERE dbo.PictureProduct.ProductId = @ID",
                             new
@@ -313,11 +313,11 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     var resultImageSelect = imageSelect.ToList();
                     return resultImageSelect;
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return null;
             }
-            
         }
     }
 }

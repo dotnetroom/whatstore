@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <label>Foto: </label>
-            @if (!string.IsNullOrEmpty(Model.ImageName))
+            @if (Model.ImageName != null && Model.ImageName.Count > 0)
             {
             <div class="logo-display-content">
                 <button asp-action="delete/logo" class="btn custom-bottom-delete float-right">x</button>

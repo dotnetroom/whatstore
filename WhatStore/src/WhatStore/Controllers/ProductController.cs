@@ -125,9 +125,21 @@ namespace WhatStore.Controllers
         {
             try
             {
+                List<string> productImage = new List<string> { };
+
                 var dataProduct = await _productRepository.GetProduct(id);
 
                 var dataTag = await _productRepository.GetTag(dataProduct.Id);
+
+                var dataImage = await _productRepository.GetImage(dataProduct.Id);
+
+                if (dataImage != null && dataImage.Count > 0)
+                {
+                    foreach(var image in dataImage)
+                    {
+                        productImage.Add(Url.Action(image, "image"));
+                    }                    
+                }
 
                 string resultDataTag = string.Join(",", dataTag);
 
@@ -141,7 +153,8 @@ namespace WhatStore.Controllers
                     Price = dataProduct.Price,
                     Weigth = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Weigth) : 0,
                     Widith = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Widith) : 0,
-                    Tags = resultDataTag
+                    Tags = resultDataTag,
+                    ImageName = productImage                    
                 };
                 return View(viewModel);
             }
