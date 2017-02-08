@@ -7,15 +7,19 @@
 
 <div class="admin-settings-content-large">
     <form asp-controller="product" asp-action="information" method="post">
-        @foreach (var product in Model) 
+        @foreach (var product in Model)
         {
             <a href="@Url.Action($"edit/", "product", new { id = product.Id})">
 
                 <div class="product-display-content">
 
+                    @if (!string.IsNullOrEmpty(product.Pictures))
+                    {
+
                         <img src="@product.Pictures" class="product-display-image" />
-                    
-                    <label >@product.Name</label>
+                    }
+
+                    <label>@product.Name</label>
                 </div>
             </a>
         }
