@@ -46,15 +46,12 @@
             <div class="logo-display-content">
                 @if (!string.IsNullOrEmpty(Model.Logo))
                 {
-
                     <button asp-action="delete/logo" class="btn custom-bottom-delete float-right">x</button>
                     <img src="@Model.Logo" class="logo-display-image" />
-
                 }
                 else
                 {
-                    <label class="logo-display-image">SEM FOTO</label>
-
+                    <label class="logo-display-lable">SEM FOTO</label>
                 }
             </div>
         </div>

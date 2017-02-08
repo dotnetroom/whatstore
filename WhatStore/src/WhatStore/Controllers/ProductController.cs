@@ -189,7 +189,7 @@ namespace WhatStore.Controllers
         {
             List<string> fileNames = new List<string> { };
             string fileName;
-             
+
             if (model.Picture != null)
             {
                 foreach (var file in model.Picture)
@@ -251,18 +251,20 @@ namespace WhatStore.Controllers
         }
 
         [HttpPost("delete/picture")]
-        public async Task<IActionResult> DeletePicture(long id)
+        public async Task<IActionResult> DeletePicture(long id, RegisterProductViewModel model)
         {
-            var model = new RegisterProductViewModel();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            if (await _productRepository.DeleteImage(id)) ;
+            if (await _productRepository.DeleteImage(id))
+            {
+                model.ReturnMessage = "Alterações salvas com sucesso";
+            }
 
-            return RedirectToAction("Product", model);
+            return RedirectToAction("EditProduct", model);
 
         }
 
