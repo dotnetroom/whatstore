@@ -186,7 +186,7 @@ namespace WhatStore.Controllers
         {
             List<string> fileNames = new List<string> { };
             string fileName;
-
+             
             if (model.Picture != null)
             {
                 foreach (var file in model.Picture)
