@@ -285,7 +285,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             ProductId = productId
                         });
                     }
-                }
+                } 
                 return true;
             }
             catch (Exception ex)
