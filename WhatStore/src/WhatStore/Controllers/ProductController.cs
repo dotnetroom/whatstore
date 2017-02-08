@@ -66,21 +66,21 @@ namespace WhatStore.Controllers
                             fileName = $"picture_{Guid.NewGuid()}_{DateTime.UtcNow.Millisecond.ToString()}.jpg";
                             System.IO.File.WriteAllBytes($"C:\\whatstore\\{fileName}", pictureBytes);
 
-                            fileNames.Add( 
+                            fileNames.Add(
                                 fileName
                             );
-                            
+
 
                         }
                     }
-                    
-                }                
+
+                }
             }
 
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            if (await _productRepository.InsertProduct(fileNames,user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
+            if (await _productRepository.InsertProduct(fileNames, user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
                                                        model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
                                                        model.Weigth, model.Widith, model.Tags, model.Id))
             {
@@ -103,14 +103,30 @@ namespace WhatStore.Controllers
         {
             try
             {
+                List<ProductViewModel> productsList = new List<ProductViewModel>() { };
+                
+
+
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-                var products = _productRepository.GetProducts(user.StoreId);
+                var products = await _productRepository.GetProducts(user.StoreId);
 
-                var viewModel = new ProductViewModel();
-                viewModel.Products = await products;
+                foreach (var product in products)
+                {
+                    var image = await _productRepository.GetImage(product.Id);
+                    image = Url.Action(image, "image");
+                    var viewModel = new ProductViewModel()
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Pictures = image
+                    };
 
-                return View(viewModel);
+                    productsList.Add(viewModel);
+
+                }
+
+                return View(productsList);
 
             }
             catch (Exception ex)
@@ -131,14 +147,14 @@ namespace WhatStore.Controllers
 
                 var dataTag = await _productRepository.GetTag(dataProduct.Id);
 
-                var dataImage = await _productRepository.GetImage(dataProduct.Id);
+                var dataImage = await _productRepository.GetImages(dataProduct.Id);
 
                 if (dataImage != null && dataImage.Count > 0)
                 {
-                    foreach(var image in dataImage)
+                    foreach (var image in dataImage)
                     {
                         productImage.Add(Url.Action(image, "image"));
-                    }                    
+                    }
                 }
 
                 string resultDataTag = string.Join(",", dataTag);
@@ -154,7 +170,7 @@ namespace WhatStore.Controllers
                     Weigth = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Weigth) : 0,
                     Widith = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Widith) : 0,
                     Tags = resultDataTag,
-                    ImageName = productImage                    
+                    ImageName = productImage
                 };
                 return View(viewModel);
             }
