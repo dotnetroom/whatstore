@@ -1026,6 +1026,17 @@ tr:nth-child(even) {
     margin-bottom: 5px;
 }
 
+.logo-display-image {
+    width: 100%;
+    height: 100%;
+    background: #ddd;
+    margin-bottom: 5px;
+    text-align:center;
+    padding: 60px;
+    font-size:20px !important;
+    color: #868585 !important;
+}
+
 .admin-settings-content-large {
     width: 800px;
     max-width: 800px;

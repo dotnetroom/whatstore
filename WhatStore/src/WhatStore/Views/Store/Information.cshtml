@@ -43,15 +43,20 @@
         </div>
         <div class="form-group">
             <label>Escolha o logo da sua loja</label>
-            @if (!string.IsNullOrEmpty(Model.Logo))
-            {
-                <div class="logo-display-content">
-                    <button  asp-action="delete/logo" class="btn custom-bottom-delete float-right" >x</button>
+            <div class="logo-display-content">
+                @if (!string.IsNullOrEmpty(Model.Logo))
+                {
+
+                    <button asp-action="delete/logo" class="btn custom-bottom-delete float-right">x</button>
                     <img src="@Model.Logo" class="logo-display-image" />
-                    
-                </div>
-                
-            }
+
+                }
+                else
+                {
+                    <label class="logo-display-image">SEM FOTO</label>
+
+                }
+            </div>
         </div>
         <div>
             <input type="file" name="Pictures" id="Pictures" class="custom-file-input" none;" multiple />
