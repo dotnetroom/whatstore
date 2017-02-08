@@ -104,7 +104,7 @@ namespace WhatStore.Controllers
             try
             {
                 List<ProductViewModel> productsList = new List<ProductViewModel>() { };
-                
+
 
 
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -114,7 +114,10 @@ namespace WhatStore.Controllers
                 foreach (var product in products)
                 {
                     var image = await _productRepository.GetImage(product.Id);
-                    image = Url.Action(image, "image");
+                    if (image != null && image.Length > 0)
+                    {
+                        image = Url.Action(image, "image");
+                    }
                     var viewModel = new ProductViewModel()
                     {
                         Id = product.Id,
@@ -251,7 +254,7 @@ namespace WhatStore.Controllers
         public async Task<IActionResult> DeletePicture(long id)
         {
             var model = new RegisterProductViewModel();
-                        
+
             if (!ModelState.IsValid)
             {
                 return BadRequest();
@@ -259,8 +262,8 @@ namespace WhatStore.Controllers
 
             if (await _productRepository.DeleteImage(id)) ;
 
-            return RedirectToAction("Product",model);
-             
+            return RedirectToAction("Product", model);
+
         }
 
 
