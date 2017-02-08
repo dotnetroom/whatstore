@@ -314,5 +314,29 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 return null;
             }
         }
+
+
+        public async Task<bool> DeleteImage(long productId)
+        {
+
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var deletePicture = await db.ExecuteAsync("DELETE FROM dbo.PictureProduct WHERE ProductId = @ProductId",
+                        new
+                        {
+                            ProductId = productId
+                        });
+
+                    return true;
+                }
+
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

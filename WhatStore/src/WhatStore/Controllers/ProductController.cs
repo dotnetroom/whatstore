@@ -231,6 +231,22 @@ namespace WhatStore.Controllers
             return RedirectToAction("Product");
         }
 
+        [HttpPost("delete/picture")]
+        public async Task<IActionResult> DeletePicture(long id)
+        {
+            var model = new RegisterProductViewModel();
+                        
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (await _productRepository.DeleteImage(id)) ;
+
+            return RedirectToAction("Product",model);
+             
+        }
+
 
     }
 }
