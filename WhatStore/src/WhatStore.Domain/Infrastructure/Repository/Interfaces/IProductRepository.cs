@@ -25,6 +25,6 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<bool> InsertPictures(string productId, List<string> fileNames);
         Task<string> GetImage(string productId);
         Task<List<PictureProductViewModel>> GetImages(string productId);
-        Task<bool> DeleteImage(string productId);  
+        Task<bool> DeleteImage(long productId);  
       }
 }

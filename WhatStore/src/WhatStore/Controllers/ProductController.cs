@@ -257,7 +257,7 @@ namespace WhatStore.Controllers
         }
 
         [HttpPost("delete/picture")]
-        public async Task<IActionResult> DeletePicture(string id, RegisterProductViewModel model)
+        public async Task<IActionResult> DeletePicture(long id)
         {
 
             if (!ModelState.IsValid)
@@ -267,10 +267,10 @@ namespace WhatStore.Controllers
 
             if (await _productRepository.DeleteImage(id))
             {
-                model.ReturnMessage = "Alterações salvas com sucesso";
+                return Ok();
             }
 
-            return RedirectToAction("EditProduct", model);
+            return BadRequest("Não foi possível deletar a imagem.");
 
         }
 

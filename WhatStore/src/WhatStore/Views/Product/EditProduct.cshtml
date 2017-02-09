@@ -40,8 +40,8 @@
                 @foreach (var picture in Model.ImageName)
                 {
                     <div id="image-@picture.Id" class="logo-display-content">
-                        <button asp-action="delete/picture" type="submit" name="editPicture" class="btn custom-bottom-delete float-right">x</button>
-                        <img src="@picture.ImageName" value="@picture.Id" class="logo-display-image" />
+                        <button data-id="@picture.Id" id="@picture.Id"  type="button" name="image" class="btn custom-bottom-delete float-right image-delete">x</button>
+                        <img src="@picture.ImageName" class="logo-display-image" />
                     </div>
 
                 }
@@ -140,7 +140,24 @@
         });
 
 
-        var picture = @Model.ImageName;
-        $("#image-")
+        $(".image-delete").on("click", function () {
+            var button = $(this);
+            var id = button.attr("data-id");
+            
+            $.ajax({
+                url: '/product/delete/picture',
+                type: 'post',
+                data: {
+                    id: id
+                },
+                
+                success: function () {          
+                    $("#image-" + id).remove();
+                },
+                error: function (x, y, message) {
+                    alert("ERROOOU  " + message);
+                },
+            });
+        });
     </script>
 }

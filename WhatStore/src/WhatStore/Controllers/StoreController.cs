@@ -297,13 +297,10 @@ namespace WhatStore.Controllers
             if (await _storeRepository.DeleteLogo(user.StoreId))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
-            }
-            else
-            {
-                model.ReturnMessage = "Erro ao salvar alterações";
+                return Ok();
             }
 
-            return RedirectToAction("Information", model);
+            return BadRequest("Não foi possível deletar a imagem.");
         }
     }
 }

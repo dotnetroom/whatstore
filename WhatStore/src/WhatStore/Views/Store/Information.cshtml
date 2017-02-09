@@ -43,10 +43,10 @@
         </div>
         <div class="form-group">
             <label>Escolha o logo da sua loja</label>
-            <div class="logo-display-content">
+            <div class="logo-display-content" id="image-content-delete" >
                 @if (!string.IsNullOrEmpty(Model.Logo))
                 {
-                    <button asp-action="delete/logo" class="btn custom-bottom-delete float-right">x</button>
+                    <button data-id="logo-delete" class="image-delete btn custom-bottom-delete float-right">x</button>
                     <img src="@Model.Logo" class="logo-display-image" />
                 }
                 else
@@ -151,6 +151,23 @@
 
         $(document).ready(function () {
             $('#dropStates').states($('#dropCities'));
+        });
+
+
+        $(".image-delete").on("click", function () {
+            var button = $(this);            
+
+            $.ajax({
+                url: '/store/delete/logo',
+                type: 'post',              
+                
+                success: function () {
+                    $("#image-content-delete").remove();
+                },
+                error: function (x, y, message) {
+                    alert("ERROOOU  " + message);
+                },
+            });
         });
     </script>
 }
