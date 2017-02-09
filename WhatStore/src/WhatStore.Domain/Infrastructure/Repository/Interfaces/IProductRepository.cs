@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using WhatStore.Domain.Infrastructure.Models.Store;
 using WhatStore.Domain.Infrastructure.Models.Product;
+using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 
 namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
 {
@@ -23,7 +24,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<bool> DeleteProduct(string id);
         Task<bool> InsertPictures(string productId, List<string> fileNames);
         Task<string> GetImage(string productId);
-        Task<List<string>> GetImages(string productId);
+        Task<List<PictureProductViewModel>> GetImages(string productId);
         Task<bool> DeleteImage(long productId);
       }
 }

@@ -145,6 +145,7 @@ namespace WhatStore.Controllers
             try
             {
                 List<string> productImage = new List<string> { };
+                List<PictureProductViewModel> listImage = new List<PictureProductViewModel> { };
 
                 var dataProduct = await _productRepository.GetProduct(id);
 
@@ -156,7 +157,12 @@ namespace WhatStore.Controllers
                 {
                     foreach (var image in dataImage)
                     {
-                        productImage.Add(Url.Action(image, "image"));
+                        var picture = new PictureProductViewModel()
+                        {
+                            Id = image.Id,
+                            ImageName = Url.Action(image.ImageName, "image")
+                        };
+                        listImage.Add(picture);
                     }
                 }
 
@@ -173,7 +179,7 @@ namespace WhatStore.Controllers
                     Weigth = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Weigth) : 0,
                     Widith = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Widith) : 0,
                     Tags = resultDataTag,
-                    ImageName = productImage
+                    ImageName = listImage
                 };
                 return View(viewModel);
             }

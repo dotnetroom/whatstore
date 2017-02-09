@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using WhatStore.Domain.Infrastructure.Models.Store;
 using WhatStore.Domain.Infrastructure.Models.Product;
+using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 
 namespace WhatStore.Domain.Infrastructure.Repository
 {
@@ -295,13 +296,13 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         }
 
-        public async Task<List<string>> GetImages(string productId)
+        public async Task<List<PictureProductViewModel>> GetImages(string productId)
         {
             try
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    var imageSelect = await db.QueryAsync<string>("SELECT dbo.PictureProduct.ImageName FROM dbo.PictureProduct WHERE dbo.PictureProduct.ProductId = @ID",
+                    var imageSelect = await db.QueryAsync<PictureProductViewModel>("SELECT * FROM dbo.PictureProduct WHERE dbo.PictureProduct.ProductId = @ID",
                             new
                             {
                                 ID = productId

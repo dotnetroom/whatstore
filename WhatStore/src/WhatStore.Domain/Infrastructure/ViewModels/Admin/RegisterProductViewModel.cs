@@ -43,7 +43,7 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 
         public ICollection<IFormFile> Picture { get; set; }
 
-        public List<string> ImageName { get; set; }
+        public List<PictureProductViewModel> ImageName { get; set; }
 
         [Required(ErrorMessage = "The Tags field is required.")]
         public string Tags { get; set; }
