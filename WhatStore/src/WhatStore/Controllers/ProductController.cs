@@ -257,7 +257,7 @@ namespace WhatStore.Controllers
         }
 
         [HttpPost("delete/picture")]
-        public async Task<IActionResult> DeletePicture(long id, RegisterProductViewModel model)
+        public async Task<IActionResult> DeletePicture(string id, RegisterProductViewModel model)
         {
 
             if (!ModelState.IsValid)

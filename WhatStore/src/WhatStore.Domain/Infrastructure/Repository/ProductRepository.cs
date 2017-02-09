@@ -339,7 +339,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
         }
 
 
-        public async Task<bool> DeleteImage(long productId)
+        public async Task<bool> DeleteImage(string ProductId)
         {
 
             using (var db = new SqlConnection(_settings.ConnectionString))
@@ -349,7 +349,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     var deletePicture = await db.ExecuteAsync("DELETE FROM dbo.PictureProduct WHERE ProductId = @ProductId",
                         new
                         {
-                            ProductId = productId
+                            ProductId = ProductId
                         });
 
                     return true;
