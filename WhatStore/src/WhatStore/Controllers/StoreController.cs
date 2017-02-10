@@ -30,7 +30,7 @@ namespace WhatStore.Controllers
             _userManager = userManager;
         }
 
-        [Route("information")]
+        [HttpGet("information")]
         public async Task<IActionResult> Information()
         {
             try

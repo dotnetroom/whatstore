@@ -47,10 +47,11 @@
             @if (!string.IsNullOrEmpty(Model.Logo))
             {
                 <div class="logo-display-content" id="image-content-delete">
-                    <button data-id="logo-delete" class="image-delete btn custom-bottom-delete float-right">x</button>
+                    <button type="button" id="image-delete" class="btn custom-bottom-delete float-right">x</button>
                     <img src="@Model.Logo" class="logo-display-image" />
                 </div>
             }
+
 
         </div>
         <div>
@@ -152,19 +153,18 @@
         });
 
 
-        $(".image-delete").on("click", function () {
-            var button = $(this);
-
+        $("#image-delete").on("click", function () {
+           
             $.ajax({
                 url: '/store/delete/logo',
                 type: 'post',
-
+               
                 success: function () {
                     $("#image-content-delete").remove();
                 },
-                error: function (x, y, message) {
-                    alert("ERROOOU  " + message);
-                },
+            error: function (x, y, message) {
+                alert("ERROOOU  " + message);
+            },
             });
         });
     </script>
