@@ -286,7 +286,7 @@ namespace WhatStore.Controllers
 
 
         [HttpPost("delete/logo")]
-        public async Task<IActionResult> DeleteLogo(RegisterStoreDataViewModel model)
+        public async Task<IActionResult> DeleteLogo()
         {
             if (!ModelState.IsValid)
             {
@@ -296,7 +296,7 @@ namespace WhatStore.Controllers
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (await _storeRepository.DeleteLogo(user.StoreId))
             {
-                model.ReturnMessage = "Alterações salvas com sucesso";
+                //model.ReturnMessage = "Alterações salvas com sucesso";
                 return Ok();
             }
 
