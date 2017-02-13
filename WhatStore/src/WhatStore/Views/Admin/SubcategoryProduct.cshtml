@@ -1,0 +1,26 @@
+﻿@model WhatStore.Domain.Infrastructure.ViewModels.Admin.RegisterSubCategoryViewModel
+    Layout = "_Layout";
+}
+
+<body>
+
+    <form class="form-group margin-top-75" asp-controller="" asp-action="" method="post">
+        <div class="form-group float-left">
+
+            <label>Categoria</label>
+            
+
+            <label>Subcategoria:</label>
+            <input value="" class="form-control float-left" name="SubcategoryProduct" id="Subcategory" />
+            <button class="btn btn-primary margin-top-10  float-left" type="submit">Enviar</button>
+        </div>
+    </form>
+
+    <table class="table" id="SubcategoryTable">
+        <tr>
+            <th class="tableRow">Subcategoria</th>
+            <th class="tableRow">Opções</th>
+        </tr>
+    </table>
+
+</body>

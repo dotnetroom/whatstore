@@ -6,7 +6,7 @@ using WhatStore.Domain.Infrastructure.Models.Product;
 
 namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 {
-    public class RegisterProductCategory
+    public class RegisterProductCategoryViewModel
     {
 
         public List<Category> Categorys { get; set; }
