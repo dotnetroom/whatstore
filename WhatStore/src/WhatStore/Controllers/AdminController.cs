@@ -16,27 +16,24 @@ namespace WhatStore.Controllers
     [Route("admin")]
     public class AdminController : Controller
     {
-          
 
-        
-        
-            
-        
-
-        [Route("open")]
+        [HttpGet("open")]
         public IActionResult Open()
 
         {
             return View();
         }
 
-        [Route("StoreType")]
-         public IActionResult StoreType()
+        [HttpGet("category")]
+        public IActionResult CategoryProduct()
         {
             return View();
-
         }
 
-        
+        [HttpGet("subcategory")]
+        public IActionResult SubcategoryProduct()
+        {
+            return View();
+        }
     }
 }

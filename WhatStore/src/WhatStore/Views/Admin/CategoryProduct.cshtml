@@ -1,22 +1,24 @@
 ﻿@model WhatStore.Domain.Infrastructure.ViewModels.Admin.RegisterProductCategoryViewModel
-    Layout = "_Layout";
-    }
+@{
+    Layout = "_Admin";
+}
 
-<body>
-    <form class="form-group margin-top-75" asp-controller="" asp-action="" method="post">
-        <div class="form-group float-left">
-            <label>Categoria dos produtos</label>
-            <input class="form-control" name="CategoryProduct" id="Category" value="@Model.Categorys" />
-            <button class="btn-primary btn" type="submit">Salvar</button>
-        </div>
-    </form>
-    <table class="table" id="CategoryTable">
-        <tr>
-            <th class="tableRow">Categoria</th>
-            <th class="tableRow">Opções</th>
-        </tr>
-        
-        @foreach (var category in Model.Categorys)
+<title>Cadastrar Categorias</title>
+
+<form class="form-group margin-top-20 " method="post">
+    <div class="form-group float-left margin-left-40"  >
+        <label>Categoria dos produtos</label>
+        <input class="form-control" name="CategoryProduct" id="Category"  />
+        <button class="btn-primary btn margin-top-10" type="submit">Salvar</button>
+    </div>
+</form>
+<table class="table margin-left-40 form-group" id="CategoryTable">
+    <tr>
+        <th class="tableRow">Categoria</th>
+        <th class="tableRow">Opções</th>
+    </tr>
+
+    @*@foreach (var category in Model.Categorys)
             {
 
             <tr>
@@ -29,6 +31,6 @@
                 </td>
             </tr>
 
-        }
-    </table>
-</body>
+        }*@
+</table>
+
