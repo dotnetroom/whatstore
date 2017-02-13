@@ -166,7 +166,7 @@ namespace WhatStore.Controllers
                     }
                 }
 
-                string resultDataTag = string.Join(",", dataTag);
+                string resultDataTag = string.Join(", ", dataTag);
 
                 var viewModel = new RegisterProductViewModel()
                 {
