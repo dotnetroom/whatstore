@@ -23,6 +23,10 @@ namespace WhatStore.Domain.Infrastructure.Models.Product
         public string Length { get; set; }
         public string Widith { get; set; }
         public string Weigth { get; set; }
+        [Required]
+        public int CategoryId { get; set; }
+
+        public virtual Category CategoryId { get; set; }
 
     }
 }
