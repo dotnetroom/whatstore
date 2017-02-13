@@ -364,26 +364,9 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     return false;
                 }
             }
-
-
-
-        public async Task<List<StoreType>> GetStoreType()
-        {
-            try
-            {
-                using (var db = new SqlConnection(_settings.ConnectionString))
-                {
-                    var result = await db.QueryAsync<StoreType>("SELECT * FROM \"dbo\".\"StoreType\"");
-
-                    return result.ToList();
-                }
-            }
-
-            catch (Exception ex)
-            {
-                return null;
-            }
         }
+
+
 
         public async Task<List<Category>> GetCategory()
         {
@@ -424,5 +407,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
 
         }
+
+
+
     }
 }
