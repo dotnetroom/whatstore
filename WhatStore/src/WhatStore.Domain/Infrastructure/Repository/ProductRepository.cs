@@ -67,8 +67,12 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 await db.OpenAsync();
                 try
                 {
-
                     string[] arrayTag = tags.Split(',');
+
+                    for (var i = 0; i < arrayTag.Length; i++)
+                    {
+                        arrayTag[i] = arrayTag[i].Replace(" ","");
+                    }
 
                     var productUpdateQuery = "UPDATE dbo.Product SET Description = @Description, IsFreeShipping = @IsFreeShipping, " +
                         "Length = @Length, Name = @Name, Price = @Price, Weigth = @Weigth, Widith = @Widith WHERE id = @Id";
