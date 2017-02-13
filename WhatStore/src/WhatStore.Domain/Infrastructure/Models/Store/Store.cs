@@ -32,6 +32,7 @@ namespace WhatStore.Domain.Infrastructure.Models.Store
         [Required]
         public string Email { get; set; }
 
+        [Required]
         public string URL { get; set; }
 
         public string Logo { get; set; }
@@ -39,8 +40,10 @@ namespace WhatStore.Domain.Infrastructure.Models.Store
         [Required]
         public bool IsActive { get; set; }
 
+        [Required]
         public string Term { get; set; }
 
+        
         public virtual Adress Adress { get; set; }
         public virtual StoreType StoreType { get; set; }
         public virtual PessoaJuridica PessoaJuridica { get; set; }
