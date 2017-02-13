@@ -14,8 +14,7 @@ namespace WhatStore.Domain.Infrastructure.Models.Store
         public long Id { get; set; }
 
         public long PessoaJuridicaId { get; set; }
-
-        
+                
         public long AdressId { get; set; }
 
         [Required]
@@ -29,7 +28,6 @@ namespace WhatStore.Domain.Infrastructure.Models.Store
         public string Phone { get; set; }
 
         [EmailAddress]
-        [Required]
         public string Email { get; set; }
 
         [Required]
