@@ -36,7 +36,6 @@ namespace WhatStore.Domain.Infrastructure.Models.Financial
         [Required]
         public string Phone { get; set; }        
 
-        [Required]
         public long AdressId { get; set; }
 
         [Required]
