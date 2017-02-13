@@ -6,9 +6,9 @@ using WhatStore.Domain.Infrastructure.Models.Product;
 
 namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 {
-    public class RegisterSubCategory
+    public class RegisterSubCategoryViewModel
     {
-        public List<SubCategory> dubCategorys { get; set; }
-        public string subCategorys { get; set; }
+        public List<SubCategory> Subcategorys { get; set; }
+        public string ProductSubcategory { get; set; }
     }
 }
