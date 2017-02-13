@@ -364,6 +364,65 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     return false;
                 }
             }
+
+
+
+        public async Task<List<StoreType>> GetStoreType()
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var result = await db.QueryAsync<StoreType>("SELECT * FROM \"dbo\".\"StoreType\"");
+
+                    return result.ToList();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Category>> GetCategory()
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var result = await db.QueryAsync<Category>("SELECT * FROM dbo.Category");
+
+                    return result.ToList();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<bool> RegisterCategory(string categoryName)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var queryInsertCategory = ("INSERT INTO dbo.Category (CategoryName) VALUES (@CategoryName)"); 
+                    var category = await db.ExecuteAsync(queryInsertCategory,new
+                        {
+                            CategoryName = categoryName
+                        });
+                    return true;
+                }
+            }
+
+            catch(Exception ex)
+            {
+                return false;
+            }
+
         }
     }
 }

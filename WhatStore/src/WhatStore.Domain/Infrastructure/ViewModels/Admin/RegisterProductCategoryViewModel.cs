@@ -8,7 +8,6 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 {
     public class RegisterProductCategoryViewModel
     {
-
         public List<Category> Categorys { get; set; }
         public string ProductCategory { get; set; }
     }
