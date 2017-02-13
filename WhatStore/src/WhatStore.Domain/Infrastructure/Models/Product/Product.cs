@@ -24,9 +24,9 @@ namespace WhatStore.Domain.Infrastructure.Models.Product
         public string Widith { get; set; }
         public string Weigth { get; set; }
         [Required]
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
 
-        public virtual Category CategoryId { get; set; }
+        public virtual Category Category { get; set; }
 
     }
 }
