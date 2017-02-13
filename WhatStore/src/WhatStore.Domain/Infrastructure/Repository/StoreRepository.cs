@@ -263,7 +263,6 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         returnData.PhoneDDD = subDDD;
                         returnData.PhoneNumber = subPhoneNumber;
                         returnData.Logo = store.Logo;
-                        //returnData.Pictures = store.Logo;
                         return returnData;
                     }
 

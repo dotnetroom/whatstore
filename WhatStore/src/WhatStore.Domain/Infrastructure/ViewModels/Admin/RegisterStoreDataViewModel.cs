@@ -47,7 +47,7 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 
         public string Logo { get; set; }
 
-        public string ReturnMessage { get; set; }
+        public string ReturnMessage { get; set; }      
 
     }
 }
