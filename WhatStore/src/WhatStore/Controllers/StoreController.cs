@@ -65,7 +65,6 @@ namespace WhatStore.Controllers
                     CityName = dataStore.CityName,
                     HasAdress = (dataStore.State > 0) ? true : false,
                     Logo = dataStore.Logo
-
                 };
 
                 return View(viewModel);

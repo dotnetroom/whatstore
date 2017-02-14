@@ -65,22 +65,10 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                         else
                         {
-                            var queryInsertAddress = "INSERT INTO dbo.\"Adress\" (\"CEP\", \"CityID\", \"Complement\", \"Number\", \"Street\") "
-                                                    + "VALUES (@CEP, @CITYID, @COMPLEMENT, @NUMBER, @STREET) SELECT SCOPE_IDENTITY()";
-
-                            var newAddress = new Adress()
-                            {
-                                CEP = CEP,
-                                CityID = city,
-                                Complement = complemento,
-                                Number = number,
-                                Street = address
-                            };
-
-                            var addressInstertedID = await db.ExecuteScalarAsync(queryInsertAddress, newAddress);
+                            var insertAdress = InsertAdress(CEP, city, complemento, number, address);                       
 
                             adressUpdate = "UPDATE dbo.Store SET AdressId = @ADDRESS WHERE Store.Id = @ID";
-                            var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID, ADDRESS = addressInstertedID });
+                            var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID, ADDRESS = insertAdress });
                         }
                     }
                     else
