@@ -9,6 +9,7 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
     public class RegisterSubCategoryViewModel
     {
         public List<SubCategory> Subcategorys { get; set; }
-        public string ProductSubcategory { get; set; }
+        public string SubcategoryName { get; set; }
+        public string ReturnMessage { get; set; }
     }
 }
