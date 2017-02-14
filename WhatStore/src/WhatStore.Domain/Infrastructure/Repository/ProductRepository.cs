@@ -406,7 +406,28 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         }
 
-        //public async Task<bool> UpdateCategory
+        public async Task<bool> UpdateCategory(long categoryId, string categoryName)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var queryUpdateCategory = ("UPDATE dbo.Cetegory SET CategoryName = @CategoryName WHERE Id = @Id");
+
+                    var resultUpdate = db.ExecuteAsync(queryUpdateCategory, new
+                    {
+                        CategoryName = categoryName,
+                        Id = categoryName
+                    });
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
         public async Task<List<SubCategory>> GetSubCategory(long categoryId)
         {
