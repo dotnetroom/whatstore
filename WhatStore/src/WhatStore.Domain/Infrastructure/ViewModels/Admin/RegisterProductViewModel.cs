@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
+using WhatStore.Domain.Infrastructure.Models.Product;
 
 namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 {
@@ -47,6 +47,14 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 
         [Required(ErrorMessage = "The Tags field is required.")]
         public string Tags { get; set; }
+
+        public List<Category> Categories { get; set; }
+
+        public string Category { get; set; }
+
+        public List<SubCategory> SubCategories { get; set; }
+
+        public string SubCategory { get; set; }
 
         public string ReturnMessage { get; set; }
     }

@@ -14,7 +14,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
 
         Task<bool> InsertProduct(List<string> fileNames, long storeId, string productName, string description, double price, ICollection<IFormFile> picture, 
                                  bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weigth, 
-                                 double widith, string tags, string id);
+                                 double widith, string tags, string id, long categoryId);
         Task<bool> UpdateProduct(string productName, string description, double price, bool hasVariety, string colors, 
                                  string sizes, bool isFreeShip, double length, double weigth, double widith, 
                                  string tags, string id, List<string> fileName);

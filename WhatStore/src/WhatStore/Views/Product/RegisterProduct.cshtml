@@ -87,6 +87,26 @@
         <hr />
 
         <div class="form-group">
+            <h3>Categorias</h3>
+            <select name="" id="dropCategory" type="text" class="form-control" value="@Model.Category">
+                <option value="-1">Selecione a categoria</option>
+                @foreach (var category in Model.Categories)
+                {
+                <option value="@category.Id">@category.CategoryName</option>
+                }
+            </select>
+            @*<select name="" id="dropSubCategory" type="text" class="form-control" value="@Model.SubCategory">
+                <option value="-1">Selecione a categoria</option>
+                @foreach (var subCategory in Model.SubCategories)
+                {
+                    <option value="@subCategory.Id">@subCategory.SubCategoryName</option>
+                }
+            </select>*@
+            
+        </div>
+        <hr />
+
+        <div class="form-group">
             <h3>Tags</h3>
             <input type="text" class="form-control" placeholder="Ex.: Presentes" required asp-for="Tags" value="@Model.Tags" />
         </div>
@@ -115,6 +135,10 @@
                 $("#frete").css("display", "none");
 
             }
+        });
+
+        $(document).ready(function () {
+            $('#dropCategory').states($('#dropSubCategory'));
         });
     </script>
 }
