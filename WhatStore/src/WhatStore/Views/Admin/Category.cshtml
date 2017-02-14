@@ -8,7 +8,7 @@
 <form class="form-group margin-top-20 " method="post" asp-controller="admin" asp-action="category">
     <div class="form-group float-left margin-left-40"  >
         <label>Categoria dos produtos</label>
-        <input class="form-control" name="CategoryProduct" id="Category" value="@Model.ProductCategory"/>
+        <input class="form-control" asp-for="CategoryName" id="Category" value="@Model.CategoryName"/>
         <button class="btn-primary btn margin-top-10" type="submit" asp-controller="admin" asp-action="register/category">Salvar</button>
     </div>
 </form>
@@ -18,11 +18,11 @@
         <th class="tableRow">Opções</th>
     </tr>
 
-    @foreach (var category in Model.Categorys)
+    @foreach (var category in Model.Categories)
             {
 
             <tr>
-                <td class="tableRow">@category.CategoryName/td>
+                <td class="tableRow">@category.CategoryName</td>
                 <td class="tableRow">
                     <form class="form-group" asp-controller="" asp-action="" method="post">
                         <input name="categoryID" hidden value="@category.Id" />

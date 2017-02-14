@@ -32,14 +32,14 @@ namespace WhatStore.Controllers
         }
 
         [HttpGet("category")]
-        public async Task<IActionResult> CategoryProduct()
+        public async Task<IActionResult> Category()
         {
             try
 
             {
                 var category = await _productRepository.GetCategory();
                 var viewModel = new RegisterProductCategoryViewModel();
-                viewModel.Categorys = category;
+                viewModel.Categories = category;
                 return View(viewModel);
             }
 
@@ -57,11 +57,10 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            var category = await _productRepository.GetCategory();
+            //var category = await _productRepository.GetCategory();
 
-            if (await _productRepository.RegisterCategory(model.ProductCategory))
-            {
-                model.Categorys = category;
+            if (await _productRepository.RegisterCategory(model.CategoryName))
+            {               
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
             else
@@ -73,7 +72,7 @@ namespace WhatStore.Controllers
         }
 
         [HttpGet("subcategory")]
-        public IActionResult SubcategoryProduct()
+        public IActionResult Subcategory()
         {
             return View();
         }
