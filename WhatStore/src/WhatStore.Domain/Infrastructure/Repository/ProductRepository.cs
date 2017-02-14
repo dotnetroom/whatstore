@@ -366,6 +366,10 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 8ad3466765e99719dc70739cf9492b546950745f
         public async Task<List<Category>> GetCategory()
         {
             try
