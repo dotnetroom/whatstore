@@ -412,7 +412,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    var queryUpdateCategory = ("UPDATE dbo.Cetegory SET CategoryName = @CategoryName WHERE Id = @Id");
+                    var queryUpdateCategory = ("UPDATE dbo.Category SET CategoryName = @CategoryName WHERE Id = @Id");
 
                     var resultUpdate = await db.ExecuteAsync(queryUpdateCategory, new
                     {
