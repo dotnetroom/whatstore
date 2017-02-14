@@ -406,6 +406,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         }
 
+        //public async Task<bool> UpdateCategory
+
         public async Task<List<SubCategory>> GetSubCategory(long categoryId)
         {
             try
@@ -450,6 +452,6 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 return false;
             }
 
-        }
+        }        
     }
 }

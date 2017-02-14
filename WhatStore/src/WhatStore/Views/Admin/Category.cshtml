@@ -6,10 +6,15 @@
 <title>Cadastrar Categorias</title>
 
 <form class="form-group margin-top-20 " method="post" asp-controller="admin" asp-action="category">
-    <div class="form-group float-left margin-left-40"  >
+    <div class="form-group float-left margin-left-40">
         <label>Categoria dos produtos</label>
-        <input class="form-control" asp-for="CategoryName" id="Category" value="@Model.CategoryName"/>
-        <button class="btn-primary btn margin-top-10" type="submit" asp-controller="admin" asp-action="register/category">Salvar</button>
+
+        <div class="float-left">
+            <input class="form-control" asp-for="CategoryName" id="Category" value="@Model.CategoryName" />
+        </div>
+        <div class="float-left margin-left-20" style="margin-top:-5px">
+            <button class="btn-primary btn margin-top-10 float-left" type="submit" asp-controller="admin" asp-action="register/category">Inserir</button>
+        </div>
     </div>
 </form>
 <table class="table margin-left-40 form-group" id="CategoryTable">
@@ -21,16 +26,18 @@
     @foreach (var category in Model.Categories)
             {
 
-            <tr>
-                <td class="tableRow">@category.CategoryName</td>
-                <td class="tableRow">
-                    <form class="form-group" asp-controller="" asp-action="" method="post">
-                        <input name="categoryID" hidden value="@category.Id" />
-                        <button type="submit" class="btn btn-primary"></button>
-                    </form>
-                </td>
-            </tr>
+        <tr>
+            <td class="tableRow">
+                <input class="form-control custom-input-table" value="@category.CategoryName" />
+            </td>
+            <td class="tableRow">
+                <form class="form-group" asp-controller="" asp-action="" method="post">
+                    <input name="categoryID" hidden value="@category.Id" />
+                    <button type="submit" class="btn btn-primary">salvar</button>
+                </form>
+            </td>
+        </tr>
 
-        }
+    }
 </table>
 
