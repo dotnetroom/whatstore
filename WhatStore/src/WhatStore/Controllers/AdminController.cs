@@ -60,7 +60,7 @@ namespace WhatStore.Controllers
             //var category = await _productRepository.GetCategory();
 
             if (await _productRepository.RegisterCategory(model.CategoryName))
-            {               
+            {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
             else
@@ -72,9 +72,44 @@ namespace WhatStore.Controllers
         }
 
         [HttpGet("subcategory")]
-        public IActionResult Subcategory()
+        public async Task<IActionResult> Subcategory()
         {
-            return View();
+            try
+
+            {
+                //var category = await _productRepository.GetCategory();
+                //var subcategory = await _productRepository.GetSubCategory();
+                var viewModel = new RegisterSubCategoryViewModel();
+                //viewModel.Subcategorys = subcategory;
+                return View(viewModel);
+            }
+
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("register/subcategory")]
+        public async Task<IActionResult> RegisterSubCategoryProduct(RegisterSubCategoryViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            //var category = await _productRepository.GetCategory();
+
+            if (await _productRepository.RegisterCategory(model.SubcategoryName))
+            {
+                model.ReturnMessage = "Alterações salvas com sucesso";
+            }
+            else
+            {
+                model.ReturnMessage = "Erro ao salvar alterações";
+            }
+
+            return RedirectToAction("subcategory");
         }
     }
 }
