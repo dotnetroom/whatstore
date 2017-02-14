@@ -34,7 +34,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             STOREID = storeID
                         });
                     var product = result.ToList();
-                    
+
                     return product;
                 }
             }
@@ -71,7 +71,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     for (var i = 0; i < arrayTag.Length; i++)
                     {
-                        arrayTag[i] = arrayTag[i].Replace(" ","");
+                        arrayTag[i] = arrayTag[i].Replace(" ", "");
                     }
 
                     var productUpdateQuery = "UPDATE dbo.Product SET Description = @Description, IsFreeShipping = @IsFreeShipping, " +
@@ -290,7 +290,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             ProductId = productId
                         });
                     }
-                } 
+                }
                 return true;
             }
             catch (Exception ex)
@@ -310,9 +310,9 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             new
                             {
                                 ID = productId
-                            });                   
-                        var resultImageSelect = imageSelect.ToList();
-                        return resultImageSelect;                                       
+                            });
+                    var resultImageSelect = imageSelect.ToList();
+                    return resultImageSelect;
                 }
             }
             catch (Exception ex)
@@ -366,8 +366,6 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-
-
         public async Task<List<Category>> GetCategory()
         {
             try
@@ -392,23 +390,66 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    var queryInsertCategory = ("INSERT INTO dbo.Category (CategoryName) VALUES (@CategoryName)"); 
-                    var category = await db.ExecuteAsync(queryInsertCategory,new
-                        {
-                            CategoryName = categoryName
-                        });
+                    var queryInsertCategory = ("INSERT INTO dbo.Category (CategoryName) VALUES (@CategoryName)");
+                    var category = await db.ExecuteAsync(queryInsertCategory, new
+                    {
+                        CategoryName = categoryName
+                    });
                     return true;
                 }
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
 
         }
 
+        public async Task<List<SubCategory>> GetSubCategory(long categoryId)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var result = await db.QueryAsync<SubCategory>("SELECT * FROM dbo.Category WHERE CategoryId = @CategoryId",
+                        new
+                        {
+                            CategoryId = categoryId
+                        });
 
+                    return result.ToList();
 
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+       }
+
+        public async Task<bool> RegisterSubCategory(string subCategoryName, long categoryId)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var queryInsertCategory = ("INSERT INTO dbo.SubCategory (SubCategoryName, CategoryId) VALUES (@SubCategoryName, @CategoryId)");
+                    var category = await db.ExecuteAsync(queryInsertCategory, new
+                    {
+                        SubCategoryName = subCategoryName,
+                        CategoryId = categoryId
+                    });
+                    return true;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
     }
 }
