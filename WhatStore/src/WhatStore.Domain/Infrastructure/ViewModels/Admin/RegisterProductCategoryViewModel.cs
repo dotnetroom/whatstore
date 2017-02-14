@@ -10,6 +10,7 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
     {
         public List<Category> Categories { get; set; }
         public string CategoryName { get; set; }
+        public long CategoryId { get; set; }
         public string ReturnMessage { get; set; }
     }
 }
