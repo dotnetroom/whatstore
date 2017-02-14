@@ -20,19 +20,16 @@
 <table class="table margin-left-40 form-group" id="CategoryTable">
     <tr>
         <th class="tableRow">Categoria</th>
-        <th class="tableRow">Opções</th>
     </tr>
 
     @foreach (var category in Model.Categories)
             {
 
         <tr>
-            <td class="tableRow" >
-                <input class="custom-input-table" value="@category.CategoryName"  asp-for="CategoryName"/>
-            </td>
             <td class="tableRow">
                 <form style="margin-bottom:-15px" class="form-group" asp-controller="admin" asp-action="update/category" method="post">
-                    <input asp-for="CategoryId" hidden value="@category.Id" />
+                    <input name="categoryID" hidden value="@category.Id" />
+                    <input class="form-control custom-input-table" value="@category.CategoryName" />
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </form>
             </td>
