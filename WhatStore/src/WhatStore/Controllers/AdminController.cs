@@ -59,9 +59,9 @@ namespace WhatStore.Controllers
 
             var category = await _productRepository.GetCategory();
 
-            if (await _productRepository.RegisterCategory(model.ProductCategory))
+            if (await _productRepository.RegisterCategory(model.CategoryName))
             {
-                model.Categorys = category;
+                model.Categories = category;
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
             else
