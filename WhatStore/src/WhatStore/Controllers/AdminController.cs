@@ -39,7 +39,7 @@ namespace WhatStore.Controllers
             {
                 var category = await _productRepository.GetCategory();
                 var viewModel = new RegisterProductCategoryViewModel();
-                viewModel.Categorys = category;
+                viewModel.Categories = category;
                 return View(viewModel);
             }
 
