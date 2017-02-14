@@ -16,6 +16,13 @@ namespace WhatStore.Controllers
     [Route("admin")]
     public class AdminController : Controller
     {
+        private IProductRepository _productRepository;
+        private UserManager<ApplicationUser> _userManager;
+        public AdminController(IProductRepository productRepository, UserManager<ApplicationUser> userManager)
+        {
+            _productRepository = productRepository;
+            _userManager = userManager;
+        }
 
         [HttpGet("open")]
         public IActionResult Open()
@@ -25,9 +32,44 @@ namespace WhatStore.Controllers
         }
 
         [HttpGet("category")]
-        public IActionResult CategoryProduct()
+        public async Task<IActionResult> CategoryProduct()
         {
-            return View();
+            try
+
+            {
+                var category = await _productRepository.GetCategory();
+                var viewModel = new RegisterProductCategoryViewModel();
+                viewModel.Categorys = category;
+                return View(viewModel);
+            }
+
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("register/category")]
+        public async Task<IActionResult> RegisterCategoryProduct(RegisterProductCategoryViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var category = await _productRepository.GetCategory();
+
+            if (await _productRepository.RegisterCategory(model.ProductCategory))
+            {
+                model.Categorys = category;
+                model.ReturnMessage = "Alterações salvas com sucesso";
+            }
+            else
+            {
+                model.ReturnMessage = "Erro ao salvar alterações";
+            }
+
+            return RedirectToAction("category");
         }
 
         [HttpGet("subcategory")]

@@ -28,5 +28,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<bool> DeleteImage(long productId);
         Task<List<Category>> GetCategory();
         Task<bool> RegisterCategory(string categoryName);
+        Task<List<SubCategory>> GetSubCategory(long categoryId);
+        Task<bool> RegisterSubCategory(string subCategoryName, long categoryId);
       }
 }
