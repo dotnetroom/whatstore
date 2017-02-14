@@ -69,7 +69,7 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return RedirectToAction("Category");
+            return RedirectToAction("category");
         }
 
         [HttpGet("subcategory")]
