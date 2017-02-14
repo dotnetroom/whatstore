@@ -414,10 +414,10 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 {
                     var queryUpdateCategory = ("UPDATE dbo.Cetegory SET CategoryName = @CategoryName WHERE Id = @Id");
 
-                    var resultUpdate = db.ExecuteAsync(queryUpdateCategory, new
+                    var resultUpdate = await db.ExecuteAsync(queryUpdateCategory, new
                     {
                         CategoryName = categoryName,
-                        Id = categoryName
+                        Id = categoryId
                     });
 
                     return true;
@@ -473,6 +473,32 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 return false;
             }
 
-        }        
+        }
+        
+        public async Task<bool> UpdateSubCategory(string subCategoryName, long subCategoryId)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+
+                    var queryUpdateCategory = ("UPDATE dbo.SubCetegory SET SubCategoryName = @SubCategoryName WHERE Id = @Id");
+
+                    var resultUpdate = await db.ExecuteAsync(queryUpdateCategory, new
+                    {
+                        SubCategoryName = subCategoryName,
+                        Id = subCategoryId
+                    });
+
+                    return true;
+                }
+            }
+
+            catch(Exception ex)
+            {
+                return false;
+            }
+
+        }       
     }
 }
