@@ -57,11 +57,10 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            var category = await _productRepository.GetCategory();
+            //var category = await _productRepository.GetCategory();
 
             if (await _productRepository.RegisterCategory(model.CategoryName))
-            {
-                model.Categories = category;
+            {               
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
             else
