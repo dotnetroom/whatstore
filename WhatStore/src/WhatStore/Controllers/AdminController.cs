@@ -32,7 +32,7 @@ namespace WhatStore.Controllers
         }
 
         [HttpGet("category")]
-        public async Task<IActionResult> CategoryProduct()
+        public async Task<IActionResult> Category()
         {
             try
 
@@ -73,7 +73,7 @@ namespace WhatStore.Controllers
         }
 
         [HttpGet("subcategory")]
-        public IActionResult SubcategoryProduct()
+        public IActionResult Subcategory()
         {
             return View();
         }
