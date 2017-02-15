@@ -1,4 +1,4 @@
-﻿@model WhatStore.Domain.Infrastructure.ViewModels.Admin.RegisterSubCategoryViewModel
+﻿@model WhatStore.Domain.Infrastructure.ViewModels.Admin.RegisterProductCategoryViewModel
 @{
     Layout = "_Admin";
 }
@@ -9,12 +9,16 @@
 <form class="form-group margin-top-20" asp-controller="admin" asp-action="subcategory" method="post">
     <div class="form-group float-left margin-left-40 ">
         <label>Categoria</label>
-        <select name="Category" id="dropCategory" type="text" class="form-control" >
+        <select name="Category" id="dropCategory" type="text" class="form-control">
             <option value="-1">Selecione a categoria</option>
+            @foreach (var category in Model.Categories)
+            {
+                <option value="@category.Id" selected>@category.CategoryName</option>
+            }
         </select>
 
         <label class="margin-top-10">Subcategoria:</label>
-        <input class="form-control float-left" asp-for="SubcategoryName" id="Subcategory" value="@Model.SubcategoryName"/>
+        <input class="form-control float-left" asp-for="SubcategoryName" id="Subcategory" value="@Model.SubcategoryName" />
         <button class="btn btn-primary margin-top-10  float-left" type="submit" asp-controller="admin" asp-action="register/subcategory">Enviar</button>
     </div>
 </form>
