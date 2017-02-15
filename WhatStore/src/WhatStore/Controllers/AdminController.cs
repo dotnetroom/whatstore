@@ -119,7 +119,7 @@ namespace WhatStore.Controllers
 
             //var category = await _productRepository.GetCategory();
 
-            if (await _productRepository.RegisterSubCategory(model.SubcategoryName, model.SubcategoryId))
+            if (await _productRepository.RegisterSubCategory(model.SubCategoryName, model.SubCategoryId))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }

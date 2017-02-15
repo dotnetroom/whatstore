@@ -13,8 +13,8 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
         public long CategoryId { get; set; }
 
         public List<SubCategory> Subcategorys { get; set; }
-        public string SubcategoryName { get; set; }
-        public long SubcategoryId { get; set; }
+        public string SubCategoryName { get; set; }
+        public long SubCategoryId { get; set; }
 
         public string ReturnMessage { get; set; }
     }

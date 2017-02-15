@@ -8,8 +8,9 @@
 
 <form class="form-group margin-top-20" asp-controller="admin" asp-action="subcategory" method="post">
     <div class="form-group float-left margin-left-40 ">
+
         <label>Categoria</label>
-        <select name="Category" id="dropCategory" type="text" class="form-control">
+        <select name="Category" id="dropCategory" type="text" class="form-control" value="@Model.Categories">
             <option value="-1">Selecione a categoria</option>
             @foreach (var category in Model.Categories)
             {
@@ -18,7 +19,7 @@
         </select>
 
         <label class="margin-top-10">Subcategoria:</label>
-        <input class="form-control float-left" asp-for="SubcategoryName" id="Subcategory" value="@Model.SubcategoryName" />
+        <input class="form-control float-left" asp-for="SubCategoryName" id="Subcategory" value="@Model.SubCategoryName" />
         <button class="btn btn-primary margin-top-10  float-left" type="submit" asp-controller="admin" asp-action="register/subcategory">Enviar</button>
     </div>
 </form>
@@ -26,8 +27,28 @@
 <table class="table margin-left-40 form-group" id="SubcategoryTable">
     <tr>
         <th class="tableRow">Subcategoria</th>
-        <th class="tableRow">Opções</th>
     </tr>
+
+    @foreach (var subcategory in Model.Subcategorys)
+            {
+
+        <tr>
+            <td class="tableRow">
+                <form style="margin-bottom:-15px" class="form-group" asp-controller="admin" asp-action="update/subcategory" method="post">
+                    <input name="subcategoryID" hidden value="@subcategory.Id" />
+                    <input class="form-group custom-input-table" value="@subcategory.SubCategoryName" asp-for="SubCategoryName" />
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </td>
+        </tr>
+
+    }
 </table>
 
-
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#dropCategory').states($('#dropSubCategory'));
+        });
+    </script>
+}
