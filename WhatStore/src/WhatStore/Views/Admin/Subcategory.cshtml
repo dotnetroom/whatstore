@@ -10,13 +10,13 @@
     <div class="form-group float-left margin-left-40 ">
 
         <label>Categoria</label>
-        <select name="CategoryId" type="text" class="form-control dropCategories" value="@Model.Categories">
+        <select name="CategoryId" type="text" class="form-control dropCategories" value="@Model.Category">
             <option value="-1">Selecione a categoria</option>
             @if (Model.Categories != null && Model.Categories.Count > 0)
             {
                 @foreach (var category in Model.Categories)
                 {
-                    <option value="@category.Id" selected>@category.CategoryName</option>
+                    <option value="@category.Id">@category.CategoryName</option>
                 }
             }
         </select>

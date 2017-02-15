@@ -93,7 +93,7 @@ namespace WhatStore.Controllers
 
         [HttpGet("subcategory")]
         public async Task<IActionResult> Subcategory(RegisterProductCategoryViewModel model, long id)
-        {
+       {
             try
 
             {

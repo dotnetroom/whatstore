@@ -16,6 +16,9 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
         public string SubCategoryName { get; set; }
         public long SubCategoryId { get; set; }
 
+        public long Category { get; set; }
+
+
         public string ReturnMessage { get; set; }
     }
 }
