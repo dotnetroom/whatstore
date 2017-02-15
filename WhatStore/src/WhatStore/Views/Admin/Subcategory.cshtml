@@ -31,7 +31,7 @@
     <tr>
         <th class="tableRow">Subcategoria</th>
     </tr>
-    @if (Model.Subcategories != null && Model.Subcategories.Count > 0)
+    @if (Model.Subcategories != null)
     {
         @foreach (var subcategory in Model.Subcategories)
         {
@@ -55,12 +55,19 @@
             var button = $(this);
             var id = button.val();
             $.ajax({
-                url: '/admin/subcategory',
-                type: 'get',
-                data:{
-                    id : id                 
-                }, 
-            });            
+                url: '/admin/category/'+id+'/subcategories',
+                type: 'get',                
+
+                success: function (data) {
+                    $.each(data, function (i, item) {
+
+                    });
+
+                }
+
+            });
+
+
         });
 
 
