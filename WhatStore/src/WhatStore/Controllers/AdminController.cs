@@ -130,5 +130,25 @@ namespace WhatStore.Controllers
 
             return RedirectToAction("subcategory");
         }
+
+        [HttpPost("update/subcategory")]
+        public async Task<IActionResult> UpdateSubCategoryProduct(RegisterProductCategoryViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (await _productRepository.UpdateSubCategory(model.SubCategoryName, model.SubCategoryId))
+            {
+                model.ReturnMessage = "Alterações salvas com sucesso";
+            }
+            else
+            {
+                model.ReturnMessage = "Erro ao salvar alterações";
+            }
+
+            return RedirectToAction("category");
+        }
     }
 }

@@ -31,6 +31,8 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<bool> UpdateCategory(long categoryId, string categoryName);
         Task<List<SubCategory>> GetSubCategory(long categoryId);
         Task<bool> RegisterSubCategory(string subCategoryName, long categoryId);
-        
+        Task<bool> UpdateSubCategory(string subCategoryName, long subCategoryId)
+
+
       }
 }
