@@ -10,7 +10,7 @@
     <div class="form-group float-left margin-left-40 ">
 
         <label>Categoria</label>
-        <select name="Category" id="dropCategory" type="text" class="form-control" value="@Model.Categories">
+        <select id="dropCategories" type="text" class="form-control" value="@Model.Categories">
             <option value="-1">Selecione a categoria</option>
             @foreach (var category in Model.Categories)
             {
@@ -48,7 +48,7 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#dropCategory').states($('#dropSubCategory'));
+            $('#dropCategories');
         });
     </script>
 }
