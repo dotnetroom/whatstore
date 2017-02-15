@@ -10,13 +10,13 @@
     <div class="form-group float-left margin-left-40 ">
 
         <label>Categoria</label>
-        <select name="CategoryId" id="dropCategories" type="text" class="form-control" value="@Model.Categories">
+        <select name="CategoryId" type="text" class="form-control dropCategories" value="@Model.Categories">
             <option value="-1">Selecione a categoria</option>
             @if (Model.Categories != null && Model.Categories.Count > 0)
             {
                 @foreach (var category in Model.Categories)
                 {
-                    <option data-id="@category.Id" value="@category.Id" selected>@category.CategoryName</option>
+                    <option value="@category.Id" selected>@category.CategoryName</option>
                 }
             }
         </select>
@@ -51,15 +51,16 @@
 
 @section Scripts{
     <script type="text/javascript">
-        $('#dropCategories').on("change", function () {
+        $('.dropCategories').on("change", function () {
             var button = $(this);
-            var id = button.attr("data-id");
+            var id = button.val();
             $.ajax({
                 url: '/admin/subcategory',
                 type: 'get',
-                data: {
-                    id: id
-                },
+                data:{
+                    id : id                 
+                }, 
+                
                 success: function () {
                     alert("deu");
                 },
