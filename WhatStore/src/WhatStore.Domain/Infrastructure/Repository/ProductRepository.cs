@@ -435,7 +435,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    var result = await db.QueryAsync<SubCategory>("SELECT * FROM dbo.Category WHERE CategoryId = @CategoryId",
+                    var result = await db.QueryAsync<SubCategory>("SELECT * FROM dbo.SubCategory WHERE CategoryId = @CategoryId",
                         new
                         {
                             CategoryId = categoryId

@@ -92,7 +92,7 @@ namespace WhatStore.Controllers
         }
 
         [HttpGet("subcategory")]
-        public async Task<IActionResult> Subcategory(RegisterProductCategoryViewModel model)
+        public async Task<IActionResult> Subcategory(RegisterProductCategoryViewModel model, long id)
         {
             try
 
@@ -120,7 +120,7 @@ namespace WhatStore.Controllers
 
             //var category = await _productRepository.GetCategory();
 
-            if (await _productRepository.RegisterSubCategory(model.SubCategoryName, model.SubCategoryId))
+            if (await _productRepository.RegisterSubCategory(model.SubCategoryName, model.CategoryId))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
