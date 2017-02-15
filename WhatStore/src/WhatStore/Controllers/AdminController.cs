@@ -92,16 +92,15 @@ namespace WhatStore.Controllers
         }
 
         [HttpGet("subcategory")]
-        public async Task<IActionResult> Subcategory()
+        public async Task<IActionResult> Subcategory(RegisterProductCategoryViewModel model)
         {
             try
 
             {
                 var category = await _productRepository.GetCategory();
-                var subcategory = await _productRepository.GetSubCategory();
-                var viewModel = new RegisterProductCategoryViewModel();
-                viewModel.Subcategorys = subcategory;
-                return View(viewModel);
+                var subcategory = await _productRepository.GetSubCategory(model.CategoryId);                
+                model.Subcategorys = subcategory;
+                return View(model);
             }
 
             catch (Exception ex)
