@@ -12,9 +12,12 @@
         <label>Categoria</label>
         <select id="dropCategories" type="text" class="form-control" value="@Model.Categories">
             <option value="-1">Selecione a categoria</option>
-            @foreach (var category in Model.Categories)
+            @if (Model.Categories != null && Model.Categories.Count > 0)
             {
-                <option value="@category.Id" selected>@category.CategoryName</option>
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.Id" selected>@category.CategoryName</option>
+                }
             }
         </select>
 
@@ -28,20 +31,21 @@
     <tr>
         <th class="tableRow">Subcategoria</th>
     </tr>
+    @if (Model.Subcategories != null && Model.Subcategories.Count > 0)
+    {
+        @foreach (var subcategory in Model.Subcategories)
+        {
 
-    @foreach (var subcategory in Model.Subcategories)
-            {
-
-        <tr>
-            <td class="tableRow">
-                <form style="margin-bottom:-15px" class="form-group" asp-controller="admin" asp-action="update/subcategory" method="post">
-                    <input name="subcategoryID" hidden value="@subcategory.Id" />
-                    <input class="form-group custom-input-table" value="@subcategory.SubCategoryName" asp-for="SubCategoryName" />
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </form>
-            </td>
-        </tr>
-
+            <tr>
+                <td class="tableRow">
+                    <form style="margin-bottom:-15px" class="form-group" asp-controller="admin" asp-action="update/subcategory" method="post">
+                        <input name="subcategoryID" hidden value="@subcategory.Id" />
+                        <input class="form-group custom-input-table" value="@subcategory.SubCategoryName" asp-for="SubCategoryName" />
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </form>
+                </td>
+            </tr>
+        }
     }
 </table>
 

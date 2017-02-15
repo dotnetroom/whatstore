@@ -99,7 +99,8 @@ namespace WhatStore.Controllers
             {
                 var category = await _productRepository.GetCategory();
                 var subcategory = await _productRepository.GetSubCategory(model.CategoryId);                
-                model.Subcategorys = subcategory;
+                model.Subcategories = subcategory;
+                model.Categories = category;
                 return View(model);
             }
 
