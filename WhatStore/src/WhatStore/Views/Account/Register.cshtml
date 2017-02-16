@@ -36,7 +36,8 @@
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Genero: </label>
-            <select id="Genero" class="form-control" asp-for="Genero">
+            <select id="Genero" class="form-control" asp-for="Genero" value="@Model.Genero">
+                <option value="-1">Selecione</option>
                 <option value="false">Masculino</option>
                 <option value="true">Feminino</option>                
             </select>            
