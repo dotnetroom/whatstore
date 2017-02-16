@@ -32,10 +32,10 @@
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Data de nascimento: </label>
-            <input type="date" class="form-control" required asp-for="Birthday"  />
+            <input type="date" class="form-control" required asp-for="Birthday" value="@Model.Birthday.ToString("yyyy-MM-dd") />
         </div>
         <div class="row margin-top-10 font-size13">
-            <label>Genero: </label>
+            <label>Genero: </label>            
             <input type="radio" name="genero" value="true" />Feminino
             <input type="radio" name="genero" value="false" />Masculino
         </div>
