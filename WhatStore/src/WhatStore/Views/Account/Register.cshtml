@@ -12,7 +12,7 @@
 <body>
     <a asp-controller="home" asp-action="index"><div class="logo-register margin-top-75 float-center" asp-action="home"></div></a>
 
-    <form class="formRegister formLogin float-center margin-top-20 margin-bottom-50" asp-controller="account" asp-action="register" method="post">
+    <form class="formRegister formLogin float-center margin-top-20 margin-bottom-50" asp-controller="account" asp-action="register/user" method="post">
 
         <div class="row margin-top-10 font-size13">
             <label>Nome: </label>
@@ -32,12 +32,14 @@
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Data de nascimento: </label>
-            <input type="date" class="form-control" required asp-for="Birthday" value="@Model.Birthday.ToString("yyyy-MM-dd") />
+            <input type="date" class="form-control" required asp-for="Birthday" value="@Model.Birthday.ToString("yyyy-MM-dd")"/>
         </div>
         <div class="row margin-top-10 font-size13">
-            <label>Genero: </label>            
-            <input type="radio" name="genero" value="true" />Feminino
-            <input type="radio" name="genero" value="false" />Masculino
+            <label>Genero: </label>
+            <select id="Genero" class="form-control" asp-for="Genero">
+                <option value="false">Masculino</option>
+                <option value="true">Feminino</option>                
+            </select>            
         </div>
 
         <div class="row margin-top-10 form-group">

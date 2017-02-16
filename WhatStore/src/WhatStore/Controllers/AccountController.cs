@@ -36,7 +36,7 @@ namespace WhatStore.Controllers
 
         // GET: /<controller>/
 
-        [Route("login")]
+        [HttpGet("login")]
         [AllowAnonymous]
         public IActionResult Login(string returnURL = null)
         {
@@ -44,7 +44,7 @@ namespace WhatStore.Controllers
             return View();
         }
 
-        [Route("register")]
+        [HttpGet("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register()
         {
@@ -86,8 +86,8 @@ namespace WhatStore.Controllers
             return RedirectToAction("Information", "Store", modelAdmin);
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterUserViewModel model)
+        [HttpPost("register/user")]
+        public async Task<IActionResult> RegisterUser(RegisterUserViewModel model)
         {
             if (!ModelState.IsValid)
             {
