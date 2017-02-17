@@ -88,21 +88,22 @@
 
         <div class="form-group">
             <h3>Categorias</h3>
-            <select name="" id="dropCategory" type="text" class="form-control" value="@Model.Category">
+            <select name="Category" id="dropCategory" type="text" class="form-control" value="@Model.Category">
                 <option value="-1">Selecione a categoria</option>
                 @foreach (var category in Model.Categories)
                 {
-                <option value="@category.Id">@category.CategoryName</option>
+                    <option value="@category.Id">@category.CategoryName</option>
                 }
             </select>
+
             @*<select name="" id="dropSubCategory" type="text" class="form-control" value="@Model.SubCategory">
-                <option value="-1">Selecione a categoria</option>
-                @foreach (var subCategory in Model.SubCategories)
-                {
-                    <option value="@subCategory.Id">@subCategory.SubCategoryName</option>
-                }
-            </select>*@
-            
+                    <option value="-1">Selecione a categoria</option>
+                    @foreach (var subCategory in Model.SubCategories)
+                    {
+                        <option value="@subCategory.Id">@subCategory.SubCategoryName</option>
+                    }
+                </select>*@
+
         </div>
         <hr />
 
@@ -139,6 +140,21 @@
 
         $(document).ready(function () {
             $('#dropCategory').states($('#dropSubCategory'));
+        });
+
+        $("#dropCategory").on("change", function () {
+            var button = $(this);
+            var value = button.val();
+
+            $.ajax({
+                url: '/category/' + value + '/subcategories',
+                type: 'get',
+                data: {
+                    id: value,
+                },
+
+            });
+
         });
     </script>
 }
