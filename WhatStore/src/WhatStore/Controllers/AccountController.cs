@@ -41,14 +41,10 @@ namespace WhatStore.Controllers
             ViewData["ReturnURL"] = returnURL;
             return View();
         }
-<<<<<<< HEAD
+
 
         
-        // POST: /<controller>/
-=======
-       
-        
->>>>>>> ab1aa430ea1d29dd46d0a8cc524ba2567f51bbb1
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -76,10 +72,7 @@ namespace WhatStore.Controllers
             return RedirectToAction("Information", "Store", modelAdmin);
         }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> ab1aa430ea1d29dd46d0a8cc524ba2567f51bbb1
         [HttpGet("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register()
