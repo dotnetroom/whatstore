@@ -624,12 +624,13 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         {
                             ID = storeId
                         });
-                    var sotore = selectStore.FirstOrDefault();
+
+                    var store = selectStore.FirstOrDefault();
 
                     var deleteAdress = await db.ExecuteAsync("DELETE FROM dbo.Adress WHERE Id = @Id",
                         new
                         {
-                            Id = store.
+                            Id = store.AdressId
                         });
 
                     return true;
@@ -657,29 +658,6 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     return false;
                 }
             }
-        }
-
-        public async Task<Store> SelectStore(long storeId)
-        {
-            using (var db = new SqlConnection(_settings.ConnectionString))
-            {
-                try
-                {
-                    var selectStore = await db.QueryAsync<Store>("SELEC * FROM dbo.Store WHERE Id = @ID",
-                        new
-                        {
-                            ID = storeId
-                        });
-
-                    return selectStore.FirstOrDefault();
-
-                }
-                catch(Exception ex)
-                {
-                    return null;
-                }
-            }
-
         }
     }
 }
