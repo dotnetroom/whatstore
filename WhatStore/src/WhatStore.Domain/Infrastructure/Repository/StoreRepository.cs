@@ -219,7 +219,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                         if (user <= 0)
                         {
-                            DeleteStore()
+                            //await _ DeleteStore();
                         }
 
                         trans.Rollback();

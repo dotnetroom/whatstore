@@ -152,6 +152,19 @@
                 data: {
                     id: value,
                 },
+                success: function (data) {
+                    var tr;
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                        tr = tr + "<tr>";
+                        tr = tr + "<td>" + data[i]. + "</td>";
+                        tr = tr + "</tr>";
+                        alert("funciona");
+                    }
+                },
+                error: function (xhr) {
+                    alert('No Valid Data');
+                }
 
             });
 
