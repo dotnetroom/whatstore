@@ -32,9 +32,7 @@ namespace WhatStore.Controllers
             _logger = loggerFactory.CreateLogger<AccountController>();
             _userManager = userManager;
             
-        }
-
-        // GET: /<controller>/
+        }  
 
         [HttpGet("login")]
         [AllowAnonymous]
@@ -43,22 +41,8 @@ namespace WhatStore.Controllers
             ViewData["ReturnURL"] = returnURL;
             return View();
         }
-
-        [HttpGet("register")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Register()
-        {
-            var storeTypes = await _storeRepository.GetStoreType();
-
-            var model = new RegisterUserViewModel()
-            {
-                StoreTypes = storeTypes
-            };
-
-            return View(model);
-        }
-
-        // POST: /<controller>/
+       
+        
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -85,6 +69,22 @@ namespace WhatStore.Controllers
 
             return RedirectToAction("Information", "Store", modelAdmin);
         }
+
+
+        [HttpGet("register")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register()
+        {
+            var storeTypes = await _storeRepository.GetStoreType();
+
+            var model = new RegisterUserViewModel()
+            {
+                StoreTypes = storeTypes
+            };
+
+            return View(model);
+        }
+
 
         [HttpPost("register/user")]
         public async Task<IActionResult> RegisterUser(RegisterUserViewModel model)
