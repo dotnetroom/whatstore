@@ -75,14 +75,13 @@ namespace WhatStore.Controllers
 
         [HttpGet("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register()
+        public async Task<IActionResult> Register(RegisterUserViewModel model)
         {
             var storeTypes = await _storeRepository.GetStoreType();
 
-            var model = new RegisterUserViewModel()
-            {
-                StoreTypes = storeTypes
-            };
+
+            model.StoreTypes = storeTypes;
+            
 
             return View(model);
         }
@@ -131,16 +130,12 @@ namespace WhatStore.Controllers
                 }
                 else
                 {
+                    ModelState.AddModelError("Email", "Email invalido");
                     await _storeRepository.DeleteStore(storeID);
-                    return View("Register", model);
+                    return RedirectToAction("Register",model);
                 }
                 
-            }
-            else
-            {
-                model.ReturnMessage = "Erro ao salvar alterações";
-            }
-
+            }        
 
             return Ok();
             
