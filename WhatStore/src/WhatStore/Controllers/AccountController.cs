@@ -44,20 +44,7 @@ namespace WhatStore.Controllers
             return View();
         }
 
-        [HttpGet("register")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Register()
-        {
-            var storeTypes = await _storeRepository.GetStoreType();
-
-            var model = new RegisterUserViewModel()
-            {
-                StoreTypes = storeTypes
-            };
-
-            return View(model);
-        }
-
+        
         // POST: /<controller>/
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -85,6 +72,21 @@ namespace WhatStore.Controllers
 
             return RedirectToAction("Information", "Store", modelAdmin);
         }
+
+        [HttpGet("register")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register()
+        {
+            var storeTypes = await _storeRepository.GetStoreType();
+
+            var model = new RegisterUserViewModel()
+            {
+                StoreTypes = storeTypes
+            };
+
+            return View(model);
+        }
+
 
         [HttpPost("register/user")]
         public async Task<IActionResult> RegisterUser(RegisterUserViewModel model)
@@ -124,22 +126,26 @@ namespace WhatStore.Controllers
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, "Store");
+                    model.ReturnMessage = "Alterações salvas com sucesso";
+                    return View("Login", new LoginViewModel());
                 }
-
-                model.ReturnMessage = "Alterações salvas com sucesso";
+                else
+                {
+                    await _storeRepository.DeleteStore(storeID);
+                    return View("Register", model);
+                }
+                
             }
             else
             {
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
-                  
-                            
 
+
+            return Ok();
             
 
-            var modelLogin = new LoginViewModel();
-
-            return View("Login", modelLogin);
+            
         }
 
         [HttpPost("Logoff")]

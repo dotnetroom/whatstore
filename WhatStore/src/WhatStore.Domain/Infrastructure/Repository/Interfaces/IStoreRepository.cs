@@ -32,5 +32,6 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<long> InsertAdress(string CEP, int cityId, string complement, string number, string street);
         Task<bool> UpdateAdress(long adressId, string CEP, int cityId, string complement, string number, string street);
         Task<bool> DeleteLogo(long storeId);
+        Task<bool> DeleteStore(long storeId);
     }
 }

@@ -596,6 +596,24 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         }
 
+        public async Task<bool> DeleteStore(long storeId)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var deleteStore = await db.ExecuteAsync("DELETE FROM dbo.Store WHERE dbo.Store.Id = @ID", new { ID = storeId });
+
+                    return true;
+
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
         public async Task<bool> DeleteLogo(long storeId)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
