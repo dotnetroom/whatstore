@@ -136,7 +136,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                             + "VALUES (@Name)";
 
                         var resultInsertType = await db.ExecuteAsync(queryInsertType, new { Name = storeType }, trans);
-                        trans.Commit();                       
+                        trans.Commit();
 
                         return true;
                     }
@@ -218,15 +218,11 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         var userExistent = await db.QueryAsync<ApplicationUser>("SELECT * FROM dbo.AspNetUser, dbo.Store WHERE dbo.Store.Id = dbo.AspNetUsers.StoreId");
                         var user = userExistent.FirstOrDefault();
 
-                      
+
 
                         if (user.Id <= 0)
                         {
-<<<<<<< HEAD
-                            //await _ DeleteStore();
-=======
                             await DeleteStore(user.StoreId);
->>>>>>> d038684d71ccc0b93fb508ea73159990bea552da
                         }
 
                         trans.Rollback();
@@ -617,12 +613,12 @@ namespace WhatStore.Domain.Infrastructure.Repository
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 try
-                {                  
+                {
                     var deleteStore = await db.ExecuteAsync("DELETE FROM dbo.Store WHERE dbo.Store.Id = @ID",
                         new
                         {
                             ID = storeId
-                        });                                     
+                        });
 
                     return true;
 
