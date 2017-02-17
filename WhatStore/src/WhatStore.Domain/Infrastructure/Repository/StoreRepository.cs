@@ -65,7 +65,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                         else
                         {
-                            var insertAdress = InsertAdress(CEP, city, complemento, number, address);                       
+                            var insertAdress = InsertAdress(CEP, city, complemento, number, address);
 
                             adressUpdate = "UPDATE dbo.Store SET AdressId = @ADDRESS WHERE Store.Id = @ID";
                             var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID, ADDRESS = insertAdress });
@@ -135,7 +135,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                             + "VALUES (@Name)";
 
                         var resultInsertType = await db.ExecuteAsync(queryInsertType, new { Name = storeType }, trans);
-                        trans.Commit();
+                        trans.Commit();                       
+
                         return true;
                     }
                     catch (Exception ex)
@@ -211,6 +212,14 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         {
                             trans.Commit();
                             return storeID;
+                        }
+
+                        var userExistent = "SELECT dbo.AspNetUsers.Id FROM dbo.AspNetUser, dbo.Store WHERE dbo.Store.Id = dbo.AspNetUsers.StoreId";
+                        var user = userExistent.FirstOrDefault();
+
+                        if (user <= 0)
+                        {
+                            DeleteStore()
                         }
 
                         trans.Rollback();
@@ -602,7 +611,26 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 try
                 {
-                    var deleteStore = await db.ExecuteAsync("DELETE FROM dbo.Store WHERE dbo.Store.Id = @ID", new { ID = storeId });
+                    
+
+                    var deleteStore = await db.ExecuteAsync("DELETE FROM dbo.Store WHERE dbo.Store.Id = @ID",
+                        new
+                        {
+                            ID = storeId
+                        });
+
+                    var selectStore = await db.QueryAsync<Store>("SELEC * FROM dbo.Store WHERE Id = @ID",
+                        new
+                        {
+                            ID = storeId
+                        });
+                    var sotore = selectStore.FirstOrDefault();
+
+                    var deleteAdress = await db.ExecuteAsync("DELETE FROM dbo.Adress WHERE Id = @Id",
+                        new
+                        {
+                            Id = store.
+                        });
 
                     return true;
 
@@ -629,6 +657,29 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     return false;
                 }
             }
+        }
+
+        public async Task<Store> SelectStore(long storeId)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var selectStore = await db.QueryAsync<Store>("SELEC * FROM dbo.Store WHERE Id = @ID",
+                        new
+                        {
+                            ID = storeId
+                        });
+
+                    return selectStore.FirstOrDefault();
+
+                }
+                catch(Exception ex)
+                {
+                    return null;
+                }
+            }
+
         }
     }
 }
