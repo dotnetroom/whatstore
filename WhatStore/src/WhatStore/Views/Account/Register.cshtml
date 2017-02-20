@@ -5,6 +5,13 @@
 }
 <html>
 <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <title>Cadastro - WhatStore</title>
 </head>
@@ -13,6 +20,13 @@
     <a asp-controller="home" asp-action="index"><div class="logo-register margin-top-75 float-center" asp-action="home"></div></a>
 
     <form class="formRegister formLogin float-center margin-top-20 margin-bottom-50" asp-controller="account" asp-action="register/user" method="post">
+
+        @if (ViewBag.Errors != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @Html.Raw(ViewBag.Errors)
+            </div>
+        }
 
         <div class="row margin-top-10 font-size13">
             <label>Nome: </label>
@@ -31,7 +45,7 @@
             <input type="text" class="form-control" required asp-for="CPF"/>
         </div>
         <div class="row margin-top-10 font-size13">
-            <label>Data de nascimento: </label>
+            <label>Data de nascimento:</label>
             <input type="date" class="form-control" required asp-for="Birthday" value="@Model.Birthday.ToString("yyyy-MM-dd")"/>
         </div>
         <div class="row margin-top-10 font-size13">

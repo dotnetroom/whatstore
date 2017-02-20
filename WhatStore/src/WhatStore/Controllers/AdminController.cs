@@ -94,9 +94,14 @@ namespace WhatStore.Controllers
         [HttpGet("category/{id}/subcategories")]
         public async Task<IActionResult> SubcategoryList(long id)
         {
-            var subcategories = await _productRepository.GetSubCategory(id);
+            try
+            {
+                var subcategories = await _productRepository.GetSubCategory(id);
 
-            return Json(subcategories);
+                return Json(subcategories);
+            }catch(Exception ex){
+                return BadRequest(ex);
+            }
         }
 
         [HttpGet("subcategory")]

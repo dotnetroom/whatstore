@@ -197,6 +197,8 @@ textarea {
 .row {
     width: 100% !important;
     height: auto !important;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 
 /*Colors*/
@@ -1101,12 +1103,10 @@ tr:nth-child(even) {
         color: #02b6e6;
     }
 
-.custom-input-table{
-    background-color:transparent; 
-    border:0px; 
+.custom-input-table {
+    background-color: transparent;
     text-align: center;
     height: 20px;
-    font-size:13pt;
-    height:30px;
-    
+    font-size: 13pt;
+    height: 30px;
 }

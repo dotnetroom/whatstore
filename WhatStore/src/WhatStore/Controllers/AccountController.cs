@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using WhatStore.Domain.Infrastructure.Models.Identity;
 using Microsoft.Extensions.Logging;
 using WhatStore.Domain.Infrastructure.ViewModels.Account;
+using WhatStore.Domain.Infrastructure.Helpers;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -75,8 +76,10 @@ namespace WhatStore.Controllers
 
         [HttpGet("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterUserViewModel model)
+        public async Task<IActionResult> Register()
         {
+            RegisterUserViewModel model = new RegisterUserViewModel();
+
             var storeTypes = await _storeRepository.GetStoreType();
 
 
@@ -130,17 +133,17 @@ namespace WhatStore.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Email", "Email invalido");
+                    ViewBag.Errors = result.ConvertToHTML();
+                    var storeTypes = await _storeRepository.GetStoreType();
+                    model.StoreTypes = storeTypes;
+
                     await _storeRepository.DeleteStore(storeID);
-                    return RedirectToAction("Register",model);
+                    return View("Register", model);
                 }
                 
             }        
 
-            return Ok();
-            
-
-            
+            return Ok();   
         }
 
         [HttpPost("Logoff")]
