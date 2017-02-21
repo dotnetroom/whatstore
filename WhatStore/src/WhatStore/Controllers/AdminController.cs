@@ -160,7 +160,7 @@ namespace WhatStore.Controllers
                 model.ReturnMessage = "Erro ao salvar alterações";
             }
 
-            return RedirectToAction("category");
+            return RedirectToAction("Subcategory");
         }
     }
 }

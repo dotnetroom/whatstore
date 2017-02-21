@@ -48,9 +48,9 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                         if (addressID > 0)
                         {
-                            adressUpdate = "UPDATE dbo.\"Adress\" SET \"CEP\" = @CEP, \"CityID\" = @city, " +
-                                       "\"Complement\" = @Complement, \"Number\" = @Number, \"Street\" = @Street " +
-                                       "WHERE \"ID\" = @ID";
+                            adressUpdate = "UPDATE dbo.Adress SET CEP = @CEP, CityID = @city, " +
+                                       "Complement = @Complement, Number = @Number, Street = @Street " +
+                                       "WHERE ID = @ID";
 
                             var resultUpdateAddress = await db.ExecuteAsync(adressUpdate,
                                                                             new
@@ -79,8 +79,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     }
                     if (fileName != null)
                     {
-                        var queryUpdateStore = "UPDATE dbo.\"Store\" SET Logo = @Logo, \"Description\" = @Description, \"Email\" = @Email, " +
-                                               "\"Name\" = @Name, \"Phone\" = @Phone, \"Term\" = @Term, \"URL\" = @URl";
+                        var queryUpdateStore = "UPDATE dbo.Store SET Logo = @Logo, Description = @Description, Email = @Email, " +
+                                               "Name = @Name, Phone = @Phone, Term = @Term, URL = @URl";
 
                         var resultUpdate = await db.ExecuteAsync(queryUpdateStore,
                                                                  new
@@ -96,8 +96,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     }
                     else
                     {
-                        var queryUpdateStore = "UPDATE dbo.\"Store\" SET \"Description\" = @Description, \"Email\" = @Email, " +
-                                          "\"Name\" = @Name, \"Phone\" = @Phone, \"Term\" = @Term, \"URL\" = @URl WHERE Id = @StoreId";
+                        var queryUpdateStore = "UPDATE dbo.Store SET Description = @Description, Email = @Email, " +
+                                          "Name = @Name, Phone = @Phone, Term = @Term, URL = @URl WHERE Id = @StoreId";
 
                         var resultUpdate = await db.ExecuteAsync(queryUpdateStore,
                                                                  new
@@ -132,7 +132,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 {
                     try
                     {
-                        var queryInsertType = "INSERT INTO dbo.\"StoreType\" (\"Name\") "
+                        var queryInsertType = "INSERT INTO dbo.StoreType (Name) "
                                                             + "VALUES (@Name)";
 
                         var resultInsertType = await db.ExecuteAsync(queryInsertType, new { Name = storeType }, trans);
@@ -156,7 +156,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    var result = await db.QueryAsync<StoreType>("SELECT * FROM \"dbo\".\"StoreType\"");
+                    var result = await db.QueryAsync<StoreType>("SELECT * FROM dbo.StoreType");
 
                     return result.ToList();
                 }
@@ -307,12 +307,13 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         if (getFinancial.PessoaJuridicaId > 0)
                         {
 
-                            var updatePesoaJuridica = await UpdatePessoaJuridica(getFinancial.PessoaJuridicaId, CNPJ, inscricaoEstadual, inscricaoMunicipal, razaoSocial);
+                            var updatePessoaJuridica = await UpdatePessoaJuridica(getFinancial.PessoaJuridicaId, CNPJ, inscricaoEstadual, inscricaoMunicipal, razaoSocial);
 
                         }
                         else
                         {
-                            var insertPessoaJuridica = await InsertPessoaJuridica(CNPJ, inscricaoEstadual, inscricaoMunicipal, razaoSocial, getFinancial.Id);
+                            var insertPessoaJuridica = await InsertPessoaJuridica(CNPJ, inscricaoEstadual, inscricaoMunicipal, razaoSocial);
+                            var updateStorFinancial = UpdateStoreFinancial(insertPessoaJuridica, getFinancial.Id);
                         }
 
                         var updateStoreFinancial = await UpdateStoreFinancial(getFinancial.Id, about, birthday, CPF, firstName, lastName, gender, phone, Rg);
@@ -478,14 +479,14 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<bool> InsertPessoaJuridica(string CNPJ, string inscricaoEstadual, string inscricaoMunicipal, string razaoSocial, long storeFinancialId)
+        public async Task<long> InsertPessoaJuridica(string CNPJ, string inscricaoEstadual, string inscricaoMunicipal, string razaoSocial)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 try
                 {
                     var queryInsertPessoaJuridica = "INSERT INTO dbo.PessoaJuridica (CNPJ, InscricaoEstadual, InscricaoMunicipal, RazaoSocial) "
-                                                            + "VALUES (@CNPJ, @InscricaoEstadual, @InscricaoMunicipal, @RazaoSocial); SELECT SCOPE_IDENTITY()";
+                                                             + "VALUES (@CNPJ, @InscricaoEstadual, @InscricaoMunicipal, @RazaoSocial); SELECT SCOPE_IDENTITY()";
 
                     var resultInsertPessoaJuridica = await db.QueryAsync<long>(queryInsertPessoaJuridica,
                                                     new
@@ -496,16 +497,30 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                         RazaoSocial = razaoSocial
                                                     });
 
-                    var selectPessoaJuridicaId = resultInsertPessoaJuridica.FirstOrDefault();
+                    return resultInsertPessoaJuridica.FirstOrDefault();
 
+                }
+                catch (Exception ex)
+                {
+                    return 0;
+                }
+            }
+        }
+
+
+        public async Task<bool> UpdateStoreFinancial(long pessoaJuridicaId, long storeFinancialId)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
                     var queryUpdateStoreFinancial = "UPDATE dbo.StoreFinancial SET dbo.StoreFinancial.PessoaJuridicaId = @PessoaJuridicaId WHERE dbo.StoreFinancial.Id = @ID";
 
                     var result = await db.ExecuteAsync(queryUpdateStoreFinancial, new
                     {
-                        PessoaJuridicaId = selectPessoaJuridicaId,
+                        PessoaJuridicaId = pessoaJuridicaId,
                         ID = storeFinancialId
                     });
-
                     return true;
                 }
                 catch (Exception ex)
@@ -544,34 +559,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<long> InsertPessoaJuridica(string CNPJ, string inscricaoEstadual, string inscricaoMunicipal, string razaoSocial)
-        {
-            using (var db = new SqlConnection(_settings.ConnectionString))
-            {
-                try
-                {
-                    var queryInsertPessoaJuridica = "INSERT INTO dbo.PessoaJuridica (CNPJ, InscricaoEstadual, InscricaoMunicipal, RazaoSocial) "
-                                                             + "VALUES (@CNPJ, @InscricaoEstadual, @InscricaoMunicipal, @RazaoSocial); SELECT SCOPE_IDENTITY()";
 
-                    var resultInsertPessoaJuridica = await db.QueryAsync<long>(queryInsertPessoaJuridica,
-                                                    new
-                                                    {
-                                                        CNPJ = CNPJ,
-                                                        InscricaoEstadual = inscricaoEstadual,
-                                                        InscricaoMunicipal = inscricaoMunicipal,
-                                                        RazaoSocial = razaoSocial
-                                                    });
-
-                    return resultInsertPessoaJuridica.FirstOrDefault();
-
-                }
-                catch (Exception ex)
-                {
-                    return 0;
-                }
-            }
-
-        }
 
         public async Task<bool> InsertStoreFinancial(long storeId, long adressId, string about, DateTime birthday, string cpf, string firstName, string lastName, bool gender, string phone, string rg)
         {

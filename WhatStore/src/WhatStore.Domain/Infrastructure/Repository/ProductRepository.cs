@@ -119,13 +119,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                         }
 
-                        var tagProductInsert = "INSERT INTO dbo.TagProduct (ProductId, TagId) VALUES (@ProductId, @TagId)";
-                        var tagProduct = await db.ExecuteAsync(tagProductInsert,
-                            new
-                            {
-                                ProductId = id,
-                                TagId = resultTagSelect
-                            });
+                        var tagProductInsert = InsertTagProduct(id, resultTagSelect);
+
                     }
 
                     var insertPicture = InsertPictures(id, fileNames);
@@ -231,13 +226,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                         }
 
-                        var tagProductInsert = "INSERT INTO dbo.TagProduct (ProductId, TagId) VALUES (@ProductId, @TagId)";
-                        var tagProduct = await db.ExecuteAsync(tagProductInsert,
-                            new
-                            {
-                                ProductId = id,
-                                TagId = resultTagSelect
-                            });
+                        var tagProductInsert = InsertTagProduct(id, resultTagSelect);
                     }
 
 
@@ -444,13 +433,13 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     return result.ToList();
 
                 }
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
-       }
+        }
 
         public async Task<bool> RegisterSubCategory(string subCategoryName, long categoryId)
         {
@@ -474,7 +463,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
 
         }
-        
+
         public async Task<bool> UpdateSubCategory(string subCategoryName, long subCategoryId)
         {
             try
@@ -482,7 +471,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
 
-                    var queryUpdateCategory = ("UPDATE dbo.SubCetegory SET SubCategoryName = @SubCategoryName WHERE Id = @Id");
+                    var queryUpdateCategory = ("UPDATE dbo.SubCategory SET SubCategoryName = @SubCategoryName WHERE Id = @Id");
 
                     var resultUpdate = await db.ExecuteAsync(queryUpdateCategory, new
                     {
@@ -494,11 +483,54 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 }
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
 
-        }       
+        }
+
+        public async Task<bool> InsertTagProduct(string productId, long tagId)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var tagProductInsert = "INSERT INTO dbo.TagProduct (ProductId, TagId) VALUES (@ProductId, @TagId)";
+                    var tagProduct = await db.ExecuteAsync(tagProductInsert,
+                        new
+                        {
+                            ProductId = productId,
+                            TagId = tagId
+                        });
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<List<long>> SelectTagId(long productId)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var tagIdSelect = await db.QueryAsync<long>("SELECT dbo.TagProduct.TagId FROM dbo.TagProduct WHERE dbo.TagProduct.ProductId = @ProductId",
+                                                              new
+                                                              {
+                                                                  ProductId = productId
+                                                              });
+                    return tagIdSelect.ToList();
+                }
+               
+            }catch(Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 }
