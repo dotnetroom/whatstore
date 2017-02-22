@@ -1,14 +1,29 @@
 ﻿<!DOCUMENT html>
     <html>
     <head>
-            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-            <link rel="stylesheet" href="~/css/site.css" />
-            <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-            <link rel="stylesheet" href="~/css/font-awesome.css" />
-        </head>
-    <body>
-        <div class="navbar admin-navbar"></div>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+ 
+        <link rel="stylesheet" href="~/css/font-awesome.css" />
+    </head>
 
+
+    <body>
+        <div class="navbarStore" >
+            <div>
+                <input type="text" style="height:40px; width:35%; position:center" />
+            </div>
+        </div>
+
+        
+        <div>
+            @RenderBody()
+        </div>
+       
     </body>
 
 </html>
+
+
+
+
