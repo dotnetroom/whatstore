@@ -166,5 +166,17 @@ namespace WhatStore.Controllers
             }
         }
         #endregion
+
+        [HttpGet("{store}/registerUser")]
+        public  IActionResult RegisterUserStore(RegisterUserViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return View();
+        }
+
     }
 }
