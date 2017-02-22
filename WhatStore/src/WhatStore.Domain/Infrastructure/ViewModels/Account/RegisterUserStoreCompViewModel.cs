@@ -62,6 +62,15 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Account
         public string Email { get; set; }
 
         [Required]
+        public string NormalizedEmail { get; set; }
+
+        [Required]
+        public string UserName { get; set; }
+
+        [Required]
+        public string NormalizedUserName { get; set; }
+
+        [Required]
         public string Password { get; set; }
 
         public string ReturnMessage { get; set; }
