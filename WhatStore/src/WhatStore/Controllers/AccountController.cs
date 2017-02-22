@@ -179,37 +179,13 @@ namespace WhatStore.Controllers
         }
 
         [HttpGet("~/{store}/register/user/complement")]
-        public async Task<IActionResult> RegisterUserStoreComp(RegisterUserStoreCompViewModel model)
+        public IActionResult RegisterUserStoreComp()
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-
-            var user = new RegisterUserStoreCompViewModel
-            {
-                Name = model.Name,
-                LastName = model.LastName,
-                RG = model.RG,
-                CPF = model.CPF,
-                Birthday = model.Birthday,
-                Genero = model.Genero,
-                States = model.States,
-                PhoneDDD = model.PhoneDDD,
-                PhoneNumber = model.PhoneNumber,
-                CEP = model.CEP,
-                Complement = model.Complement,
-                Number = model.Number,
-                Street = model.Street,
-                CityID = model.CityID,
-                CityName = model.CityName,
-                Email = model.Email,
-                NormalizedEmail = model.Email.ToUpper(),
-                NormalizedUserName = model.Email.ToUpper(),
-                UserName = model.Email,
-                Password = model.Password
-            };
-            
+                      
             return View();
         }
 
