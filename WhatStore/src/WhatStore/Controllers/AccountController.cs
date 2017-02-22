@@ -167,7 +167,7 @@ namespace WhatStore.Controllers
         }
         #endregion
 
-        [HttpGet("{store}/registerUser")]
+        [HttpGet("{store}/register/user")]
         public  IActionResult RegisterUserStore(RegisterUserViewModel model)
         {
             if (!ModelState.IsValid)
