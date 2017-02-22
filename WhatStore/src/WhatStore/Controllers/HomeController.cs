@@ -12,6 +12,12 @@ namespace WhatStore.Controllers
         {
             return View();
         }
+
+        [HttpGet("~/{store}")]
+        public IActionResult StoreIndex(string store)
+        {
+            return View();
+        }
        
       
     }
