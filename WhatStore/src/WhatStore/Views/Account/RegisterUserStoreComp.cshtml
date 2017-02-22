@@ -39,6 +39,78 @@
         </select>
     </div>
 
+    <div class="float-right">
+        <div class="float-left margin-right-10">
+            <label>DDD: </label>
+            <input type="text" class="form-control" style="width:50px" maxlength="2" required name="PhoneDDD" value="@Model.PhoneDDD" />
+        </div>
+
+        <div class="float-left">
+            <label>Telefone: </label>
+            <input type="text" class="form-control" style="width:150px" required name="PhoneNumber" value="@Model.PhoneNumber" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <h4>Endereço: </h4>
+        <div class="float-left">
+            <label>CEP: </label>
+            <input class="form-control" style="width: 100px;" required name="CEP" value="@Model.CEP" />
+        </div>
+
+        <div class="float-left margin-left-50">
+            <label>Estado:</label>
+            <select id="dropStates" class="form-control" style="width: 200px;" asp-for="State">
+                <option value="-1">Selecione um estado</option>
+                @foreach (var state in Model.States)
+                {
+                    if (state.Id == Model.State)
+                    {
+                        <option value="@state.Id" selected>@state.Initials</option>
+
+                    }
+                    else
+                    {
+                        <option value="@state.Id">@state.Initials</option>
+                    }
+                }
+            </select>
+        </div>
+
+
+        <div class="float-right">
+            <label>Cidade: </label>
+            <select id="dropCities" class="form-control" style="width: 200px;" name="CityID" value="@Model.CityID">
+                <option value="-1">Selecione uma cidade</option>
+                @if (Model.CityID > 0)
+                {
+                    <option value="@Model.CityID" selected>@Model.CityName</option>
+
+                }
+            </select>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+        <div class="float-left" style="width:400px;">
+            <label>Endereço: </label>
+            <input class="form-control " required name="Street" value="@Model.Street" />
+        </div>
+
+        <div class="float-right margin-left-10">
+            <label>Número: </label>
+            <input class="form-control " style="width: 150px;" required name="Number" value="@Model.Number" />
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label>Complemento:</label>
+        <input class="form-control" name="Complement" value="@Model.Complement" />
+    </div>
+
     <div class="row margin-top-10 font-size13">
         <label>Email: </label>
         <input type="text" class="form-control" required asp-for="Email" />
