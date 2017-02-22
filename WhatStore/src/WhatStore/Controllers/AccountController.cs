@@ -178,5 +178,16 @@ namespace WhatStore.Controllers
             return View();
         }
 
+        [HttpGet("~/{store}/register/user/complement")]
+        public IActionResult RegisterUserStoreComp(RegisterUserStoreCompViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return View();
+        }
+
     }
 }
