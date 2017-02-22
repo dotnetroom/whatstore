@@ -892,6 +892,12 @@ label {
     box-shadow: 0px 1px 6px -3px rgba(0,0,0,0.75);
 }
 
+.store-content {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 100px;
+}
+
 .admin-content {
     width: 80%;
     height: auto;
