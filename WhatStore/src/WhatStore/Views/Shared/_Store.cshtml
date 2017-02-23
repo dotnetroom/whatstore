@@ -9,17 +9,31 @@
 
 
     <body>
-        <div class="navbar-store" >
-            <div>
-                <input type="text" style="height:40px; width:35%; position:center" />
+        <div style="height: 120px;">
+            <div class="navbar-store">
+                <ul style="line-height: normal; list-style: none;">
+                    <li class="float-right">
+                        <a class="links hover-from-center">Login</a>
+                    </li>
+                   
+                    <li class="float-right" style="margin-right:20px;" >
+                        <a class="links hover-from-center" >Cadastrar</a>
+                    </li>
+                </ul>
+               
+
+            </div>
+            <div class="div-input-search">
+                <input type="text" class="input-search" />
             </div>
         </div>
 
-        
+
         <div class="store-content">
+            <h1>@ViewBag.StoreName</h1>
             @RenderBody()
         </div>
-       
+
     </body>
 
 </html>

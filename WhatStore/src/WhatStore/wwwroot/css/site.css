@@ -187,10 +187,11 @@ textarea {
 }
 
 .links {
-    text-decoration: none;
-    color: #c1326e;
+    text-decoration: none !important;
+    color: #c1326e !important;
     font-family: 'Lucida Sans', serif;
     font-size: 12px;
+    list-style: none;
 }
 
 .row {
@@ -881,11 +882,23 @@ label {
 
 
 .navbar-store{
-    width:100%;
-    padding-top:20px;
-    padding-right:15px;
-    padding-left:15px;
-    height: 120px;
+    height:25px; 
+    width:100%; 
+    background: #fff;
+    padding-right:20px;
+    padding-top: 2px;
+    color: black;
+}
+
+.div-input-search{    
+    width:400px;
+    position:relative; 
+    margin: 0 auto;  
+    margin-top:50px;  
+}
+
+.input-search{    
+    width:400px;    
 }
 
 .store-content {

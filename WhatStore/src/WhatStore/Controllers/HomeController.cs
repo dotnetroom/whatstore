@@ -16,6 +16,7 @@ namespace WhatStore.Controllers
         [HttpGet("~/{store}")]
         public IActionResult StoreIndex(string store)
         {
+            ViewBag.StoreName = store;
             return View();
         }
        
