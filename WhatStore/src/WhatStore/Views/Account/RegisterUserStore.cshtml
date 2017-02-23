@@ -1,7 +1,7 @@
 ﻿@model WhatStore.Domain.Infrastructure.ViewModels.Account.RegisterUserViewModel
 
 @{
-    Layout = null;
+    Layout ="_Store";
 }
 
 <html>
@@ -13,11 +13,11 @@
 
 <body>
     <form class="formLogin float-center margin-top-20" asp-controller="account" asp-action="login" method="post">
-        <div>
-            <label>Email: </label>
-            <input type="text" class="form-control" required />
+        <div class="row margin-top-10">
+            <label> Digite seu email:</label>
+            <input type="text" class="form-control" asp-for="Email" required />
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
-
         <div class="row margin-top-10">
             <button type="submit" class="btn btn-primary" style="width: 100%; height: 40px;">Entrar</button>
         </div>
