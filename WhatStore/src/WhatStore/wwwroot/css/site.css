@@ -191,7 +191,6 @@ textarea {
     color: #c1326e !important;
     font-family: 'Lucida Sans', serif;
     font-size: 12px;
-    
 }
 
 .row {
@@ -881,24 +880,24 @@ label {
 }
 
 
-.navbar-store{
-    height:25px; 
-    width:100%; 
+.navbar-store {
+    height: 25px;
+    width: 100%;
     background: #fff;
-    padding-right:20px;
+    padding-right: 20px;
     padding-top: 2px;
     color: black;
 }
 
-.div-input-search{    
-    width:400px;
-    position:relative; 
-    margin: 0 auto;  
-    margin-top:50px;  
+.div-input-search {
+    width: 400px;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 
-.input-search{    
-    width:400px;    
+.input-search {
+    width: 400px;
 }
 
 .store-content {
@@ -1137,4 +1136,10 @@ tr:nth-child(even) {
     font-size: 13pt;
     height: 30px;
     border: transparent;
+}
+
+.formRegisterUser {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 200px;
 }
