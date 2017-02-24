@@ -9,24 +9,40 @@
 
 
     <body>
-        <div style="height: 120px;">
-            <div class="navbar-store">
-                <ul style="line-height: normal; list-style: none;">
-                    <li class="float-right">
-                        <a class="links hover-from-center">Login</a>
-                    </li>
-                   
-                    <li class="float-right" style="margin-right:20px;" >
-                        <a class="links hover-from-center" >Cadastrar</a>
-                    </li>
-                </ul>
-               
 
+
+        <div class="store-navbar">
+            <div class="float-right">
+                <label style="font: small-caption; float: left; color: white !important;">Bem vindo!</label>
+                <button class="btn btn-primary btn-store">Entrar</button>
             </div>
-            <div class="div-input-search">
-                <input type="text" class="input-search" />
+
+            <img class="float-left content-logo" src="@ViewBag.Logo" />
+
+            <form class="div-input-search" asp-controller=" " asp-action=" " method="post">
+                <input type="search" class="input-search float-center" placeholder="Buscar por..." />
+                <button class="btn btn-primary btn-search" type="submit">
+                    <span class="fa fa-search"></span>
+                </button>
+            </form>
+            <div id="carrinho" class="product-shop ">
+                <a style="color:white !important; font-size:35pt" class="links fa fa-shopping-cart"></a>
+
+                <h6>carrinho</h6>
             </div>
         </div>
+
+
+        <nav id="menu">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Produtos</a></li>
+                <li><a href="#">Missão</a></li>
+                <li><a href="#">Links</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+
 
 
         <div class="store-content">

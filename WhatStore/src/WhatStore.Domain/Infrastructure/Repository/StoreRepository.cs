@@ -634,6 +634,23 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 }
             }
         }
+
+        public async Task<string> GetLogo(string store)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var query = "SELECT dbo.Store.Logo FROM dbo.Store WHERE dbo.Store.URL = @URL";
+                    var logo = await db.QueryAsync<string>(query, new { URL = store });
+                    return logo.FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
     }
 }
 

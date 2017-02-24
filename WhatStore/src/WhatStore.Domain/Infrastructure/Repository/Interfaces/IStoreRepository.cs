@@ -33,6 +33,6 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<bool> UpdateStoreFinancial(long pessoaJuridicaId, long storeFinancialId);
         Task<bool> UpdateStoreInformation(string fileName, long userID, string storeName, string storeDescription, string phoneNumber, string email, string URL,
                                   string terms, bool hasAddress, string address, string number, string CEP, string complemento, int city);
-
+        Task<string> GetLogo(string store);
     }
 }

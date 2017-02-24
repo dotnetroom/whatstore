@@ -355,7 +355,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<List<Category>> GetCategory()
+        public async Task<List<Category>> GetCategories()
         {
             try
             {
