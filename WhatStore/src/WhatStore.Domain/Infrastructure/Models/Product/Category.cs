@@ -12,5 +12,7 @@ namespace WhatStore.Domain.Infrastructure.Models.Product
         public long Id { get; set; }
         [Required]
         public string CategoryName { get; set; }
+        [Required]
+        public long StoreId { get; set; }
     }
 }
