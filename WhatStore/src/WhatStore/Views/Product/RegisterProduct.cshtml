@@ -88,21 +88,28 @@
 
         <div class="form-group">
             <h3>Categorias</h3>
-            <select name="Category" id="dropCategory" type="text" class="form-control" value="@Model.Category">
-                <option value="-1">Selecione a categoria</option>
-                @foreach (var category in Model.Categories)
-                {
-                    <option value="@category.Id">@category.CategoryName</option>
-                }
-            </select>
-
-            @*<select name="" id="dropSubCategory" type="text" class="form-control" value="@Model.SubCategory">
+            <div class="form-group float-left">
+                <select name="Category" id="dropCategory" type="text" class="form-control" style="width:500px" value="@Model.Category">
                     <option value="-1">Selecione a categoria</option>
-                    @foreach (var subCategory in Model.SubCategories)
+                    @foreach (var category in Model.Categories)
                     {
-                        <option value="@subCategory.Id">@subCategory.SubCategoryName</option>
+                        <option value="@category.Id">@category.CategoryName</option>
                     }
-                </select>*@
+                </select>
+            </div>
+
+            <div class="form-group float-right">
+                <select name="" id="dropSubCategory" type="text" class="form-control" style="width:500px" value="@Model.SubCategory">
+                    <option value="-1">Selecione a subcategoria</option>
+                    @if (Model.SubCategories != null)
+                    {
+                        @foreach (var subCategory in Model.SubCategories)
+                {
+                            <option value="@subCategory.Id">@subCategory.SubCategoryName</option>
+                        }
+                    }
+                </select>
+            </div>
 
         </div>
         <hr />
@@ -139,35 +146,7 @@
         });
 
         $(document).ready(function () {
-            $('#dropCategory').states($('#dropSubCategory'));
-        });
-
-        $("#dropCategory").on("change", function () {
-            var button = $(this);
-            var value = button.val();
-
-            $.ajax({
-                url: '/category/' + value + '/subcategories',
-                type: 'get',
-                data: {
-                    id: value,
-                },
-                success: function (data) {
-                    var tr;
-                    console.log(data);
-                    for (var i = 0; i < data.length; i++) {
-                        tr = tr + "<tr>";
-                        tr = tr + "<td>" + data[i]. + "</td>";
-                        tr = tr + "</tr>";
-                        alert("funciona");
-                    }
-                },
-                error: function (xhr) {
-                    alert('No Valid Data');
-                }
-
-            });
-
+            $('#dropCategory').categories($('#dropSubCategory'));
         });
     </script>
 }
