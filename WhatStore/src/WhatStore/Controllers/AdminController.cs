@@ -110,7 +110,7 @@ namespace WhatStore.Controllers
             try
 
             {
-                var category = await _productRepository.GetCategory();                                          
+                var category = await _productRepository.GetCategories();                                          
                 model.Categories = category;
                 return View(model);
             }

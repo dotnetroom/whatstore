@@ -78,7 +78,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         adressUpdate = "UPDATE dbo.Store SET AdressId = NULL WHERE Store.Id = @ID";
                         var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID });
                     }
-                   
+
 
                     if (fileName != null)
                     {
@@ -205,17 +205,18 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
 
                     try
-                    {                       
+                    {
                         long storeID = 0;
-                        if (SelectStoreName(store.Name) != null) {
+                        if (SelectStoreName(store.Name) != null)
+                        {
                             return -1;
                         }
 
-                            var queryInsertStore = "INSERT INTO dbo.Store (Name, URL, IsActive, StoreTypeId) " +
-                                                    "VALUES (@Name, @URL, @IsActive, @StoreTypeId); SELECT SCOPE_IDENTITY();";
+                        var queryInsertStore = "INSERT INTO dbo.Store (Name, URL, IsActive, StoreTypeId) " +
+                                                "VALUES (@Name, @URL, @IsActive, @StoreTypeId); SELECT SCOPE_IDENTITY();";
 
-                            var resultInsertStore = await db.QueryAsync<long>(queryInsertStore, store, trans);
-                            storeID = resultInsertStore.FirstOrDefault();
+                        var resultInsertStore = await db.QueryAsync<long>(queryInsertStore, store, trans);
+                        storeID = resultInsertStore.FirstOrDefault();
 
 
                         if (storeID > 0)
@@ -545,21 +546,21 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 try
                 {
-                  
-                        var updatePessoaJuridica = await db.ExecuteAsync("UPDATE dbo.StoreFinancial SET About = @About, Birthday = @Birthday, CPF = @CPF, FirstName = @FirstName, Gender = @Gender, LastName = @LastName, Phone = @Phone, Rg = Rg WHERE dbo.StoreFinancial.Id = @ID",
-                                                                        new
-                                                                        {
-                                                                            ID = storeFinancialId,
-                                                                            About = about,
-                                                                            Birthday = birthday,
-                                                                            CPF = cpf,
-                                                                            FirstName = firstName,
-                                                                            Gender = gender,
-                                                                            LastName = lastName,
-                                                                            Phone = phone,
-                                                                            Rg = rg
-                                                                        });
-                    
+
+                    var updatePessoaJuridica = await db.ExecuteAsync("UPDATE dbo.StoreFinancial SET About = @About, Birthday = @Birthday, CPF = @CPF, FirstName = @FirstName, Gender = @Gender, LastName = @LastName, Phone = @Phone, Rg = Rg WHERE dbo.StoreFinancial.Id = @ID",
+                                                                    new
+                                                                    {
+                                                                        ID = storeFinancialId,
+                                                                        About = about,
+                                                                        Birthday = birthday,
+                                                                        CPF = cpf,
+                                                                        FirstName = firstName,
+                                                                        Gender = gender,
+                                                                        LastName = lastName,
+                                                                        Phone = phone,
+                                                                        Rg = rg
+                                                                    });
+
                     return true;
 
                 }
@@ -646,21 +647,32 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-<<<<<<< HEAD
         public async Task<string> GetLogo(string store)
-=======
-        public async Task<string> SelectStoreName(string storeName)
->>>>>>> origin/1.0
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 try
                 {
-<<<<<<< HEAD
                     var query = "SELECT dbo.Store.Logo FROM dbo.Store WHERE dbo.Store.URL = @URL";
                     var logo = await db.QueryAsync<string>(query, new { URL = store });
                     return logo.FirstOrDefault();
-=======
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public async Task<string> SelectStoreName(string storeName)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var query = "SELECT dbo.Store.Logo FROM dbo.Store WHERE dbo.Store.URL = @URL";
+                    var logo = await db.QueryAsync<string>(query, new { URL = storeName });
+                    return logo.FirstOrDefault();
                     var selectName = await db.QueryAsync<string>("SELECT dbo.Store.Name FROM dbo.Store WHERE Name = @Name",
                         new
                         {
@@ -669,7 +681,6 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     var name = selectName.FirstOrDefault();
 
                     return name;
->>>>>>> origin/1.0
                 }
                 catch (Exception ex)
                 {
