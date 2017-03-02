@@ -1,132 +1,135 @@
 ﻿@model WhatStore.Domain.Infrastructure.ViewModels.Account.RegisterUserStoreCompViewModel
 @{
-    Layout = "_Store";
+    Layout = null;
 }
-<form class="formRegister formLogin float-center margin-top-20 margin-bottom-50" asp-controller="account" asp-action="~/{store}/register/user/complement" method="post">
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <title>Register</title>
+</head>
 
+<body>
+    <form class="formRegisterUserStore float-center margin-top-20 margin-bottom-50" asp-controller="account" asp-action="~/{store}/register/user/complement" method="post">
 
-    <div class="row margin-top-10 font-size13">
-        <label>Nome: </label>
-        <input type="text" class="form-control" asp-for="Name" required />
-    </div>
+        <div class="float-left margin-top-10 font-size13">
+            <div class="float-left margin-right-10 font-size13">
+                <label>Nome: </label>
+                <input type="text" class="form-control" style="width:180px" asp-for="Name" required />
+            </div>
 
-    <div class="row margin-top-10 font-size13">
-        <label>Sobrenome: </label>
-        <input type="text" class="form-control" required asp-for="LastName" />
-    </div>
-
-    <div class="row margin-top-10 font-size13">
-        <label>RG: </label>
-        <input type="text" class="form-control" required asp-for="RG" />
-    </div>
-
-    <div class="row margin-top-10 font-size13">
-        <label>CPF: </label>
-        <input type="text" class="form-control" required asp-for="CPF" />
-    </div>
-
-    <div class="row margin-top-10 font-size13">
-        <label>Data de nascimento:</label>
-        <input type="date" class="form-control" required asp-for="Birthday" value="@Model.Birthday.ToString("yyyy-MM-dd")" />
-    </div>
-
-    <div class="row margin-top-10 font-size13">
-        <label>Genero: </label>
-        <select id="Genero" class="form-control" asp-for="Genero" value="@Model.Genero">
-            <option value="-1">Selecione um genero</option>
-            <option value="false">Masculino</option>
-            <option value="true">Feminino</option>
-        </select>
-    </div>
-
-    <div class="float-right">
-        <div class="float-left margin-right-10">
-            <label>DDD: </label>
-            <input type="text" class="form-control" style="width:50px" maxlength="2" required name="PhoneDDD" value="@Model.PhoneDDD" />
+            <div class="float-right font-size13">
+                <label>Sobrenome: </label>
+                <input type="text" class="form-control" style="width:210px" required asp-for="LastName" />
+            </div>
         </div>
 
-        <div class="float-left">
-            <label>Telefone: </label>
-            <input type="text" class="form-control" style="width:150px" required name="PhoneNumber" value="@Model.PhoneNumber" />
-        </div>
-    </div>
+        <div class="float-left margin-top-10 font-size13">
+            <div class="float-left margin-right-10 font-size13">
+                <label>RG: </label>
+                <input type="text" class="form-control" style="width:190px" required asp-for="RG" />
+            </div>
 
-    <div class="form-group">
-        <h4>Endereço: </h4>
-        <div class="float-left">
+            <div class="float-right font-size13">
+                <label>CPF: </label>
+                <input type="text" class="form-control" style="width:200px" required asp-for="CPF" />
+            </div>
+        </div>
+
+        <div class="float-left margin-top-10 font-size13">
+            <div class="float-left margin-right-10 font-size13">
+                <label>Data de nascimento:</label>
+                <input type="date" class="form-control" required asp-for="Birthday" />
+            </div>
+
+            <div class="float-right font-size13">
+                <label>Genero: </label>
+                <select id="Genero" class="form-control" style="width:220px" asp-for="Genero">
+                    <option value="-1">Selecione um genero</option>
+                    <option value="false">Masculino</option>
+                    <option value="true">Feminino</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="float-left margin-top-10 font-size13">
+            <div class="float-left margin-right-10 font-size13">
+                <label>DDD: </label>
+                <input type="text" class="form-control" style="width:110px" maxlength="2" required name="PhoneDDD" />
+            </div>
+            <div class="float-right font-size13">
+                <label>Telefone: </label>
+                <input type="text" class="form-control" style="width:280px" required name="PhoneNumber" />
+            </div>
+        </div>
+
+        <div class="float-left margin-top-10 font-size13">
+            <div class="float-left margin-right-10 font-size13">
+                <label>Estado:</label>
+                <select id="dropStates" class="form-control" style="width:190px" asp-for="State">
+                    <option value="-1">Selecione um estado</option>
+                    @*@foreach (var state in Model.States)
+                        {
+                            if (state.Id == Model.State)
+                            {
+                                <option value="@state.Id" selected>@state.Initials</option>
+
+                            }
+                            else
+                            {
+                                <option value="@state.Id">@state.Initials</option>
+                            }
+                        }*@
+                </select>
+            </div>
+
+
+            <div class="float-right font-size13">
+                <label>Cidade: </label>
+                <select id="dropCities" class="form-control" style="width:200px" name="CityID">
+                    <option value="-1">Selecione uma cidade</option>
+                    @*@if (Model.CityID > 0)
+                        {
+                            <option value="@Model.CityID" selected>@Model.CityName</option>
+
+                        }*@
+                </select>
+            </div>
+        </div>
+
+        <div class="float-left row margin-top-10 font-size13">
             <label>CEP: </label>
-            <input class="form-control" style="width: 100px;" required name="CEP" value="@Model.CEP" />
+            <input class="form-control" style="width: 100px;" required name="CEP" />
         </div>
 
-        <div class="float-left margin-left-50">
-            <label>Estado:</label>
-            <select id="dropStates" class="form-control" style="width: 200px;" asp-for="State">
-                <option value="-1">Selecione um estado</option>
-                @foreach (var state in Model.States)
-                {
-                    if (state.Id == Model.State)
-                    {
-                        <option value="@state.Id" selected>@state.Initials</option>
-
-                    }
-                    else
-                    {
-                        <option value="@state.Id">@state.Initials</option>
-                    }
-                }
-            </select>
-        </div>
-
-
-        <div class="float-right">
-            <label>Cidade: </label>
-            <select id="dropCities" class="form-control" style="width: 200px;" name="CityID" value="@Model.CityID">
-                <option value="-1">Selecione uma cidade</option>
-                @if (Model.CityID > 0)
-                {
-                    <option value="@Model.CityID" selected>@Model.CityName</option>
-
-                }
-            </select>
-        </div>
-
-    </div>
-
-    <div class="form-group">
-
-        <div class="float-left" style="width:400px;">
+        <div class="float-left row margin-top-10 font-size13">
             <label>Endereço: </label>
-            <input class="form-control " required name="Street" value="@Model.Street" />
+            <input class="form-control" style="width: 150px;" required name="Street" />
         </div>
 
-        <div class="float-right margin-left-10">
-            <label>Número: </label>
-            <input class="form-control " style="width: 150px;" required name="Number" value="@Model.Number" />
+        <div class="float-left margin-top-10 font-size13">
+            <div class="float-left margin-right-10 font-size13">
+                <label>Número: </label>
+                <input class="form-control " style="width: 140px;" required name="Number" />
+            </div>
+
+            <div class="float-right font-size13">
+                <label>Complemento:</label>
+                <input class="form-control" style="width: 250px;" name="Complement" />
+            </div>
         </div>
 
-    </div>
+        <div class="float-left row margin-top-10 font-size13">
+            <label>Email: </label>
+            <input type="text" class="form-control" required asp-for="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label>Complemento:</label>
-        <input class="form-control" name="Complement" value="@Model.Complement" />
-    </div>
+        <div class="float-left row margin-top-10 font-size13">
+            <label>Senha: </label>
+            <input type="password" class="form-control" required asp-for="Password" />
+        </div>
 
-    <div class="row margin-top-10 font-size13">
-        <label>Email: </label>
-        <input type="text" class="form-control" required asp-for="Email" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-
-    <div class="row margin-top-10 font-size13">
-        <label>Senha: </label>
-        <input type="password" class="form-control" required asp-for="Password" />
-    </div>
-
-    <div class="row margin-top-10 font-size13 ">
-        <button type="submit" style="height: 40px !important;" class="btn btn-primary margin-bottom-20 row">Registrar</button>
-    </div>
-
-    <div class="row margin-top-10 font-size13">
-        Já está cadastrado? <a asp-controller="account" asp-action="login" class="links hover-from-center">Clique aqui para entrar.</a>
-    </div>
-</form>
+        <div class="float-left row margin-top-10 font-size13 ">
+            <button type="submit" style="height: 40px !important;" class="btn btn-primary margin-bottom-20 row">Registrar</button>
+        </div>
+    </form>
+</body>

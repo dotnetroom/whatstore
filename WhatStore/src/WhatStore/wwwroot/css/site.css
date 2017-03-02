@@ -892,6 +892,7 @@ label {
 }
 
 
+<<<<<<< HEAD
 
 .navbar-store-top ul {
     list-style: none;
@@ -933,6 +934,26 @@ label {
     float: right;
     color: white !important;
     text-align: center;
+=======
+.navbar-store {
+    height: 25px;
+    width: 100%;
+    background: #fff;
+    padding-right: 20px;
+    padding-top: 2px;
+    color: black;
+}
+
+.div-input-search {
+    width: 400px;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.input-search {
+    width: 400px;
+>>>>>>> origin/1.0
 }
 
 
@@ -1181,6 +1202,7 @@ tr:nth-child(even) {
     border: transparent;
 }
 
+<<<<<<< HEAD
 #menu ul {
 	padding:0px;
 	margin:0px;
@@ -1215,4 +1237,10 @@ tr:nth-child(even) {
     width:100%; 
     text-align:center; 
     color:white !important;
+=======
+.formRegisterUser {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 200px;
+>>>>>>> origin/1.0
 }
