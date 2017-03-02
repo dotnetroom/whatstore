@@ -189,5 +189,15 @@ namespace WhatStore.Controllers
             return View();
         }
 
+        [HttpGet("~/{store}/confirm/user")]
+        public IActionResult ConfirmUserStore()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return View();
+        }
     }
 }
