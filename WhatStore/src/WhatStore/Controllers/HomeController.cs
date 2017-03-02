@@ -11,10 +11,12 @@ namespace WhatStore.Controllers
     public class HomeController : Controller
     {
         private IStoreRepository _storeRepository;
+        private IProductRepository _productRepository;
 
-        public HomeController(IStoreRepository storeRepository)
+        public HomeController(IStoreRepository storeRepository, IProductRepository productRepository)
         {
             _storeRepository = storeRepository;
+            _productRepository = productRepository;
         }
 
         public IActionResult Index()
@@ -30,6 +32,7 @@ namespace WhatStore.Controllers
             {
                 logo = Url.Action(logo, "image");
             }
+            var categories = await _productRepository.GetCategories();
             ViewBag.Logo = logo;
             ViewBag.StoreName = store;
             return View();
