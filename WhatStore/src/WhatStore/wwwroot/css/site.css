@@ -892,8 +892,6 @@ label {
 }
 
 
-<<<<<<< HEAD
-
 .navbar-store-top ul {
     list-style: none;
 }
@@ -934,8 +932,9 @@ label {
     float: right;
     color: white !important;
     text-align: center;
-=======
-.navbar-store {
+}
+
+.navbar-store{
     height: 25px;
     width: 100%;
     background: #fff;
@@ -953,7 +952,6 @@ label {
 
 .input-search {
     width: 400px;
->>>>>>> origin/1.0
 }
 
 
@@ -1202,7 +1200,6 @@ tr:nth-child(even) {
     border: transparent;
 }
 
-<<<<<<< HEAD
 #menu ul {
 	padding:0px;
 	margin:0px;
@@ -1231,16 +1228,16 @@ tr:nth-child(even) {
 	border-bottom:3px solid #EA0000;
 }
 
-#carrinho h6{
-    font: small-caption; 
-    font-weight:bolder; 
-    width:100%; 
-    text-align:center; 
-    color:white !important;
-=======
+#carrinho h6 {
+    font: small-caption;
+    font-weight: bolder;
+    width: 100%;
+    text-align: center;
+    color: white !important;
+}
+
 .formRegisterUser {
     position: relative;
     margin: 0 auto;
     margin-top: 200px;
->>>>>>> origin/1.0
 }
