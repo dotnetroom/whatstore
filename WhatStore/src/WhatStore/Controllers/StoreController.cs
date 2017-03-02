@@ -111,7 +111,7 @@ namespace WhatStore.Controllers
             var phone = model.PhoneDDD + model.PhoneNumber;
 
             if (await _storeRepository.UpdateStoreInformation(fileName, user.StoreId, model.StoreName, model.StoreDescription, phone,
-                                                    model.Email, model.URL, model.Terms, model.HasAdress, model.Address,
+                                                    model.Email, model.Terms, model.HasAdress, model.Address,
                                                     model.Number, model.CEP, model.Complemento, model.City))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";

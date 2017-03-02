@@ -26,7 +26,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             _settings = settings.Value;
         }
 
-        public async Task<bool> UpdateStoreInformation(string fileName, long storeID, string storeName, string storeDescription, string phoneNumber, string email, string URL,
+        public async Task<bool> UpdateStoreInformation(string fileName, long storeID, string storeName, string storeDescription, string phoneNumber, string email,
                                                        string terms, bool hasAddress, string address, string number, string CEP, string complemento, int city)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
@@ -34,6 +34,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 await db.OpenAsync();
                 try
                 {
+                    if (SelectStoreName(storeName) != null) return false;
 
                     if (storeID <= 0) return false;
 
@@ -77,8 +78,11 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         adressUpdate = "UPDATE dbo.Store SET AdressId = NULL WHERE Store.Id = @ID";
                         var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID });
                     }
+                   
+
                     if (fileName != null)
                     {
+
                         var queryUpdateStore = "UPDATE dbo.Store SET Logo = @Logo, Description = @Description, Email = @Email, " +
                                                "Name = @Name, Phone = @Phone, Term = @Term, URL = @URl";
 
@@ -90,7 +94,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                      Name = storeName,
                                                                      Phone = phoneNumber,
                                                                      Term = terms,
-                                                                     URL = URL,
+                                                                     URL = storeName.ToLower(),
                                                                      Logo = fileName,
                                                                  });
                     }
@@ -107,7 +111,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                      Name = storeName,
                                                                      Phone = phoneNumber,
                                                                      Term = terms,
-                                                                     URL = URL,
+                                                                     URL = storeName.ToLower(),
                                                                      StoreId = storeID
                                                                  });
 
@@ -201,13 +205,18 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
 
                     try
-                    {
-                        var queryInsertStore = "INSERT INTO dbo.Store (Name, URL, IsActive, StoreTypeId) " +
-                                                "VALUES (@Name, @URL, @IsActive, @StoreTypeId); SELECT SCOPE_IDENTITY();";
+                    {                       
+                        long storeID = 0;
+                        if (SelectStoreName(store.Name) != null) {
+                            return -1;
+                        }
 
-                        var resultInsertStore = await db.QueryAsync<long>(queryInsertStore, store, trans);
+                            var queryInsertStore = "INSERT INTO dbo.Store (Name, URL, IsActive, StoreTypeId) " +
+                                                    "VALUES (@Name, @URL, @IsActive, @StoreTypeId); SELECT SCOPE_IDENTITY();";
 
-                        var storeID = resultInsertStore.FirstOrDefault();
+                            var resultInsertStore = await db.QueryAsync<long>(queryInsertStore, store, trans);
+                            storeID = resultInsertStore.FirstOrDefault();
+
 
                         if (storeID > 0)
                         {
@@ -536,19 +545,21 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 try
                 {
-                    var updatePessoaJuridica = await db.ExecuteAsync("UPDATE dbo.StoreFinancial SET About = @About, Birthday = @Birthday, CPF = @CPF, FirstName = @FirstName, Gender = @Gender, LastName = @LastName, Phone = @Phone, Rg = Rg WHERE dbo.StoreFinancial.Id = @ID",
-                                                                    new
-                                                                    {
-                                                                        ID = storeFinancialId,
-                                                                        About = about,
-                                                                        Birthday = birthday,
-                                                                        CPF = cpf,
-                                                                        FirstName = firstName,
-                                                                        Gender = gender,
-                                                                        LastName = lastName,
-                                                                        Phone = phone,
-                                                                        Rg = rg
-                                                                    });
+                  
+                        var updatePessoaJuridica = await db.ExecuteAsync("UPDATE dbo.StoreFinancial SET About = @About, Birthday = @Birthday, CPF = @CPF, FirstName = @FirstName, Gender = @Gender, LastName = @LastName, Phone = @Phone, Rg = Rg WHERE dbo.StoreFinancial.Id = @ID",
+                                                                        new
+                                                                        {
+                                                                            ID = storeFinancialId,
+                                                                            About = about,
+                                                                            Birthday = birthday,
+                                                                            CPF = cpf,
+                                                                            FirstName = firstName,
+                                                                            Gender = gender,
+                                                                            LastName = lastName,
+                                                                            Phone = phone,
+                                                                            Rg = rg
+                                                                        });
+                    
                     return true;
 
                 }
@@ -635,15 +646,30 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
+<<<<<<< HEAD
         public async Task<string> GetLogo(string store)
+=======
+        public async Task<string> SelectStoreName(string storeName)
+>>>>>>> origin/1.0
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 try
                 {
+<<<<<<< HEAD
                     var query = "SELECT dbo.Store.Logo FROM dbo.Store WHERE dbo.Store.URL = @URL";
                     var logo = await db.QueryAsync<string>(query, new { URL = store });
                     return logo.FirstOrDefault();
+=======
+                    var selectName = await db.QueryAsync<string>("SELECT dbo.Store.Name FROM dbo.Store WHERE Name = @Name",
+                        new
+                        {
+                            Name = storeName
+                        });
+                    var name = selectName.FirstOrDefault();
+
+                    return name;
+>>>>>>> origin/1.0
                 }
                 catch (Exception ex)
                 {

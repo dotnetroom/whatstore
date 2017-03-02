@@ -1,0 +1,30 @@
+﻿@model WhatStore.Domain.Infrastructure.ViewModels.Account.ConfirmUserStoreViewModel
+
+@{
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+</head>
+
+<body>
+    <form class="formLogin formRegisterUser" method="post">
+        <div class="row margin-top-10">
+            <label>Nome: </label>
+            <input  type="text" class="form-control" asp-for="Name" required/>
+        </div>
+    <div>
+        <label>Email: </label>
+        <input type="text" class="form-control" asp-for="Email" required />
+    </div>
+
+    <div class="row margin-top-10">
+        <button type="submit" class="btn btn-primary" style="width: 100%; height: 40px;">Entrar</button>
+    </div>
+
+    </form>>
+
+</body>
+</html>
