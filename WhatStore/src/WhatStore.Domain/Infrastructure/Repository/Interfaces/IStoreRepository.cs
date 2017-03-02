@@ -31,12 +31,9 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<long> InsertAdress(string CEP, int cityId, string complement, string number, string street);
         Task<bool> UpdateAdress(long adressId, string CEP, int cityId, string complement, string number, string street);
         Task<bool> UpdateStoreFinancial(long pessoaJuridicaId, long storeFinancialId);
-        Task<bool> UpdateStoreInformation(string fileName, long userID, string storeName, string storeDescription, string phoneNumber, string email,
-                                  string terms, bool hasAddress, string address, string number, string CEP, string complemento, int city);
-<<<<<<< HEAD
+        Task<bool> UpdateStoreInformation(string fileName, long userID, string storeName, string storeDescription, string phoneNumber, string email, string terms, bool hasAdress, string address,
+                                            string number, string CEP, string complemento, int city);
         Task<string> GetLogo(string store);
-=======
         Task<string> SelectStoreName(string storeName);
->>>>>>> origin/1.0
     }
 }
