@@ -37,12 +37,12 @@
         <div class="float-left margin-top-10 font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>Data de nascimento:</label>
-                <input type="date" class="form-control" required asp-for="Birthday" value="@Model.Birthday.ToString("yyyy-MM-dd")"/>
+                <input type="date" class="form-control" required asp-for="Birthday" />
             </div>
 
             <div class="float-right font-size13">
                 <label>Genero: </label>
-                <select id="Genero" class="form-control" style="width:220px" asp-for="Genero" value="@Model.Genero">
+                <select id="Genero" class="form-control" style="width:220px" asp-for="Genero">
                     <option value="-1">Selecione um genero</option>
                     <option value="false">Masculino</option>
                     <option value="true">Feminino</option>
@@ -53,11 +53,11 @@
         <div class="float-left margin-top-10 font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>DDD: </label>
-                <input type="text" class="form-control" style="width:110px" maxlength="2" required name="PhoneDDD" value="@Model.PhoneDDD"/>
+                <input type="text" class="form-control" style="width:110px" maxlength="2" required name="PhoneDDD" />
             </div>
             <div class="float-right font-size13">
                 <label>Telefone: </label>
-                <input type="text" class="form-control" style="width:280px" required name="PhoneNumber" value="@Model.PhoneNumber"/>
+                <input type="text" class="form-control" style="width:280px" required name="PhoneNumber" />
             </div>
         </div>
 
@@ -65,55 +65,55 @@
             <div class="float-left margin-right-10 font-size13">
                 <label>Estado:</label>
                 <select id="dropStates" class="form-control" style="width:190px" asp-for="State">
-                    <option value="-1">Selecione um estado</option>
+                    <option value="-1">Selecione seu estado</option>
                     @foreach (var state in Model.States)
+                    {
+                        if (state.Id == Model.State)
                         {
-                            if (state.Id == Model.State)
-                            {
-                                <option value="@state.Id" selected>@state.Initials</option>
+                            <option value="@state.Id" selected>@state.Initials</option>
 
-                            }
-                            else
-                            {
-                                <option value="@state.Id">@state.Initials</option>
-                            }
                         }
+                        else
+                        {
+                            <option value="@state.Id">@state.Initials</option>
+                        }
+                    }
                 </select>
             </div>
 
 
             <div class="float-right font-size13">
                 <label>Cidade: </label>
-                <select id="dropCities" class="form-control" style="width:200px" name="CityID">
-                    <option value="-1">Selecione uma cidade</option>
-                    @*@if (model.cityid > 0)
-                        {
-                            <option value="@model.cityid" selected>@model.cityname</option>
+                <select id="dropCities" class="form-control" style="width:200px" value="@Model.CityID">
+                    <option value="-1">Selecione sua cidade</option>
+                    @if (Model.CityID > 0)
+                    {
+                        <option value="@Model.CityID" selected>@Model.CityName</option>
 
-                        }*@
+                    }
                 </select>
             </div>
         </div>
 
         <div class="float-left row margin-top-10 font-size13">
             <label>CEP: </label>
-            <input class="form-control" style="width: 100px;" required name="CEP" value="@Model.CEP"/>
+            <input class="form-control" style="width: 100px;" required name="CEP" />
         </div>
 
         <div class="float-left row margin-top-10 font-size13">
             <label>Endereço: </label>
-            <input class="form-control" style="width: 150px;" required name="Street" value="@Model.Street"/>
+            <input class="form-control" style="width: 150px;" required name="Street" />
         </div>
 
         <div class="float-left margin-top-10 font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>Número: </label>
-                <input class="form-control " style="width: 140px;" required name="Number" value="@Model.Number"/>
+                <input class="form-control " style="width: 140px;" required name="Number" />
             </div>
 
             <div class="float-right font-size13">
                 <label>Complemento:</label>
-                <input class="form-control" style="width: 250px;" name="Complement" value="@Model.Complement"/>
+                <input class="form-control" style="width: 250px;" name="Complement" />
             </div>
         </div>
 
@@ -136,7 +136,7 @@
 
 @section Scripts{
     <script type="text/javascript">
-      $(document).ready(function () {
+        $(document).ready(function () {
             $('#dropStates').states($('#dropCities'));
         });
     </script>
