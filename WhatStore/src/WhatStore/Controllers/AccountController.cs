@@ -100,7 +100,7 @@ namespace WhatStore.Controllers
 
             long storeID = 0;
             var urlStore = model.StoreName.Trim().Replace(" ", "").ToLower();
-           
+
             if (await _storeRepository.SelectStoreName(urlStore) == null)
             {
                 storeID = await _storeRepository.RegisterStore(new Store()
@@ -109,14 +109,15 @@ namespace WhatStore.Controllers
                     Name = model.StoreName.Trim(),
                     URL = urlStore,
                 });
-            }else
+            }
+            else
             {
                 var storeTypes = await _storeRepository.GetStoreType();
                 model.StoreTypes = storeTypes;
                 ModelState.AddModelError("StoreName", "Nome de loja já utilizada");
                 model.ReturnMessage = "Erro ao salvar alterações";
                 return View("Register", model);
-            }        
+            }
 
             if (storeID > 0)
             {
@@ -190,13 +191,47 @@ namespace WhatStore.Controllers
             return View();
         }
 
-        [HttpGet("~/{store}/register/user/complement")]
-        public IActionResult RegisterUserStoreComp()
+        [HttpGet("~/{store}/register/user/comp")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RegisterUserStoreComp()
+        {
+            RegisterUserStoreCompViewModel model = new RegisterUserStoreCompViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost("~/{store}/register/user/complement")]
+        public async Task<IActionResult> RegisterUserStoreComplement(RegisterUserStoreCompViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
+            var user = new ApplicationUser
+            {
+                FirstName = model.Name,
+                LastName = model.LastName,
+                RG = model.RG,
+                CPF = model.CPF,
+                Birthday = model.Birthday,
+                Genero = model.Genero,
+                Email = model.Email,
+                NormalizedEmail = model.Email.ToUpper(),
+                NormalizedUserName = model.Email.ToUpper(),
+                UserName = model.Email
+            };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                return View("Login", new LoginViewModel());
+            }
+            else
+            {
+                return View("RegisterUserStoreComp", model);
+            }
+
 
             return View();
         }
