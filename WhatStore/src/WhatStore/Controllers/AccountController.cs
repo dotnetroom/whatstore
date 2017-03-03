@@ -199,9 +199,11 @@ namespace WhatStore.Controllers
         {
 
             var states = await _localizationRepository.GetStates();
+            var cities = await _localizationRepository.GetCities();
 
             var model = new RegisterUserStoreCompViewModel();
             model.States = states;
+            model.CityID = cities;
 
             return View(model);
         }
