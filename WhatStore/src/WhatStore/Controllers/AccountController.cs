@@ -212,7 +212,7 @@ namespace WhatStore.Controllers
             {
                 return BadRequest();
             }
-           
+
             return View();
         }
 
