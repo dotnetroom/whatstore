@@ -197,48 +197,22 @@ namespace WhatStore.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> RegisterUserStoreComp()
         {
-
             var states = await _localizationRepository.GetStates();
 
             var model = new RegisterUserStoreCompViewModel();
             model.States = states;
-            
+
             return View(model);
         }
 
         [HttpPost("~/{store}/register/user/complement")]
-        public async Task<IActionResult> RegisterUserStoreComplement(RegisterUserStoreCompViewModel model)
+        public IActionResult RegisterUserStoreComplement()
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            var user = new ApplicationUser
-            {
-                FirstName = model.Name,
-                LastName = model.LastName,
-                RG = model.RG,
-                CPF = model.CPF,
-                Birthday = model.Birthday,
-                Genero = model.Genero,
-                Email = model.Email,
-                NormalizedEmail = model.Email.ToUpper(),
-                NormalizedUserName = model.Email.ToUpper(),
-                UserName = model.Email
-            };
-
-            var result = await _userManager.CreateAsync(user, model.Password);
-
-            if (result.Succeeded)
-            {
-                return View("Login", new LoginViewModel());
-            }
-            else
-            {
-                return View("RegisterUserStoreComp", model);
-            }
-
-
+           
             return View();
         }
 

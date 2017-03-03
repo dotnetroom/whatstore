@@ -42,7 +42,7 @@
 
             <div class="float-right font-size13">
                 <label>Genero: </label>
-                <select id="Genero" class="form-control" style="width:220px" asp-for="Genero" >
+                <select id="Genero" class="form-control" style="width:220px" asp-for="Genero">
                     <option value="-1">Selecione um genero</option>
                     <option value="false">Masculino</option>
                     <option value="true">Feminino</option>
@@ -65,32 +65,32 @@
             <div class="float-left margin-right-10 font-size13">
                 <label>Estado:</label>
                 <select id="dropStates" class="form-control" style="width:190px" asp-for="State">
-                    <option value="-1">Selecione um estado</option>
+                    <option value="-1">Selecione seu estado</option>
                     @foreach (var state in Model.States)
+                    {
+                        if (state.Id == Model.State)
                         {
-                            if (state.Id == Model.State)
-                            {
-                                <option value="@state.Id" selected>@state.Initials</option>
+                            <option value="@state.Id" selected>@state.Initials</option>
 
-                            }
-                            else
-                            {
-                                <option value="@state.Id">@state.Initials</option>
-                            }
                         }
+                        else
+                        {
+                            <option value="@state.Id">@state.Initials</option>
+                        }
+                    }
                 </select>
             </div>
 
 
             <div class="float-right font-size13">
                 <label>Cidade: </label>
-                <select id="dropCities" class="form-control" style="width:200px" name="CityID">
-                    <option value="-1">Selecione uma cidade</option>
-                    @if (Model.CityID> 0)
-                        {
-                            <option value="@Model.CityID" selected>@Model.CityName</option>
+                <select id="dropCities" class="form-control" style="width:200px" value="@Model.CityID">
+                    <option value="-1">Selecione sua cidade</option>
+                    @if (Model.CityID > 0)
+                    {
+                        <option value="@Model.CityID" selected>@Model.CityName</option>
 
-                        }
+                    }
                 </select>
             </div>
         </div>
@@ -136,7 +136,7 @@
 
 @section Scripts{
     <script type="text/javascript">
-      $(document).ready(function () {
+        $(document).ready(function () {
             $('#dropStates').states($('#dropCities'));
         });
     </script>
