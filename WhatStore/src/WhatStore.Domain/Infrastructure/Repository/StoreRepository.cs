@@ -207,10 +207,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     try
                     {
                         long storeID = 0;
-                        if (SelectStoreName(store.Name) != null)
-                        {
-                            return -1;
-                        }
+                       
 
                         var queryInsertStore = "INSERT INTO dbo.Store (Name, URL, IsActive, StoreTypeId) " +
                                                 "VALUES (@Name, @URL, @IsActive, @StoreTypeId); SELECT SCOPE_IDENTITY();";
@@ -664,23 +661,22 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<string> SelectStoreName(string storeName)
+        public async Task<string> SelectStoreName(string urlStore)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 try
                 {
-                    var query = "SELECT dbo.Store.Logo FROM dbo.Store WHERE dbo.Store.URL = @URL";
-                    var logo = await db.QueryAsync<string>(query, new { URL = storeName });
-                    return logo.FirstOrDefault();
-                    var selectName = await db.QueryAsync<string>("SELECT dbo.Store.Name FROM dbo.Store WHERE Name = @Name",
+                   
+                    var selectName = await db.QueryAsync<string>("SELECT dbo.Store.URL FROM dbo.Store WHERE URL = @URL",
                         new
                         {
-                            Name = storeName
+                            URL = urlStore
                         });
-                    var name = selectName.FirstOrDefault();
 
-                    return name;
+                    var url = selectName.FirstOrDefault();
+
+                    return url;
                 }
                 catch (Exception ex)
                 {

@@ -32,8 +32,8 @@ namespace WhatStore.Controllers
             _signInManager = signInManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _userManager = userManager;
-            
-        }  
+
+        }
 
         [HttpGet("login")]
         [AllowAnonymous]
@@ -44,7 +44,7 @@ namespace WhatStore.Controllers
         }
 
 
-        
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -54,16 +54,16 @@ namespace WhatStore.Controllers
                 return View(model);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe ,lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
-                _logger.LogInformation(1,"Usuario logado.");                
-                
+                _logger.LogInformation(1, "Usuario logado.");
+
             }
-                        
+
             else
-            {               
+            {
                 ModelState.AddModelError("Email", "Usuário ou senha incorreta");
                 return View(model);
             }
@@ -84,7 +84,7 @@ namespace WhatStore.Controllers
 
 
             model.StoreTypes = storeTypes;
-            
+
 
             return View(model);
         }
@@ -98,13 +98,25 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            var storeID = await _storeRepository.RegisterStore(new Store()
+            long storeID = 0;
+            var urlStore = model.StoreName.Trim().Replace(" ", "").ToLower();
+           
+            if (await _storeRepository.SelectStoreName(urlStore) == null)
             {
-                StoreTypeId = model.StoreTypeID,
-                Name = model.StoreName.Trim(),
-                URL = model.StoreName.Trim().Replace(" ", "").ToLower()
-            });
-
+                storeID = await _storeRepository.RegisterStore(new Store()
+                {
+                    StoreTypeId = model.StoreTypeID,
+                    Name = model.StoreName.Trim(),
+                    URL = urlStore,
+                });
+            }else
+            {
+                var storeTypes = await _storeRepository.GetStoreType();
+                model.StoreTypes = storeTypes;
+                ModelState.AddModelError("StoreName", "Nome de loja já utilizada");
+                model.ReturnMessage = "Erro ao salvar alterações";
+                return View("Register", model);
+            }        
 
             if (storeID > 0)
             {
@@ -131,19 +143,19 @@ namespace WhatStore.Controllers
                     model.ReturnMessage = "Alterações salvas com sucesso";
                     return View("Login", new LoginViewModel());
                 }
+
                 else
                 {
                     ViewBag.Errors = result.ConvertToHTML();
                     var storeTypes = await _storeRepository.GetStoreType();
                     model.StoreTypes = storeTypes;
-
                     await _storeRepository.DeleteStore(storeID);
                     return View("Register", model);
                 }
-                
-            }        
 
-            return Ok();   
+            }
+
+            return Ok();
         }
 
         [HttpPost("Logoff")]
@@ -168,7 +180,7 @@ namespace WhatStore.Controllers
         #endregion
 
         [HttpGet("~/{store}/register/user")]
-        public  IActionResult RegisterUserStore()
+        public IActionResult RegisterUserStore()
         {
             if (!ModelState.IsValid)
             {
@@ -185,7 +197,7 @@ namespace WhatStore.Controllers
             {
                 return BadRequest();
             }
-                      
+
             return View();
         }
 

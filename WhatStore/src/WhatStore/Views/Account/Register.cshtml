@@ -34,41 +34,49 @@
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Sobrenome: </label>
-            <input type="text" class="form-control" required asp-for="LastName"  />
+            <input type="text" class="form-control" required asp-for="LastName" />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>RG: </label>
-            <input type="text" class="form-control" required asp-for="RG"  />
+            <input type="text" class="form-control" required asp-for="RG" />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>CPF: </label>
-            <input type="text" class="form-control" required asp-for="CPF"/>
+            <input type="text" class="form-control" required asp-for="CPF" />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Data de nascimento:</label>
-            <input type="date" class="form-control" required asp-for="Birthday" value="@Model.Birthday.ToString("yyyy-MM-dd")"/>
+            <input type="date" class="form-control" required asp-for="Birthday" value="@Model.Birthday.ToString("yyyy-MM-dd")" />
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Genero: </label>
             <select id="Genero" class="form-control" asp-for="Genero" value="@Model.Genero">
                 <option value="-1">Selecione um genero</option>
                 <option value="false">Masculino</option>
-                <option value="true">Feminino</option>                
-            </select>            
+                <option value="true">Feminino</option>
+            </select>
         </div>
 
         <div class="row margin-top-10 form-group">
             <label>Nome da Loja: </label>
-            <input type="text" class="form-control" asp-for="StoreName" required/>
+            <input type="text" class="form-control" asp-for="StoreName" required />
+            <span asp-validation-for="StoreName" class="text-danger"></span>
         </div>
 
         <div class="row margin-top10 form-group">
             <label>Tipos de Loja:</label>
-            <select id="StoreTypeID" class="form-control" name="StoreTypeID">
+            <select id="StoreTypeID" class="form-control" name="StoreTypeID" value="@Model.StoreTypeID">
                 <option value="-1">Selecione um Tipo</option>
-               @foreach (var storeType in Model.StoreTypes)
+                @foreach (var storeType in Model.StoreTypes)
                 {
-                    <option value="@storeType.Id">@storeType.Name</option>
+                    if (storeType.Id == Model.StoreTypeID)
+                    {
+                        <option value="@storeType.Id" selected>@storeType.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@storeType.Id">@storeType.Name</option>
+                    }
                 }
             </select>
         </div>
@@ -80,7 +88,7 @@
         </div>
         <div class="row margin-top-10 font-size13">
             <label>Senha: </label>
-            <input  type="password" class="form-control" required asp-for="Password" />
+            <input type="password" class="form-control" required asp-for="Password" />
         </div>
         <div class="row margin-top-10 font-size13 ">
             <button type="submit" style="height: 40px !important;" class="btn btn-primary margin-bottom-20 row">Registrar</button>
