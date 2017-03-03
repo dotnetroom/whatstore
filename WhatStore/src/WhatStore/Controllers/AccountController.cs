@@ -23,13 +23,15 @@ namespace WhatStore.Controllers
 
         private IStoreRepository _storeRepository;
         private SignInManager<ApplicationUser> _signInManager;
+        private ILocalizationRepository _localizationRepository;
         private ILogger _logger;
         private UserManager<ApplicationUser> _userManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, IStoreRepository storeRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
+        public AccountController(UserManager<ApplicationUser> userManager, IStoreRepository storeRepository, ILocalizationRepository localizationRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
         {
             _storeRepository = storeRepository;
             _signInManager = signInManager;
+            _localizationRepository = localizationRepository;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _userManager = userManager;
 
@@ -195,7 +197,11 @@ namespace WhatStore.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> RegisterUserStoreComp()
         {
-            RegisterUserStoreCompViewModel model = new RegisterUserStoreCompViewModel();
+
+            var states = await _localizationRepository.GetStates();
+
+            var model = new RegisterUserStoreCompViewModel();
+            model.States = states;
 
             return View(model);
         }
