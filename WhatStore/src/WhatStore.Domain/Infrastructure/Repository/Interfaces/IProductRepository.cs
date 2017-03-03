@@ -27,7 +27,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<List<PictureProductViewModel>> GetImages(string productId);
         Task<bool> DeleteImage(long productId);
         Task<List<Category>> GetCategories();
-        Task<bool> RegisterCategory(string categoryName);
+        Task<bool> RegisterCategory(string categoryName, long storeId);
         Task<bool> UpdateCategory(long categoryId, string categoryName);
         Task<List<SubCategory>> GetSubCategory(long categoryId);
         Task<bool> RegisterSubCategory(string subCategoryName, long categoryId);

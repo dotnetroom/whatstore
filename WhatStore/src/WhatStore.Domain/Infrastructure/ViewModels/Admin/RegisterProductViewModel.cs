@@ -50,11 +50,13 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
 
         public List<Category> Categories { get; set; }
 
-        public string Category { get; set; }
+        public long Category { get; set; }
 
         public List<SubCategory> SubCategories { get; set; }
 
-        public string SubCategory { get; set; }
+        public long SubCategory { get; set; }
+
+        public string SubCategoryName { get; set; }
 
         public string ReturnMessage { get; set; }
     }

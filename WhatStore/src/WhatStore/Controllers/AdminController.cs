@@ -57,9 +57,9 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            //var category = await _productRepository.GetCategory();
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            if (await _productRepository.RegisterCategory(model.CategoryName))
+            if (await _productRepository.RegisterCategory(model.CategoryName, user.StoreId))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }

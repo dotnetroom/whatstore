@@ -107,8 +107,6 @@ namespace WhatStore.Controllers
             {
                 List<ProductViewModel> productsList = new List<ProductViewModel>() { };
 
-
-
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
                 var products = await _productRepository.GetProducts(user.StoreId);
@@ -275,7 +273,27 @@ namespace WhatStore.Controllers
             return BadRequest("Não foi possível deletar a imagem.");
 
         }
+        
 
-       
+        [HttpGet("list/subcategory/{category}")]
+        public async Task<IActionResult> ListCities(long category)
+        {
+            try
+            {
+                var subcategories = await _productRepository.GetSubCategory(category);
+                    
+                    
+
+                if (subcategories == null) return BadRequest("There was an error to load the subcategories.");
+
+                return Json(subcategories);
+            }
+
+            catch (Exception ex)
+            {
+                return BadRequest("There was an internal error");
+            }
+        }
+
     }
 }

@@ -99,15 +99,9 @@
             </div>
 
             <div class="form-group float-right">
-                <select name="" id="dropSubCategory" type="text" class="form-control" style="width:500px" value="@Model.SubCategory">
+                <select name="SubCategory" id="dropSubCategories" type="text" class="form-control" style="width:500px" value="@Model.SubCategory">
                     <option value="-1">Selecione a subcategoria</option>
-                    @if (Model.SubCategories != null)
-                    {
-                        @foreach (var subCategory in Model.SubCategories)
-                {
-                            <option value="@subCategory.Id">@subCategory.SubCategoryName</option>
-                        }
-                    }
+                   
                 </select>
             </div>
 
@@ -145,8 +139,30 @@
             }
         });
 
-        $(document).ready(function () {
-            $('#dropCategory').categories($('#dropSubCategory'));
+
+        $("#dropCategory").on('changes', function () {
+            var dropDown = $(this);
+            var categoryId = dropDown.val();            
+            dropSubCategories.html('<option value="-1">Selecione a subcategoria</option>');
+
+            $.ajax({
+                url: '/product/list/subcategory/' + categoryId,
+                method: 'GET',
+                success: function (data) {
+                    $.each(data, function (i, item) {
+                        dropSubCategories.append('<option value="' + item.id + '">' + item.name + '</option>');
+                    });
+                    dropSubCategories.removeAttr('disabled');
+                },
+                error: function (x, y, message) {
+                    dropSubCategories.attr('disable', 'disable');
+                    alert("ERROOOU  " + message);
+                }
+            });
         });
+
+        //$(document).ready(function () {
+        //    $('#dropCategory').category($('#dropSubCategories'));
+        //});
     </script>
 }

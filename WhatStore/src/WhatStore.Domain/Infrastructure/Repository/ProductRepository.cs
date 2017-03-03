@@ -373,16 +373,17 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<bool> RegisterCategory(string categoryName)
+        public async Task<bool> RegisterCategory(string categoryName, long storeId)
         {
             try
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    var queryInsertCategory = ("INSERT INTO dbo.Category (CategoryName) VALUES (@CategoryName)");
+                    var queryInsertCategory = ("INSERT INTO dbo.Category (CategoryName, StoreId) VALUES (@CategoryName, @StoreId)");
                     var category = await db.ExecuteAsync(queryInsertCategory, new
                     {
-                        CategoryName = categoryName
+                        CategoryName = categoryName,
+                        StoreId = storeId
                     });
                     return true;
                 }
