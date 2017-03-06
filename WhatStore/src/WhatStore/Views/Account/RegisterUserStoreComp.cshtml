@@ -3,46 +3,70 @@
     Layout = null;
 }
 <head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/font-awesome.css" />
+
     <title>Register</title>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <script src="~/js/whatstore.js"></script>
+
 </head>
 
 <body>
     <form class="formRegisterUserStore float-center margin-top-20 margin-bottom-50" asp-controller="account" asp-action="~/{store}/register/user/complement" method="post">
 
-        <div class="float-left margin-top-10 font-size13">
+        <div class="float-left font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>Nome: </label>
-                <input type="text" class="form-control" style="width:180px" asp-for="Name" required />
+                <input type="text" class="form-control" style="width:150px" asp-for="Name" required />
             </div>
 
             <div class="float-right font-size13">
                 <label>Sobrenome: </label>
-                <input type="text" class="form-control" style="width:210px" required asp-for="LastName" />
+                <input type="text" class="form-control" style="width:190px" required asp-for="LastName" />
             </div>
         </div>
 
         <div class="float-left margin-top-10 font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>RG: </label>
-                <input type="text" class="form-control" style="width:190px" required asp-for="RG" />
+                <input type="text" class="form-control" style="width:170px" required asp-for="RG" />
             </div>
 
             <div class="float-right font-size13">
                 <label>CPF: </label>
-                <input type="text" class="form-control" style="width:200px" required asp-for="CPF" />
+                <input type="text" class="form-control" style="width:170px" required asp-for="CPF" />
             </div>
         </div>
 
         <div class="float-left margin-top-10 font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>Data de nascimento:</label>
-                <input type="date" class="form-control" required asp-for="Birthday" />
+                <input type="date" class="form-control" required asp-for="Birthday" style="width:170px" />
             </div>
 
             <div class="float-right font-size13">
                 <label>Genero: </label>
-                <select id="Genero" class="form-control" style="width:220px" asp-for="Genero">
+                <select id="Genero" class="form-control" style="width:170px" asp-for="Genero">
                     <option value="-1">Selecione um genero</option>
                     <option value="false">Masculino</option>
                     <option value="true">Feminino</option>
@@ -53,18 +77,18 @@
         <div class="float-left margin-top-10 font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>DDD: </label>
-                <input type="text" class="form-control" style="width:110px" maxlength="2" required name="PhoneDDD" />
+                <input type="text" class="form-control" style="width:90px" maxlength="2" required name="PhoneDDD" />
             </div>
             <div class="float-right font-size13">
                 <label>Telefone: </label>
-                <input type="text" class="form-control" style="width:280px" required name="PhoneNumber" />
+                <input type="text" class="form-control" style="width:250px" required name="PhoneNumber" />
             </div>
         </div>
 
         <div class="float-left margin-top-10 font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>Estado:</label>
-                <select id="dropStates" class="form-control" style="width:190px" asp-for="State">
+                <select id="dropStates" class="form-control" style="width:170px" asp-for="State">
                     <option value="-1">Selecione seu estado</option>
                     @foreach (var state in Model.States)
                     {
@@ -84,7 +108,7 @@
 
             <div class="float-right font-size13">
                 <label>Cidade: </label>
-                <select id="dropCities" class="form-control" style="width:200px" value="@Model.CityID">
+                <select id="dropCities" class="form-control" style="width:170px" value="@Model.CityID">
                     <option value="-1">Selecione sua cidade</option>
                     @if (Model.CityID > 0)
                     {
@@ -97,23 +121,23 @@
 
         <div class="float-left row margin-top-10 font-size13">
             <label>CEP: </label>
-            <input class="form-control" style="width: 100px;" required name="CEP" />
+            <input class="form-control" required name="CEP" />
         </div>
 
         <div class="float-left row margin-top-10 font-size13">
             <label>Endereço: </label>
-            <input class="form-control" style="width: 150px;" required name="Street" />
+            <input class="form-control" required name="Street" />
         </div>
 
         <div class="float-left margin-top-10 font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>Número: </label>
-                <input class="form-control " style="width: 140px;" required name="Number" />
+                <input class="form-control " style="width: 120px;" required name="Number" />
             </div>
 
             <div class="float-right font-size13">
                 <label>Complemento:</label>
-                <input class="form-control" style="width: 250px;" name="Complement" />
+                <input class="form-control" style="width: 225px;" name="Complement" />
             </div>
         </div>
 
@@ -134,10 +158,11 @@
     </form>
 </body>
 
-@section Scripts{
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#dropStates').states($('#dropCities'));
-        });
-    </script>
-}
+
+<script type="text/javascript">
+
+
+    $('#dropStates').states($('#dropCities'));
+
+
+</script>
