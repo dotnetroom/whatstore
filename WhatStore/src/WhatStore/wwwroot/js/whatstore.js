@@ -36,7 +36,7 @@
                 method: 'GET',
                 success: function (data) {
                     $.each(data, function (i, item) {
-                        dropSubCategories.append('<option value="' + item.id + '">' + item.subCategoryName + '<option>');
+                        dropSubCategories.append('<option value="' + item.id + '">' + item.subCategoryName + '</option>');
                     });
                     dropSubCategories.removeAttr('disabled');
                 },
