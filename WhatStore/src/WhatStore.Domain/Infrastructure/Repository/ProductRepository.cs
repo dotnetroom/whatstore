@@ -173,7 +173,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         public async Task<bool> InsertProduct(List<string> fileNames, long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
                                               bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weigth,
-                                              double widtih, string tags, string id)
+                                              double widtih, string tags, string id, long subCategoryId)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
@@ -186,8 +186,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     var codigo = id.Replace(" ", "");
 
-                    var productInsert = "INSERT INTO dbo.Product (Id, Name, Description, Price, StoreId, IsFreeShipping, Length, Weigth, Widith) "
-                                   + "VALUES (@ID, @NAME, @DESCRIPTION, @PRICE, @STOREID, @ISFREESHIPPING, @Length, @Weigth, @Widith)";
+                    var productInsert = "INSERT INTO dbo.Product (Id, Name, Description, Price, StoreId, IsFreeShipping, Length, Weigth, Widith, SubCategoryId) "
+                                   + "VALUES (@ID, @NAME, @DESCRIPTION, @PRICE, @STOREID, @ISFREESHIPPING, @Length, @Weigth, @Widith, @SubCategoryId)";
 
                     var product = await db.ExecuteAsync(productInsert,
                         new
@@ -200,7 +200,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             IsFreeShipping = isFreeShip,
                             Length = (isFreeShip != false) ? length : 0,
                             Weigth = (isFreeShip != false) ? weigth : 0,
-                            Widith = (isFreeShip != false) ? widtih : 0
+                            Widith = (isFreeShip != false) ? widtih : 0,
+                            SubCategoryId = subCategoryId
                         });
 
 
@@ -355,13 +356,17 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<List<Category>> GetCategories()
+        public async Task<List<Category>> GetCategories(long storeId)
         {
             try
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    var result = await db.QueryAsync<Category>("SELECT * FROM dbo.Category");
+                    var result = await db.QueryAsync<Category>("SELECT * FROM dbo.Category WHERE dbo.Category.StoreId = @storeid",
+                        new
+                        {
+                            storeid = storeId
+                        });
 
                     return result.ToList();
                 }
@@ -419,7 +424,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<List<SubCategory>> GetSubCategory(long categoryId)
+        public async Task<List<SubCategory>> GetSubCategories(long categoryId)
         {
             try
             {
@@ -530,6 +535,45 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }catch(Exception ex)
             {
                 return null;
+            }
+        }
+
+        public async Task<long> GetCategory(long subCategoryId)
+        {
+            try
+            {
+                using(var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var selectCategory = await db.QueryAsync<long>("SELECT dbo.SubCategory.CategoryId FROM dbo.SubCategory WHERE dbo.SubCategory.Id = @id",
+                        new
+                        {
+                            id = subCategoryId
+                        });
+                    return selectCategory.FirstOrDefault();
+                }
+            }catch(Exception ex)
+            {
+                return 0;
+            }
+        }
+
+        public async Task<long> GetSubCategory(long subCategoryId)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var selectCategory = await db.QueryAsync<long>("SELECT dbo.SubCategory.Id FROM dbo.SubCategory WHERE dbo.SubCategory.Id = @id",
+                        new
+                        {
+                            id = subCategoryId
+                        });
+                    return selectCategory.FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                return 0;
             }
         }
 

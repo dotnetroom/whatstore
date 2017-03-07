@@ -14,25 +14,25 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
 
         Task<bool> InsertProduct(List<string> fileNames, long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
                                              bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weigth,
-                                             double widtih, string tags, string id);
+                                             double widtih, string tags, string id, long subCategoryId);
         Task<bool> UpdateProduct(string productName, string description, double price, bool hasVariety, string colors, 
                                  string sizes, bool isFreeShip, double length, double weigth, double widith, 
                                  string tags, string id, List<string> fileName);
         Task<List<Product>> GetProducts(long storeID);
         Task<Product> GetProduct(string productId);
         Task<List<string>> GetTag(string productId);
+        Task<List<SubCategory>> GetSubCategories(long categoryId);
+        Task<List<Category>> GetCategories(long storeId);
+        Task<long> GetCategory(long subCategoryId);
+        Task<long> GetSubCategory(long subCategoryId);
         Task<bool> DeleteProduct(string id);
         Task<bool> InsertPictures(string productId, List<string> fileNames);
         Task<string> GetImage(string productId);
         Task<List<PictureProductViewModel>> GetImages(string productId);
         Task<bool> DeleteImage(long productId);
-        Task<List<Category>> GetCategories();
         Task<bool> RegisterCategory(string categoryName, long storeId);
         Task<bool> UpdateCategory(long categoryId, string categoryName);
-        Task<List<SubCategory>> GetSubCategory(long categoryId);
         Task<bool> RegisterSubCategory(string subCategoryName, long categoryId);
         Task<bool> UpdateSubCategory(string subCategoryName, long subCategoryId);
-
-
-      }
+    }
 }

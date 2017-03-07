@@ -29,8 +29,9 @@ namespace WhatStore.Controllers
         {
             try
             {
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 var viewModel = new RegisterProductViewModel();
-                var category = await _productRepository.GetCategories();
+                var category = await _productRepository.GetCategories(user.StoreId);
                 viewModel.Categories = category;
 
                 return View(viewModel);
@@ -84,7 +85,7 @@ namespace WhatStore.Controllers
 
             if (await _productRepository.InsertProduct(fileNames, user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
                                                        model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
-                                                       model.Weigth, model.Widith, model.Tags, model.Id))
+                                                       model.Weigth, model.Widith, model.Tags, model.Id, model.SubCategory))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
@@ -144,6 +145,8 @@ namespace WhatStore.Controllers
         {
             try
             {
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
                 List<string> productImage = new List<string> { };
                 List<PictureProductViewModel> listImage = new List<PictureProductViewModel> { };
 
@@ -166,6 +169,10 @@ namespace WhatStore.Controllers
                     }
                 }
 
+                var dataCategories = await _productRepository.GetCategories(user.StoreId);
+
+                var dataCategory = await _productRepository.GetCategory(dataProduct.SubCategoryId);
+
                 string resultDataTag = string.Join(", ", dataTag);
 
                 var viewModel = new RegisterProductViewModel()
@@ -179,7 +186,10 @@ namespace WhatStore.Controllers
                     Weigth = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Weigth) : 0,
                     Widith = (dataProduct.IsFreeShipping != false) ? double.Parse(dataProduct.Widith) : 0,
                     Tags = resultDataTag,
-                    ImageName = listImage
+                    ImageName = listImage,
+                    Categories = dataCategories,
+                    Category = dataCategory,
+                    SubCategory = dataProduct.SubCategoryId,                                                   
                 };
                 return View(viewModel);
             }
@@ -273,17 +283,15 @@ namespace WhatStore.Controllers
             return BadRequest("Não foi possível deletar a imagem.");
 
         }
-        
+
 
         [HttpGet("list/subcategory/{category}")]
-        public async Task<IActionResult> ListCities(long category)
+        public async Task<IActionResult> ListSubCategories(long category)
         {
             try
             {
-                var subcategories = await _productRepository.GetSubCategory(category);
-                    
-                    
-
+                var subcategories = await _productRepository.GetSubCategories(category);
+                
                 if (subcategories == null) return BadRequest("There was an error to load the subcategories.");
 
                 return Json(subcategories);

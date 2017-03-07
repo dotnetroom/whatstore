@@ -32,7 +32,7 @@ namespace WhatStore.Controllers
             {
                 logo = Url.Action(logo, "image");
             }
-            var categories = await _productRepository.GetCategories();
+            //var categories = await _productRepository.GetCategories();
             ViewBag.Logo = logo;
             ViewBag.StoreName = store;
             return View();

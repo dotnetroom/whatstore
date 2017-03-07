@@ -37,7 +37,9 @@ namespace WhatStore.Controllers
             try
 
             {
-                var category = await _productRepository.GetCategories();
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+                var category = await _productRepository.GetCategories(user.StoreId);
                 var viewModel = new RegisterProductCategoryViewModel();
                 viewModel.Categories = category;
                 return View(viewModel);
@@ -110,7 +112,8 @@ namespace WhatStore.Controllers
             try
 
             {
-                var category = await _productRepository.GetCategories();                                          
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                var category = await _productRepository.GetCategories(user.StoreId);                                          
                 model.Categories = category;
                 return View(model);
             }
