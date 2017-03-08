@@ -684,6 +684,26 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 }
             }
         }
+
+        public async Task<long> GetStoreId(string storeName)
+        {
+            using (var db = new SqlConnection(_settings.ConnectionString))
+            {
+                try
+                {
+                    var selectStoreId = await db.QueryAsync<long>("SELECT dbo.Store.Id FROM dbo.Store WHERE Name = @name",
+                        new
+                        {
+                            name = storeName
+                        });
+                    return selectStoreId.FirstOrDefault();
+
+                }catch(Exception ex)
+                {
+                    return 0;
+                }
+            }
+        }
     }
 }
 

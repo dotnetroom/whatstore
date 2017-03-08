@@ -919,9 +919,10 @@ label {
 
 .store-navbar {
     height: 100px;
-    background: black;
+    background: #f8f8f8;
     padding-top: 20px;
     padding-right: 20px;
+    box-shadow: 3px 4px 20px -11px rgba(0,0,0,0.75);
 }
 
 .div-input-search {
@@ -1221,41 +1222,48 @@ tr:nth-child(even) {
     margin-top: 200px;
 }
 
-#menu ul {
-    list-style-type: none;
-    padding: 0px;
-    margin: 0px;
-    background-color: #EDEDED;
-    list-style: none;
-    text-align: center;
+#nav {
+    width: 20%;
+    height: 100%;
+    background-color: #FFFFFF;
+    position: fixed;
+    left: 0;
+    padding-top: 80px;
+    -webkit-box-shadow: 3px 4px 20px -11px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 4px 20px -11px rgba(0,0,0,0.75);
+    box-shadow: 3px 4px 20px -11px rgba(0,0,0,0.75);
 }
 
-#menu ul li {
-    display: inline;
-    position: relative;
-}
+#nav ul {
+	margin: 0;	
+	list-style: none;
+	width: 150px;
+	}
 
-    #menu ul li:hover > ul {
+
+#nav ul li {
+	position: relative;
+	}
+
+    #nav ul li:hover > ul {
         display: block;
     }
 
    
-#menu ul li a {
+#nav ul li a {
     letter-spacing: 1px;
     display: inline-block;
-    background-color: #EDEDED;
     color: #333;
     text-decoration: none;
     padding: 5px 10px; 
 }
 
-    #menu li a:hover {
-        background-color: #D6D6D6;
+    #nav li a:hover {
         color: #c1326e;  
         text-shadow: 0px 0px 5px #fff;
     }
 
-#menu ul ul {
+#nav ul ul {
     margin: 0;
     position: absolute;
     top: 25px;
@@ -1265,11 +1273,11 @@ tr:nth-child(even) {
 }
 
 
-#menu ul ul li {    
+#nav ul ul li {    
     display: block;    
 }
 
-#menu ul ul a{
+#nav ul ul a{
     display: block;
     font-style: normal;
 }

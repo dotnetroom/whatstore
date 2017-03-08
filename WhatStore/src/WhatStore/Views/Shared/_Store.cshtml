@@ -32,26 +32,45 @@
             </div>
         </div>
 
-
-        <nav id="menu">
-            <ul >
-                <li>
-                    <a href="#">Masculino</a>
-                    <ul>
-                        <li><a href="#">Camisa</a></li>
-                        <li><a href="#">Calça</a></li>
-                        <li><a href="#">Design</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Sobre</a></li>
-                <li>
-                    <a href="#">O que fazemos?</a>
-                    
-                </li>
-                <li><a href="#">Links</a></li>
-                <li><a href="#">Contato</a></li>
+        <div id="nav">
+            <ul>
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <li>
+                        <a>@category.CategoryName</a>
+                        @if (ViewBag.SubCategories != null)
+                        {
+                            <ul>
+                                @foreach (var subCategory in ViewBag.SubCategories)
+                                {
+                                    <li><a>@subCategory.SubCategoryName</a></li>
+                                }
+                            </ul>
+                        }
+                    </li>
+                }
             </ul>
-        </nav>
+        </div>
+
+        @*<nav id="menu">
+                <ul >
+                    <li>
+                        <a href="#">Masculino</a>
+                        <ul>
+                            <li><a href="#">Camisa</a></li>
+                            <li><a href="#">Calça</a></li>
+                            <li><a href="#">Design</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Sobre</a></li>
+                    <li>
+                        <a href="#">O que fazemos?</a>
+
+                    </li>
+                    <li><a href="#">Links</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </nav>*@
 
 
         <div class="store-content">

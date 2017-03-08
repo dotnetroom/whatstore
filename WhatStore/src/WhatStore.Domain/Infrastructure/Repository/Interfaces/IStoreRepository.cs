@@ -22,6 +22,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
                                     string Rg, bool gender, string CNPJ, string socialName, string stateIncentive, string municipalRegistration);
         Task<StoreFinancial> GetFinancial(long storeID);
         Task<List<StoreType>> GetStoreType();
+        Task<long> GetStoreId(string storeName);
         Task<RegisterStoreDataViewModel> GetAdress(long adressId);
         Task<PessoaJuridica> GetPessoaJuridica(long pessoaJuridicaId);
         Task<bool> InsertStoreFinancial(long storeId, long adressId, string about, DateTime birthday, string cpf, string firstName, string lastName, bool gender, string phone, string rg);
