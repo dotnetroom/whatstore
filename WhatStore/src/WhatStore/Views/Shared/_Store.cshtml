@@ -13,7 +13,7 @@
 
         <div class="store-navbar">
             <div class="float-right">
-                <label style="font: small-caption; float: left; color: white !important;">Bem vindo!</label>
+                <label style="font: small-caption; float: left;">Bem vindo!</label>
                 <button class="btn btn-primary btn-store">Entrar</button>
             </div>
 
@@ -26,9 +26,9 @@
                 </button>
             </form>
             <div id="carrinho" class="product-shop ">
-                <a style="color:white !important; font-size:35pt" class="links fa fa-shopping-cart"></a>
-
-                <h6>carrinho</h6>
+                <a class="links fa fa-shopping-cart">
+                    <h6>carrinho</h6>
+                </a>
             </div>
         </div>
 
@@ -37,11 +37,11 @@
                 @foreach (var category in ViewBag.Categories)
                 {
                     <li>
-                        <a>@category.CategoryName</a>
-                        @if (ViewBag.SubCategories != null)
+                        <a>@category.category.CategoryName</a>
+                        @if (category.subcategories != null)
                         {
                             <ul>
-                                @foreach (var subCategory in ViewBag.SubCategories)
+                                @foreach (var subCategory in category.subcategories)
                                 {
                                     <li><a>@subCategory.SubCategoryName</a></li>
                                 }
@@ -80,8 +80,9 @@
 
     </body>
 
-</html>
 
+
+</html>
 
 
 

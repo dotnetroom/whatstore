@@ -34,7 +34,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                 await db.OpenAsync();
                 try
                 {
-                    if (SelectStoreName(storeName) != null) return false;
+
 
                     if (storeID <= 0) return false;
 
@@ -94,7 +94,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                      Name = storeName,
                                                                      Phone = phoneNumber,
                                                                      Term = terms,
-                                                                     URL = storeName.ToLower(),
+                                                                     URL = storeName.Trim().Replace(" ", "").ToLower(),
                                                                      Logo = fileName,
                                                                  });
                     }
@@ -111,7 +111,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                      Name = storeName,
                                                                      Phone = phoneNumber,
                                                                      Term = terms,
-                                                                     URL = storeName.ToLower(),
+                                                                     URL = storeName.Trim().Replace(" ", "").ToLower(),
                                                                      StoreId = storeID
                                                                  });
 
@@ -207,7 +207,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     try
                     {
                         long storeID = 0;
-                       
+
 
                         var queryInsertStore = "INSERT INTO dbo.Store (Name, URL, IsActive, StoreTypeId) " +
                                                 "VALUES (@Name, @URL, @IsActive, @StoreTypeId); SELECT SCOPE_IDENTITY();";
@@ -644,14 +644,14 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
-        public async Task<string> GetLogo(string store)
+        public async Task<string> GetLogo(long storeId)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
                 try
                 {
-                    var query = "SELECT dbo.Store.Logo FROM dbo.Store WHERE dbo.Store.URL = @URL";
-                    var logo = await db.QueryAsync<string>(query, new { URL = store });
+                    var query = "SELECT dbo.Store.Logo FROM dbo.Store WHERE dbo.Store.Id = @id";
+                    var logo = await db.QueryAsync<string>(query, new { id = storeId });
                     return logo.FirstOrDefault();
                 }
                 catch (Exception ex)
@@ -667,7 +667,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 try
                 {
-                   
+
                     var selectName = await db.QueryAsync<string>("SELECT dbo.Store.URL FROM dbo.Store WHERE URL = @URL",
                         new
                         {
@@ -691,14 +691,15 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 try
                 {
-                    var selectStoreId = await db.QueryAsync<long>("SELECT dbo.Store.Id FROM dbo.Store WHERE Name = @name",
+                    var selectStoreId = await db.QueryAsync<long>("SELECT dbo.Store.Id FROM dbo.Store WHERE dbo.Store.URL = @URL",
                         new
                         {
-                            name = storeName
+                            URL = storeName
                         });
                     return selectStoreId.FirstOrDefault();
 
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     return 0;
                 }

@@ -16,6 +16,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<bool> DeleteStore(long storeId);
         Task<bool> RegisterStoreType(string type);
         Task<long> RegisterStore(Store store);
+        //Task<long> RegisterInformation();
         Task<RegisterStoreDataViewModel> GetStore(long storeID);        
         Task<bool> InsertFinancial(string CEP, int cityId, string complement, string number, string street, long storeId, string about,
                                     DateTime birthday, string CPF, string firstName, string lastName, bool isPessoaJuridica, string phone,
@@ -34,7 +35,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<bool> UpdateStoreFinancial(long pessoaJuridicaId, long storeFinancialId);
         Task<bool> UpdateStoreInformation(string fileName, long userID, string storeName, string storeDescription, string phoneNumber, string email, string terms, bool hasAdress, string address,
                                             string number, string CEP, string complemento, int city);
-        Task<string> GetLogo(string store);
+        Task<string> GetLogo(long storeId);
         Task<string> SelectStoreName(string storeName);
     }
 }

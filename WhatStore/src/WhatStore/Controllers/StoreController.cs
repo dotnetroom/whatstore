@@ -76,8 +76,8 @@ namespace WhatStore.Controllers
             }
         }
 
-        [HttpPost("register/information")]
-        public async Task<IActionResult> RegisterInformation(RegisterStoreDataViewModel model)
+        [HttpPost("update/information")]
+        public async Task<IActionResult> UpdateInformation(RegisterStoreDataViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -105,12 +105,14 @@ namespace WhatStore.Controllers
                 }
             }
 
-            var states = await _localizationRepository.GetStates();
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
 
             var phone = model.PhoneDDD + model.PhoneNumber;
 
-            if (await _storeRepository.UpdateStoreInformation(fileName, user.StoreId, model.StoreName, model.StoreDescription, phone,
+            var storeName = model.StoreName.Trim();
+
+            if (await _storeRepository.UpdateStoreInformation(fileName, user.StoreId, storeName, model.StoreDescription, phone,
                                                     model.Email, model.Terms, model.HasAdress, model.Address,
                                                     model.Number, model.CEP, model.Complemento, model.City))
             {

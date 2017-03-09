@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using WhatStore.Domain.Infrastructure.Repository;
 using WhatStore.Domain.Infrastructure.Models.Product;
+using WhatStore.Domain.Infrastructure.ViewModels.Store;
 
 namespace WhatStore.Controllers
 {
@@ -28,20 +29,27 @@ namespace WhatStore.Controllers
         [HttpGet("~/{store}")]
         public async Task<IActionResult> StoreIndex(string store)
         {
-            var logo = await _storeRepository.GetLogo(store);
-            List<SubCategory> subCategories = new List<SubCategory> { };
+            var storeId = await _storeRepository.GetStoreId(store);
+            var logo = await _storeRepository.GetLogo(storeId);
+            List<CategoryViewModel> subCategoriesList = new List<CategoryViewModel> { };
             if (logo != null)
             {
                 logo = Url.Action(logo, "image");
             }
-            var storeId = await _storeRepository.GetStoreId(store);
+            
             var categories = await _productRepository.GetCategories(storeId);
             foreach (var item in categories)
             {
-                subCategories = await _productRepository.GetSubCategories(item.Id);
+                var subCategories = await _productRepository.GetSubCategories(item.Id);
+
+                var categoryObject = new CategoryViewModel
+                {
+                    category = item,
+                    subcategories = subCategories
+                };
+                subCategoriesList.Add(categoryObject);
             }
-            ViewBag.Categories = categories;
-            ViewBag.SubCategories = subCategories;
+            ViewBag.Categories = subCategoriesList;
             ViewBag.Logo = logo;
             ViewBag.StoreName = store;
             

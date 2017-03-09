@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using WhatStore.Domain.Infrastructure.Models.Store;
 using WhatStore.Domain.Infrastructure.Models.Product;
 using WhatStore.Domain.Infrastructure.ViewModels.Admin;
+using WhatStore.Domain.Infrastructure.ViewModels.Store;
 
 namespace WhatStore.Domain.Infrastructure.Repository
 {
@@ -367,7 +368,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         {
                             storeid = storeId
                         });
-
+                    
                     return result.ToList();
                 }
             }
