@@ -182,7 +182,7 @@ namespace WhatStore.Controllers
         }
         #endregion
 
-        [HttpGet("~/{store}/register/user")]
+        [HttpGet("~/{store}/login")]
         public IActionResult RegisterUserStore()
         {
             if (!ModelState.IsValid)
@@ -193,7 +193,7 @@ namespace WhatStore.Controllers
             return View();
         }
 
-        [HttpGet("~/{store}/register/user/comp")]
+        [HttpGet("~/{store}/register/user")]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterUserStoreComp()
         {
@@ -205,8 +205,8 @@ namespace WhatStore.Controllers
             return View(model);
         }
 
-        [HttpPost("~/{store}/register/user/complement")]
-        public IActionResult RegisterUserStoreComplement()
+        [HttpPost("~/{store}/register/user")]
+        public IActionResult RegisterUserStoreComplement(RegisterUserStoreCompViewModel model)
         {
             if (!ModelState.IsValid)
             {
