@@ -183,11 +183,19 @@ namespace WhatStore.Controllers
         #endregion
 
         [HttpGet("~/{store}/login")]
-        public IActionResult RegisterUserStore()
+        public async Task<IActionResult> RegisterUserStore(string store)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
+            }
+
+            var storeId = await _storeRepository.GetStoreId(store);
+            var logo = await _storeRepository.GetLogo(storeId);
+            if (logo != null)
+            {
+                logo = Url.Action(logo, "image");
+                ViewBag.Logo = logo;
             }
 
             return View();
@@ -195,12 +203,20 @@ namespace WhatStore.Controllers
 
         [HttpGet("~/{store}/register/user")]
         [AllowAnonymous]
-        public async Task<IActionResult> RegisterUserStoreComp()
+        public async Task<IActionResult> RegisterUserStoreComp(string store)
         {
             var states = await _localizationRepository.GetStates();
 
             var model = new RegisterUserStoreCompViewModel();
             model.States = states;
+
+            var storeId = await _storeRepository.GetStoreId(store);
+            var logo = await _storeRepository.GetLogo(storeId);
+            if (logo != null)
+            {
+                logo = Url.Action(logo, "image");
+                ViewBag.Logo = logo;
+            }
 
             return View(model);
         }
@@ -217,11 +233,19 @@ namespace WhatStore.Controllers
         }
 
         [HttpGet("~/{store}/confirm/user")]
-        public IActionResult ConfirmUserStore()
+        public async Task<IActionResult> ConfirmUserStore(string store)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
+            }
+
+            var storeId = await _storeRepository.GetStoreId(store);
+            var logo = await _storeRepository.GetLogo(storeId);
+            if (logo != null)
+            {
+                logo = Url.Action(logo, "image");
+                ViewBag.Logo = logo;
             }
 
             return View();

@@ -32,35 +32,14 @@
             </div>
         </div>
 
-        <div id="nav">
-            <ul>
-                @foreach (var category in ViewBag.Categories)
-                {
-                    <li>
-                        <a>@category.category.CategoryName</a>
-                        @if (category.subcategories != null)
-                        {
-                            <ul>
-                                @foreach (var subCategory in category.subcategories)
-                                {
-                                    <li><a>@subCategory.SubCategoryName</a></li>
-                                }
-                            </ul>
-                        }
-                    </li>
-                }
-            </ul>
-        </div>
         <div class="store-content">
-            <h1>@ViewBag.StoreName</h1>
+           
             @RenderBody()
         </div>
 
     </body>
-
-
-
 </html>
+
 
 
 
