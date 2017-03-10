@@ -98,7 +98,7 @@ namespace WhatStore.Controllers
         {
             try
             {
-                var subcategories = await _productRepository.GetSubCategory(id);
+                var subcategories = await _productRepository.GetSubCategories(id);
 
                 return Json(subcategories);
             }catch(Exception ex){
