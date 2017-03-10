@@ -222,14 +222,50 @@ namespace WhatStore.Controllers
         }
 
         [HttpPost("~/{store}/register/user")]
-        public IActionResult RegisterUserStoreComplement(RegisterUserStoreCompViewModel model)
+        public async Task<IActionResult> RegisterUserStoreComplement(RegisterUserStoreCompViewModel model, string store)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
+            var storeId = await _storeRepository.GetStoreId(store);
 
-            return View();
+            var adress = await _storeRepository.InsertAdress(model.CEP, model.CityID, model.Complement, model.Number, model.Street);
+
+            if (storeId > 0)
+            {
+                var user = new ApplicationUser
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    RG = model.RG,
+                    CPF = model.CPF,
+                    PhoneNumber = model.PhoneDDD + model.PhoneNumber,
+                    Birthday = model.Birthday,
+                    Genero = model.Genero,
+                    Email = model.Email,
+                    NormalizedEmail = model.Email.ToUpper(),
+                    NormalizedUserName = model.Email.ToUpper(),
+                    UserName = model.Email,
+                    StoreId = storeId
+                };
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Store");
+                    model.ReturnMessage = "Alterações salvas com sucesso";
+                    return View("RegisterUserStore", new RegisterUserStoreViewModel());
+                }
+
+                else
+                {
+                    ViewBag.Errors = result.ConvertToHTML();
+                    return View("RegisterUserStoreComp", model);
+                }
+            }
+                return Ok();
         }
 
         [HttpGet("~/{store}/confirm/user")]
