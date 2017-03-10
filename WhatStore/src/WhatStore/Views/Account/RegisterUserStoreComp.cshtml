@@ -26,36 +26,36 @@
 
 
 
-    <form class="formRegisterUserStore float-center margin-bottom-50" asp-controller="account" asp-action="~/{store}/register/user/complement" method="post">
+    <form class="formRegisterUserStore float-center margin-bottom-50" asp-controller="account" asp-action="~/{store}/register/user" method="post">
 
         <div class="float-left font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>Nome: </label>
-                <input type="text" class="form-control" style="width:150px" asp-for="Name" required />
+                <input type="text" class="form-control" style="width:150px" asp-for="FirstName" required  value="@Model.FirstName"/>
             </div>
 
             <div class="float-right font-size13">
                 <label>Sobrenome: </label>
-                <input type="text" class="form-control" style="width:190px" required asp-for="LastName" />
+                <input type="text" class="form-control" style="width:190px" required asp-for="LastName" value="@Model.LastName"/>
             </div>
         </div>
 
         <div class="float-left margin-top-10 font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>RG: </label>
-                <input type="text" class="form-control" style="width:170px" required asp-for="RG" />
+                <input type="text" class="form-control" style="width:170px" required asp-for="RG" value="@Model.RG"/>
             </div>
 
             <div class="float-right font-size13">
                 <label>CPF: </label>
-                <input type="text" class="form-control" style="width:170px" required asp-for="CPF" />
+                <input type="text" class="form-control" style="width:170px" required asp-for="CPF" value="@Model.CPF"/>
             </div>
         </div>
 
         <div class="float-left margin-top-10 font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>Data de nascimento:</label>
-                <input type="date" class="form-control" required asp-for="Birthday" style="width:170px" />
+                <input type="date" class="form-control" required asp-for="Birthday" style="width:170px" value="@Model.Birthday"/>
             </div>
 
             <div class="float-right font-size13">
@@ -71,11 +71,11 @@
         <div class="float-left margin-top-10 font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>DDD: </label>
-                <input type="text" class="form-control" style="width:90px" maxlength="2" required name="PhoneDDD" />
+                <input type="text" class="form-control" style="width:90px" maxlength="2" required asp-for="PhoneDDD" value="@Model.PhoneDDD"/>
             </div>
             <div class="float-right font-size13">
                 <label>Telefone: </label>
-                <input type="text" class="form-control" style="width:250px" required name="PhoneNumber" />
+                <input type="text" class="form-control" style="width:250px" required asp-for="PhoneNumber" value="@Model.PhoneNumber"/>
             </div>
         </div>
 
@@ -115,39 +115,39 @@
 
         <div class="float-left row margin-top-10 font-size13">
             <label>CEP: </label>
-            <input class="form-control" required name="CEP" />
+            <input class="form-control" required asp-for="CEP" value="@Model.CEP"/>
         </div>
 
         <div class="float-left row margin-top-10 font-size13">
             <label>Endereço: </label>
-            <input class="form-control" required name="Street" />
+            <input class="form-control" required asp-for="Street" value="@Model.Street"/>
         </div>
 
         <div class="float-left margin-top-10 font-size13">
             <div class="float-left margin-right-10 font-size13">
                 <label>Número: </label>
-                <input class="form-control " style="width: 120px;" required name="Number" />
+                <input class="form-control " style="width: 120px;" required asp-for="Number" value="@Model.Number"/>
             </div>
 
             <div class="float-right font-size13">
                 <label>Complemento:</label>
-                <input class="form-control" style="width: 225px;" name="Complement" />
+                <input class="form-control" style="width: 225px;" asp-for="Complement" value="@Model.Complement"/>
             </div>
         </div>
 
         <div class="float-left row margin-top-10 font-size13">
             <label>Email: </label>
-            <input type="text" class="form-control" required asp-for="Email" />
+            <input type="text" class="form-control" required asp-for="Email" value="@Model.Email"/>
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 
         <div class="float-left row margin-top-10 font-size13">
             <label>Senha: </label>
-            <input type="password" class="form-control" required asp-for="Password" />
+            <input type="password" class="form-control" required asp-for="Password" value="@Model.Password"/>
         </div>
 
         <div class="float-left row margin-top-10 font-size13 ">
-            <button type="submit" style="height: 40px !important;" class="btn btn-primary margin-bottom-20 row">Registrar</button>
+            <button type="submit" style="height: 40px !important;"  class="btn btn-primary margin-bottom-20 row">Registrar</button>
         </div>
     </form>
 

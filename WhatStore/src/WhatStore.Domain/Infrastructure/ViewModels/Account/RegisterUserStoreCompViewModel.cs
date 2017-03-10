@@ -10,7 +10,7 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Account
     public class RegisterUserStoreCompViewModel
     {
         [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
         public string LastName { get; set; }

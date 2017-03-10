@@ -12,6 +12,7 @@ using WhatStore.Domain.Infrastructure.Models.Identity;
 using Microsoft.Extensions.Logging;
 using WhatStore.Domain.Infrastructure.ViewModels.Account;
 using WhatStore.Domain.Infrastructure.Helpers;
+using WhatStore.Domain.Infrastructure.Repository;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,14 +27,16 @@ namespace WhatStore.Controllers
         private ILocalizationRepository _localizationRepository;
         private ILogger _logger;
         private UserManager<ApplicationUser> _userManager;
+        private IAccountRepository _account;
 
-        public AccountController(UserManager<ApplicationUser> userManager, IStoreRepository storeRepository, ILocalizationRepository localizationRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
+        public AccountController(UserManager<ApplicationUser> userManager, IStoreRepository storeRepository, ILocalizationRepository localizationRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory, IAccountRepository account)
         {
             _storeRepository = storeRepository;
             _signInManager = signInManager;
             _localizationRepository = localizationRepository;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _userManager = userManager;
+            _account = account;
 
         }
 
@@ -188,8 +191,7 @@ namespace WhatStore.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest();
-            }
-
+            }                    
             var storeId = await _storeRepository.GetStoreId(store);
             var logo = await _storeRepository.GetLogo(storeId);
             if (logo != null)
@@ -197,8 +199,26 @@ namespace WhatStore.Controllers
                 logo = Url.Action(logo, "image");
                 ViewBag.Logo = logo;
             }
+            
+           
 
-            return View();
+                return View();
+        }
+
+        [HttpPost("~/{store}/login")]
+        public async Task<IActionResult> RegisterUserStore(RegisterUserStoreViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if(await _account.GetUser(model.Email) == null)
+            {
+                return View("RegisterUserStore");
+            }
+
+            return View("RegisterUserStoreComp");
         }
 
         [HttpGet("~/{store}/register/user")]
@@ -218,18 +238,56 @@ namespace WhatStore.Controllers
                 ViewBag.Logo = logo;
             }
 
+           
+
             return View(model);
         }
 
         [HttpPost("~/{store}/register/user")]
-        public IActionResult RegisterUserStoreComplement(RegisterUserStoreCompViewModel model)
+        public async Task<IActionResult> RegisterUserStoreComplement(RegisterUserStoreCompViewModel model, string store)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
+            var storeId = await _storeRepository.GetStoreId(store);
 
-            return View();
+            var adress = await _storeRepository.InsertAdress(model.CEP, model.CityID, model.Complement, model.Number, model.Street);
+
+            if (storeId > 0)
+            {
+                var user = new ApplicationUser
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    RG = model.RG,
+                    CPF = model.CPF,
+                    PhoneNumber = model.PhoneDDD + model.PhoneNumber,
+                    Birthday = model.Birthday,
+                    Genero = model.Genero,
+                    Email = model.Email,
+                    NormalizedEmail = model.Email.ToUpper(),
+                    NormalizedUserName = model.Email.ToUpper(),
+                    UserName = model.Email,
+                    StoreId = storeId
+                };
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, "Store");
+                    model.ReturnMessage = "Alterações salvas com sucesso";
+                    return View("RegisterUserStore", new RegisterUserStoreViewModel());
+                }
+
+                else
+                {
+                    ViewBag.Errors = result.ConvertToHTML();
+                    return View("RegisterUserStoreComp", model);
+                }
+            }
+                return Ok();
         }
 
         [HttpGet("~/{store}/confirm/user")]
@@ -252,3 +310,4 @@ namespace WhatStore.Controllers
         }
     }
 }
+  
