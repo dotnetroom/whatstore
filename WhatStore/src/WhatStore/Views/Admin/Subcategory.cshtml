@@ -47,7 +47,6 @@
                     var table = '<table class="table margin-left-40 form-group" id="SubcategoryTable"><tr><th class="tableRow">Subcategoria</th></tr>';
 
                     $.each(data, function (i, item) {
-                        console.log(item);
                         table += ('<tr>')
                         table += ('<td class="tableRow">')
                         table += ('<form asp-controller="admin" action="update/subcategory" method="post">')
