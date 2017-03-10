@@ -12,6 +12,7 @@ using WhatStore.Domain.Infrastructure.Models.Identity;
 using Microsoft.Extensions.Logging;
 using WhatStore.Domain.Infrastructure.ViewModels.Account;
 using WhatStore.Domain.Infrastructure.Helpers;
+using WhatStore.Domain.Infrastructure.Repository;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,14 +27,16 @@ namespace WhatStore.Controllers
         private ILocalizationRepository _localizationRepository;
         private ILogger _logger;
         private UserManager<ApplicationUser> _userManager;
+        private IAccountRepository _account;
 
-        public AccountController(UserManager<ApplicationUser> userManager, IStoreRepository storeRepository, ILocalizationRepository localizationRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
+        public AccountController(UserManager<ApplicationUser> userManager, IStoreRepository storeRepository, ILocalizationRepository localizationRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory, IAccountRepository account)
         {
             _storeRepository = storeRepository;
             _signInManager = signInManager;
             _localizationRepository = localizationRepository;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _userManager = userManager;
+            _account = account;
 
         }
 
@@ -188,8 +191,7 @@ namespace WhatStore.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest();
-            }
-
+            }                    
             var storeId = await _storeRepository.GetStoreId(store);
             var logo = await _storeRepository.GetLogo(storeId);
             if (logo != null)
@@ -197,8 +199,16 @@ namespace WhatStore.Controllers
                 logo = Url.Action(logo, "image");
                 ViewBag.Logo = logo;
             }
+            
+           
 
-            return View();
+                return View();
+        }
+
+        [HttpPost("~/{store}/login")]
+        public async Task<IActionResult> RegisterUserStore(RegisterUserStoreViewModel model)
+        {
+            if(!ModelState.IsValid)
         }
 
         [HttpGet("~/{store}/register/user")]
@@ -217,6 +227,8 @@ namespace WhatStore.Controllers
                 logo = Url.Action(logo, "image");
                 ViewBag.Logo = logo;
             }
+
+           
 
             return View(model);
         }
