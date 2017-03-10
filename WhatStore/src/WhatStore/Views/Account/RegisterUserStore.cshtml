@@ -15,7 +15,7 @@
 <body>
     <div class="float-center" style="width:800px; height:100px; margin-top:-150px">
         <div class="margin-left-75">
-            <form class="formLogin formRegisterUser float-left " asp-controller="account" method="post">
+            <form class="formLogin formRegisterUser float-left " asp-controller="account" asp-action="~/{store}/login" method="post">
                 <div>
                     <h3>Não tenho cadastro:</h3>
                     <label>E-mail:</label>
@@ -28,7 +28,7 @@
             </form>
         </div>
         <div >
-            <form class="formLogin formRegisterUser float-left margin-left-75" asp-controller="accout" method="post">
+            <form class="formLogin formRegisterUser float-left margin-left-75" asp-controller="accout"  method ="post">
                 <div>
                     <h3> Já tenho cadastro </h3>
                     <label>E-mail:</label>

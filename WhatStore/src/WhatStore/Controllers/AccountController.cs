@@ -208,7 +208,17 @@ namespace WhatStore.Controllers
         [HttpPost("~/{store}/login")]
         public async Task<IActionResult> RegisterUserStore(RegisterUserStoreViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if(await _account.GetUser(model.Email) == null)
+            {
+                return View("RegisterUserStore");
+            }
+
+            return View("RegisterUserStoreComp");
         }
 
         [HttpGet("~/{store}/register/user")]
@@ -300,3 +310,4 @@ namespace WhatStore.Controllers
         }
     }
 }
+  
