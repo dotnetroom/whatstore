@@ -147,6 +147,25 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid #02B6E6;
 }
 
+.btn-login-store {
+    border-radius: 5px;
+    padding: 2px 10px 2px 10px;
+}
+
+.btn-shop {
+    position: absolute;
+    margin-top: -52px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    color: #fff;
+    background-color: #00a3cf;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -1108,7 +1127,7 @@ tr:nth-child(even) {
 }
 
 .content-logo {
-    margin-left: 15%;
+    margin-left: 10%;
     margin-top: -10px;
     width: auto;
     height: 83px;
@@ -1207,21 +1226,13 @@ tr:nth-child(even) {
 }
 
 #carrinho a {
-    font-size: 35pt;
-    color: #868585 !important;
+    font-size: 30pt;
+    text-decoration: none;
 }
 
-
-#carrinho h6 {
-    font: small-caption;
-    font-weight: bolder;
-    width: 100%;
-    text-align: center;
+.shop:hover span {
+    background-color: #337ab7;
 }
-
-    #carrinho a:hover,h6:hover {
-        color: black !important;
-    }
 
 .formRegisterUser {
     position: relative;
@@ -1261,9 +1272,10 @@ tr:nth-child(even) {
             #nav ul li a {
                 letter-spacing: 1px;
                 display: inline-block;
-                color: #333;
+                color: #868585;
                 text-decoration: none;
                 padding: 5px 10px;
+                font-family: sans-serif;
             }
 
     #nav li a:hover {

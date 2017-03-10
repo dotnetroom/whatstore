@@ -12,9 +12,19 @@
 
 
         <div class="store-navbar">
-            <div class="float-right">
-                <label style="font: small-caption; float: left;">Bem vindo!</label>
-                <button class="btn btn-primary btn-store">Entrar</button>
+
+            <div id="carrinho" class="shop margin-right-75 float-right margin-left-20" style="width:100px">
+                <a class="color-grey fa fa-shopping-basket float-right margin-top-10">
+                    <span class="btn-shop margin-left-20">00</span>
+                </a>
+            </div>
+
+            <div class="float-right margin-right-50" style="width: 200px">
+                <div class="float-right" style="width:100px">
+                    <label>Olá! Faça seu login</label>
+                    <button class="btn-login-store btn-primary margin-left-20">Entrar</button>
+                </div>
+                <span style="font-size: 40pt" class="color-grey fa fa-user float-right"></span>
             </div>
 
             <img class="float-left content-logo" src="@ViewBag.Logo" />
@@ -25,11 +35,7 @@
                     <span class="fa fa-search"></span>
                 </button>
             </form>
-            <div id="carrinho" class="product-shop ">
-                <a class="links fa fa-shopping-cart">
-                    <h6>carrinho</h6>
-                </a>
-            </div>
+
         </div>
 
         <div id="nav">
