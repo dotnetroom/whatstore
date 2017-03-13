@@ -10,9 +10,8 @@ using WhatStore.Domain.Infrastructure.Models.Store;
 using Microsoft.AspNetCore.Authorization;
 using WhatStore.Domain.Infrastructure.Models.Identity;
 using Microsoft.Extensions.Logging;
-using WhatStore.Domain.Infrastructure.ViewModels.Account;
 using WhatStore.Domain.Infrastructure.Helpers;
-using WhatStore.Domain.Infrastructure.Repository;
+using WhatStore.Domain.Infrastructure.ViewModels.Account;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,24 +19,21 @@ namespace WhatStore.Controllers
 {
     [Route("account")]
     public class AccountController : Controller
-    {
-
+    {       
         private IStoreRepository _storeRepository;
         private SignInManager<ApplicationUser> _signInManager;
         private ILocalizationRepository _localizationRepository;
         private ILogger _logger;
         private UserManager<ApplicationUser> _userManager;
-        private IAccountRepository _account;
+        
 
-        public AccountController(UserManager<ApplicationUser> userManager, IStoreRepository storeRepository, ILocalizationRepository localizationRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory, IAccountRepository account)
+        public AccountController(UserManager<ApplicationUser> userManager, IStoreRepository storeRepository, ILocalizationRepository localizationRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
         {
             _storeRepository = storeRepository;
             _signInManager = signInManager;
             _localizationRepository = localizationRepository;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _userManager = userManager;
-            _account = account;
-
         }
 
         [HttpGet("login")]
@@ -199,10 +195,11 @@ namespace WhatStore.Controllers
                 logo = Url.Action(logo, "image");
                 ViewBag.Logo = logo;
             }
-            
-           
 
-                return View();
+
+
+
+            return View();
         }
 
         [HttpPost("~/{store}/login")]
@@ -213,12 +210,23 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            if(await _account.GetUser(model.Email) == null)
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+
+            if (result.Succeeded)
             {
-                return View("RegisterUserStore");
+                _logger.LogInformation(1, "Usuario logado.");
+
+            }
+            else
+
+            {
+                ModelState.AddModelError("Email", "Usuário ou senha incorreta");
+                return View(model);
             }
 
-            return View("RegisterUserStoreComp");
+            var modelAdmin = new RegisterStoreDataViewModel();
+
+            return View();           
         }
 
         [HttpGet("~/{store}/register/user")]
