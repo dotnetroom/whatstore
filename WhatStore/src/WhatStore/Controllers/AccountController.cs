@@ -229,7 +229,7 @@ namespace WhatStore.Controllers
             return View();           
         }
 
-        [HttpGet("~/{store}/register/user")]
+        [HttpGet("~/{store}/register")]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterUserStoreComp(string store)
         {
@@ -245,8 +245,6 @@ namespace WhatStore.Controllers
                 logo = Url.Action(logo, "image");
                 ViewBag.Logo = logo;
             }
-
-           
 
             return View(model);
         }
@@ -286,7 +284,7 @@ namespace WhatStore.Controllers
                 {
                     await _userManager.AddToRoleAsync(user, "Store");
                     model.ReturnMessage = "Alterações salvas com sucesso";
-                    return View("RegisterUserStore", new RegisterUserStoreViewModel());
+                    return View("RegisterUserStore");
                 }
 
                 else
