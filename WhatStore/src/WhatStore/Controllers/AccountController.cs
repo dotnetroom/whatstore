@@ -250,7 +250,7 @@ namespace WhatStore.Controllers
         }
 
         [HttpPost("~/{store}/register/user")]
-        public async Task<IActionResult> RegisterUserStoreComplement(RegisterUserStoreCompViewModel model, string store)
+        public async Task<IActionResult> RegisterUserStoreComp(RegisterUserStoreCompViewModel model, string store)
         {
             if (!ModelState.IsValid)
             {
