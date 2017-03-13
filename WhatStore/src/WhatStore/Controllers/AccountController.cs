@@ -237,7 +237,7 @@ namespace WhatStore.Controllers
 
             var model = new RegisterUserStoreCompViewModel();
             model.States = states;
-
+            ViewBag.StoreName = store;
             var storeId = await _storeRepository.GetStoreId(store);
             var logo = await _storeRepository.GetLogo(storeId);
             if (logo != null)
@@ -249,7 +249,7 @@ namespace WhatStore.Controllers
             return View(model);
         }
 
-        [HttpPost("~/{store}/register/user")]
+        [HttpPost("~/{store}/register")]
         public async Task<IActionResult> RegisterUserStoreComp(RegisterUserStoreCompViewModel model, string store)
         {
             if (!ModelState.IsValid)
