@@ -12,24 +12,11 @@
 
 
         <div class="store-navbar">
-            <div class="float-right">
-                <label style="font: small-caption; float: left;">Bem vindo!</label>
-                <button class="btn btn-primary btn-store">Entrar</button>
-            </div>
+           <a asp-controller="home" asp-for="" class="links margin-right-30 margin-top-20 float-right">< Voltar para a loja</a>
 
             <img class="float-left content-logo" src="@ViewBag.Logo" />
 
-            <form class="div-input-search" asp-controller=" " asp-action=" " method="post">
-                <input type="search" class="input-search float-center" placeholder="Buscar por..." />
-                <button class="btn btn-primary btn-search" type="submit">
-                    <span class="fa fa-search"></span>
-                </button>
-            </form>
-            <div id="carrinho" class="product-shop ">
-                <a class="links fa fa-shopping-cart">
-                    <h6>carrinho</h6>
-                </a>
-            </div>
+            
         </div>
 
         <div class="store-content">

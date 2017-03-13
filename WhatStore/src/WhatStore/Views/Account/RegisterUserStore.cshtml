@@ -1,18 +1,24 @@
 ﻿@model WhatStore.Domain.Infrastructure.ViewModels.Account.RegisterUserStoreViewModel
 
 @{
-    Layout ="_RegisterUserStore";
+    Layout =null;
 }
 
 <html>
 
 <head>
-    @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
     <title>Store - WhatStore</title>
 </head>
 
 <body>
+
+    <div class="store-navbar">
+        <a asp-controller="home" asp-for="" class="links margin-right-30 margin-top-30 float-right">< Voltar para a loja</a>
+        <img class="float-left content-logo" src="@ViewBag.Logo" />
+    </div>
+
     <div class="float-center" style="width:800px; height:100px; margin-top:-150px">
         <div class="margin-left-75">
             <form class="formLogin formRegisterUser float-left " asp-controller="account" asp-action="~/{store}/login" method="post">
