@@ -19,13 +19,13 @@ namespace WhatStore.Controllers
 {
     [Route("account")]
     public class AccountController : Controller
-    {       
+    {
         private IStoreRepository _storeRepository;
         private SignInManager<ApplicationUser> _signInManager;
         private ILocalizationRepository _localizationRepository;
         private ILogger _logger;
         private UserManager<ApplicationUser> _userManager;
-        
+
 
         public AccountController(UserManager<ApplicationUser> userManager, IStoreRepository storeRepository, ILocalizationRepository localizationRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
         {
@@ -187,7 +187,7 @@ namespace WhatStore.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest();
-            }                    
+            }
             var storeId = await _storeRepository.GetStoreId(store);
             var logo = await _storeRepository.GetLogo(storeId);
             if (logo != null)
@@ -226,7 +226,7 @@ namespace WhatStore.Controllers
 
             var modelAdmin = new RegisterStoreDataViewModel();
 
-            return View();           
+            return View();
         }
 
         [HttpGet("~/{store}/register")]
@@ -252,7 +252,6 @@ namespace WhatStore.Controllers
         [HttpPost("~/{store}/register")]
         public async Task<IActionResult> RegisterUserStoreComp(RegisterUserStoreCompViewModel model, string store)
         {
-            
             var storeId = await _storeRepository.GetStoreId(store);
 
             var adress = await _storeRepository.InsertAdress(model.CEP, model.CityID, model.Complement, model.Number, model.Street);
@@ -279,7 +278,7 @@ namespace WhatStore.Controllers
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Store");
+                    await _userManager.AddToRoleAsync(user, "User");
                     model.ReturnMessage = "Alterações salvas com sucesso";
                     return View("RegisterUserStore");
                 }
@@ -289,11 +288,6 @@ namespace WhatStore.Controllers
                     ViewBag.Errors = result.ConvertToHTML();
                     return View("RegisterUserStoreComp", model);
                 }
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
             }
 
             return Ok();
@@ -319,4 +313,3 @@ namespace WhatStore.Controllers
         }
     }
 }
-  
