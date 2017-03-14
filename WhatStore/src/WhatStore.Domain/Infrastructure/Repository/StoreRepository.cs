@@ -70,7 +70,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             var insertAdress = InsertAdress(CEP, city, complemento, number, address);
 
                             adressUpdate = "UPDATE dbo.Store SET AdressId = @ADDRESS WHERE Store.Id = @ID";
-                            var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID, ADDRESS = insertAdress });
+                            var resultUpdateAddress = await db.ExecuteAsync(adressUpdate, new { ID = storeID, ADDRESS = insertAdress.Result });
                         }
                     }
                     else
@@ -442,7 +442,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 try
                 {
-                    var insertAdress = await db.QueryAsync<long>("INSERT INTO dbo.Adress (CEP, CityID, Complement, Number, Street) SET CEP = @Cep, CityID = @CityID, Complement = @Complement, Number = @Number, Street = @Street; SELECT SCOPE_IDENTITY();",
+                    var insertAdress = await db.QueryAsync<long>("INSERT INTO dbo.Adress (CEP, CityID, Complement, Number, Street) VALUES (@CEP, @CityID, @Complement, @Number, @Street); SELECT SCOPE_IDENTITY();",
                                                                 new
                                                                 {
                                                                     Cep = CEP,
