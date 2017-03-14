@@ -49,7 +49,7 @@
                             <ul>
                                 @foreach (var subCategory in category.subcategories)
                                 {
-                                    <li><a>@subCategory.SubCategoryName</a></li>
+                                    <li><a href="@Url.Action($"list/product/", "product", new { id = subCategory.Id})">@subCategory.SubCategoryName</a></li>
                                 }
                             </ul>
                         }

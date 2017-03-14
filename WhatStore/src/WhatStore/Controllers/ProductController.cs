@@ -303,5 +303,19 @@ namespace WhatStore.Controllers
             }
         }
 
+        [HttpGet("list/product/{id}")]
+        public async Task<IActionResult> ProductsStore(long id)
+        {
+            try
+            {
+                return View();
+            }
+
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }

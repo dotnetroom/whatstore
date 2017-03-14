@@ -19,7 +19,9 @@
                     <option value="@category.Id">@category.CategoryName</option>
                 }
             }
+
         </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
 
         <label class="margin-top-10">Subcategoria:</label>
         <input class="form-control float-left" name="SubCategoryName" id="Subcategory" value="@Model.SubCategoryName" />
