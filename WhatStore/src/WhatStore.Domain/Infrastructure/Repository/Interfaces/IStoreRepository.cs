@@ -37,5 +37,8 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
                                             string number, string CEP, string complemento, int city);
         Task<string> GetLogo(long storeId);
         Task<string> SelectStoreName(string storeName);
+
+
+        Task<string> SelectUser(string email);
     }
 }

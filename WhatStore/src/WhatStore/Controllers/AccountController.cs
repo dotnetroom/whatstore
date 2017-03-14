@@ -12,6 +12,7 @@ using WhatStore.Domain.Infrastructure.Models.Identity;
 using Microsoft.Extensions.Logging;
 using WhatStore.Domain.Infrastructure.Helpers;
 using WhatStore.Domain.Infrastructure.ViewModels.Account;
+using WhatStore.Domain.Infrastructure.Repository;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,8 +25,7 @@ namespace WhatStore.Controllers
         private SignInManager<ApplicationUser> _signInManager;
         private ILocalizationRepository _localizationRepository;
         private ILogger _logger;
-        private UserManager<ApplicationUser> _userManager;
-
+        private UserManager<ApplicationUser> _userManager;        
 
         public AccountController(UserManager<ApplicationUser> userManager, IStoreRepository storeRepository, ILocalizationRepository localizationRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
         {
@@ -33,7 +33,7 @@ namespace WhatStore.Controllers
             _signInManager = signInManager;
             _localizationRepository = localizationRepository;
             _logger = loggerFactory.CreateLogger<AccountController>();
-            _userManager = userManager;
+            _userManager = userManager;            
         }
 
         [HttpGet("login")]
@@ -182,6 +182,7 @@ namespace WhatStore.Controllers
         #endregion
 
         [HttpGet("~/{store}/login")]
+        [AllowAnonymous]
         public async Task<IActionResult> RegisterUserStore(string store)
         {
             if (!ModelState.IsValid)
@@ -227,6 +228,22 @@ namespace WhatStore.Controllers
             var modelAdmin = new RegisterStoreDataViewModel();
 
             return View();
+        }
+        [HttpPost("~/{store}/verifica")]
+        public async Task<IActionResult> ConfirmUserStore(RegisterUserStoreViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (await _storeRepository.SelectUser(model.Email) == null)
+            {
+                return View("RegisterUserStore");
+            }
+
+            return View("RegisterUserStoreComp");
+
         }
 
         [HttpGet("~/{store}/register")]
@@ -296,7 +313,8 @@ namespace WhatStore.Controllers
         [HttpGet("~/{store}/confirm/user")]
         public async Task<IActionResult> ConfirmUserStore(string store)
         {
-            if (!ModelState.IsValid)
+
+           if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
