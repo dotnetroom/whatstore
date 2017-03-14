@@ -276,6 +276,11 @@ textarea {
     font-size: 13px;
 }
 
+
+.font-size20 {
+    font-size: 20px !important;
+}
+
 .font-primary {
     font-family: 'Lucida Sans';
 }
@@ -1118,6 +1123,10 @@ tr:nth-child(even) {
     width: 100%;
     bottom: 0;
     position: absolute;
+}
+
+.font-bold{
+    font-weight:bold;
 }
 
 .logo-display-content {
