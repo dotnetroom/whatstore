@@ -213,6 +213,13 @@ textarea {
     min-height: 550px;
 }
 
+
+.formRegisterUser {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 200px;
+}
+
 .formRegisterUserStore {
     width: 400px;
     min-height: 840px;
@@ -1233,12 +1240,6 @@ tr:nth-child(even) {
 
 .shop:hover span {
     background-color: #337ab7;
-}
-
-.formRegisterUser {
-    position: relative;
-    margin: 0 auto;
-    margin-top: 200px;
 }
 
 #nav {
