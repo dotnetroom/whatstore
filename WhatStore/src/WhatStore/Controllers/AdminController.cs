@@ -110,7 +110,6 @@ namespace WhatStore.Controllers
         public async Task<IActionResult> Subcategory(RegisterProductCategoryViewModel model)
        {
             try
-
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 var category = await _productRepository.GetCategories(user.StoreId);                                          
@@ -131,9 +130,14 @@ namespace WhatStore.Controllers
             {
                 return BadRequest();
             }
-
-            //var category = await _productRepository.GetCategory();
-
+            if(model.CategoryId < 0)
+            {
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                var category = await _productRepository.GetCategories(user.StoreId);
+                model.Categories = category;
+                ModelState.AddModelError("CategoryId", "selecione a categoria");
+                return View("Subcategory", model);
+            }
             if (await _productRepository.RegisterSubCategory(model.SubCategoryName, model.CategoryId))
             {               
                 model.ReturnMessage = "Alterações salvas com sucesso";
