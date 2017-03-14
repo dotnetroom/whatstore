@@ -303,7 +303,7 @@ namespace WhatStore.Controllers
             }
         }
 
-        [HttpGet("list/product/{id}")]
+        [HttpGet("list/{id}")]
         public async Task<IActionResult> ProductsStore(long id)
         {
             try
