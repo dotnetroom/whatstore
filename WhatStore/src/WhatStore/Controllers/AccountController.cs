@@ -252,10 +252,7 @@ namespace WhatStore.Controllers
         [HttpPost("~/{store}/register")]
         public async Task<IActionResult> RegisterUserStoreComp(RegisterUserStoreCompViewModel model, string store)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
+            
             var storeId = await _storeRepository.GetStoreId(store);
 
             var adress = await _storeRepository.InsertAdress(model.CEP, model.CityID, model.Complement, model.Number, model.Street);
@@ -293,7 +290,13 @@ namespace WhatStore.Controllers
                     return View("RegisterUserStoreComp", model);
                 }
             }
-                return Ok();
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
         }
 
         [HttpGet("~/{store}/confirm/user")]

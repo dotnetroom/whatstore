@@ -442,7 +442,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 try
                 {
-                    var insertAdress = await db.QueryAsync<long>("INSERT INTO dbo.Adress (CEP, CityID, Complement, Number, Street) SET CEP = @Cep, CityID = @CityID, Complement = @Complement, Number = @ Number, Street = @Street; SELECT SCOPE_IDENTITY();",
+                    var insertAdress = await db.QueryAsync<long>("INSERT INTO dbo.Adress (CEP, CityID, Complement, Number, Street) SET CEP = @Cep, CityID = @CityID, Complement = @Complement, Number = @Number, Street = @Street; SELECT SCOPE_IDENTITY();",
                                                                 new
                                                                 {
                                                                     Cep = CEP,

@@ -102,7 +102,7 @@
 
             <div class="float-right font-size13">
                 <label>Cidade: </label>
-                <select id="dropCities" class="form-control" style="width:170px" name="CityID" value="@Model.CityID">
+                <select id="dropCities" class="form-control" style="width:170px" asp-for="CityID" value="@Model.CityID">
                     <option value="-1">Selecione sua cidade</option>
                     @if (Model.CityID > 0)
                     {
