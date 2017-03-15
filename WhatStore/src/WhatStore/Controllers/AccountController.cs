@@ -197,9 +197,6 @@ namespace WhatStore.Controllers
                 ViewBag.Logo = logo;
             }
 
-
-
-
             return View();
         }
 
@@ -229,8 +226,9 @@ namespace WhatStore.Controllers
 
             return View();
         }
+
         [HttpPost("~/{store}/verifica")]
-        public async Task<IActionResult> VerificaUserStore(RegisterUserStoreViewModel model)
+        public async Task<IActionResult> VerificaUserStore(RegisterUserStoreViewModel model,string store)
         {
             if (!ModelState.IsValid)
             {
@@ -239,7 +237,8 @@ namespace WhatStore.Controllers
 
             if (await _storeRepository.SelectUser(model.EmailCadastro) == null)
             {
-                return View("RegisterUserStoreComp");
+                
+                return View("RegisterUserStoreComp",store);
             }
 
             return View("ConfirmUserStore");
@@ -248,7 +247,7 @@ namespace WhatStore.Controllers
 
         [HttpGet("~/{store}/register")]
         [AllowAnonymous]
-        public async Task<IActionResult> RegisterUserStore(string store)
+        public async Task<IActionResult> RegisterUserStoreComp(string store)
         {
             var states = await _localizationRepository.GetStates();
 
@@ -297,7 +296,7 @@ namespace WhatStore.Controllers
                 {
                     await _userManager.AddToRoleAsync(user, "User");
                     model.ReturnMessage = "Alterações salvas com sucesso";
-                    return View("RegisterUserStore");
+                    return View("LoginUserStore");
                 }
 
                 else
