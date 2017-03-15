@@ -183,7 +183,7 @@ namespace WhatStore.Controllers
 
         [HttpGet("~/{store}/login")]
         [AllowAnonymous]
-        public async Task<IActionResult> RegisterUserStore(string store)
+        public async Task<IActionResult> LoginUserStore(string store)
         {
             if (!ModelState.IsValid)
             {
@@ -204,7 +204,7 @@ namespace WhatStore.Controllers
         }
 
         [HttpPost("~/{store}/login")]
-        public async Task<IActionResult> RegisterUserStore(RegisterUserStoreViewModel model)
+        public async Task<IActionResult> LoginUserStore(RegisterUserStoreViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -230,7 +230,7 @@ namespace WhatStore.Controllers
             return View();
         }
         [HttpPost("~/{store}/verifica")]
-        public async Task<IActionResult> ConfirmUserStore(RegisterUserStoreViewModel model)
+        public async Task<IActionResult> VerificaUserStore(RegisterUserStoreViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -248,7 +248,7 @@ namespace WhatStore.Controllers
 
         [HttpGet("~/{store}/register")]
         [AllowAnonymous]
-        public async Task<IActionResult> RegisterUserStoreComp(string store)
+        public async Task<IActionResult> LoginUserStore(string store)
         {
             var states = await _localizationRepository.GetStates();
 
