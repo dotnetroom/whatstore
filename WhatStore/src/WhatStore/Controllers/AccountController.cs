@@ -248,7 +248,7 @@ namespace WhatStore.Controllers
 
         [HttpGet("~/{store}/register")]
         [AllowAnonymous]
-        public async Task<IActionResult> LoginUserStore(string store)
+        public async Task<IActionResult> RegisterUserStore(string store)
         {
             var states = await _localizationRepository.GetStates();
 
