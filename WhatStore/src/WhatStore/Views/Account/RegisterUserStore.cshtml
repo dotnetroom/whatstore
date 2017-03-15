@@ -14,39 +14,40 @@
 
 
     <div class="margin-top-100" style="width:738px; margin: 0 auto">
-        
-            <form style="padding:0px 20px 0px 20px" class="formLogin float-left" asp-controller="account" asp-action="ConfirmUserStore" method="post">
-                <h3 class="font-bold font-size20">Cadastrar</h3>
-                <label>E-mail:</label>
-                <input type="text" class="form-control" asp-for="Email" required />
-                <span asp-validation-for="Email" class="text-danger"></span>
-                <div class="row margin-top-10">
-                    <button type="submit" class="btn btn-primary" style="width: 100%; height: 40px;">Cadastrar</button>
-                </div>
-            </form>
-        
-        <div>
-            <form style="padding:0px 20px 0px 20px" class="formLogin float-left margin-left-50" asp-controller="account" asp-action="~/{store}/login" method="post">
-                    <h3 class="font-bold font-size20">Entrar</h3>
-                    <label style="">E-mail:</label>
-                    <input type="text" class="form-control" asp-for="Email" required />
-                    <label>Senha</label>
-                    <input type="password" class="form-control" asp-for="Password" required />
 
-                    <div class="row margin-top-10">
-                        <button type="submit" class="btn btn-primary" style="width: 100%; height: 40px;">Entrar</button>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                <label asp-for="RememberMe">
-                                    <input asp-for="RememberMe" />
-                                    @Html.DisplayNameFor(m => m.RememberMe)
-                                </label>
-                            </div>
-                        </div>
+        <form style="padding:0px 20px 0px 20px" class="formLogin float-left" asp-controller="account" asp-action="ConfirmUserStore" method="post">
+            <h3 class="font-bold font-size20">Cadastrar</h3>
+            <label>E-mail:</label>
+            <input type="text" class="form-control" asp-for="EmailCadastro" required />
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <div class="row margin-top-10">
+                <button type="submit" class="btn btn-primary" style="width: 100%; height: 40px;">Cadastrar</button>
+            </div>
+        </form>
+
+        <div>
+            <form style="padding:0px 20px 0px 20px" class="formLogin float-left margin-left-50" asp-controller="account" asp-action="RegisterUserStore" method="post">
+                <h3 class="font-bold font-size20">Entrar</h3>
+                <label style="">E-mail:</label>
+                <input type="text" class="form-control" asp-for="Email" required />
+                <label>Senha</label>
+                <input type="password" class="form-control" asp-for="Password" required />
+               
+                    <div class="checkbox">
+                        <label asp-for="RememberMe">
+                            <input asp-for="RememberMe" />
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>
                     </div>
                 
+                
+                <div class="row margin-top-10">
+                    <button type="submit" class="btn btn-primary" style="width: 100%; height: 40px;">Entrar</button>
+
+
+                </div>
+
+
             </form>
         </div>
     </div>

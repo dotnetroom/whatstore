@@ -222,7 +222,7 @@ namespace WhatStore.Controllers
 
             {
                 ModelState.AddModelError("Email", "Usuário ou senha incorreta");
-                return View(model);
+                return View("_Store");
             }
 
             var modelAdmin = new RegisterStoreDataViewModel();
@@ -237,7 +237,7 @@ namespace WhatStore.Controllers
                 return BadRequest();
             }
 
-            if (await _storeRepository.SelectUser(model.Email) == null)
+            if (await _storeRepository.SelectUser(model.EmailCadastro) == null)
             {
                 return View("RegisterUserStore");
             }

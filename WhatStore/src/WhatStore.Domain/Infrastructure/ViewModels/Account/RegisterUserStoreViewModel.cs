@@ -16,5 +16,7 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Account
 
         public bool RememberMe { get; set; }
 
+        public string EmailCadastro { get; set; }
+
     }
 }
