@@ -239,10 +239,10 @@ namespace WhatStore.Controllers
 
             if (await _storeRepository.SelectUser(model.EmailCadastro) == null)
             {
-                return View("RegisterUserStore");
+                return View("RegisterUserStoreComp");
             }
 
-            return View("RegisterUserStoreComp");
+            return View("ConfirmUserStore");
 
         }
 
