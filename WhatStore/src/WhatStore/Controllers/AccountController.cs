@@ -197,14 +197,11 @@ namespace WhatStore.Controllers
                 ViewBag.Logo = logo;
             }
 
-
-
-
             return View();
         }
 
         [HttpPost("~/{store}/login")]
-        public async Task<IActionResult> LoginUserStore(RegisterUserStoreViewModel model)
+        public async Task<IActionResult> LoginUserStore(LoginUserStoreViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -222,15 +219,16 @@ namespace WhatStore.Controllers
 
             {
                 ModelState.AddModelError("Email", "Usuário ou senha incorreta");
-                return View("_Store");
+                return View();
             }
 
             var modelAdmin = new RegisterStoreDataViewModel();
 
-            return View();
+            return RedirectToAction("LoginUserStore");
         }
+
         [HttpPost("~/{store}/verifica")]
-        public async Task<IActionResult> VerificaUserStore(RegisterUserStoreViewModel model)
+        public async Task<IActionResult> VerificaUserStore(LoginUserStoreViewModel model,string store)
         {
             if (!ModelState.IsValid)
             {
@@ -239,11 +237,32 @@ namespace WhatStore.Controllers
 
             if (await _storeRepository.SelectUser(model.EmailCadastro) == null)
             {
-                return View("RegisterUserStore");
+                
+                return RedirectToAction("RegisterUserStore");
             }
 
-            return View("RegisterUserStoreComp");
+            return RedirectToAction("ConfirmUserStore");
 
+        }
+
+        [HttpGet("~/{store}/confirm/user")]
+        public async Task<IActionResult> ConfirmUserStore(string store)
+         {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var storeId = await _storeRepository.GetStoreId(store);
+            var logo = await _storeRepository.GetLogo(storeId);
+            if (logo != null)
+            {
+                logo = Url.Action(logo, "image");
+                ViewBag.Logo = logo;
+            }
+
+            return View();
         }
 
         [HttpGet("~/{store}/register")]
@@ -252,7 +271,7 @@ namespace WhatStore.Controllers
         {
             var states = await _localizationRepository.GetStates();
 
-            var model = new RegisterUserStoreCompViewModel();
+            var model = new RegisterUserStoreViewModel();
             model.States = states;
             ViewBag.StoreName = store;
             var storeId = await _storeRepository.GetStoreId(store);
@@ -267,7 +286,7 @@ namespace WhatStore.Controllers
         }
 
         [HttpPost("~/{store}/register")]
-        public async Task<IActionResult> RegisterUserStoreComp(RegisterUserStoreCompViewModel model, string store)
+        public async Task<IActionResult> RegisterUserStore(RegisterUserStoreViewModel model, string store)
         {
             var storeId = await _storeRepository.GetStoreId(store);
 
@@ -297,7 +316,7 @@ namespace WhatStore.Controllers
                 {
                     await _userManager.AddToRoleAsync(user, "User");
                     model.ReturnMessage = "Alterações salvas com sucesso";
-                    return View("RegisterUserStore");
+                    return View("LoginUserStore");
                 }
 
                 else
@@ -310,24 +329,6 @@ namespace WhatStore.Controllers
             return Ok();
         }
 
-        [HttpGet("~/{store}/confirm/user")]
-        public async Task<IActionResult> ConfirmUserStore(string store)
-        {
-
-           if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            var storeId = await _storeRepository.GetStoreId(store);
-            var logo = await _storeRepository.GetLogo(storeId);
-            if (logo != null)
-            {
-                logo = Url.Action(logo, "image");
-                ViewBag.Logo = logo;
-            }
-
-            return View();
-        }
+        
     }
 }

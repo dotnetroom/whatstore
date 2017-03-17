@@ -5,20 +5,6 @@
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/font-awesome.css" />
-    </head>
-
-
-    <body>
-
-
-        <div class="store-navbar">
-            <a style="font-size:12pt" asp-controller="home" asp-action="StoreIndex" class="links margin-right-30 margin-top-30 float-right">< Voltar para a loja</a>
-            <img class="float-left content-logo" src="@ViewBag.Logo" />
-        </div>
-
-        <div class="store-content">           
-            @RenderBody()
-        </div>
 
         <environment names="Development">
             <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -36,9 +22,18 @@
             </script>
             <script src="~/js/site.min.js" asp-append-version="true"></script>
         </environment>
-
         <script src="~/js/whatstore.js"></script>
+    </head>
 
+    <body>
+        <div class="store-navbar">
+            <a style="font-size:12pt" asp-controller="home" asp-action="StoreIndex" class="links margin-right-30 margin-top-30 float-right">< Voltar para a loja</a>
+            <img class="float-left content-logo" src="@ViewBag.Logo" />
+        </div>
+
+        <div class="store-content">
+            @RenderBody()
+        </div>
     </body>
 </html>
 
