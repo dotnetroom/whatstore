@@ -61,7 +61,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         public async Task<bool> UpdateProduct(string productName, string description, double price, bool hasVariety, string colors,
                                               string sizes, bool isFreeShip, double length, double weigth, double widith,
-                                              string tags, string id, List<string> fileNames)
+                                              string tags, string id, List<string> fileNames, int installment)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
@@ -76,7 +76,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                     }
 
                     var productUpdateQuery = "UPDATE dbo.Product SET Description = @Description, IsFreeShipping = @IsFreeShipping, " +
-                        "Length = @Length, Name = @Name, Price = @Price, Weigth = @Weigth, Widith = @Widith WHERE id = @Id";
+                        "Length = @Length, Name = @Name, Price = @Price, Weigth = @Weigth, Widith = @Widith, Installments = @Installments  WHERE id = @Id";
 
                     var resultProductUpdate = await db.ExecuteAsync(productUpdateQuery,
                                                                     new
@@ -89,6 +89,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                                         Price = price,
                                                                         Weigth = (isFreeShip != false) ? weigth : 0,
                                                                         Widith = (isFreeShip != false) ? widith : 0,
+                                                                        Installments = installment
                                                                     });
                     for (int i = 0; i < arrayTag.Length; i++)
                     {
@@ -174,7 +175,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
         public async Task<bool> InsertProduct(List<string> fileNames, long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
                                               bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weigth,
-                                              double widtih, string tags, string id, long subCategoryId)
+                                              double widtih, string tags, string id, long subCategoryId, int installment)
         {
             using (var db = new SqlConnection(_settings.ConnectionString))
             {
@@ -187,8 +188,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
                     var codigo = id.Replace(" ", "");
 
-                    var productInsert = "INSERT INTO dbo.Product (Id, Name, Description, Price, StoreId, IsFreeShipping, Length, Weigth, Widith, SubCategoryId) "
-                                   + "VALUES (@ID, @NAME, @DESCRIPTION, @PRICE, @STOREID, @ISFREESHIPPING, @Length, @Weigth, @Widith, @SubCategoryId)";
+                    var productInsert = "INSERT INTO dbo.Product (Id, Name, Description, Price, StoreId, IsFreeShipping, Length, Weigth, Widith, SubCategoryId, Installments) "
+                                   + "VALUES (@ID, @NAME, @DESCRIPTION, @PRICE, @STOREID, @ISFREESHIPPING, @Length, @Weigth, @Widith, @SubCategoryId, @Installments)";
 
                     var product = await db.ExecuteAsync(productInsert,
                         new
@@ -202,7 +203,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                             Length = (isFreeShip != false) ? length : 0,
                             Weigth = (isFreeShip != false) ? weigth : 0,
                             Widith = (isFreeShip != false) ? widtih : 0,
-                            SubCategoryId = subCategoryId
+                            SubCategoryId = subCategoryId,
+                            Installments = installment
                         });
 
 
@@ -586,7 +588,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    var selectProducts = await db.QueryAsync<Product>("SELECT TOP 20 dbo.Product.Id, dbo.Product.Name, dbo.Product.Price FROM dbo.Product WHERE StoreID = @storeId AND SubCategoryId = @subcategoryId",
+                    var selectProducts = await db.QueryAsync<Product>("SELECT TOP 20 dbo.Product.Id, dbo.Product.Name, dbo.Product.Price, dbo.Product.Installments FROM dbo.Product WHERE StoreID = @storeId AND SubCategoryId = @subcategoryId",
                                                                                 new
                                                                                 {
                                                                                     storeId = storeID,

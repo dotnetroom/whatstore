@@ -14,10 +14,10 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
 
         Task<bool> InsertProduct(List<string> fileNames, long storeId, string productName, string description, double price, ICollection<IFormFile> picture,
                                              bool hasVariety, string colors, string sizes, bool isFreeShip, double length, double weigth,
-                                             double widtih, string tags, string id, long subCategoryId);
+                                             double widtih, string tags, string id, long subCategoryId, int installment);
         Task<bool> UpdateProduct(string productName, string description, double price, bool hasVariety, string colors, 
                                  string sizes, bool isFreeShip, double length, double weigth, double widith, 
-                                 string tags, string id, List<string> fileName);
+                                 string tags, string id, List<string> fileName, int installment);
         Task<List<Product>> GetProducts(long storeID);
         Task<List<Product>> GetProducts(long storeID, long subcategoryId);
         Task<Product> GetProduct(string productId);

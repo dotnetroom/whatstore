@@ -86,7 +86,7 @@ namespace WhatStore.Controllers
 
             if (await _productRepository.InsertProduct(fileNames, user.StoreId, model.ProductName, model.Description, model.Price, model.Picture,
                                                        model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
-                                                       model.Weigth, model.Widith, model.Tags, model.Id, model.SubCategory))
+                                                       model.Weigth, model.Widith, model.Tags, model.Id, model.SubCategory, model.Installments))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
@@ -191,6 +191,7 @@ namespace WhatStore.Controllers
                     Categories = dataCategories,
                     Category = dataCategory,
                     SubCategory = dataProduct.SubCategoryId,
+                    Installments = dataProduct.Installments
                 };
                 return View(viewModel);
             }
@@ -239,7 +240,7 @@ namespace WhatStore.Controllers
 
             if (await _productRepository.UpdateProduct(model.ProductName, model.Description,
                 model.Price, model.HasVariety, model.Colors, model.Sizes, model.IsFreeShip, model.Length,
-                model.Weigth, model.Widith, model.Tags, model.Id, fileNames))
+                model.Weigth, model.Widith, model.Tags, model.Id, fileNames, model.Installments))
             {
                 model.ReturnMessage = "Alterações salvas com sucesso";
             }
@@ -350,7 +351,8 @@ namespace WhatStore.Controllers
                             Id = item.Id,
                             Name = item.Name,
                             Pictures = image,
-                            Price = item.Price
+                            Price = item.Price,
+                            Installment = item.Installments
                         };
 
                         productsList.Add(viewModel);

@@ -20,6 +20,7 @@
                 </div>
                 <h4>@product.Name</h4>
                 <h5>R$ @string.Format("{0:N2}", product.Price)</h5>
+                <h5 style="color:#868585 !important;">@string.Format("{0} x R${1:N2}", product.Installment, product.Price / product.Installment)</h5>
             </div>
         </a>
     }
