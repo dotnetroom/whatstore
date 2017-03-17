@@ -5,6 +5,9 @@
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/font-awesome.css" />
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Cantarell" rel="stylesheet">
     </head>
 
 
@@ -38,7 +41,7 @@
 
         </div>
 
-        <div id="nav">
+        <div class="side-bar-store">
             <ul>
                 @foreach (var category in ViewBag.Categories)
                 {
@@ -49,7 +52,7 @@
                             <ul>
                                 @foreach (var subCategory in category.subcategories)
                                 {
-                                    <li><a href="@Url.Action($"list/", "product", new { id = subCategory.Id})">@subCategory.SubCategoryName</a></li>
+                                    <li><a href="@Url.Action("ProductStore", "product", new { id = subCategory.Id, storeId = ViewBag.StoreId})">@subCategory.SubCategoryName</a></li>
                                 }
                             </ul>
                         }
@@ -58,7 +61,7 @@
             </ul>
         </div>
 
-        <div class="store-content">
+        <div class="product-content">
             @RenderBody()
         </div>
 

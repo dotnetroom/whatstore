@@ -19,6 +19,8 @@ namespace WhatStore.Domain.Infrastructure.Models.Product
         [Required]
         public double Price { get; set; }
         [Required]
+        public int Installments { get; set; }
+        [Required]
         public bool IsFreeShipping { get; set; }
         public string Length { get; set; }
         public string Widith { get; set; }

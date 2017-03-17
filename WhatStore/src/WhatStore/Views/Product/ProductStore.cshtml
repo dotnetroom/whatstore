@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Store";
+}
+
+<div class="product-settings-content">
+
+    @foreach (var product in Model)
+    {
+        <a href="@Url.Action($"edit/", "product", new { id = product.Id})">
+            <div class="product-display-content-store">
+                <div class="product-display-content" style="margin-bottom:5px">
+
+                    @if (!string.IsNullOrEmpty(product.Pictures))
+                    {
+                        <img src="@product.Pictures" class="product-display-image" style="height:100%" />
+                    }
+                </div>
+                <h4>@product.Name</h4>
+                <h5>R$ @string.Format("{0:N2}", product.Price)</h5>
+            </div>
+        </a>
+    }
+</div>

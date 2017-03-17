@@ -368,7 +368,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         {
                             storeid = storeId
                         });
-                    
+
                     return result.ToList();
                 }
             }
@@ -532,8 +532,9 @@ namespace WhatStore.Domain.Infrastructure.Repository
                                                               });
                     return tagIdSelect.ToList();
                 }
-               
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 return null;
             }
@@ -543,7 +544,7 @@ namespace WhatStore.Domain.Infrastructure.Repository
         {
             try
             {
-                using(var db = new SqlConnection(_settings.ConnectionString))
+                using (var db = new SqlConnection(_settings.ConnectionString))
                 {
                     var selectCategory = await db.QueryAsync<long>("SELECT dbo.SubCategory.CategoryId FROM dbo.SubCategory WHERE dbo.SubCategory.Id = @id",
                         new
@@ -552,7 +553,8 @@ namespace WhatStore.Domain.Infrastructure.Repository
                         });
                     return selectCategory.FirstOrDefault();
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return 0;
             }
@@ -578,5 +580,26 @@ namespace WhatStore.Domain.Infrastructure.Repository
             }
         }
 
+        public async Task<List<Product>> GetProducts(long storeID, long subcategoryId)
+        {
+            try
+            {
+                using (var db = new SqlConnection(_settings.ConnectionString))
+                {
+                    var selectProducts = await db.QueryAsync<Product>("SELECT TOP 20 dbo.Product.Id, dbo.Product.Name, dbo.Product.Price FROM dbo.Product WHERE StoreID = @storeId AND SubCategoryId = @subcategoryId",
+                                                                                new
+                                                                                {
+                                                                                    storeId = storeID,
+                                                                                    subcategoryId = subcategoryId
+                                                                                });
+                    return selectProducts.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
     }
 }

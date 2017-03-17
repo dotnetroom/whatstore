@@ -19,6 +19,7 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
                                  string sizes, bool isFreeShip, double length, double weigth, double widith, 
                                  string tags, string id, List<string> fileName);
         Task<List<Product>> GetProducts(long storeID);
+        Task<List<Product>> GetProducts(long storeID, long subcategoryId);
         Task<Product> GetProduct(string productId);
         Task<List<string>> GetTag(string productId);
         Task<List<SubCategory>> GetSubCategories(long categoryId);

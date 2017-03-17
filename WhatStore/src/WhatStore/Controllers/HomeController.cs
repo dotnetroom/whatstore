@@ -52,6 +52,7 @@ namespace WhatStore.Controllers
             ViewBag.Categories = subCategoriesList;
             ViewBag.Logo = logo;
             ViewBag.StoreName = store;
+            ViewBag.StoreId = storeId;
             
             return View();
         }

@@ -7,6 +7,7 @@ using WhatStore.Domain.Infrastructure.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using WhatStore.Domain.Infrastructure.Models.Identity;
 using System.Globalization;
+using WhatStore.Domain.Infrastructure.ViewModels.Store;
 
 namespace WhatStore.Controllers
 {
@@ -189,7 +190,7 @@ namespace WhatStore.Controllers
                     ImageName = listImage,
                     Categories = dataCategories,
                     Category = dataCategory,
-                    SubCategory = dataProduct.SubCategoryId,                                                   
+                    SubCategory = dataProduct.SubCategoryId,
                 };
                 return View(viewModel);
             }
@@ -291,7 +292,7 @@ namespace WhatStore.Controllers
             try
             {
                 var subcategories = await _productRepository.GetSubCategories(category);
-                
+
                 if (subcategories == null) return BadRequest("There was an error to load the subcategories.");
 
                 return Json(subcategories);
@@ -303,12 +304,59 @@ namespace WhatStore.Controllers
             }
         }
 
-        [HttpGet("list/{id}")]
-        public async Task<IActionResult> ProductsStore(long id)
+        [HttpGet("~/{storeId}/subcategory/{id}")]
+        public async Task<IActionResult> ProductStore(long id, long storeId)
         {
             try
             {
-                return View();
+                #region navbar
+                var logo = await _storeRepository.GetLogo(storeId);
+                List<CategoryViewModel> subCategoriesList = new List<CategoryViewModel> { };
+                if (logo != null)
+                {
+                    logo = Url.Action(logo, "image");
+                }
+
+                var categories = await _productRepository.GetCategories(storeId);
+                foreach (var item in categories)
+                {
+                    var subCategories = await _productRepository.GetSubCategories(item.Id);
+
+                    var categoryObject = new CategoryViewModel
+                    {
+                        category = item,
+                        subcategories = subCategories
+                    };
+                    subCategoriesList.Add(categoryObject);
+                }
+                ViewBag.Categories = subCategoriesList;
+                ViewBag.Logo = logo;
+                ViewBag.StoreName = storeId;
+                ViewBag.StoreId = storeId;
+                #endregion
+                List<ProductViewModel> productsList = new List<ProductViewModel> { };
+                var product = await _productRepository.GetProducts(storeId, id);
+                if (product != null)
+                {
+                    foreach (var item in product)
+                    {
+                        var image = await _productRepository.GetImage(item.Id);
+                        if (image != null && image.Length > 0)
+                        {
+                            image = Url.Action(image, "image");
+                        }
+                        var viewModel = new ProductViewModel()
+                        {
+                            Id = item.Id,
+                            Name = item.Name,
+                            Pictures = image,
+                            Price = item.Price
+                        };
+
+                        productsList.Add(viewModel);
+                    }
+                }
+                return View(productsList);
             }
 
             catch (Exception ex)
