@@ -26,7 +26,7 @@ namespace WhatStore.Domain.Infrastructure.ViewModels.Admin
         public double Price { get; set; }
 
         [Required(ErrorMessage = "The Price field is required.")]
-        public double Installments { get; set; }
+        public int Installments { get; set; }
 
         [Required(ErrorMessage = "The Variety field is required.")]
         public bool HasVariety { get; set; }

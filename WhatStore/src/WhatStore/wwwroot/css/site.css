@@ -1345,7 +1345,7 @@ tr:nth-child(even) {
         text-align: center;
         font-family: 'Cantarell', sans-serif;
         font-weight:300 !important;
-        color: #423d3d !important;
+        margin-top: -8px;
     }
 
 .product-settings-content a:hover {
