@@ -14,16 +14,16 @@
     <form class="formLogin formRegisterUser margin-top-10" method="post">
         <div class="row margin-top-10">
             <label>First Name: </label>
-            <input type="text" class="form-control" asp-for="Name" required readonly="readonly" />
+            <input type="text" class="form-control" asp-for="FirstName" required readonly="readonly" value="@Model.FirstName"/>
         </div>
         <div>
             <label>Email: </label>
-            <input type="text" class="form-control" asp-for="Email" required readonly="readonly" />
+            <input type="text" class="form-control" asp-for="Email" required readonly="readonly" value="@Model.Email"/>
         </div>
 
         <div>
             <label>Password: </label>
-            <input type="text" class="form-control" asp-for="Password" required/>
+            <input type="text" class="form-control" asp-for="Password" required value="@Model.Password"/>
         </div>
 
         <div class="row margin-top-10">
