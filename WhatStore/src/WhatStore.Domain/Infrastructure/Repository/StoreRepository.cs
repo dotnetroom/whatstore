@@ -708,13 +708,13 @@ namespace WhatStore.Domain.Infrastructure.Repository
 
 
 
-        public async Task<string> SelectUser(string email)
+        public async Task<ApplicationUser> SelectUser(string email)
         {
             try
             {
                 using (var db = new SqlConnection(_settings.ConnectionString))
                 {
-                    var selecUser = await db.QueryAsync<string>("Select * FROM dbo.AspNetUserRoles, dbo.AspNetUsers WHERE dbo.AspNetUsers.Email = @Email AND dbo.AspNetUsers.Id = dbo.AspNetUserRoles.UserId AND dbo.AspNetUserRoles.RoleId = 3",
+                    var selecUser = await db.QueryAsync<ApplicationUser>("Select dbo.AspNetUsers.* FROM dbo.AspNetUserRoles, dbo.AspNetUsers WHERE dbo.AspNetUsers.Email = @Email AND dbo.AspNetUsers.Id = dbo.AspNetUserRoles.UserId AND dbo.AspNetUserRoles.RoleId = 3",
                         new
                         {
                             Email = email

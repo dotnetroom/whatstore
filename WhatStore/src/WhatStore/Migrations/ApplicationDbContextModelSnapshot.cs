@@ -308,12 +308,27 @@ namespace WhatStore.Migrations
                     b.ToTable("State");
                 });
 
-            modelBuilder.Entity("WhatStore.Domain.Infrastructure.Models.Product.PictureProduct", b =>
+            modelBuilder.Entity("WhatStore.Domain.Infrastructure.Models.Product.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ImagemName")
+                    b.Property<string>("CategoryName")
+                        .IsRequired();
+
+                    b.Property<long>("StoreId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("WhatStore.Domain.Infrastructure.Models.Product.PictureProduct", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ImageName")
                         .IsRequired();
 
                     b.Property<string>("ProductId")
@@ -334,6 +349,8 @@ namespace WhatStore.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
+                    b.Property<int>("Installments");
+
                     b.Property<bool>("IsFreeShipping");
 
                     b.Property<string>("Length");
@@ -345,11 +362,15 @@ namespace WhatStore.Migrations
 
                     b.Property<int>("StoreID");
 
+                    b.Property<long>("SubCategoryId");
+
                     b.Property<string>("Weigth");
 
                     b.Property<string>("Widith");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SubCategoryId");
 
                     b.ToTable("Product");
                 });
@@ -389,6 +410,23 @@ namespace WhatStore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Size");
+                });
+
+            modelBuilder.Entity("WhatStore.Domain.Infrastructure.Models.Product.SubCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("CategoryId");
+
+                    b.Property<string>("SubCategoryName")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("SubCategory");
                 });
 
             modelBuilder.Entity("WhatStore.Domain.Infrastructure.Models.Product.Tag", b =>
@@ -463,9 +501,11 @@ namespace WhatStore.Migrations
 
                     b.Property<int>("StoreTypeId");
 
-                    b.Property<string>("Term");
+                    b.Property<string>("Term")
+                        .IsRequired();
 
-                    b.Property<string>("URL");
+                    b.Property<string>("URL")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -585,6 +625,14 @@ namespace WhatStore.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("WhatStore.Domain.Infrastructure.Models.Product.Product", b =>
+                {
+                    b.HasOne("WhatStore.Domain.Infrastructure.Models.Product.SubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("WhatStore.Domain.Infrastructure.Models.Product.ProductSize", b =>
                 {
                     b.HasOne("WhatStore.Domain.Infrastructure.Models.Product.Product", "Product")
@@ -594,6 +642,14 @@ namespace WhatStore.Migrations
                     b.HasOne("WhatStore.Domain.Infrastructure.Models.Product.Size", "Size")
                         .WithMany()
                         .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WhatStore.Domain.Infrastructure.Models.Product.SubCategory", b =>
+                {
+                    b.HasOne("WhatStore.Domain.Infrastructure.Models.Product.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

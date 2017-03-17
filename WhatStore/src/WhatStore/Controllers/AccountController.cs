@@ -25,7 +25,7 @@ namespace WhatStore.Controllers
         private SignInManager<ApplicationUser> _signInManager;
         private ILocalizationRepository _localizationRepository;
         private ILogger _logger;
-        private UserManager<ApplicationUser> _userManager;        
+        private UserManager<ApplicationUser> _userManager;
 
         public AccountController(UserManager<ApplicationUser> userManager, IStoreRepository storeRepository, ILocalizationRepository localizationRepository, SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
         {
@@ -33,7 +33,7 @@ namespace WhatStore.Controllers
             _signInManager = signInManager;
             _localizationRepository = localizationRepository;
             _logger = loggerFactory.CreateLogger<AccountController>();
-            _userManager = userManager;            
+            _userManager = userManager;
         }
 
         [HttpGet("login")]
@@ -228,26 +228,27 @@ namespace WhatStore.Controllers
         }
 
         [HttpPost("~/{store}/verifica")]
-        public async Task<IActionResult> VerificaUserStore(LoginUserStoreViewModel model,string store)
+        public async Task<IActionResult> VerificaUserStore(LoginUserStoreViewModel model, string store)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
+            var user = await _storeRepository.SelectUser(model.EmailCadastro);
 
-            if (await _storeRepository.SelectUser(model.EmailCadastro) == null)
+            if (user.Email == null)
             {
-                
+
                 return RedirectToAction("RegisterUserStore");
             }
 
-            return RedirectToAction("ConfirmUserStore");
+            return RedirectToAction("ConfirmUserStore", new { store = store, email = model.EmailCadastro });
 
         }
 
         [HttpGet("~/{store}/confirm/user")]
-        public async Task<IActionResult> ConfirmUserStore(string store)
-         {
+        public async Task<IActionResult> ConfirmUserStore(string store, string email)
+        {
 
             if (!ModelState.IsValid)
             {
@@ -262,7 +263,15 @@ namespace WhatStore.Controllers
                 ViewBag.Logo = logo;
             }
 
-            return View();
+            var user = await _storeRepository.SelectUser(email);
+            var name = user.FirstName + " " + user.LastName;
+            var model = new ConfirmUserStoreViewModel()
+            {
+                Name = name,
+                Email = user.Email                
+            };
+
+            return View(model);
         }
 
         [HttpGet("~/{store}/register")]
@@ -329,6 +338,6 @@ namespace WhatStore.Controllers
             return Ok();
         }
 
-        
+
     }
 }

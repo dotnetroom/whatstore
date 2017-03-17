@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WhatStore.Domain.Infrastructure.Models.Financial;
+using WhatStore.Domain.Infrastructure.Models.Identity;
 using WhatStore.Domain.Infrastructure.Models.Store;
 using WhatStore.Domain.Infrastructure.ViewModels.Admin;
 
@@ -39,6 +40,6 @@ namespace WhatStore.Domain.Infrastructure.Repository.Interfaces
         Task<string> SelectStoreName(string storeName);
 
 
-        Task<string> SelectUser(string email);
+        Task<ApplicationUser> SelectUser(string email);
     }
 }
